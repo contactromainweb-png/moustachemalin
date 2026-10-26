@@ -36,6 +36,13 @@ export const RUBRIQUES = [
   { href: "/guides/", label: "Guides" },
 ];
 
+// Seulement les rubriques dont la page existe déjà (voir ROUTES_EN_LIGNE dans next.config.ts).
+// Une rubrique apparaît d'elle-même dans le menu dès que son dossier src/app/<rubrique>/ est créé.
+export function rubriquesEnLigne() {
+  const enLigne = (process.env.ROUTES_EN_LIGNE ?? "").split(",");
+  return RUBRIQUES.filter((r) => enLigne.includes(r.href.replaceAll("/", "")));
+}
+
 export const PAGES_INFO = [
   { href: "/a-propos/", label: "À propos" },
   { href: "/methode/", label: "Notre méthode" },

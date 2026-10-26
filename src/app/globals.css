@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
-/* Palette Moustache Malin : crème chaud, brun caramel, accent safran pour les boutons Amazon. */
+/* Palette Moustache Malin : crème chaud, brun caramel, accent safran pour les boutons Amazon.
+   Thème clair par défaut ; le sombre ne s'active que si le système du visiteur le demande. */
 :root {
+  color-scheme: light;
   --paper: #f6efe4;
   --field: #ece1cf;
   --ink: #22170e;
@@ -15,6 +17,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --paper: #16100b;
     --field: #231a12;
     --ink: #f3eadc;

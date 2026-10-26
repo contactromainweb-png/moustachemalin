@@ -11,7 +11,6 @@ const ETAPES = [
   {
     titre: "Le coût réel",
     lignes: [
-      ["Prix au moment de la rédaction", "Amazon"],
       ["Consommables à racheter", "fabricant"],
       ["Entretien : temps et fréquence", "notice"],
     ],
@@ -19,9 +18,8 @@ const ETAPES = [
   {
     titre: "La vie avec l'appareil",
     lignes: [
-      ["Problèmes qui reviennent souvent", "retours d'acheteurs"],
-      ["Pannes, odeurs, bruit réel", "retours d'acheteurs"],
       ["Service après-vente, garantie", "fabricant"],
+      ["Tendances (pannes, bruit réel), si analysées", "retours d'acheteurs"],
     ],
   },
 ] as const;

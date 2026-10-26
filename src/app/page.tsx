@@ -10,8 +10,9 @@ export default function Home() {
         <Bienvenue />
       </div>
       <p className="rise mt-4 max-w-[52ch]" style={{ "--i": 2 } as React.CSSProperties}>
-        Comparatifs de litières, fontaines, distributeurs et arbres à chat, basés sur la lecture des fiches
-        techniques et des retours d&apos;acheteurs. Les premiers articles arrivent très bientôt.
+        Comparatifs de litières, fontaines, distributeurs et arbres à chat, fondés principalement sur les
+        fiches techniques des fabricants. Quand nous les avons analysés, les retours d&apos;acheteurs servent
+        à repérer des tendances. Les premiers articles arrivent très bientôt.
       </p>
       <Link
         href="/methode/"

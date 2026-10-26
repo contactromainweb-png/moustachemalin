@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
-import { PAGES_INFO, RUBRIQUES, SITE } from "@/lib/site";
+import { PAGES_INFO, rubriquesEnLigne, SITE } from "@/lib/site";
 
 export function SiteFooter() {
+  const rubriques = rubriquesEnLigne();
+
   return (
     <footer className="mt-32 bg-field px-4 pb-8 pt-16 sm:mt-44 sm:px-8">
       <div className="mx-auto max-w-[90rem]">
@@ -11,18 +13,20 @@ export function SiteFooter() {
             <p className="text-lead">{SITE.tagline}</p>
             <AmazonDisclosure className="mt-6" />
           </div>
-          <nav aria-label="Rubriques (pied de page)">
-            <ul className="flex flex-col gap-2">
-              {RUBRIQUES.map((r) => (
-                <li key={r.href}>
-                  <Link href={r.href} className="underline-offset-4 hover:underline">
-                    {r.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <nav aria-label="Informations">
+          {rubriques.length > 0 ? (
+            <nav aria-label="Rubriques (pied de page)">
+              <ul className="flex flex-col gap-2">
+                {rubriques.map((r) => (
+                  <li key={r.href}>
+                    <Link href={r.href} className="underline-offset-4 hover:underline">
+                      {r.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ) : null}
+          <nav aria-label="Informations" className="md:col-start-3">
             <ul className="flex flex-col gap-2">
               {PAGES_INFO.map((p) => (
                 <li key={p.href}>
