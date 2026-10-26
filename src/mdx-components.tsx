@@ -1,7 +1,19 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
+import { AffiliateButton } from "@/components/AffiliateButton";
+import { AmazonDisclosure } from "@/components/AmazonDisclosure";
+import { ComparisonTable } from "@/components/ComparisonTable";
+import { FAQ } from "@/components/FAQ";
+import { NewsletterForm } from "@/components/NewsletterForm";
+import { ProductBox } from "@/components/ProductBox";
+import { ProductCard } from "@/components/ProductCard";
+import { ProsCons } from "@/components/ProsCons";
+import { RelatedArticles } from "@/components/RelatedArticles";
+import { TopPicks } from "@/components/TopPicks";
+import { VetNotice } from "@/components/VetNotice";
 
 // Mise en forme des textes écrits en MDX (dossier content/).
+// Les composants listés en bas sont utilisables directement dans un article, sans import.
 const components: MDXComponents = {
   h2: (props) => (
     <h2 className="reveal font-display mb-6 mt-20 max-w-[22ch] text-head first:mt-0" {...props} />
@@ -20,6 +32,17 @@ const components: MDXComponents = {
   blockquote: (props) => (
     <blockquote className="reveal my-10 bg-field px-6 py-6 text-lead sm:px-8" {...props} />
   ),
+  AffiliateButton,
+  AmazonDisclosure,
+  ComparisonTable,
+  FAQ,
+  NewsletterForm,
+  ProductBox,
+  ProductCard,
+  ProsCons,
+  RelatedArticles,
+  TopPicks,
+  VetNotice,
 };
 
 export function useMDXComponents(): MDXComponents {

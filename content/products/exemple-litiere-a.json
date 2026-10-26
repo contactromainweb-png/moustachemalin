@@ -1,0 +1,29 @@
+{
+  "asin": "B0EXEMPLE1",
+  "nom": "Litière Exemple A",
+  "marque": "Produit fictif",
+  "categorie": "litiere-autonettoyante",
+  "resume": "Produit fictif qui sert à montrer le modèle de fiche. Il n'existe pas.",
+  "pourQui": "Un seul chat adulte, dans un appartement où le bruit compte.",
+  "caracteristiques": {
+    "Poids du chat accepté": "1,5 à 9 kg",
+    "Bac à déchets": "9 L",
+    "Bruit annoncé": "faible",
+    "Application": "oui"
+  },
+  "pointsForts": [
+    "Capteur de présence qui arrête le cycle si le chat revient",
+    "Bac à déchets assez grand pour une semaine avec un chat",
+    "Pièces au contact de la litière démontables"
+  ],
+  "pointsFaibles": [
+    "Encombrant : prévoir un coin dédié",
+    "Sacs propriétaires à racheter"
+  ],
+  "entretien": "Vider le bac une fois par semaine, laver le tambour une fois par mois.",
+  "consommables": [
+    { "nom": "Sacs pour le bac à déchets", "frequence": "1 par semaine" },
+    { "nom": "Filtre à charbon", "frequence": "tous les 2 mois" }
+  ],
+  "exemple": true
+}
