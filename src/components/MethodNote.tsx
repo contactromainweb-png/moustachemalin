@@ -6,8 +6,8 @@ export function MethodNote() {
   return (
     <aside aria-label="Notre méthode" className="bg-field px-5 py-6 sm:px-8">
       <p>
-        Nous n&apos;avons pas testé physiquement ces produits&#8239;: cette sélection repose sur l&apos;analyse des
-        caractéristiques et des retours d&apos;acheteurs.{" "}
+        Nous n&apos;avons pas testé physiquement ces produits&#8239;: cette sélection repose principalement sur les
+        fiches techniques des fabricants et, quand nous les avons analysés, sur les retours d&apos;acheteurs.{" "}
         <Link href="/methode/" className="text-caramel underline decoration-2 underline-offset-4 hover:text-ink">
           Comment nous comparons
         </Link>
