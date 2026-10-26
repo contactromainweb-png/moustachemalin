@@ -17,7 +17,7 @@
 ## 2. Règles non négociables
 
 ### Honnêteté et conformité
-- Les avis sont **basés sur la recherche** (fiches techniques, prix, entretien, synthèse des retours acheteurs). Chaque comparatif l'annonce clairement en haut : « Nous n'avons pas testé physiquement ces produits : cette sélection repose sur l'analyse des caractéristiques et des retours d'acheteurs. »
+- Les avis sont **basés sur la recherche**, principalement les fiches techniques des fabricants. Chaque comparatif l’annonce en haut : “Nous n’avons pas testé physiquement ces produits : ce comparatif repose sur les fiches techniques des fabricants.” Les retours d’acheteurs ne sont mentionnés que dans un comparatif où ils ont réellement été analysés.
 - **Jamais** de faux témoignages, faux avis clients, fausses notes ou faux « testé par notre équipe ».
 - **Jamais** de copie d'avis clients Amazon, même reformulés.
 - **Pas de schema.org `Review` / `AggregateRating`** avec des notes inventées.
