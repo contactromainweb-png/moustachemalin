@@ -1,0 +1,39 @@
+{
+  "asin": "B0D9QGW2M6",
+  "slug": "petkit-pura-max-2",
+  "name": "PETKIT Pura Max 2",
+  "brand": "PETKIT",
+  "category": "litiere-autonettoyante",
+  "badge": "Le meilleur globalement",
+  "specs": {
+    "type": "Fermée (tambour)",
+    "volumeInterieur": "76 L",
+    "bacDechets": "7 L",
+    "poidsChat": "1,5 à 8 kg (dès 6 mois)",
+    "hauteurEntree": "20 cm",
+    "capteurs": "Chaleur, infrarouge, poids, anti-pincement",
+    "modes": "Auto, programmé, manuel",
+    "wifi": "2,4 GHz uniquement",
+    "application": "Oui (poids, fréquence, durée des passages)"
+  },
+  "pour": "Un ou deux chats de taille moyenne, en appartement, pour qui veut un modèle fermé qui limite les projections et les odeurs.",
+  "pros": [
+    "Modèle fermé : limite les projections de litière",
+    "Base hermétique pensée contre les fuites",
+    "Suivi du poids et des passages dans l'application",
+    "Quatre familles de capteurs de sécurité"
+  ],
+  "cons": [
+    "Bac à déchets de 7 L, plus petit que les modèles ouverts",
+    "Wi-Fi 2,4 GHz seulement",
+    "Chats de plus de 8 kg exclus",
+    "Spray désodorisant non pris en charge sur cette version"
+  ],
+  "entretien": "Vider le bac à déchets selon le nombre de chats, laver le revêtement intérieur et le panneau magnétique de temps en temps. À poser sur un sol plat, pas sur un tapis.",
+  "consommables": [
+    "Désodorisant PETKIT N50",
+    "Sacs pour bac à déchets",
+    "Litière agglomérante compatible"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+}

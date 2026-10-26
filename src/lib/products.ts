@@ -1,22 +1,47 @@
 import fs from "node:fs";
 import path from "node:path";
 
-// Un produit = un fichier content/products/<nom>.json. Les articles l'appellent par son ASIN :
+// Un produit = un fichier content/products/<slug>.json. Les articles l'appellent par son ASIN :
 // changer un lien ou une info dans le fichier la change partout sur le site.
 export type Product = {
   asin: string; // identifiant Amazon (10 caractères)
-  nom: string;
-  marque: string;
-  categorie: string; // ex. "litiere-autonettoyante"
-  resume: string; // une phrase
-  pourQui: string;
-  caracteristiques: Record<string, string>; // ex. { "Bac": "9 L", "Bruit": "faible" }
-  pointsForts: string[];
-  pointsFaibles: string[];
+  slug: string;
+  name: string;
+  brand: string;
+  category: string; // ex. "litiere-autonettoyante"
+  badge?: string; // ex. "Le meilleur globalement"
+  specs: Record<string, string>; // clés libellées dans SPEC_LABELS
+  pour: string; // pour qui
+  pros: string[];
+  cons: string[];
   entretien: string;
-  consommables: { nom: string; frequence: string }[];
+  consommables: string[];
+  source: string; // d'où viennent les informations, avec la date de consultation
   exemple?: boolean; // true = produit fictif, jamais relié à Amazon
 };
+
+// Libellés affichés pour chaque clé de "specs". Une clé absente d'ici s'affiche telle quelle.
+export const SPEC_LABELS: Record<string, string> = {
+  type: "Type",
+  volumeInterieur: "Volume intérieur",
+  chambreLitiere: "Chambre à litière",
+  bacDechets: "Bac à déchets",
+  poidsChat: "Poids du chat",
+  hauteurEntree: "Hauteur d'entrée",
+  ouverture: "Ouverture",
+  capteurs: "Capteurs",
+  modes: "Modes",
+  bruit: "Bruit",
+  litiere: "Litière acceptée",
+  wifi: "Wi-Fi",
+  application: "Application",
+  montage: "Montage",
+  garantie: "Garantie",
+};
+
+export function specLabel(cle: string) {
+  return SPEC_LABELS[cle] ?? cle;
+}
 
 const DOSSIER = path.join(process.cwd(), "content/products");
 

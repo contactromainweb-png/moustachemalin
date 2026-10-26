@@ -1,28 +1,29 @@
 {
   "asin": "B0EXEMPLE3",
-  "nom": "Litière Exemple C",
-  "marque": "Produit fictif",
-  "categorie": "litiere-autonettoyante",
-  "resume": "Troisième produit fictif, pensé pour un foyer de plusieurs chats.",
-  "pourQui": "Deux ou trois chats qui partagent la même litière.",
-  "caracteristiques": {
-    "Poids du chat accepté": "1,5 à 12 kg",
-    "Bac à déchets": "13 L",
-    "Bruit annoncé": "faible",
-    "Application": "oui"
+  "slug": "exemple-litiere-c",
+  "name": "Litière Exemple C",
+  "brand": "Produit fictif",
+  "category": "litiere-autonettoyante",
+  "specs": {
+    "poidsChat": "1,5 à 12 kg",
+    "bacDechets": "13 L",
+    "bruit": "faible",
+    "application": "oui"
   },
-  "pointsForts": [
+  "pour": "Deux ou trois chats qui partagent la même litière.",
+  "pros": [
     "Reconnaît chaque chat par son poids",
     "Grand bac : moins de vidages même à plusieurs"
   ],
-  "pointsFaibles": [
+  "cons": [
     "Le plus encombrant des trois",
     "Doit rester branché en permanence"
   ],
   "entretien": "Vider le bac une fois par semaine, laver le tambour toutes les trois semaines.",
   "consommables": [
-    { "nom": "Sacs pour le bac à déchets", "frequence": "1 à 2 par semaine" },
-    { "nom": "Tapis de sortie", "frequence": "1 par an" }
+    "Sacs pour le bac à déchets (1 à 2 par semaine)",
+    "Tapis de sortie (1 par an)"
   ],
+  "source": "Produit fictif, aucune source",
   "exemple": true
 }

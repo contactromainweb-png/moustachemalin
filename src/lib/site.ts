@@ -36,11 +36,18 @@ export const RUBRIQUES = [
   { href: "/guides/", label: "Guides" },
 ];
 
-// Seulement les rubriques dont la page existe déjà (voir ROUTES_EN_LIGNE dans next.config.ts).
-// Une rubrique apparaît d'elle-même dans le menu dès que son dossier src/app/<rubrique>/ est créé.
+// Vrai si la page existe déjà sur le site (liste calculée au build dans next.config.ts).
+// Les liens externes (https://…) sont toujours considérés comme en ligne.
+export function pageEnLigne(href: string) {
+  if (!href.startsWith("/")) return true;
+  const chemin = href.split(/[?#]/)[0].replace(/\/?$/, "/");
+  return (process.env.PAGES_EN_LIGNE ?? "").split(",").includes(chemin);
+}
+
+// Seulement les rubriques dont la page existe : une rubrique apparaît d'elle-même dans le menu
+// dès que son dossier src/app/<rubrique>/ contient un page.tsx.
 export function rubriquesEnLigne() {
-  const enLigne = (process.env.ROUTES_EN_LIGNE ?? "").split(",");
-  return RUBRIQUES.filter((r) => enLigne.includes(r.href.replaceAll("/", "")));
+  return RUBRIQUES.filter((r) => pageEnLigne(r.href));
 }
 
 export const PAGES_INFO = [

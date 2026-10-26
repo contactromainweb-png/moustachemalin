@@ -1,19 +1,25 @@
-export const meta = {
-  type: "comparatif",
-  titre: "Litière autonettoyante : exemple",
-  titreSeo: "Exemple de comparatif",
-  description: "Page d'exemple qui montre le modèle de comparatif de Moustache Malin, avec des produits fictifs.",
-  chemin: "/exemples/comparatif/",
-  rubrique: { label: "Exemples", href: "/exemples/rubrique/" },
-  publie: "2026-10-26",
-  misAJour: "2026-10-26",
-  produits: ["B0EXEMPLE1", "B0EXEMPLE2", "B0EXEMPLE3"],
-  index: false,
-};
+---
+title: "Litière autonettoyante : exemple"
+metaTitle: "Exemple de comparatif"
+description: "Page d'exemple qui montre le modèle de comparatif de Moustache Malin, avec des produits fictifs."
+slug: comparatif
+rubrique: exemples
+type: comparatif
+updatedAt: "2026-10-26"
+products:
+  - B0EXEMPLE1
+  - B0EXEMPLE2
+  - B0EXEMPLE3
+noindex: true
+---
 
-> Page d'exemple : les trois produits ci-dessous sont fictifs. Elle sert à vérifier la mise en page avant d'écrire le vrai comparatif.
+<MethodNote />
 
-Une litière autonettoyante ramasse les besoins du chat à sa place et les stocke dans un bac fermé. Bien choisie, elle fait gagner quelques minutes par jour et limite les odeurs. Mal choisie, elle effraie le chat ou coûte cher en sacs à racheter.
+<AmazonDisclosure />
+
+> Page d'exemple : les trois produits ci-dessous sont fictifs. Elle sert à vérifier la mise en page.
+
+## Notre sélection en bref
 
 <TopPicks
   picks={[
@@ -23,62 +29,28 @@ Une litière autonettoyante ramasse les besoins du chat à sa place et les stock
   ]}
 />
 
-<ComparisonTable
-  asins={["B0EXEMPLE1", "B0EXEMPLE2", "B0EXEMPLE3"]}
-  criteres={["Poids du chat accepté", "Bac à déchets", "Bruit annoncé", "Application"]}
-/>
+## Tableau comparatif
 
-## Les fiches détaillées
+<ComparisonTable asins={["B0EXEMPLE1", "B0EXEMPLE2", "B0EXEMPLE3"]} columns={["poidsChat", "bacDechets", "bruit", "application"]} />
+
+## Les modèles en détail
+
+### Litière Exemple A : le meilleur globalement
 
 <ProductCard asin="B0EXEMPLE1" />
 
+### Litière Exemple B : le meilleur petit budget
+
 <ProductCard asin="B0EXEMPLE2" />
+
+### Litière Exemple C : pour plusieurs chats
 
 <ProductCard asin="B0EXEMPLE3" />
 
-## Le guide d'achat
-
-### Les critères de choix
-
-- **Le poids minimum accepté** : en dessous, le capteur ne détecte pas le chat. Un chaton doit attendre.
-- **La taille du bac à déchets** : elle décide du nombre de vidages par semaine.
-- **Le coût des consommables** : sacs, filtres et tapis se rachètent toute la vie de l'appareil.
-- **La place disponible** : mesurez le coin prévu avant de commander, porte du bac ouverte.
-
-### Les erreurs à éviter
-
-- Retirer l'ancienne litière dès le premier jour : laissez les deux côte à côte le temps que le chat s'habitue.
-- Choisir uniquement sur le prix de l'appareil, sans compter les recharges.
-- Placer l'appareil dans un passage bruyant : le chat a besoin d'un coin calme.
-
 <FAQ
-  questions={[
-    {
-      q: "Une litière autonettoyante convient-elle à un chaton ?",
-      r: "Pas avant le poids minimum indiqué par le fabricant, souvent autour de 1,5 kg : en dessous, le capteur risque de ne pas le détecter.",
-    },
-    {
-      q: "Peut-on utiliser n'importe quelle litière dedans ?",
-      r: "Non. La plupart des modèles demandent une litière agglomérante. Vérifiez la notice avant d'acheter un sac.",
-    },
-    {
-      q: "Est-ce bruyant ?",
-      r: "Le cycle de nettoyage dure quelques minutes. Le bruit annoncé par le fabricant permet de comparer, mais le placement compte autant.",
-    },
+  items={[
+    { q: "À quoi sert cette page ?", a: "À vérifier le modèle de comparatif avec des produits fictifs, avant d'écrire les vrais articles." },
   ]}
 />
 
-<RelatedArticles
-  articles={[
-    {
-      href: "/exemples/guide/",
-      titre: "Exemple de guide",
-      description: "Le modèle de guide problème, avec son encadré vétérinaire.",
-    },
-    {
-      href: "/methode/",
-      titre: "Comment nous comparons",
-      description: "Nos sources, nos critères et ce que nous ne faisons pas.",
-    },
-  ]}
-/>
+<RelatedArticles links={[{ href: "/exemples/guide/", label: "Exemple de guide" }]} />

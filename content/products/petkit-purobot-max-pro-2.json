@@ -1,0 +1,38 @@
+{
+  "asin": "B0FJFB6YXB",
+  "slug": "petkit-purobot-max-pro-2",
+  "name": "PETKIT Purobot Max Pro 2",
+  "brand": "PETKIT",
+  "category": "litiere-autonettoyante",
+  "badge": "Pour suivre la santé du chat",
+  "specs": {
+    "type": "Fermée (tambour) avec caméra",
+    "volumeInterieur": "76 L",
+    "bacDechets": "8 L (jusqu'à 15 jours annoncés)",
+    "poidsChat": "Grands chats acceptés (entrée agrandie de 43 %)",
+    "capteurs": "12 capteurs + anti-pincement",
+    "bruit": "35 à 45 dB annoncés",
+    "wifi": "2,4 et 5 GHz",
+    "application": "Oui, avec identification de plusieurs chats"
+  },
+  "pour": "Les grands chats (type Maine Coon) et les propriétaires qui veulent surveiller les habitudes de leur chat.",
+  "pros": [
+    "Caméra grand angle 210° avec vision nocturne",
+    "Photos des selles et urines pour repérer un changement",
+    "Entrée nettement plus large que la génération précédente",
+    "Fermeture des sacs à cordon : vidage sans contact",
+    "Wi-Fi 5 GHz accepté"
+  ],
+  "cons": [
+    "Le plus haut de gamme de la sélection",
+    "La caméra ne remplace pas un vétérinaire",
+    "Ne pas poser sur moquette ou tapis (capteurs perturbés)"
+  ],
+  "entretien": "Retirer le sac fermé par cordon quand le bac est plein, nettoyer l'intérieur périodiquement.",
+  "consommables": [
+    "Sacs à cordon PETKIT",
+    "Désodorisant / purificateur PETKIT",
+    "Litière agglomérante compatible"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+}

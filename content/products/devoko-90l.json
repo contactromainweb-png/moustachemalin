@@ -1,0 +1,32 @@
+{
+  "asin": "B0FMRB7Z2S",
+  "slug": "devoko-90l",
+  "name": "Devoko 90L",
+  "brand": "Devoko",
+  "category": "litiere-autonettoyante",
+  "specs": {
+    "type": "Fermée (tambour)",
+    "volumeInterieur": "90 L",
+    "poidsChat": "1,5 à 10 kg",
+    "capteurs": "Radar de mouvement, infrarouges, radar biologique",
+    "modes": "Auto, programmé, manuel",
+    "wifi": "2,4 GHz",
+    "application": "Oui"
+  },
+  "pour": "Un compromis fermé et spacieux, moins cher que les PETKIT.",
+  "pros": [
+    "Grand volume intérieur de 90 L",
+    "Trois technologies de détection du chat",
+    "Pièces modulaires et lavables"
+  ],
+  "cons": [
+    "Wi-Fi 2,4 GHz seulement",
+    "Marque moins connue : vérifier le SAV et la garantie à l'achat"
+  ],
+  "entretien": "Démontage modulaire pour laver les pièces, vidage régulier du bac.",
+  "consommables": [
+    "Sacs pour bac à déchets",
+    "Litière agglomérante"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+}

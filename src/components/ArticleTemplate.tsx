@@ -1,55 +1,53 @@
 import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
-import { MethodNote } from "@/components/MethodNote";
 import { UpdatedDate } from "@/components/UpdatedDate";
-import type { ArticleMeta } from "@/lib/articles";
+import { cheminArticle, rubriqueArticle, type Frontmatter } from "@/lib/articles";
 import { getProduct } from "@/lib/products";
 import { SITE } from "@/lib/site";
+import { espacesFines } from "@/lib/typo";
 
-// Modèle commun aux comparatifs et aux guides. Le corps de l'article vient du fichier MDX.
-// Pas de Three.js ici : les articles restent légers (cahier des charges, section 2).
-export function ArticleTemplate({ meta, children }: { meta: ArticleMeta; children: ReactNode }) {
-  const url = new URL(meta.chemin, SITE.url).toString();
+// Modèle commun aux comparatifs et aux guides. Le corps (MethodNote, mention Amazon, sections)
+// vient du fichier MDX. Pas de Three.js ici : les articles restent légers (cahier des charges, section 2).
+export function ArticleTemplate({ frontmatter: fm, children }: { frontmatter: Frontmatter; children: ReactNode }) {
+  const chemin = cheminArticle(fm);
+  const url = new URL(chemin, SITE.url).toString();
 
   return (
     <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10">
-      <Breadcrumbs items={[meta.rubrique, { label: meta.titre, href: meta.chemin }]} />
+      <Breadcrumbs items={[rubriqueArticle(fm), { label: espacesFines(fm.title), href: chemin }]} />
 
       <header className="mt-10 lg:mt-16">
-        <h1 className="font-display rise max-w-[22ch] text-[clamp(2.5rem,1.4rem+4.6vw,6rem)]">{meta.titre}</h1>
-        <UpdatedDate date={meta.misAJour} className="rise mt-6" />
+        <h1 className="font-display rise max-w-[22ch] text-[clamp(2.5rem,1.4rem+4.6vw,6rem)]">{espacesFines(fm.title)}</h1>
+        <UpdatedDate date={fm.updatedAt} className="rise mt-6" />
       </header>
 
-      <div className="mt-10 max-w-[64rem] lg:mt-14">
-        {meta.type === "comparatif" ? <MethodNote /> : null}
-        <div className={meta.type === "comparatif" ? "mt-12" : ""}>{children}</div>
-      </div>
+      <div className="mt-10 max-w-[64rem] lg:mt-14">{children}</div>
 
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "Article",
-          headline: meta.titre,
-          description: meta.description,
-          datePublished: meta.publie,
-          dateModified: meta.misAJour,
+          headline: fm.title,
+          description: fm.description,
+          datePublished: fm.publishedAt ?? fm.updatedAt,
+          dateModified: fm.updatedAt,
           mainEntityOfPage: url,
           inLanguage: "fr-FR",
           author: { "@type": "Organization", name: SITE.name, url: SITE.url },
           publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
         }}
       />
-      {meta.type === "comparatif" && meta.produits?.length ? (
+      {fm.type === "comparatif" && fm.products?.length ? (
         <JsonLd
           data={{
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: meta.titre,
-            itemListElement: meta.produits.map((asin, i) => ({
+            name: fm.title,
+            itemListElement: fm.products.map((asin, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              name: getProduct(asin).nom,
+              name: getProduct(asin).name,
               url: `${url}#${asin}`,
             })),
           }}

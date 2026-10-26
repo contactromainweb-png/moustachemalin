@@ -1,0 +1,37 @@
+{
+  "asin": "B0DG59SQ5P",
+  "slug": "neakasa-m1-lite",
+  "name": "Neakasa M1 Lite",
+  "brand": "Neakasa",
+  "category": "litiere-autonettoyante",
+  "badge": "Pour plusieurs chats ou un grand chat",
+  "specs": {
+    "type": "Ouverte",
+    "chambreLitiere": "7,17 L",
+    "bacDechets": "11 L (jusqu'à 14 jours annoncés)",
+    "poidsChat": "Jusqu'à 15 kg",
+    "capteurs": "6 infrarouges + 4 de poids",
+    "modes": "Auto, manuel, minuteur, vidage",
+    "bruit": "≤ 50 dB annoncés",
+    "application": "Oui (passages, poids, niveau de litière)",
+    "garantie": "2 ans"
+  },
+  "pour": "Les foyers à plusieurs chats, les gros chats et les chats méfiants qui refusent les toilettes fermées.",
+  "pros": [
+    "Design ouvert, rassurant pour les chats craintifs",
+    "Accepte les chats jusqu'à 15 kg",
+    "Gros bac à déchets de 11 L",
+    "Quatre modes dont un mode vidage",
+    "Garantie 2 ans"
+  ],
+  "cons": [
+    "Ouvert : plus de projections possibles qu'un modèle fermé (accessoires anti-projection vendus à part)",
+    "Encombrant"
+  ],
+  "entretien": "Changer le sac du bac à déchets toutes les une à deux semaines selon le nombre de chats.",
+  "consommables": [
+    "Sacs à déchets Neakasa",
+    "Litière agglomérante (bentonite) conseillée"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+}

@@ -1,3 +1,5 @@
+import { espacesFines } from "@/lib/typo";
+
 // Points forts et points faibles côte à côte (empilés sur téléphone).
 export function ProsCons({ pros, cons }: { pros: string[]; cons: string[] }) {
   return (
@@ -8,7 +10,7 @@ export function ProsCons({ pros, cons }: { pros: string[]; cons: string[] }) {
           {pros.map((p) => (
             <li key={p} className="flex gap-3">
               <span aria-hidden="true" className="font-semibold text-caramel">+</span>
-              <span>{p}</span>
+              <span>{espacesFines(p)}</span>
             </li>
           ))}
         </ul>
@@ -19,7 +21,7 @@ export function ProsCons({ pros, cons }: { pros: string[]; cons: string[] }) {
           {cons.map((c) => (
             <li key={c} className="flex gap-3">
               <span aria-hidden="true" className="font-semibold text-ink-soft">−</span>
-              <span>{c}</span>
+              <span>{espacesFines(c)}</span>
             </li>
           ))}
         </ul>

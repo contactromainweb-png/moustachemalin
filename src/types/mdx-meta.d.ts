@@ -1,4 +1,4 @@
-// Les articles MDX exportent `meta` (voir src/lib/articles.ts).
+// Les articles MDX exportent leur bloc --- sous le nom `frontmatter` (voir src/lib/articles.ts).
 declare module "*.mdx" {
-  export const meta: import("@/lib/articles").ArticleMeta;
+  export const frontmatter: import("@/lib/articles").Frontmatter;
 }

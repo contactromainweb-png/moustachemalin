@@ -1,27 +1,28 @@
 {
   "asin": "B0EXEMPLE2",
-  "nom": "Litière Exemple B",
-  "marque": "Produit fictif",
-  "categorie": "litiere-autonettoyante",
-  "resume": "Deuxième produit fictif, version petit budget, pour montrer la comparaison.",
-  "pourQui": "Un chat calme, pour découvrir l'autonettoyant sans trop dépenser.",
-  "caracteristiques": {
-    "Poids du chat accepté": "2 à 7 kg",
-    "Bac à déchets": "6 L",
-    "Bruit annoncé": "moyen",
-    "Application": "non"
+  "slug": "exemple-litiere-b",
+  "name": "Litière Exemple B",
+  "brand": "Produit fictif",
+  "category": "litiere-autonettoyante",
+  "specs": {
+    "poidsChat": "2 à 7 kg",
+    "bacDechets": "6 L",
+    "bruit": "moyen",
+    "application": "non"
   },
-  "pointsForts": [
+  "pour": "Un chat calme, pour découvrir l'autonettoyant sans trop dépenser.",
+  "pros": [
     "Fonctionne avec une litière agglomérante classique",
     "Compact, passe dans une salle de bains"
   ],
-  "pointsFaibles": [
+  "cons": [
     "Bac à vider deux fois par semaine",
     "Pas de suivi sur téléphone"
   ],
   "entretien": "Vider le bac deux fois par semaine, nettoyer le râteau une fois par mois.",
   "consommables": [
-    { "nom": "Sacs standard 30 L", "frequence": "2 par semaine" }
+    "Sacs standard 30 L (2 par semaine)"
   ],
+  "source": "Produit fictif, aucune source",
   "exemple": true
 }

@@ -1,39 +1,22 @@
-export const meta = {
-  type: "guide",
-  titre: "Mon chat ne boit pas : exemple",
-  titreSeo: "Exemple de guide",
-  description: "Page d'exemple qui montre le modèle de guide de Moustache Malin.",
-  chemin: "/exemples/guide/",
-  rubrique: { label: "Exemples", href: "/exemples/rubrique/" },
-  publie: "2026-10-26",
-  misAJour: "2026-10-26",
-  index: false,
-};
+---
+title: "Mon chat ne boit pas : exemple"
+metaTitle: "Exemple de guide"
+description: "Page d'exemple qui montre le modèle de guide de Moustache Malin."
+slug: guide
+rubrique: exemples
+type: guide
+updatedAt: "2026-10-26"
+noindex: true
+---
 
-> Page d'exemple : ce texte sert à vérifier la mise en page. Le vrai guide sera écrit à l'étape 4.
-
-Beaucoup de chats boivent peu, parce que leurs ancêtres tiraient une grande partie de leur eau de leurs proies. Quelques changements dans la maison peuvent les encourager.
+> Page d'exemple : ce texte sert à vérifier la mise en page.
 
 <VetNotice />
 
-## Ce que vous pouvez essayer
+## Un encadré produit
 
-- Éloigner la gamelle d'eau de la gamelle de nourriture.
-- Proposer plusieurs points d'eau dans le logement.
-- Essayer une eau qui bouge : beaucoup de chats la préfèrent à une eau immobile.
+<ProductBox asin="B0EXEMPLE1" comparatif={{ href: "/exemples/comparatif/", titre: "Voir le comparatif d'exemple" }} />
 
-## L'équipement qui peut aider
+<CalloutLink href="/exemples/comparatif/" title="Exemple de lien vers un comparatif" text="L'encadré CalloutLink, affiché parce que la page visée existe." />
 
-Une fontaine à eau garde l'eau en mouvement et filtrée. C'est souvent le premier équipement à essayer.
-
-<ProductBox asin="B0EXEMPLE1" comparatif={{ href: "/exemples/comparatif/", titre: "Voir le comparatif complet" }} />
-
-<RelatedArticles
-  articles={[
-    {
-      href: "/exemples/comparatif/",
-      titre: "Exemple de comparatif",
-      description: "Le modèle de comparatif, avec résumé rapide, tableau et fiches.",
-    },
-  ]}
-/>
+<RelatedArticles links={[{ href: "/exemples/comparatif/", label: "Exemple de comparatif" }]} />

@@ -1,23 +1,28 @@
 import Link from "next/link";
+import { pageEnLigne } from "@/lib/site";
+import { espacesFines } from "@/lib/typo";
 
-export type Related = { href: string; titre: string; description: string };
+export type Related = { href: string; label: string };
 
-// Maillage interne : liens vers les guides et comparatifs liés, en bas d'article.
-export function RelatedArticles({ articles, titre = "À lire aussi" }: { articles: Related[]; titre?: string }) {
+// Maillage interne en bas d'article. Les pages pas encore écrites sont masquées ;
+// si aucune n'existe, toute la section (titre compris) disparaît.
+export function RelatedArticles({ links, titre = "À lire aussi" }: { links: Related[]; titre?: string }) {
+  const enLigne = links.filter((l) => pageEnLigne(l.href));
+  if (enLigne.length === 0) return null;
+
   return (
     <section aria-labelledby="a-lire-aussi" className="reveal my-14">
       <h2 id="a-lire-aussi" className="font-display mb-8 text-head">
         {titre}
       </h2>
       <ul className="space-y-3">
-        {articles.map((a) => (
-          <li key={a.href}>
+        {enLigne.map((l) => (
+          <li key={l.href}>
             <Link
-              href={a.href}
-              className="group block bg-field px-5 py-5 transition-colors hover:bg-caramel-field hover:text-on-caramel sm:px-8"
+              href={l.href}
+              className="block bg-field px-5 py-5 text-lead font-semibold underline-offset-4 transition-colors hover:bg-caramel-field hover:text-on-caramel hover:underline sm:px-8"
             >
-              <span className="text-lead font-semibold underline-offset-4 group-hover:underline">{a.titre}</span>
-              <span className="mt-1 block max-w-[60ch]">{a.description}</span>
+              {espacesFines(l.label)}
             </Link>
           </li>
         ))}
