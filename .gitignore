@@ -48,3 +48,7 @@ next-env.d.ts
 
 # rapports du skill de design (captures locales)
 .taste-skill
+
+# captures d'écran de contrôle (Playwright)
+/captures/
+.playwright-mcp/
