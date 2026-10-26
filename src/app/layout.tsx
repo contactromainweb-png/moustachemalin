@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk, Instrument_Serif } from "next/font/google";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SITE } from "@/lib/site";
@@ -41,6 +42,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Aller au contenu
         </a>
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              { "@type": "Organization", "@id": `${SITE.url}/#organisation`, name: SITE.name, url: SITE.url, email: SITE.email },
+              {
+                "@type": "WebSite",
+                name: SITE.name,
+                url: SITE.url,
+                inLanguage: "fr-FR",
+                publisher: { "@id": `${SITE.url}/#organisation` },
+              },
+            ],
+          }}
+        />
         <SiteHeader />
         <main id="contenu" className="flex-1">
           {children}

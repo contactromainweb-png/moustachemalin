@@ -10,15 +10,15 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
   const tous = [{ label: "Accueil", href: "/" }, ...items];
   return (
     <nav aria-label="Fil d'Ariane" className="text-small text-ink-soft">
-      <ol className="flex flex-wrap gap-x-2">
+      <ol className="flex flex-wrap items-center gap-x-2">
         {tous.map((c, i) => {
           const derniere = i === tous.length - 1;
           return (
-            <li key={c.href} className="flex gap-x-2">
+            <li key={c.href} className="flex min-h-11 items-center gap-x-2">
               {derniere ? (
                 <span aria-current="page">{c.label}</span>
               ) : pageEnLigne(c.href) ? (
-                <Link href={c.href} className="underline-offset-4 hover:text-ink hover:underline">
+                <Link href={c.href} className="inline-block py-2.5 underline-offset-4 hover:text-ink hover:underline">
                   {c.label}
                 </Link>
               ) : (

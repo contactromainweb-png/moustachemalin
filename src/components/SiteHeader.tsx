@@ -9,10 +9,10 @@ export function SiteHeader() {
 
   return (
     <header className="relative px-4 sm:px-8">
-      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-6 py-5">
+      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-6 py-3">
         <Link
           href="/"
-          className="font-display text-[1.75rem] sm:text-[2rem] hover:text-caramel transition-colors"
+          className="py-2 font-display text-[1.75rem] sm:text-[2rem] hover:text-caramel transition-colors"
         >
           {SITE.name}
         </Link>

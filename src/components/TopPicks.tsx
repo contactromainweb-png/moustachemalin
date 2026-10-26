@@ -22,7 +22,7 @@ export function TopPicks({ picks }: { picks: Pick[] }) {
           </div>
           <div>
             <AffiliateButton asin={premier.asin} exemple={premier.produit.exemple} />
-            <a href={`#${premier.asin}`} className="mt-4 block underline underline-offset-4">
+            <a href={`#${premier.asin}`} className="mt-2 block w-fit py-2.5 underline underline-offset-4">
               Lire la fiche détaillée
             </a>
           </div>
@@ -37,7 +37,7 @@ export function TopPicks({ picks }: { picks: Pick[] }) {
                 </div>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                   <AffiliateButton asin={pick.asin} exemple={pick.produit.exemple} />
-                  <a href={`#${pick.asin}`} className="underline underline-offset-4">
+                  <a href={`#${pick.asin}`} className="inline-block py-2.5 underline underline-offset-4">
                     La fiche
                   </a>
                 </div>

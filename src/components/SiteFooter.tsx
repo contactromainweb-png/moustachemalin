@@ -15,10 +15,10 @@ export function SiteFooter() {
           </div>
           {rubriques.length > 0 ? (
             <nav aria-label="Rubriques (pied de page)">
-              <ul className="flex flex-col gap-2">
+              <ul className="flex flex-col">
                 {rubriques.map((r) => (
                   <li key={r.href}>
-                    <Link href={r.href} className="underline-offset-4 hover:underline">
+                    <Link href={r.href} className="inline-block py-2.5 underline-offset-4 hover:underline">
                       {r.label}
                     </Link>
                   </li>
@@ -27,10 +27,10 @@ export function SiteFooter() {
             </nav>
           ) : null}
           <nav aria-label="Informations" className="md:col-start-3">
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col">
               {PAGES_INFO.map((p) => (
                 <li key={p.href}>
-                  <Link href={p.href} className="underline-offset-4 hover:underline">
+                  <Link href={p.href} className="inline-block py-2.5 underline-offset-4 hover:underline">
                     {p.label}
                   </Link>
                 </li>
