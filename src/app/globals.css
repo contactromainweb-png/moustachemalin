@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
+/* Palette Moustache Malin : crème chaud, brun caramel, accent safran pour les boutons Amazon. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --paper: #f6efe4;
+  --field: #ece1cf;
+  --ink: #22170e;
+  --ink-soft: #5a4838;
+  --caramel: #84501f;
+  --caramel-field: #6b4019;
+  --on-caramel: #f6efe4;
+  --accent: #f2a20c;
+  --on-accent: #22170e;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #16100b;
+    --field: #231a12;
+    --ink: #f3eadc;
+    --ink-soft: #c7b6a3;
+    --caramel: #e3bd84;
+    --caramel-field: #4a2c11;
+    --on-caramel: #f3eadc;
+    --accent: #f2a20c;
+    --on-accent: #22170e;
   }
 }
 
+@theme inline {
+  --color-paper: var(--paper);
+  --color-field: var(--field);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-caramel: var(--caramel);
+  --color-caramel-field: var(--caramel-field);
+  --color-on-caramel: var(--on-caramel);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --font-display: var(--font-instrument-serif);
+  --font-sans: var(--font-hanken-grotesk);
+
+  /* Cinq tailles, pas plus. */
+  --text-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --text-head: clamp(2.25rem, 1.5rem + 3.2vw, 4rem);
+  --text-display: clamp(3rem, 1.6rem + 6.4vw, 7.5rem);
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: var(--text-body);
+  line-height: 1.55;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--caramel);
+  outline-offset: 3px;
+}
+
+/* Titres : police à caractère, serrée. */
+.font-display {
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 80ms);
+  }
+}
+
+/* Entrée des blocs de texte quand ils arrivent à l'écran (CSS pur, sans JavaScript). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
 }

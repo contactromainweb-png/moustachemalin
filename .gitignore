@@ -45,3 +45,6 @@ next-env.d.ts
 
 # netlify
 .netlify
+
+# rapports du skill de design (captures locales)
+.taste-skill

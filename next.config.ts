@@ -4,6 +4,9 @@ import createMDX from "@next/mdx";
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
+  trailingSlash: true,
+  // Année affichée dans le footer, figée à chaque construction du site.
+  env: { BUILD_YEAR: String(new Date().getFullYear()) },
   partialPrefetching: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   turbopack: {

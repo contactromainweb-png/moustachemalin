@@ -1,15 +1,25 @@
+import Link from "next/link";
 import Bienvenue from "../../content/bienvenue.mdx";
 
+// Accueil provisoire : la vraie vitrine (vidéo au scroll + scène 3D) arrive à l'étape 5.
 export default function Home() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-6 px-4 py-24 text-center">
-      <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-        Moustache Malin
-      </h1>
-      <div className="max-w-md text-lg leading-8 opacity-80">
+    <div className="mx-auto max-w-[90rem] px-4 pt-12 sm:px-8 sm:pt-24">
+      <h1 className="font-display rise max-w-[16ch] text-display">Bien équiper son chat</h1>
+      <div className="rise mt-10 max-w-[40ch] text-lead" style={{ "--i": 1 } as React.CSSProperties}>
         <Bienvenue />
       </div>
-      <p className="text-sm opacity-60">Site en construction — à très bientôt.</p>
-    </main>
+      <p className="rise mt-4 max-w-[52ch]" style={{ "--i": 2 } as React.CSSProperties}>
+        Comparatifs de litières, fontaines, distributeurs et arbres à chat, basés sur la lecture des fiches
+        techniques et des retours d&apos;acheteurs. Les premiers articles arrivent très bientôt.
+      </p>
+      <Link
+        href="/methode/"
+        className="rise mt-10 inline-flex min-h-12 items-center bg-ink px-7 text-paper transition-transform hover:-translate-y-0.5 active:translate-y-0"
+        style={{ "--i": 3 } as React.CSSProperties}
+      >
+        Voir comment nous comparons
+      </Link>
+    </div>
   );
 }
