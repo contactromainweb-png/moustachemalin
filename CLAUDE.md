@@ -17,7 +17,7 @@
 ## 2. Règles non négociables
 
 ### Honnêteté et conformité
-- Les avis sont **basés sur la recherche** (fiches techniques, prix, entretien, synthèse des retours acheteurs). Chaque comparatif l'annonce clairement en haut : « Nous n'avons pas testé physiquement ces produits : cette sélection repose principalement sur les fiches techniques des fabricants et, quand nous les avons analysés, sur les retours d'acheteurs. »
+- Les avis sont **basés sur la recherche** (fiches techniques, prix, entretien, synthèse des retours acheteurs). Chaque comparatif l'annonce clairement en haut : « Nous n'avons pas testé physiquement ces produits : cette sélection repose sur l'analyse des caractéristiques et des retours d'acheteurs. »
 - **Jamais** de faux témoignages, faux avis clients, fausses notes ou faux « testé par notre équipe ».
 - **Jamais** de copie d'avis clients Amazon, même reformulés.
 - **Pas de schema.org `Review` / `AggregateRating`** avec des notes inventées.
@@ -109,7 +109,8 @@ URLs en français, minuscules, avec tirets, sans accents.
 - `AffiliateButton` : lien Amazon formaté (tag partenaire dans une variable d'environnement `NEXT_PUBLIC_AMAZON_TAG`), `rel` correct, suivi des clics.
 - `AmazonDisclosure` : la mention obligatoire.
 - `MethodNote` : l'encadré « avis basé sur la recherche ».
-- `ProductCard`, `TopPicks`, `ComparisonTable`, `ProsCons`, `FAQ` (avec schema), `VetNotice`, `RelatedArticles`, `Breadcrumbs` (avec schema), `UpdatedDate`.
+- `ProductCard`, `TopPicks`, `ComparisonTable`, `ProsCons`, `FAQ` (avec schema), `VetNotice`, `RelatedArticles`, `Breadcrumbs` (avec schema), `UpdatedDate`, `CalloutLink` (encadré qui renvoie d'un guide vers un comparatif : `href`, `title`, `text`).
+- Liens internes vers des pages pas encore écrites : ne pas casser le build ; les masquer tant que la page cible n'existe pas.
 - `ProductData` : les produits sont décrits dans `content/products/*.json` (nom, ASIN, catégorie, caractéristiques, points forts/faibles, consommables). Les articles MDX les appellent par ASIN, pour pouvoir changer un lien partout en une fois.
 - `NewsletterForm` : prêt à brancher sur un outil gratuit (à choisir plus tard), désactivé par défaut.
 
@@ -128,6 +129,19 @@ URLs en français, minuscules, avec tirets, sans accents.
 - Typographie : une police de titres avec du caractère, une police de texte très lisible (Google Fonts).
 - Mascotte possible plus tard : « Moustache », utilisée dans les vidéos courtes.
 - Accessibilité : contrastes suffisants, navigation au clavier, tailles de texte ≥ 16 px.
+
+### Skills et outils installés : quand les utiliser
+
+Utilise-les systématiquement aux moments indiqués. Ils améliorent la qualité, mais **ne remplacent jamais les règles de ce fichier** : thème clair crème par défaut, photos réelles de chats, performance mobile, 3D limitée aux 4 vitrines.
+
+| Outil | Rôle | Quand |
+| --- | --- | --- |
+| **Taste** (`design-taste-frontend`, `high-end-visual-design`) | Direction visuelle haut de gamme, anti « look IA » | Au début de chaque nouveau type de page (accueil, rubrique, comparatif, guide). Garder l'ambiance chaleureuse et lumineuse : pas de style brutaliste ni sombre par défaut. |
+| **Impeccable** (`/impeccable shape`, `craft`, `typeset`, `colorize`, `polish`, `audit`, `critique`) | Structurer, construire puis peaufiner l'interface | `shape` avant de coder une page, `craft` pour la construire, `polish` à la fin de chaque étape, `audit` avant chaque mise en ligne. |
+| **Emil Kowalski** (`emil-design-eng`) | Qualité des animations et micro-interactions (timing, easing, retours au survol et au clic) | Pour toutes les animations : boutons, cartes, apparitions au scroll, et le rythme des vitrines 3D (étape 5). Toujours avec une version `prefers-reduced-motion`. |
+| **Playwright** (MCP) | Ouvrir le site dans un vrai navigateur, faire des captures, tester en taille mobile (390 px) et ordinateur | À la fin de chaque étape : captures mobile et ordinateur, vérification des liens, de la mention Amazon et de l'absence d'erreurs dans la console. Montre-moi les captures. |
+
+La 3D elle-même (étape 5 et vitrines) se fait avec Three.js, React Three Fiber, drei et GSAP ScrollTrigger (section 3). Aucun de ces skills ne la remplace : ils servent à la direction artistique, au rythme des animations et au contrôle qualité.
 
 ## 9. Ordre de construction
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { StagePage, type StagePhoto } from "@/components/StagePage";
+import { espacesFines } from "@/lib/typo";
 
 export type ArticleLien = { href: string; titre: string; description: string; type: "comparatif" | "guide" };
 
@@ -23,9 +24,9 @@ export function RubriqueTemplate({ titre, intro, articles, photo }: Props) {
               className="group block bg-field px-5 py-6 transition-colors hover:bg-caramel-field hover:text-on-caramel sm:px-8"
             >
               <span className="block font-display text-head">
-                {a.titre}
+                {espacesFines(a.titre)}
               </span>
-              <span className="mt-2 block max-w-[55ch]">{a.description}</span>
+              <span className="mt-2 block max-w-[55ch]">{espacesFines(a.description)}</span>
               <span className="mt-4 block font-medium underline underline-offset-4">
                 {a.type === "comparatif" ? "Lire le comparatif" : "Lire le guide"}
               </span>
