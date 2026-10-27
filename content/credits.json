@@ -54,5 +54,33 @@
     "source": "Pexels",
     "url": "https://www.pexels.com/photo/relaxed-feline-basking-in-indoor-sunlight-35681668/",
     "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/accueil-chatons-arbre.jpg",
+    "auteur": "mraqieb",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/kittens-on-a-cat-tree-7330190/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/methode-chat-cartons.jpg",
+    "auteur": "大 董",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/ginger-tabby-cat-sitting-indoors-with-boxes-39501015/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/methode-chat-carton.jpg",
+    "auteur": "Jared Brotman",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/curious-cat-sitting-in-a-cardboard-box-indoors-35401734/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/methode-chat-canape.jpg",
+    "auteur": "Merve Bayar",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/a-cat-lying-on-the-couch-11591471/",
+    "licence": "Licence Pexels"
   }
 ]

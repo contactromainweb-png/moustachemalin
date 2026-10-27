@@ -15,6 +15,19 @@
   --on-accent: #22170e;
 }
 
+/* Accueil : un aplat par chapitre, du plus clair au plus foncé (pris dans les photos).
+   Ce sont des champs de couleur, identiques en mode clair et sombre ; leur texte est fixé à côté. */
+:root {
+  --ch-gamelle: #e9dcc6;
+  --ch-fontaine: #d8bf98;
+  --ch-litiere: #c49a68;
+  --ch-arbre: #a97a4b;
+  --ch-articles: #6b4019;
+  --ch-methode: #22170e;
+  --ch-encre: #22170e;
+  --ch-creme: #f6efe4;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
@@ -40,6 +53,14 @@
   --color-on-caramel: var(--on-caramel);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
+  --color-ch-gamelle: var(--ch-gamelle);
+  --color-ch-fontaine: var(--ch-fontaine);
+  --color-ch-litiere: var(--ch-litiere);
+  --color-ch-arbre: var(--ch-arbre);
+  --color-ch-articles: var(--ch-articles);
+  --color-ch-methode: var(--ch-methode);
+  --color-ch-encre: var(--ch-encre);
+  --color-ch-creme: var(--ch-creme);
   --font-display: var(--font-instrument-serif);
   --font-sans: var(--font-hanken-grotesk);
 
@@ -72,6 +93,14 @@ body {
 :focus-visible {
   outline: 3px solid var(--caramel);
   outline-offset: 3px;
+}
+
+/* Sur les aplats foncés (cartes encre, « Déjà comparé », méthode), le contour caramel ne se voit
+   plus : il passe en crème. */
+.bg-ch-encre :focus-visible,
+.bg-ch-articles :focus-visible,
+.bg-ch-methode :focus-visible {
+  outline-color: var(--ch-creme);
 }
 
 /* Titres : police à caractère, serrée. */
@@ -113,3 +142,4 @@ body {
     transform: translateY(20px);
   }
 }
+

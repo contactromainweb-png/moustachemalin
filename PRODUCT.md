@@ -45,7 +45,7 @@ Lecture sur mobile, souvent dans un appartement. Le guide « Mon chat ne boit pa
 
 - Textes : `content/litieres/litiere-autonettoyante.mdx`, `content/guides/mon-chat-ne-boit-pas.mdx`, pages `content/pages/*.mdx`.
 - Produits : `content/products/*.json` (6 litières, données issues des fiches techniques).
-- Aucune photo ni vidéo encore téléchargée (clé API Pexels à venir, variable `PEXELS_API_KEY`).
+- Photos et vidéo Pexels dans `public/media/` (liste et crédits dans `src/lib/medias.ts` et `content/credits.json`), choisies à la main sur pexels.com.
 - Aucun témoignage, avis client, chiffre d'audience ou mention presse : ne jamais en inventer.
 
 ## Product Principles

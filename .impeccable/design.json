@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T17:28:18.113Z",
+  "title": "Design System: Moustache Malin",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papier crème",
+        "canonical": "#f6efe4",
+        "tonalRamp": [
+          "#272624",
+          "#41403d",
+          "#5c5955",
+          "#837f79",
+          "#aaa59e",
+          "#ccc6bd",
+          "#e6e0d5",
+          "#f8f2e9"
+        ],
+        "darkCanonical": "#16100b"
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Champ",
+        "canonical": "#ece1cf",
+        "tonalRamp": [
+          "#282623",
+          "#433f3a",
+          "#5d5952",
+          "#857f75",
+          "#ada598",
+          "#d0c6b6",
+          "#eadfcd",
+          "#f7f2ea"
+        ],
+        "darkCanonical": "#231a12"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Encre brune",
+        "canonical": "#22170e",
+        "tonalRamp": [
+          "#2f251c",
+          "#473e37",
+          "#605852",
+          "#857f7a",
+          "#a9a5a2",
+          "#c9c6c4",
+          "#e2e0df",
+          "#f3f2f2"
+        ],
+        "darkCanonical": "#f3eadc"
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Encre douce",
+        "canonical": "#5a4838",
+        "tonalRamp": [
+          "#2e251d",
+          "#4d3d30",
+          "#675748",
+          "#8a7e72",
+          "#ada49d",
+          "#ccc6c1",
+          "#e3e0dd",
+          "#f3f2f1"
+        ],
+        "darkCanonical": "#c7b6a3"
+      },
+      "caramel": {
+        "role": "secondary",
+        "displayName": "Caramel",
+        "canonical": "#84501f",
+        "tonalRamp": [
+          "#3a230e",
+          "#603a17",
+          "#855221",
+          "#a17a54",
+          "#bda288",
+          "#d6c4b4",
+          "#e9dfd6",
+          "#f6f2ee"
+        ],
+        "darkCanonical": "#e3bd84"
+      },
+      "caramel-field": {
+        "role": "secondary",
+        "displayName": "Caramel plein",
+        "canonical": "#6b4019",
+        "tonalRamp": [
+          "#3a230e",
+          "#613a17",
+          "#7a5431",
+          "#997b60",
+          "#b7a390",
+          "#d2c5b9",
+          "#e6dfd9",
+          "#f5f2ef"
+        ],
+        "darkCanonical": "#4a2c11"
+      },
+      "on-caramel": {
+        "role": "neutral",
+        "displayName": "Crème sur caramel",
+        "canonical": "#f6efe4",
+        "tonalRamp": [
+          "#272624",
+          "#41403d",
+          "#5c5955",
+          "#837f79",
+          "#aaa59e",
+          "#ccc6bd",
+          "#e6e0d5",
+          "#f8f2e9"
+        ],
+        "darkCanonical": "#f3eadc"
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Safran",
+        "canonical": "#f2a20c",
+        "tonalRamp": [
+          "#372503",
+          "#5c3d05",
+          "#805606",
+          "#b77b09",
+          "#efa00c",
+          "#f7c362",
+          "#fadea9",
+          "#fdf1db"
+        ],
+        "darkCanonical": "#f2a20c"
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "Encre sur safran",
+        "canonical": "#22170e",
+        "tonalRamp": [
+          "#2f251c",
+          "#473e37",
+          "#605852",
+          "#857f7a",
+          "#a9a5a2",
+          "#c9c6c4",
+          "#e2e0df",
+          "#f3f2f2"
+        ],
+        "darkCanonical": "#22170e"
+      },
+      "ch-gamelle": {
+        "role": "tertiary",
+        "displayName": "Aplat gamelle",
+        "canonical": "#e9dcc6",
+        "tonalRamp": [
+          "#282622",
+          "#433f39",
+          "#5e5950",
+          "#867f72",
+          "#afa594",
+          "#d2c6b2",
+          "#ebdfcb",
+          "#f7f2ea"
+        ]
+      },
+      "ch-fontaine": {
+        "role": "tertiary",
+        "displayName": "Aplat fontaine",
+        "canonical": "#d8bf98",
+        "tonalRamp": [
+          "#2b261e",
+          "#473f32",
+          "#645846",
+          "#8e7e64",
+          "#b9a482",
+          "#dbc5a1",
+          "#ecdfcc",
+          "#f7f2ea"
+        ]
+      },
+      "ch-litiere": {
+        "role": "tertiary",
+        "displayName": "Aplat litière",
+        "canonical": "#c49a68",
+        "tonalRamp": [
+          "#2f2519",
+          "#4e3e2a",
+          "#6e563a",
+          "#9d7b53",
+          "#c8a172",
+          "#dcc4a6",
+          "#ecdfcf",
+          "#f7f2eb"
+        ]
+      },
+      "ch-arbre": {
+        "role": "tertiary",
+        "displayName": "Aplat arbre à chat",
+        "canonical": "#a97a4b",
+        "tonalRamp": [
+          "#322416",
+          "#543c25",
+          "#755534",
+          "#a8794a",
+          "#c2a180",
+          "#d9c4af",
+          "#eadfd3",
+          "#f6f2ed"
+        ]
+      },
+      "ch-articles": {
+        "role": "tertiary",
+        "displayName": "Aplat articles",
+        "canonical": "#6b4019",
+        "tonalRamp": [
+          "#3a230e",
+          "#613a17",
+          "#7a5431",
+          "#997b60",
+          "#b7a390",
+          "#d2c5b9",
+          "#e6dfd9",
+          "#f5f2ef"
+        ]
+      },
+      "ch-methode": {
+        "role": "tertiary",
+        "displayName": "Aplat méthode",
+        "canonical": "#22170e",
+        "tonalRamp": [
+          "#2f251c",
+          "#473e37",
+          "#605852",
+          "#857f7a",
+          "#a9a5a2",
+          "#c9c6c4",
+          "#e2e0df",
+          "#f3f2f2"
+        ]
+      },
+      "ch-encre": {
+        "role": "neutral",
+        "displayName": "Encre des chapitres",
+        "canonical": "#22170e",
+        "tonalRamp": [
+          "#2f251c",
+          "#473e37",
+          "#605852",
+          "#857f7a",
+          "#a9a5a2",
+          "#c9c6c4",
+          "#e2e0df",
+          "#f3f2f2"
+        ]
+      },
+      "ch-creme": {
+        "role": "neutral",
+        "displayName": "Crème des chapitres",
+        "canonical": "#f6efe4",
+        "tonalRamp": [
+          "#272624",
+          "#41403d",
+          "#5c5955",
+          "#837f79",
+          "#aaa59e",
+          "#ccc6bd",
+          "#e6e0d5",
+          "#f8f2e9"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "H1 de l'accueil et des pages institutionnelles."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "H2 de section, titres des encadrés caramel et des cartes d'articles."
+      },
+      "title": {
+        "displayName": "Lead",
+        "purpose": "Chapeaux, questions de FAQ, noms de produits."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texte courant."
+      },
+      "label": {
+        "displayName": "Small",
+        "purpose": "Crédits, dates, mention Amazon, fil d'Ariane, navigation ; jamais sous 16 px."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "rise",
+        "value": "700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; from opacity 0 + translateY(24px); delay calc(var(--i) * 80ms)",
+        "purpose": "Entrée du H1 et du chapeau d'en-tête au chargement ; absente en mouvement réduit."
+      },
+      {
+        "name": "reveal",
+        "value": "animation-timeline: view(); animation-range: entry 0% entry 60%; from translateY(20px); linear",
+        "purpose": "Entrée des blocs au défilement, translation seule sans fondu, CSS pur ; absente en mouvement réduit ou sans support."
+      },
+      {
+        "name": "press",
+        "value": "transform 200ms ease-out; hover translateY(-2px); active translateY(0) scale(0.98)",
+        "purpose": "Retour au survol et au clic des boutons et encadrés-liens."
+      },
+      {
+        "name": "vitrine",
+        "value": "GSAP ScrollTrigger + Lenis chargés à l'inactivité ; carte xPercent -100 -> 0 (scrub 0.6) ; média du héros scale 1 -> 1.08 (scrub)",
+        "purpose": "Accueil seulement, ordinateur (>= 1024px, pointeur fin), sans mouvement réduit ni économie de données ; 3D en plus : 4 coeurs, 4 Go, WebGL2."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "container",
+        "value": "90rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bouton Amazon (safran)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action principale : Amazon dans les articles, premier bouton de l'accueil.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Voir le prix sur Amazon</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;background:var(--accent,#f2a20c);color:var(--on-accent,#22170e);font-weight:500;font-size:1.0625rem;text-decoration:none;border-radius:0;transition:transform 200ms ease-out}.ds-btn-primary:hover{transform:translateY(-2px)}.ds-btn-primary:active{transform:translateY(0) scale(.98)}.ds-btn-primary:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
+    },
+    {
+      "name": "Bouton encre",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Action secondaire sur fond clair (menu mobile, envoi de formulaire).",
+      "html": "<button class=\"ds-btn-ink\">S'inscrire</button>",
+      "css": ".ds-btn-ink{min-height:48px;padding:0 24px;background:var(--ink,#22170e);color:var(--paper,#f6efe4);border:0;border-radius:0;font:inherit;font-size:1.0625rem;cursor:pointer}.ds-btn-ink:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
+    },
+    {
+      "name": "Bouton crème sur fond sombre",
+      "kind": "button",
+      "refersTo": "button-on-dark",
+      "description": "Action dans les cartes de chapitres et la section méthode de l'accueil.",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-btn-cream\" href=\"#\">Lire notre méthode complète</a></div>",
+      "css": ".ds-dark{background:var(--ch-encre,#22170e);padding:24px}.ds-btn-cream{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;background:var(--ch-creme,#f6efe4);color:var(--ch-encre,#22170e);font-weight:500;text-decoration:none;transition:transform 200ms ease-out}.ds-btn-cream:hover{transform:translateY(-2px)}.ds-btn-cream:active{transform:translateY(0) scale(.98)}"
+    },
+    {
+      "name": "Champ e-mail",
+      "kind": "input",
+      "refersTo": "input-text",
+      "description": "Champ du formulaire de newsletter.",
+      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"votre@adresse.fr\">",
+      "css": ".ds-input{min-height:48px;padding:0 16px;background:var(--paper,#f6efe4);color:var(--ink,#22170e);border:2px solid var(--ink,#22170e);border-radius:0;font-size:1.125rem}.ds-input:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
+    },
+    {
+      "name": "En-tête",
+      "kind": "nav",
+      "description": "Nom en Instrument Serif ; rubriques soulignées en caramel au survol.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-logo\" href=\"#\">Moustache Malin</a><nav><a href=\"#\">Litières</a><a href=\"#\">Guides</a></nav></header>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 32px;background:var(--paper,#f6efe4);color:var(--ink,#22170e)}.ds-nav-logo{font-family:var(--font-instrument-serif,'Instrument Serif'),Georgia,serif;font-size:2rem;letter-spacing:-.02em;color:inherit;text-decoration:none}.ds-nav nav{display:flex;gap:28px}.ds-nav nav a{padding:8px 0;color:inherit;text-decoration:none;text-underline-offset:4px;text-decoration-thickness:2px}.ds-nav nav a:hover{text-decoration-line:underline;text-decoration-color:var(--caramel,#84501f)}.ds-nav a:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
+    },
+    {
+      "name": "Carte d'article",
+      "kind": "card",
+      "refersTo": "card-field",
+      "description": "Lien vers un article sur champ ; passe au caramel plein au survol.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-t\">Litière autonettoyante</span><span>Six modèles comparés à partir des fiches techniques.</span><span class=\"ds-card-l\">Lire le comparatif</span></a>",
+      "css": ".ds-card{display:block;padding:24px 32px;background:var(--field,#ece1cf);color:var(--ink,#22170e);text-decoration:none;transition:background-color 150ms,color 150ms}.ds-card:hover{background:var(--caramel-field,#6b4019);color:var(--on-caramel,#f6efe4)}.ds-card:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}.ds-card span{display:block;max-width:55ch}.ds-card-t{font-family:var(--font-instrument-serif,'Instrument Serif'),Georgia,serif;font-size:clamp(2.25rem,1.5rem + 3.2vw,4rem);line-height:.95;letter-spacing:-.02em;font-weight:400;margin-bottom:8px}.ds-card-l{margin-top:16px;font-weight:500;text-decoration:underline;text-underline-offset:4px}"
+    },
+    {
+      "name": "Encadré caramel",
+      "kind": "card",
+      "refersTo": "card-caramel",
+      "description": "Encadré vétérinaire, renvoi vers un article, premier choix de la sélection.",
+      "html": "<aside class=\"ds-callout\"><p class=\"ds-callout-t\">En cas de doute, consultez votre vétérinaire</p><p>Cette page parle d'équipement et ne remplace pas un avis vétérinaire.</p></aside>",
+      "css": ".ds-callout{padding:28px 32px;background:var(--caramel-field,#6b4019);color:var(--on-caramel,#f6efe4)}.ds-callout p{margin:0;max-width:60ch}.ds-callout .ds-callout-t{font-family:var(--font-instrument-serif,'Instrument Serif'),Georgia,serif;font-size:clamp(2.25rem,1.5rem + 3.2vw,4rem);line-height:.95;letter-spacing:-.02em;font-weight:400;margin-bottom:12px}"
+    },
+    {
+      "name": "Nuancier des chapitres",
+      "kind": "custom",
+      "description": "Colonne de cinq aplats-liens du premier écran de l'accueil, du clair au foncé.",
+      "html": "<nav class=\"ds-swatch\"><a href=\"#\" style=\"background:#e9dcc6;color:#22170e\">La gamelle</a><a href=\"#\" style=\"background:#d8bf98;color:#22170e\">La fontaine</a><a href=\"#\" style=\"background:#c49a68;color:#22170e\">La litière</a><a href=\"#\" style=\"background:#6b4019;color:#f6efe4\">Déjà comparé</a><a href=\"#\" style=\"background:#22170e;color:#f6efe4\">Notre méthode</a></nav>",
+      "css": ".ds-swatch{display:grid;width:220px}.ds-swatch a{display:flex;min-height:96px;padding:20px;font-size:1rem;text-decoration:none;text-underline-offset:4px;text-decoration-thickness:2px}.ds-swatch a:hover{text-decoration-line:underline}"
+    }
+  ],
+  "narrative": {
+    "northStar": "À hauteur de moustaches",
+    "overview": "L'appartement vu à 25 cm du sol. Un papier crème chaud porte tout ; le brun caramel et l'encre brun très foncé arrivent en aplats pleins, jamais en dégradés ni en ombres. La couleur vit dans ces aplats et dans les photos de vrais chats, qui sont les héroïnes des pages. Instrument Serif donne la voix (grands titres serrés), Hanken Grotesk porte la lecture.\n\nLes surfaces sont plates et à angles droits. La hiérarchie se fait par la taille du texte, le changement d'aplat et l'espace, pas par des filets, des ombres ou des étiquettes au-dessus des titres. Une seule couleur vive, le safran, est réservée à l'action principale.\n\nThème clair crème par défaut ; le mode sombre suit uniquement le réglage de l'appareil.",
+    "keyCharacteristics": [
+      "Aplats pleins, angles droits, aucune ombre au repos.",
+      "Deux polices, cinq tailles de texte, rien sous 16 px.",
+      "Safran pour l'action principale (Amazon, premier bouton de l'accueil) et rien d'autre.",
+      "Photos réelles de chats (Pexels), toujours créditées sous l'image.",
+      "Mouvement léger en CSS partout ; vidéo, 3D, GSAP et Lenis seulement sur les vitrines et sur ordinateur capable."
+    ],
+    "rules": [
+      {
+        "name": "La règle du safran",
+        "body": "Le safran signale l'action qui compte : Amazon dans les articles, un seul bouton sur le premier écran de l'accueil. Une action secondaire prend l'encre (`button-ink`) ou le crème sur fond sombre (`button-on-dark`).",
+        "section": "colors"
+      },
+      {
+        "name": "La règle des aplats",
+        "body": "La couleur arrive en champs pleins de bord à bord, avec le texte fixé pour chaque champ. Pas de dégradé, pas de transparence décorative sur les fonds.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle des cinq tailles",
+        "body": "small, body, lead, head, display, et rien d'autre ; les rares tailles en clamp() propres à un composant (nom du pied de page, H1 d'article, titres de chapitres) restent des titres en Instrument Serif.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle du 16 px",
+        "body": "Aucun texte sous 16 px, même les mentions légales.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle du plat au repos",
+        "body": "Rien ne flotte. Au survol, un bouton ou un encadré-lien monte de 2 px (translation), sans ombre.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do poser chaque texte sur un aplat plein avec son couple fixé (encre sur papier/champ/aplats clairs, crème sur caramel plein et encre).",
+      "Do garder le safran pour Amazon et pour une seule action principale par écran, avec le texte encre dessus.",
+      "Do utiliser de vraies photos de chats libres de droits (Pexels, Unsplash, Pixabay), listées dans `content/credits.json` et créditées sous l'image.",
+      "Do animer les entrées par translation seule (`.reveal` : 20 px, liée au défilement, CSS pur) et réserver `.rise` (fondu + 24 px, 700 ms, cascade de 80 ms) aux titres et chapeaux d'en-tête ; les deux disparaissent avec `prefers-reduced-motion`.",
+      "Do charger vidéo, Three.js, GSAP et Lenis seulement sur les vitrines, après l'affichage, et seulement sur ordinateur (≥ 1024 px, pointeur fin) sans mouvement réduit ni économie de données ; la 3D exige en plus 4 cœurs, 4 Go et WebGL2 (`src/lib/capacites.ts`).",
+      "Do donner 44 px minimum à chaque cible tactile (48 px pour les boutons)."
+    ],
+    "donts": [
+      "Don't arrondir un angle ni ajouter une ombre portée à un élément d'interface.",
+      "Don't séparer des blocs avec des filets ou des bordures ; utiliser l'aplat et l'espace.",
+      "Don't placer une étiquette ou un sur-titre au-dessus d'un titre, ni de texte en capitales espacées.",
+      "Don't écrire du texte en safran ou en caramel clair sur papier.",
+      "Don't mettre de 3D, de GSAP ou de Lenis dans un article (comparatif ou guide).",
+      "Don't utiliser d'illustration dessinée, d'image Amazon ou de produit de marque identifiable pour en illustrer un autre.",
+      "Don't descendre sous 16 px de texte."
+    ]
+  }
+}

@@ -6,7 +6,8 @@ export function SiteFooter() {
   const rubriques = rubriquesEnLigne();
 
   return (
-    <footer className="mt-32 bg-field px-4 pb-8 pt-16 sm:mt-44 sm:px-8">
+    // Collé à la page quand elle finit sur un aplat plein (data-fin-pleine, sur l'accueil).
+    <footer className="mt-32 bg-field px-4 pb-8 pt-16 sm:mt-44 sm:px-8 [main:has([data-fin-pleine])+&]:mt-0 sm:[main:has([data-fin-pleine])+&]:mt-0">
       <div className="mx-auto max-w-[90rem]">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-[34ch]">

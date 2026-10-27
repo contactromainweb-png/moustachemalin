@@ -51,6 +51,34 @@ export const PHOTOS = {
     alt: "Un chat roux à poils longs allongé dans une flaque de soleil sur un sol clair.",
     credit: "Photo : Himanshu Tambe, Pexels",
   },
+  chatonsArbre: {
+    src: "/media/accueil-chatons-arbre.jpg",
+    width: 2000,
+    height: 1500,
+    alt: "Deux chatons tigrés installés chacun sur une plateforme d'arbre à chat, contre un mur blanc.",
+    credit: "Photo : mraqieb, Pexels",
+  },
+  chatCartons: {
+    src: "/media/methode-chat-cartons.jpg",
+    width: 2000,
+    height: 1335,
+    alt: "Un chat roux et blanc assis bien droit à côté d'une pile de cartons.",
+    credit: "Photo : 大 董, Pexels",
+  },
+  chatCarton: {
+    src: "/media/methode-chat-carton.jpg",
+    width: 2000,
+    height: 1333,
+    alt: "Un chat tigré assis au fond d'un carton ouvert, qui regarde l'objectif.",
+    credit: "Photo : Jared Brotman, Pexels",
+  },
+  chatCanape: {
+    src: "/media/methode-chat-canape.jpg",
+    width: 2000,
+    height: 1500,
+    alt: "Un salon lumineux avec des plantes à la fenêtre, et un chat qui dort sur un canapé bleu au milieu des coussins.",
+    credit: "Photo : Merve Bayar, Pexels",
+  },
 } satisfies Record<string, Photo>;
 
 export const VIDEO_ACCUEIL = {
