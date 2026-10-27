@@ -3,6 +3,7 @@ import { Hanken_Grotesk, Instrument_Serif } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { IMAGE_PARTAGE } from "@/lib/medias";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -29,7 +30,9 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     locale: "fr_FR",
     type: "website",
+    images: [IMAGE_PARTAGE],
   },
+  twitter: { card: "summary_large_image", images: [IMAGE_PARTAGE.url] },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

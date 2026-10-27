@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
+import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function Page() {
       titre="Guides"
       intro="Les questions qu'on se pose tous avec un chat, et des réponses simples. Pour tout souci de santé, votre vétérinaire reste la bonne adresse."
       articles={articlesDeRubrique("guides")}
+      photo={PHOTOS.chatSoleil}
     />
   );
 }

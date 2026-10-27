@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "fichier": "public/media/accueil-chat-tapis.mp4",
+    "auteur": "cottonbro studio",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/accueil-chat-tapis-poster.jpg",
+    "auteur": "cottonbro studio (image extraite de la vidéo)",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/accueil-chaton-saut.jpg",
+    "auteur": "Dmytro Koplyk",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/energetic-kitten-mid-jump-in-cozy-interior-setting-39705296/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/og-moustache-malin.jpg",
+    "auteur": "Dmytro Koplyk (recadrage)",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/energetic-kitten-mid-jump-in-cozy-interior-setting-39705296/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/litieres-chat-fauteuil.jpg",
+    "auteur": "Erdem Horat",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/cozy-tabby-cat-relaxing-on-orange-chair-35715970/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/guide-chat-robinet.jpg",
+    "auteur": "Helena Jankovičová Kováčová",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/cat-drinking-tap-water-from-faucet-16440316/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/guide-chat-bol.jpg",
+    "auteur": "Vlad Deep",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/a-close-up-shot-of-a-cat-drinking-from-a-stainless-steel-bowl-6946867/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/chat-soleil.jpg",
+    "auteur": "Himanshu Tambe",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/relaxed-feline-basking-in-indoor-sunlight-35681668/",
+    "licence": "Licence Pexels"
+  }
+]

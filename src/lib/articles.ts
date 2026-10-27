@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { IMAGE_PARTAGE } from "@/lib/medias";
 import { RUBRIQUES } from "@/lib/site";
 
 // Bloc --- en tête de chaque article MDX (exporté sous le nom `frontmatter`).
@@ -43,6 +44,8 @@ export function articleMetadata(fm: Frontmatter): Metadata {
       url: cheminArticle(fm),
       publishedTime: fm.publishedAt ?? fm.updatedAt,
       modifiedTime: fm.updatedAt,
+      // Le bloc openGraph d'une page remplace celui du layout : on redonne l'image de partage.
+      images: [IMAGE_PARTAGE],
     },
     robots: fm.noindex ? { index: false, follow: false } : undefined,
   };

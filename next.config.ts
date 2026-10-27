@@ -24,6 +24,8 @@ const nextConfig: NextConfig = {
     PAGES_EN_LIGNE: pagesEnLigne().join(","),
   },
   partialPrefetching: true,
+  // Photos servies en AVIF (le plus léger), sinon WebP, à la taille de l'écran.
+  images: { formats: ["image/avif", "image/webp"], qualities: [60, 70, 75] },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   turbopack: {
     rules: {

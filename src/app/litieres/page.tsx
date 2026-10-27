@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
+import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function Page() {
       titre="Litières"
       intro="Autonettoyante ou classique, ouverte ou fermée : de quoi choisir la litière qui convient à votre chat et à votre logement."
       articles={articlesDeRubrique("litieres")}
+      photo={PHOTOS.chatFauteuil}
     />
   );
 }
