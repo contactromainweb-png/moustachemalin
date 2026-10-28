@@ -233,8 +233,25 @@ body {
 }
 [data-fond] .mot-serif {
   color: var(--f-serif);
-  background-image: linear-gradient(transparent 58%, var(--f-surligne, transparent) 58% 90%, transparent 90%);
-  box-decoration-break: clone;
+}
+/* Surlignage lavande (fond blanc) : une bande sous le corps des lettres, inclinée comme l’italique,
+   posée derrière le mot (et non sous la boîte de la ligne, plus haute que les lettres). */
+[data-fond="blanc"] .mot-serif {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+}
+[data-fond="blanc"] .mot-serif::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0.02em;
+  right: -0.02em;
+  bottom: 0.2em;
+  height: 0.3em;
+  border-radius: 0.05em;
+  background: var(--f-surligne);
+  transform: skewX(-12deg);
 }
 [data-fond="nuit"] :focus-visible {
   outline-color: var(--accent);
@@ -242,4 +259,19 @@ body {
 /* Épinglée : les étapes sont transparentes, la couleur vient de la section. */
 [data-epingle] [data-souci] {
   background-color: transparent;
+}
+
+/* Premier écran sur ordinateur à écran Retina : le gros plan de départ ne dépasse jamais la définition de la photo
+   (5165 px de large). Plus l'écran est large, moins on agrandit au départ, pour que la photo soit nette dès le début. */
+@media (min-width: 1615px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1.4; }
+}
+@media (min-width: 1845px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1.25; }
+}
+@media (min-width: 2066px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1.1; }
+}
+@media (min-width: 2348px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1; }
 }

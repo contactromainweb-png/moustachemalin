@@ -31,7 +31,7 @@ export function HeroAccueil() {
     width: mobile.width,
     height: mobile.height,
     quality: 80,
-    sizes: "100vw",
+    sizes: "125vw",
     loading: "eager",
     fetchPriority: "high",
   });

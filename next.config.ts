@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // Qualité 80 pour les photos de chats (les poils se dégradent vite en dessous), jusqu’à 3840 px pour les écrans Retina.
     qualities: [80],
-    deviceSizes: [640, 750, 828, 1080, 1280, 1600, 1920, 2560, 3840],
+    deviceSizes: [640, 750, 828, 960, 1080, 1280, 1600, 1920, 2560, 3840, 4608, 5120],
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   turbopack: {

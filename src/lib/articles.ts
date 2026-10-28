@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IMAGE_PARTAGE } from "@/lib/medias";
+import { IMAGE_PARTAGE, PHOTOS } from "@/lib/medias";
 import { RUBRIQUES } from "@/lib/site";
 
 // Bloc --- en tête de chaque article MDX (exporté sous le nom `frontmatter`).
@@ -10,6 +10,8 @@ export type Frontmatter = {
   slug: string;
   rubrique: string; // ex. "litieres"
   type: "comparatif" | "guide";
+  photo?: keyof typeof PHOTOS; // grande photo en tête de l'article (nom dans src/lib/medias.ts)
+  motSerif?: string; // mot du titre affiché en serif italique
   updatedAt: string; // AAAA-MM-JJ
   publishedAt?: string; // AAAA-MM-JJ, sinon updatedAt
   products?: string[]; // ASIN classés, pour le schema ItemList des comparatifs

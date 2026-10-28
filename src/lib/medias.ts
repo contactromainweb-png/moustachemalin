@@ -1,7 +1,7 @@
 // Photos du site (fichiers dans public/media/, crédits détaillés dans content/credits.json).
 // Les pages les appellent par leur nom : changer une photo ici la change partout.
-// Règle « niveau luxe » : source de 3 000 px de large au moins, contrôlée à 100 %, fichier maître de
-// 3 840 px au plus (jamais agrandi) ; next/image en tire les tailles utiles, en qualité 80.
+// Règle « niveau luxe » : source de 3 000 px de large au moins, contrôlée à 100 %, fichier maître à la taille
+// utile, jamais agrandi ; next/image en tire les tailles utiles, en qualité 80.
 export type Photo = {
   src: string;
   width: number;
@@ -13,8 +13,8 @@ export type Photo = {
 export const PHOTOS = {
   chatBlanc: {
     src: "/media/accueil-chat-blanc.jpg",
-    width: 3840,
-    height: 2560,
+    width: 5165,
+    height: 3443,
     alt: "Gros plan sur un chat blanc aux yeux verts, moustaches déployées, qui regarde l'objectif.",
     credit: "Photo : realfish, Unsplash",
   },
@@ -68,32 +68,48 @@ export const PHOTOS = {
     alt: "Deux chatons tigrés installés chacun sur une plateforme d'arbre à chat, contre un mur blanc.",
     credit: "Photo : mraqieb, Pexels",
   },
-  chatCartons: {
-    src: "/media/methode-chat-cartons.jpg",
-    width: 2000,
-    height: 1335,
-    alt: "Un chat roux et blanc assis bien droit à côté d'une pile de cartons.",
-    credit: "Photo : 大 董, Pexels",
-  },
-  chatCarton: {
-    src: "/media/methode-chat-carton.jpg",
-    width: 2000,
-    height: 1333,
-    alt: "Un chat tigré assis au fond d'un carton ouvert, qui regarde l'objectif.",
-    credit: "Photo : Jared Brotman, Pexels",
-  },
 } satisfies Record<string, Photo>;
 
-// Chats détourés (fond retiré) qui traversent l'écran dans la section « Les petits soucis ».
-// Décoratifs : texte alternatif vide, mais crédit affiché sous l'étape.
-export const DETOURES = {
-  bond: { src: "/media/detoure-chat-bond.webp", width: 1430, height: 1200, credit: "The3dragons, Unsplash" },
-  saut: { src: "/media/detoure-chat-saut.webp", width: 522, height: 1200, credit: "Jan Laugesen, Pexels" },
-  marche: { src: "/media/detoure-chat-marche.webp", width: 2294, height: 1001, credit: "Kai Arun, Unsplash" },
-  tigre: { src: "/media/detoure-chat-tigre.webp", width: 1962, height: 1075, credit: "Anna Venezia, Pexels" },
-} satisfies Record<string, Omit<Photo, "alt">>;
+// Scène 5 de l’accueil : le mur de photos (vignettes, petit côté 1 200 px) et sa photo centrale, plein écran au départ.
+export const MUR_CENTRE: Photo = {
+  src: "/media/mur-centre.jpg",
+  width: 3840,
+  height: 5760,
+  alt: "Un chat roux et blanc couché sur un tapis, dans un salon lumineux, qui regarde l’objectif.",
+  credit: "Helena Jankovičová Kováčová, Pexels",
+};
 
-export type Detoure = (typeof DETOURES)[keyof typeof DETOURES];
+export const MUR: Omit<Photo, "alt">[] = [
+  { src: "/media/mur-01.jpg", width: 1800, height: 1200, credit: "Pixabay, Pexels" },
+  { src: "/media/mur-02.jpg", width: 1200, height: 1226, credit: "Charles Pragnell, Pexels" },
+  { src: "/media/mur-03.jpg", width: 1800, height: 1200, credit: "Anna Fusciello, Pexels" },
+  { src: "/media/mur-04.jpg", width: 1800, height: 1200, credit: "Anete Lusina, Pexels" },
+  { src: "/media/mur-05.jpg", width: 1200, height: 1800, credit: "Milada Vigerova, Pexels" },
+  { src: "/media/mur-06.jpg", width: 1805, height: 1200, credit: "Mónika Erdei, Pexels" },
+  { src: "/media/mur-07.jpg", width: 1200, height: 1800, credit: "cottonbro studio, Pexels" },
+  { src: "/media/mur-08.jpg", width: 1800, height: 1200, credit: "Anna Hinckel, Pexels" },
+  { src: "/media/mur-09.jpg", width: 1800, height: 1200, credit: "Anna Hinckel, Pexels" },
+  { src: "/media/mur-10.jpg", width: 1800, height: 1200, credit: "Anna Hinckel, Pexels" },
+  { src: "/media/mur-11.jpg", width: 1200, height: 1800, credit: "Lera Mk, Pexels" },
+  { src: "/media/mur-12.jpg", width: 1800, height: 1200, credit: "Amelia Giannitto, Pexels" },
+  { src: "/media/mur-13.jpg", width: 1200, height: 1800, credit: "witchagron buapa, Pexels" },
+  { src: "/media/mur-14.jpg", width: 1800, height: 1200, credit: "Natalie Bond, Pexels" },
+  { src: "/media/mur-15.jpg", width: 1200, height: 1800, credit: "MikeGz, Pexels" },
+  { src: "/media/mur-16.jpg", width: 1800, height: 1200, credit: "Helena Jankovičová Kováčová, Pexels" },
+  { src: "/media/mur-17.jpg", width: 1200, height: 1600, credit: "Deniz Krkl, Pexels" },
+  { src: "/media/mur-18.jpg", width: 1806, height: 1200, credit: "Mahmoud Yahyaoui, Pexels" },
+  { src: "/media/mur-19.jpg", width: 1800, height: 1200, credit: "Gundula Vogel, Pexels" },
+  { src: "/media/mur-20.jpg", width: 1800, height: 1200, credit: "Michał Robak, Pexels" },
+  { src: "/media/mur-21.jpg", width: 1800, height: 1200, credit: "krazyYangNA, Pexels" },
+  { src: "/media/mur-22.jpg", width: 1200, height: 1800, credit: "Jared 'Shy' Chapman, Pexels" },
+  { src: "/media/mur-23.jpg", width: 1800, height: 1200, credit: "Camilo Ospina, Pexels" },
+  { src: "/media/mur-24.jpg", width: 1798, height: 1200, credit: "大 董, Pexels" },
+  { src: "/media/mur-25.jpg", width: 1200, height: 1600, credit: "Hemant Singh, Pexels" },
+  { src: "/media/mur-26.jpg", width: 1798, height: 1200, credit: "大 董, Pexels" },
+  { src: "/media/mur-27.jpg", width: 1200, height: 1800, credit: "Nuray, Pexels" },
+  { src: "/media/mur-28.jpg", width: 1649, height: 1200, credit: "Ayşegül Aytören, Pexels" },
+  { src: "/media/mur-29.jpg", width: 1800, height: 1200, credit: "Magda Ehlers, Pexels" },
+];
 
 // Image de partage par défaut sur les réseaux sociaux (1200 × 630).
 export const IMAGE_PARTAGE = {

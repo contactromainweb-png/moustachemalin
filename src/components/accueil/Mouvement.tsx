@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { SOUCIS } from "@/lib/accueil";
 import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
+import { comparaison, fin, mur, pelote } from "./scenes";
 
 type Lenis = { scrollTo: (cible: number, options?: { immediate?: boolean }) => void };
 
@@ -10,6 +11,7 @@ type Lenis = { scrollTo: (cible: number, options?: { immediate?: boolean }) => v
 // Ordinateur et téléphone (version allégée sur téléphone : moins de particules, mosaïque 4 × 4, épinglages plus
 // courts) ; rien avec « animations réduites » ou en économie de données. Chargés une fois la page affichée :
 // sans eux, tout est déjà à sa place.
+// Aucun aimantage (snap) : la page ne bouge jamais d'elle-même, seul le visiteur fait défiler.
 export function Mouvement() {
   useEffect(() => {
     if (!peutAnimer()) return;
@@ -24,6 +26,9 @@ export function Mouvement() {
       ]);
       if (annule) return;
       gsap.registerPlugin(ScrollTrigger);
+      // Sur téléphone, la barre d'adresse qui apparaît ou disparaît ne recalcule pas les épinglages
+      // (sinon la page saute au milieu d'un défilement).
+      ScrollTrigger.config({ ignoreMobileResize: true });
       const ordinateur = estOrdinateur();
       const finitions: (() => void)[] = [];
 
@@ -39,6 +44,7 @@ export function Mouvement() {
         heros(gsap, ordinateur);
         finitions.push(desintegration(gsap, ordinateur));
         if (section) finitions.push(soucis(gsap, lenis, section, ordinateur));
+        finitions.push(pelote(gsap, ordinateur), mur(gsap, ordinateur), comparaison(gsap, ordinateur), fin(gsap));
         ScrollTrigger.refresh();
       });
 
@@ -68,7 +74,8 @@ type Gsap = typeof import("gsap").gsap;
 // Scène 1 : du très gros plan au chat entier, puis l'image recule en carte aux coins arrondis.
 // Le titre ne bouge pas : il reste entier à l'écran pendant tout le mouvement.
 function heros(gsap: Gsap, ordinateur: boolean) {
-  // Le gros plan de départ vient du CSS (propriété scale) : GSAP le reprend en transform pour le défaire.
+  // Le gros plan de départ vient du CSS (propriété scale, réglée pour ne jamais dépasser la définition de la
+  // photo) : GSAP le reprend en transform pour le défaire.
   const zoom = document.querySelector<HTMLElement>("[data-hero-zoom]");
   if (!zoom) return;
   const depart = parseFloat(getComputedStyle(zoom).scale) || 1;
@@ -178,11 +185,10 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
   );
   const cadres = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-cadre]")!);
   const images = cadres.map((c) => c.querySelector<HTMLImageElement>("img")!);
-  const chats = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-chat]")!);
   const jauges = gsap.utils.toArray<HTMLElement>("[data-jauge]", section);
 
   // La photo de l'étape affichée passe au-dessus des suivantes : elle se décompose et révèle celle d'en dessous.
-  // Les chats restent derrière tous les textes (z 5), les photos au milieu (z 10+), les textes devant (z 20).
+  // Les photos sont au milieu (z 10+), les textes devant (z 20), le mot géant tout devant (z 30).
   const photos = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-photo]")!);
   photos.forEach((p, i) => (p.style.zIndex = String(10 + n - i)));
   const mosaiques = cadres.slice(0, -1).map((c, i) => mosaique(c, images[i], ordinateur));
@@ -190,11 +196,9 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
   const entree = ordinateur ? 40 : 18;
   const sortie = ordinateur ? -32 : -14;
   const flou = (px: number) => (ordinateur ? `blur(${px}px)` : "none");
-  const largeur = () => window.innerWidth;
 
   gsap.set(textes.slice(1), { opacity: 0, y: entree, filter: flou(6) });
   gsap.set(images.slice(1), { scale: 1.12 });
-  gsap.set(chats.slice(1), { x: () => largeur(), rotate: 8 });
   gsap.set(jauges[0], { scaleX: 1 });
 
   const marquerActive = (i: number) => {
@@ -203,25 +207,26 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
   };
   marquerActive(0);
 
+  // Une étape par unité de temps ; une demi-unité de plus à la fin, pour lire la dernière étape.
+  const queue = 0.5;
   const tl = gsap.timeline({
     defaults: { ease: "none" },
     scrollTrigger: {
       trigger: section,
       start: "top top",
-      end: `+=${(n - 1) * (ordinateur ? 100 : 70)}%`,
+      end: `+=${(n - 1 + queue) * (ordinateur ? 100 : 70)}%`,
       pin: true,
       scrub: 0.6,
-      invalidateOnRefresh: true,
-      snap: { snapTo: "labels", inertia: false, duration: { min: 0.2, max: 0.6 }, ease: "power2.inOut" },
-      onUpdate: (st) => marquerActive(Math.round(st.progress * (n - 1))),
+      onUpdate: (st) => marquerActive(gsap.utils.clamp(0, n - 1, Math.round(st.progress * (n - 1 + queue)))),
     },
   });
-  tl.addLabel("etape0", 0);
   for (let i = 1; i < n; i++) {
     const debut = i - 1;
     // Fondu enchaîné : le texte sortant s'efface pendant que le suivant arrive ; ils se croisent, jamais d'écran vide.
     tl.to(textes[i - 1], { opacity: 0, y: sortie, filter: flou(4), duration: 0.55, ease: "power2.inOut" }, debut + 0.05)
       .to(textes[i], { opacity: 1, y: 0, filter: flou(0), duration: 0.6, ease: "power3.out" }, debut + 0.3)
+      // La photo d'origine reste sous la mosaïque un court instant après le départ : à l'arrêt, aucun joint entre les carrés ne se voit.
+      .set(images[i - 1], { opacity: 0 }, debut + 0.1)
       // La photo se décompose en carrés qui disparaissent au hasard ; la suivante recule légèrement dessous.
       .to(
         mosaiques[i - 1],
@@ -229,19 +234,17 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
         debut,
       )
       .to(images[i], { scale: 1, duration: 0.95, ease: "power2.out" }, debut)
-      // Le chat de l'étape sort par la gauche en pivotant, le suivant entre par la droite.
-      .to(chats[i - 1], { x: () => -largeur(), rotate: -8, duration: 0.7, ease: "power2.in" }, debut)
-      .to(chats[i], { x: 0, rotate: 0, duration: 0.75, ease: "power3.out" }, debut + 0.25)
-      .to(jauges[i], { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, debut)
-      .addLabel(`etape${i}`, i);
+      .to(jauges[i], { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, debut);
   }
-
-  // Au clavier, un lien d'une étape cachée qui reçoit le focus ramène le défilement à son étape.
+  // La timeline dure exactement n − 1 + queue : l'étape i est entièrement en place à la position de défilement i.
+  tl.to({}, { duration: queue }, n - 1);
+  // Au clavier, un lien d'une étape cachée qui reçoit le focus ramène le défilement à son étape
+  // (seulement au clavier : un clic ne fait jamais bouger la page).
   etapes.forEach((e, i) =>
-    e.addEventListener("focusin", () => {
+    e.addEventListener("focusin", (ev) => {
       const st = tl.scrollTrigger;
-      if (!st || e.hasAttribute("data-actif")) return;
-      lenis.scrollTo(st.start + ((st.end - st.start) * i) / (n - 1), { immediate: true });
+      if (!st || e.hasAttribute("data-actif") || !(ev.target as HTMLElement).matches(":focus-visible")) return;
+      lenis.scrollTo(st.start + ((st.end - st.start) * i) / (n - 1 + queue), { immediate: true });
     }),
   );
 
@@ -269,7 +272,8 @@ function mosaique(cadre: HTMLElement, image: HTMLImageElement, ordinateur: boole
   for (let r = 0; r < rangees; r++) {
     for (let c = 0; c < colonnes; c++) {
       const carre = document.createElement("div");
-      carre.style.cssText = "position:relative;overflow:hidden";
+      // Légèrement agrandis (1,2 %) : les carrés se chevauchent et aucun joint ne se voit entre eux.
+      carre.style.cssText = "position:relative;overflow:hidden;transform:scale(1.012)";
       const morceau = image.cloneNode() as HTMLImageElement;
       // Même srcset et même sizes que la photo : le navigateur reprend le fichier déjà chargé.
       morceau.alt = "";
@@ -280,6 +284,5 @@ function mosaique(cadre: HTMLElement, image: HTMLImageElement, ordinateur: boole
     }
   }
   cadre.appendChild(grille);
-  image.style.opacity = "0";
   return carres;
 }
