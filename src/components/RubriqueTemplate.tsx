@@ -26,7 +26,7 @@ type Props = {
 export function RubriqueTemplate({ titre, intro, articles, photo }: Props) {
   return (
     <StagePage title={titre} lead={intro} photo={photo} stageWord={titre}>
-      <h2 data-fond="blanc" className="font-display mb-8 text-head">
+      <h2 data-fond="page" className="font-display mb-8 text-head">
         Nos <span className="mot-serif">articles</span>
       </h2>
       <ul className="grid gap-6 sm:grid-cols-2">

@@ -16,14 +16,19 @@ export function Desintegration() {
         className="relative mx-auto grid min-h-svh max-w-[90rem] content-center gap-8 px-4 py-16 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-12"
       >
         <h2 id="titre-phrase" className="font-display text-[clamp(3rem,1.2rem+6vw,8rem)] lg:col-span-6 lg:max-w-[9ch]">
-          {PHRASE.map((mot, i) => (
-            <span key={mot}>
-              <span data-mot className={`inline-block ${mot === MOT_SERIF ? "mot-serif" : ""}`}>
-                {mot}
+          {/* La phrase entière pour les lecteurs d'écran ; à l'écran, les mots séparés qui sortent du flou un par un
+              au défilement (ils restent pâles tant que le visiteur n'est pas arrivé à la scène). */}
+          <span className="sr-only">{PHRASE.join(" ")}</span>
+          <span aria-hidden="true">
+            {PHRASE.map((mot, i) => (
+              <span key={mot}>
+                <span data-mot className={`inline-block ${mot === MOT_SERIF ? "mot-serif" : ""}`}>
+                  {mot}
+                </span>
+                {i < PHRASE.length - 1 ? " " : null}
               </span>
-              {i < PHRASE.length - 1 ? " " : null}
-            </span>
-          ))}
+            ))}
+          </span>
         </h2>
 
         <figure className="lg:col-span-6 lg:col-start-7">

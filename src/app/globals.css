@@ -16,6 +16,7 @@
   --on-caramel: #faf7f2;
   --accent: #ff7a1a;
   --on-accent: #14213d;
+  --surligne: #b9a6ff;
 }
 
 /* Couleurs fixes, identiques en mode clair et sombre : en-tête, grandes sections bleu nuit,
@@ -38,6 +39,7 @@
     --on-caramel: #f4f1ec;
     --accent: #ff7a1a;
     --on-accent: #14213d;
+    --surligne: rgb(185 166 255 / 0.32);
   }
 }
 
@@ -231,17 +233,38 @@ body {
   --f-souligne: #ff7a1a;
   --f-surligne: #b9a6ff;
 }
+/* En mode sombre, l'étape « blanc » suit le thème : fond de page sombre, texte clair, surlignage atténué. */
+@media (prefers-color-scheme: dark) {
+  [data-fond="blanc"] {
+    --f-fond: var(--paper);
+    --f-encre: var(--ink);
+    --f-doux: var(--ink-soft);
+    --f-serif: var(--ink);
+    --f-surligne: var(--surligne);
+  }
+}
+/* Articles et rubriques : comme le blanc, mais en suivant le thème du visiteur (clair ou sombre), sans aplat
+   propre (le fond de la page passe dessous). Surlignage lavande atténué en sombre : texte clair dessus, 9:1. */
+[data-fond="page"] {
+  --f-fond: transparent;
+  --f-encre: var(--ink);
+  --f-doux: var(--ink-soft);
+  --f-serif: var(--ink);
+  --f-surligne: var(--surligne);
+}
 [data-fond] .mot-serif {
   color: var(--f-serif);
 }
 /* Surlignage lavande (fond blanc) : une bande sous le corps des lettres, inclinée comme l’italique,
    posée derrière le mot (et non sous la boîte de la ligne, plus haute que les lettres). */
-[data-fond="blanc"] .mot-serif {
+[data-fond="blanc"] .mot-serif,
+[data-fond="page"] .mot-serif {
   position: relative;
   isolation: isolate;
   display: inline-block;
 }
-[data-fond="blanc"] .mot-serif::before {
+[data-fond="blanc"] .mot-serif::before,
+[data-fond="page"] .mot-serif::before {
   content: "";
   position: absolute;
   z-index: -1;

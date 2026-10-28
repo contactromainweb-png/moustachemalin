@@ -51,7 +51,7 @@ export function MethodSlip() {
             </ul>
           </section>
         ))}
-        <p className="-mx-5 mt-8 bg-ink px-5 py-3 text-paper sm:-mx-8 sm:px-8">
+        <p className="-mx-5 mt-8 bg-caramel-field px-5 py-3 text-on-caramel sm:-mx-8 sm:px-8">
           Résultat : un choix par profil de chat, sans note inventée.
         </p>
       </div>

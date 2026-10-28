@@ -46,7 +46,7 @@ const components: MDXComponents = {
       <table className="w-full border-collapse text-left" {...props} />
     </div>
   ),
-  thead: (props) => <thead className="bg-ink text-paper" {...props} />,
+  thead: (props) => <thead className="bg-caramel-field text-on-caramel" {...props} />,
   tr: (props) => <tr className="even:bg-field" {...props} />,
   th: (props) => <th className="px-4 py-3 font-medium" {...props} />,
   td: (props) => <td className="px-4 py-3" {...props} />,

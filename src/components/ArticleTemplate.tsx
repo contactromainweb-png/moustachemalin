@@ -23,7 +23,7 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
     <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10">
       <Breadcrumbs items={[rubriqueArticle(fm), { label: espacesFines(fm.title), href: chemin }]} />
 
-      <header data-fond="blanc" className="mt-10 lg:mt-14">
+      <header data-fond="page" className="mt-10 lg:mt-14">
         <h1 className="font-display rise max-w-[20ch] text-[clamp(2.5rem,1.4rem+4.6vw,6rem)]">
           <TitreSerif titre={fm.title} mot={fm.motSerif} />
         </h1>

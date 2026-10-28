@@ -150,7 +150,12 @@ function desintegration(gsap: Gsap, ordinateur: boolean) {
     },
   });
   // Les mots sortent du flou un par un ; « heureux » arrive au moment où la photo s'envole.
-  gsap.set(mots, { opacity: 0.12, filter: ordinateur ? "blur(10px)" : "none", y: "0.1em" });
+  // Avant leur tour, ils restent lisibles (contraste 3:1 au moins, grand texte) : blanc à 40 %, orange à 68 %.
+  gsap.set(mots, {
+    opacity: (_: number, mot: HTMLElement) => (mot.classList.contains("mot-serif") ? 0.68 : 0.4),
+    filter: ordinateur ? "blur(10px)" : "none",
+    y: "0.1em",
+  });
   tl.to(mots, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.12, stagger: 0.06, ease: "power2.out" }, 0);
   tl.to(etat, { progres: 1, duration: 0.85, ease: "power1.inOut", onUpdate: afficher }, 0.12);
 

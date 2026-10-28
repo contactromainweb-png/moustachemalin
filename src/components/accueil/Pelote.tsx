@@ -6,13 +6,14 @@ import { tousLesArticles } from "@/lib/rubriques";
 
 // Scène 4, sur fond bleu nuit : au fond, une pelote de laine en particules (fils lumineux, cœur orange) qui tourne
 // doucement et reste en place (canevas WebGL, voir pelote.ts) ; par-dessus défilent des cartes en verre dépoli
-// lavande, une par article en ligne. Sans JavaScript ou avec « animations réduites » : le halo orange seul, immobile.
+// lavande, une par article en ligne. La section rogne son décor (overflow: clip, qui garde le « sticky ») : les fils
+// ne débordent jamais sur la scène suivante. Sans JavaScript ou avec « animations réduites » : le halo orange seul, immobile.
 export function Pelote() {
   const articles = tousLesArticles();
   if (articles.length === 0) return null;
 
   return (
-    <section data-pelote data-fond="nuit" aria-labelledby="titre-dossiers" className="relative">
+    <section data-pelote data-fond="nuit" aria-labelledby="titre-dossiers" className="relative overflow-clip">
       <div
         data-pelote-decor
         aria-hidden="true"

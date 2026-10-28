@@ -83,7 +83,7 @@ export function Comparaison() {
             data-fiche
             className="max-w-[26rem] rounded-[1.5rem] bg-blanc p-6 text-nuit shadow-[0_24px_60px_-28px_rgb(20_33_61/0.45)]"
           >
-            <p className="text-small font-medium text-ink-soft">Fiche technique</p>
+            <p className="text-small font-medium text-nuit/80">Fiche technique</p>
             <p className="font-display mt-1 text-[1.75rem]">{fiche.name}</p>
             <dl className="mt-4 divide-y divide-nuit/10">
               {[
@@ -93,7 +93,7 @@ export function Comparaison() {
                 ["Capteurs", fiche.specs.capteurs],
               ].map(([t, v]) => (
                 <div key={t} data-fiche-ligne className="flex justify-between gap-4 py-2.5">
-                  <dt className="text-ink-soft">{t}</dt>
+                  <dt className="text-nuit/80">{t}</dt>
                   <dd className="text-right font-medium">{v}</dd>
                 </div>
               ))}
@@ -127,7 +127,7 @@ export function Comparaison() {
               ))}
               {CRITERES.map((c, r) => (
                 <div key={c.ligne} data-tableau-ligne className="contents">
-                  <div data-ligne-fond className="border-t border-nuit/10 px-4 pb-1 pt-4 text-small font-medium text-ink-soft lg:p-4 lg:text-[1rem] lg:font-normal">
+                  <div data-ligne-fond className="border-t border-nuit/10 px-4 pb-1 pt-4 text-small font-medium text-nuit/80 lg:p-4 lg:text-[1rem]">
                     {c.ligne}
                   </div>
                   {produits.map((p) => (
