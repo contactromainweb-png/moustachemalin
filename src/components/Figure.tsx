@@ -24,7 +24,7 @@ export function Figure({ photo, sizes, enTete = false, className = "" }: Props) 
         sizes={sizes}
         loading="lazy"
         fetchPriority={enTete ? "high" : "auto"}
-        quality={70}
+        quality={80}
         className="aspect-[3/2] w-full bg-field object-cover"
       />
       <figcaption className="mt-2 text-small text-ink-soft">{photo.credit}</figcaption>

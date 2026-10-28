@@ -1,80 +1,119 @@
-import Image from "next/image";
-import Link from "next/link";
-import { HeroVideo } from "@/components/accueil/HeroVideo";
-import { VIDEO_ACCUEIL } from "@/lib/medias";
+import { getImageProps } from "next/image";
+import { preload } from "react-dom";
+import { BoutonAction } from "@/components/BoutonAction";
+import { PHOTOS } from "@/lib/medias";
 
-// Les cinq aplats de la colonne de droite : chacun est la couleur du chapitre vers lequel il mène.
-const NUANCIER = [
-  { href: "#gamelle", label: "La gamelle", classe: "bg-ch-gamelle text-ch-encre" },
-  { href: "#fontaine", label: "La fontaine", classe: "bg-ch-fontaine text-ch-encre" },
-  { href: "#litiere", label: "La litière", classe: "bg-ch-litiere text-ch-encre" },
-  { href: "#deja-compare", label: "Déjà comparé", classe: "bg-ch-articles text-ch-creme" },
-  { href: "#methode", label: "Notre méthode", classe: "bg-ch-methode text-ch-creme" },
-];
+const ORDINATEUR = "(min-width: 1024px)";
+const TELEPHONE = "(max-width: 1023.98px)";
 
-// Premier écran : la vidéo d'un chat (ordinateur) ou sa première image (téléphone), et le nuancier des chapitres.
-// Sur ordinateur, la phrase d'introduction se pose sur la vidéo ; sur téléphone, elle passe sous le nuancier.
+// Le titre, mot par mot : chaque mot sort d'un flou (CSS .entree-flou), « sans se tromper » en serif italique orange.
+const MOTS = ["Bien", "équiper", "son", "chat,"];
+const MOTS_SERIF = ["sans", "se", "tromper"];
+
+// Premier écran (scène 1, « Macro ») : très gros plan sur l'œil et les moustaches d'un chat blanc, le titre posé
+// dessus. Au défilement, l'image recule jusqu'au chat entier, puis devient une carte aux coins arrondis
+// (voir Mouvement). Le gros plan est un simple agrandissement CSS : sans JavaScript, il reste en place.
+// Ordinateur : la photo entière, servie assez grande pour le gros plan. Téléphone : un recadrage vertical.
 export function HeroAccueil() {
-  const poster = VIDEO_ACCUEIL.poster;
+  const { chatBlanc: photo, chatBlancTelephone: mobile } = PHOTOS;
+
+  const { props: ordinateur } = getImageProps({
+    alt: "",
+    src: photo.src,
+    width: photo.width,
+    height: photo.height,
+    quality: 80,
+    sizes: "160vw",
+  });
+  const { props: telephone } = getImageProps({
+    alt: photo.alt,
+    src: mobile.src,
+    width: mobile.width,
+    height: mobile.height,
+    quality: 80,
+    sizes: "125vw",
+    loading: "eager",
+    fetchPriority: "high",
+  });
+  preload(telephone.src, {
+    as: "image",
+    imageSrcSet: telephone.srcSet,
+    imageSizes: telephone.sizes,
+    fetchPriority: "high",
+    media: TELEPHONE,
+  });
+  preload(ordinateur.src, {
+    as: "image",
+    imageSrcSet: ordinateur.srcSet,
+    imageSizes: ordinateur.sizes,
+    fetchPriority: "high",
+    media: ORDINATEUR,
+  });
+
+  let i = 0;
   return (
     <section
       data-hero
       aria-labelledby="titre-accueil"
-      className="grid gap-2.5 p-2.5 lg:h-[calc(100svh-4.75rem)] lg:min-h-[38rem] lg:grid-cols-12 lg:grid-rows-1"
+      className="relative h-[calc(100svh-4rem)] min-h-[34rem] overflow-hidden bg-nuit"
     >
-      <div className="relative h-[64svh] min-h-[26rem] overflow-hidden bg-field lg:col-span-10 lg:col-start-1 lg:row-start-1 lg:h-auto lg:min-h-0">
-        <div data-hero-media className="absolute inset-0">
-          <Image
-            src={poster.src}
-            alt={poster.alt}
-            fill
-            preload
-            fetchPriority="high"
-            quality={60}
-            sizes="(min-width: 1024px) 83vw, 100vw"
-            className="object-cover object-[70%_50%]"
+      <div data-hero-media className="absolute inset-0 overflow-hidden">
+        <picture>
+          <source media={ORDINATEUR} srcSet={ordinateur.srcSet} sizes={ordinateur.sizes} />
+          <img
+            {...telephone}
+            alt={photo.alt}
+            data-hero-zoom
+            className="absolute inset-0 h-full w-full origin-[73%_30%] scale-[1.25] object-cover object-[50%_35%] lg:origin-[76%_38%] lg:scale-[1.6] lg:object-[50%_40%]"
           />
-          <HeroVideo src={VIDEO_ACCUEIL.src} />
-        </div>
+        </picture>
+        {/* Voile bleu nuit en bas : le titre blanc reste lisible sur le pelage blanc. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(to_top,rgb(20_33_61/0.94)_0%,rgb(20_33_61/0.78)_34%,rgb(20_33_61/0)_70%)]"
+        />
 
-        <div className="absolute left-0 top-0 bg-paper px-4 pb-4 pt-3 sm:px-6 lg:px-8 lg:pb-7 lg:pt-5">
-          <h1 id="titre-accueil" className="font-display rise text-[clamp(2.75rem,12vw,4.5rem)] lg:text-display">
-            À hauteur
-            <br />
-            de moustaches
-          </h1>
+        <div data-sur-photo className="relative flex h-full flex-col justify-end px-4 pb-7 sm:px-8 lg:pb-12">
+          <div className="mx-auto w-full max-w-[90rem]">
+            <h1
+              id="titre-accueil"
+              className="font-display max-w-[13ch] text-[clamp(3.25rem,0.9rem+7.4vw,9rem)] text-blanc"
+            >
+              {MOTS.map((mot) => (
+                <span key={mot}>
+                  <span className="mot-entree entree-flou" style={{ "--i": i++ } as React.CSSProperties}>
+                    {mot}
+                  </span>{" "}
+                </span>
+              ))}
+              {MOTS_SERIF.map((mot, k) => (
+                <span key={mot}>
+                  <span
+                    className="mot-entree entree-flou mot-serif text-accent"
+                    style={{ "--i": i++ } as React.CSSProperties}
+                  >
+                    {mot}
+                  </span>
+                  {k < MOTS_SERIF.length - 1 ? " " : null}
+                </span>
+              ))}
+            </h1>
+            <div
+              className="entree-flou mt-6 flex flex-col items-start gap-6 lg:mt-8 lg:flex-row lg:items-end lg:justify-between"
+              style={{ "--i": i + 2 } as React.CSSProperties}
+            >
+              <p className="max-w-[40ch] text-lead text-blanc">
+                Litières, fontaines, arbres à chat : nous comparons l&apos;équipement à partir des fiches techniques des
+                fabricants.
+              </p>
+              <BoutonAction href="/litieres/litiere-autonettoyante/" className="shrink-0">
+                Lire le comparatif des litières
+              </BoutonAction>
+            </div>
+            <p className="mt-6 text-small text-blanc/75">{photo.credit}</p>
+          </div>
         </div>
-
-        <Link
-          href="/litieres/litiere-autonettoyante/"
-          className="absolute bottom-5 left-1/2 inline-flex min-h-12 -translate-x-1/2 items-center whitespace-nowrap bg-accent px-6 font-medium text-on-accent transition-transform duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] lg:bottom-8 lg:left-auto lg:right-8 lg:translate-x-0 lg:px-7"
-        >
-          Lire le comparatif des litières
-        </Link>
       </div>
-
-      {/* Ordinateur : posée en bas à gauche de la vidéo (même case de la grille). Téléphone : sous le nuancier. */}
-      <div className="order-last px-2 pb-4 pt-6 lg:order-none lg:col-span-5 lg:col-start-1 lg:relative lg:z-10 lg:row-start-1 lg:self-end lg:p-0">
-        <div className="lg:bg-paper lg:px-8 lg:py-6">
-          <p className="rise max-w-[36ch] text-lead lg:text-body" style={{ "--i": 1 } as React.CSSProperties}>
-            Litières, fontaines, gamelles, arbres à chat : nous comparons l&apos;équipement du chat à partir des
-            fiches techniques des fabricants.
-          </p>
-          <p className="mt-3 text-small text-ink-soft">{poster.credit}</p>
-        </div>
-      </div>
-
-      <nav aria-label="Chapitres de la page" className="grid lg:col-span-2 lg:col-start-11 lg:row-start-1 lg:grid-rows-5">
-        {NUANCIER.map((n) => (
-          <a
-            key={n.href}
-            href={n.href}
-            className={`${n.classe} group flex min-h-13 focus-visible:outline-current focus-visible:-outline-offset-[6px] items-center px-5 text-small lg:items-start lg:p-5`}
-          >
-            <span className="underline-offset-4 decoration-2 group-hover:underline">{n.label}</span>
-          </a>
-        ))}
-      </nav>
     </section>
   );
 }

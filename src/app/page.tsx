@@ -1,23 +1,31 @@
 import type { Metadata } from "next";
-import { Chapitres } from "@/components/accueil/Chapitres";
-import { DejaCompare } from "@/components/accueil/DejaCompare";
+import { Comparaison } from "@/components/accueil/Comparaison";
+import { Desintegration } from "@/components/accueil/Desintegration";
+import { Fin } from "@/components/accueil/Fin";
 import { HeroAccueil } from "@/components/accueil/HeroAccueil";
-import { MethodeDiagonale } from "@/components/accueil/MethodeDiagonale";
 import { Mouvement } from "@/components/accueil/Mouvement";
+import { Mur } from "@/components/accueil/Mur";
+import { Pelote } from "@/components/accueil/Pelote";
+import { Soucis } from "@/components/accueil/Soucis";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-// Accueil vitrine « À hauteur de moustaches » : l'appartement vu à hauteur de chat.
-// Tout le texte est dans le HTML ; vidéo, 3D et défilement fluide s'ajoutent ensuite, sur ordinateur seulement.
+// Accueil vitrine (brief-da-spectaculaire.md), sept scènes : gros plan sur un chat, photo qui se désintègre en
+// particules, les petits soucis du quotidien, la pelote et les articles, le mur de photos et son compteur, la
+// comparaison qui se construit, puis la grande section de fin. Tout le texte est dans le HTML ; défilement fluide,
+// particules et animations s'ajoutent après l'affichage.
 export default function Home() {
   return (
     <>
       <HeroAccueil />
-      <Chapitres />
-      <DejaCompare />
-      <MethodeDiagonale />
+      <Desintegration />
+      <Soucis />
+      <Pelote />
+      <Mur />
+      <Comparaison />
+      <Fin />
       <Mouvement />
     </>
   );

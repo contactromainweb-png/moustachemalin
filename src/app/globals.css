@@ -1,45 +1,45 @@
 @import "tailwindcss";
 
-/* Palette Moustache Malin : crème chaud, brun caramel, accent safran pour les boutons Amazon.
+/* Palette Moustache Malin : blanc cassé, bleu nuit (titres, en-tête, grandes sections pleines),
+   orange vif réservé aux boutons Amazon et aux appels à l'action, avec texte bleu nuit dessus (6,1:1).
+   Les liens dans le texte restent bleu nuit, soulignés d'orange : l'orange seul est trop clair pour du texte.
+   Les noms « caramel » sont historiques : ils désignent la couleur forte (bleu nuit) et ses aplats.
    Thème clair par défaut ; le sombre ne s'active que si le système du visiteur le demande. */
 :root {
   color-scheme: light;
-  --paper: #f6efe4;
-  --field: #ece1cf;
-  --ink: #22170e;
-  --ink-soft: #5a4838;
-  --caramel: #84501f;
-  --caramel-field: #6b4019;
-  --on-caramel: #f6efe4;
-  --accent: #f2a20c;
-  --on-accent: #22170e;
+  --paper: #faf7f2;
+  --field: #efe9e0;
+  --ink: #14213d;
+  --ink-soft: #5d5750;
+  --caramel: #14213d;
+  --caramel-field: #14213d;
+  --on-caramel: #faf7f2;
+  --accent: #ff7a1a;
+  --on-accent: #14213d;
+  --surligne: #b9a6ff;
 }
 
-/* Accueil : un aplat par chapitre, du plus clair au plus foncé (pris dans les photos).
-   Ce sont des champs de couleur, identiques en mode clair et sombre ; leur texte est fixé à côté. */
+/* Couleurs fixes, identiques en mode clair et sombre : en-tête, grandes sections bleu nuit,
+   texte posé sur les photos, lavande lumineuse (grands aplats, surlignage ; texte bleu nuit dessus, 7,4:1). */
 :root {
-  --ch-gamelle: #e9dcc6;
-  --ch-fontaine: #d8bf98;
-  --ch-litiere: #c49a68;
-  --ch-arbre: #a97a4b;
-  --ch-articles: #6b4019;
-  --ch-methode: #22170e;
-  --ch-encre: #22170e;
-  --ch-creme: #f6efe4;
+  --nuit: #14213d;
+  --blanc: #faf7f2;
+  --lavande: #b9a6ff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --paper: #16100b;
-    --field: #231a12;
-    --ink: #f3eadc;
-    --ink-soft: #c7b6a3;
-    --caramel: #e3bd84;
-    --caramel-field: #4a2c11;
-    --on-caramel: #f3eadc;
-    --accent: #f2a20c;
-    --on-accent: #22170e;
+    --paper: #0f1a31;
+    --field: #182641;
+    --ink: #f4f1ec;
+    --ink-soft: #b9b4ac;
+    --caramel: #ffb27a;
+    --caramel-field: #1d2d4f;
+    --on-caramel: #f4f1ec;
+    --accent: #ff7a1a;
+    --on-accent: #14213d;
+    --surligne: rgb(185 166 255 / 0.32);
   }
 }
 
@@ -53,16 +53,12 @@
   --color-on-caramel: var(--on-caramel);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
-  --color-ch-gamelle: var(--ch-gamelle);
-  --color-ch-fontaine: var(--ch-fontaine);
-  --color-ch-litiere: var(--ch-litiere);
-  --color-ch-arbre: var(--ch-arbre);
-  --color-ch-articles: var(--ch-articles);
-  --color-ch-methode: var(--ch-methode);
-  --color-ch-encre: var(--ch-encre);
-  --color-ch-creme: var(--ch-creme);
-  --font-display: var(--font-instrument-serif);
-  --font-sans: var(--font-hanken-grotesk);
+  --color-nuit: var(--nuit);
+  --color-blanc: var(--blanc);
+  --color-lavande: var(--lavande);
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-instrument);
 
   /* Cinq tailles, pas plus. */
   /* Petit texte (mention Amazon, fil d'Ariane, sources) : jamais sous 16 px (cahier des charges §8). */
@@ -71,6 +67,11 @@
   --text-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
   --text-head: clamp(2.25rem, 1.5rem + 3.2vw, 4rem);
   --text-display: clamp(3rem, 1.6rem + 6.4vw, 7.5rem);
+}
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 html {
@@ -95,19 +96,47 @@ body {
   outline-offset: 3px;
 }
 
-/* Sur les aplats foncés (cartes encre, « Déjà comparé », méthode), le contour caramel ne se voit
-   plus : il passe en crème. */
-.bg-ch-encre :focus-visible,
-.bg-ch-articles :focus-visible,
-.bg-ch-methode :focus-visible {
-  outline-color: var(--ch-creme);
+/* Sur le bleu nuit fixe et sur les photos, le contour passe en orange. */
+.bg-nuit :focus-visible,
+[data-sur-photo] :focus-visible {
+  outline-color: var(--accent);
 }
 
-/* Titres : police à caractère, serrée. */
+/* Titres : grotesque très grasse, légèrement étroite, serrée. */
 .font-display {
-  letter-spacing: -0.02em;
-  line-height: 0.95;
+  font-weight: 800;
+  font-stretch: 88%;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+/* Mot mis en valeur dans un titre : serif italique fine au milieu de la grotesque grasse. */
+.mot-serif {
+  font-family: var(--font-instrument), Georgia, serif;
+  font-style: italic;
   font-weight: 400;
+  font-stretch: normal;
+  letter-spacing: -0.01em;
+}
+
+/* Titre du premier écran : chaque mot sort d’un flou, l’un après l’autre (CSS seul, dès l’affichage). */
+.mot-entree {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .entree-flou {
+    animation: sort-du-flou 900ms var(--ease-out) both;
+    animation-delay: calc(120ms + var(--i, 0) * 70ms);
+  }
+}
+
+@keyframes sort-du-flou {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(0.12em);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -143,3 +172,129 @@ body {
   }
 }
 
+
+/* Accueil, « petits soucis » épinglés : seule l'étape affichée reçoit les clics.
+   Les autres restent dans la page (lecteurs d'écran, clavier) ; un focus y ramène le défilement. */
+[data-epingle] [data-souci]:not([data-actif]) [data-souci-texte] {
+  pointer-events: none;
+}
+
+/* Accueil, « petits soucis » : chaque souci a son aplat de couleur (couleurs fixes, aussi en mode sombre).
+   En liste simple (sans animation), chaque étape est un panneau de sa couleur ; épinglée, c’est la section
+   entière qui prend la couleur de l’étape affichée, avec un fondu. Contrastes vérifiés : bleu nuit sur orange 6,1:1,
+   sur lavande 7,4:1 ; blanc cassé sur bleu nuit 15:1, orange sur bleu nuit 6,1:1. */
+[data-fond] {
+  background-color: var(--f-fond);
+  color: var(--f-encre);
+}
+[data-soucis][data-fond] {
+  transition:
+    background-color 700ms var(--ease-in-out),
+    color 700ms var(--ease-in-out);
+}
+[data-fond="orange"] {
+  --f-fond: #ff7a1a;
+  --f-encre: #14213d;
+  --f-doux: #14213d;
+  --f-serif: #14213d;
+  --f-jauge: #14213d;
+  --f-souligne: #14213d;
+  --cta-fond: #14213d;
+  --cta-texte: #faf7f2;
+  --cta-rond: #ff7a1a;
+  --cta-fleche: #14213d;
+}
+[data-fond="lavande"] {
+  --f-fond: #b9a6ff;
+  --f-encre: #14213d;
+  --f-doux: #14213d;
+  --f-serif: #14213d;
+  --f-jauge: #14213d;
+  --f-souligne: #14213d;
+  --cta-fond: #14213d;
+  --cta-texte: #faf7f2;
+  --cta-rond: #ff7a1a;
+  --cta-fleche: #14213d;
+}
+[data-fond="nuit"] {
+  --f-fond: #14213d;
+  --f-encre: #faf7f2;
+  --f-doux: rgb(250 247 242 / 0.82);
+  --f-serif: #ff7a1a;
+  --f-jauge: #ff7a1a;
+  --f-souligne: #ff7a1a;
+}
+[data-fond="blanc"] {
+  --f-fond: #faf7f2;
+  --f-encre: #14213d;
+  --f-doux: #5d5750;
+  --f-serif: #14213d;
+  --f-jauge: #ff7a1a;
+  --f-souligne: #ff7a1a;
+  --f-surligne: #b9a6ff;
+}
+/* En mode sombre, l'étape « blanc » suit le thème : fond de page sombre, texte clair, surlignage atténué. */
+@media (prefers-color-scheme: dark) {
+  [data-fond="blanc"] {
+    --f-fond: var(--paper);
+    --f-encre: var(--ink);
+    --f-doux: var(--ink-soft);
+    --f-serif: var(--ink);
+    --f-surligne: var(--surligne);
+  }
+}
+/* Articles et rubriques : comme le blanc, mais en suivant le thème du visiteur (clair ou sombre), sans aplat
+   propre (le fond de la page passe dessous). Surlignage lavande atténué en sombre : texte clair dessus, 9:1. */
+[data-fond="page"] {
+  --f-fond: transparent;
+  --f-encre: var(--ink);
+  --f-doux: var(--ink-soft);
+  --f-serif: var(--ink);
+  --f-surligne: var(--surligne);
+}
+[data-fond] .mot-serif {
+  color: var(--f-serif);
+}
+/* Surlignage lavande (fond blanc) : une bande sous le corps des lettres, inclinée comme l’italique,
+   posée derrière le mot (et non sous la boîte de la ligne, plus haute que les lettres). */
+[data-fond="blanc"] .mot-serif,
+[data-fond="page"] .mot-serif {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+}
+[data-fond="blanc"] .mot-serif::before,
+[data-fond="page"] .mot-serif::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0.02em;
+  right: -0.02em;
+  bottom: 0.2em;
+  height: 0.3em;
+  border-radius: 0.05em;
+  background: var(--f-surligne);
+  transform: skewX(-12deg);
+}
+[data-fond="nuit"] :focus-visible {
+  outline-color: var(--accent);
+}
+/* Épinglée : les étapes sont transparentes, la couleur vient de la section. */
+[data-epingle] [data-souci] {
+  background-color: transparent;
+}
+
+/* Premier écran sur ordinateur à écran Retina : le gros plan de départ ne dépasse jamais la définition de la photo
+   (5165 px de large). Plus l'écran est large, moins on agrandit au départ, pour que la photo soit nette dès le début. */
+@media (min-width: 1615px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1.4; }
+}
+@media (min-width: 1845px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1.25; }
+}
+@media (min-width: 2066px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1.1; }
+}
+@media (min-width: 2348px) and (min-resolution: 2dppx) {
+  [data-hero-zoom][data-hero-zoom] { scale: 1; }
+}

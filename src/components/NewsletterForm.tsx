@@ -24,7 +24,7 @@ export function NewsletterForm() {
           placeholder="vous@exemple.fr"
           className="min-h-12 flex-1 border-2 border-ink bg-paper px-4 text-body"
         />
-        <button type="submit" className="min-h-12 bg-ink px-6 text-paper">
+        <button type="submit" className="min-h-12 bg-caramel-field px-6 text-on-caramel">
           S&apos;inscrire
         </button>
       </form>

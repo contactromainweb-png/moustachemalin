@@ -9,18 +9,18 @@ related_targets: []
 
 Scope: `/` (src/app/page.tsx), mode Experience au premier écran puis Persuade (mener vers un comparatif ou un guide). Visiteur : propriétaire de chat en appartement, sur téléphone, qui découvre le site. Action : ouvrir le comparatif des litières ou le guide « Mon chat ne boit pas ». Preuves : seulement les articles en ligne et les faits tirés des fiches techniques et du guide ; aucun avis, chiffre d'audience ni témoignage.
 
-Contraintes : LCP mobile < 2,5 s (le titre reste le LCP), Lighthouse mobile ≥ 75 ; 3D et GSAP/Lenis chargés en différé, jamais sur téléphone faible, mouvement réduit ou économie de données ; vidéo seulement sur ordinateur ; liens vers les rubriques absentes masqués.
+Contraintes : LCP mobile < 2,5 s (le titre reste le LCP), Lighthouse mobile ≥ 75 ; aucune 3D ; GSAP/Lenis chargés après l’affichage, sur ordinateur et téléphone, jamais en mouvement réduit ou économie de données ; vidéo seulement sur ordinateur ; liens vers les rubriques absentes masqués.
 
 ## Direction contract
 
-THESIS: « À hauteur de moustaches ». L'appartement vu à 25 cm du sol, à la hauteur du chat ; les objets du quotidien du chat s'allument un par un et mènent à leur article. Refuse le héros centré + grille de cartes de catégories.
+THESIS: « Grande photo, titre énorme, le reste se construit au scroll ». Un vrai chat en plein écran porte le titre ; au défilement, l’image recule en carte et la page raconte les petits soucis du quotidien, un par écran, chacun menant à son article. Refuse le héros centré + grille de cartes de catégories.
 
-OWN-WORLD: crème chaud (papier), brun caramel en champs pleins, encre brun très foncé, safran réservé au bouton d'action. Instrument Serif en titres, Hanken Grotesk en texte. Angles droits, pas d'ombres, pas de filets ; la couleur vit en aplats par chapitre et dans les photos.
+OWN-WORLD: blanc cassé #FAF7F2, bleu nuit #14213D (header, titres, grandes sections pleines), orange vif #FF7A1A réservé aux appels à l’action (texte bleu nuit dessus, 6,1:1). Bricolage Grotesque très grasse et serrée en titres, DM Sans en texte. Coins très arrondis sur les photos, boutons pilule avec flèche dans son rond ; pas d’ombres ni de filets.
 
-STORY: le visiteur voit un vrai chat chez lui, comprend que le site compare l'équipement à partir des fiches techniques, touche un objet de la scène, lit le fait concret qui le concerne (moustaches et bol large, eau qui bouge, bac vidé toutes les une à deux semaines) et ouvre l'article.
+STORY: le visiteur voit un chat chez lui sous un titre énorme, comprend que le site compare l’équipement à partir des fiches techniques, fait défiler : litière qui sent, chat qui boit peu, repas, griffes ; chaque souci donne un fait concret et un bouton vers l’article.
 
-FIRST VIEWPORT: cadre papier de 10 px ; panneau vidéo (ordinateur) ou photo fixe (téléphone) sur les colonnes 1-10 ; titre en deux lignes dans le tiers haut du panneau ; bouton safran « Lire le comparatif des litières » en bas au centre ; colonne de 5 aplats (clair vers foncé) à droite, chacun un lien vers un chapitre ; sur téléphone panneau 64svh puis 5 barres.
+FIRST VIEWPORT: header bleu nuit de 4 rem ; vidéo (ordinateur) ou photo AVIF recadrée verticale (téléphone) sur toute la hauteur restante ; voile bleu nuit en bas ; titre jusqu’à 9 rem sur 13 caractères de large en bas à gauche, phrase d’accroche, bouton orange « Lire le comparatif des litières ».
 
-FORM: code-led, direction Taste « place-carries-it » (1er choix). Signature : scène 3D à hauteur de chat où gamelle, fontaine, litière et arbre à chat s'éclairent au scroll et se touchent ; carte encre qui avance d'une colonne par chapitre. seed: none (unavailable)
+FORM: code-led, direction imposée par refonte-design.md (pas de tirage). Signature : section 2 épinglée, une étape par écran, texte qui sort vers le haut puis entre par le bas, photo suivante dévoilée par masque depuis le bas avec léger zoom arrière, jauge orange. seed: none (unavailable)
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
