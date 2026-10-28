@@ -49,7 +49,7 @@ export function StagePage({ title, lead, updated, photo, stageWord, children }: 
                 fill
                 loading="lazy"
                 fetchPriority="high"
-                quality={70}
+                quality={80}
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover"
               />

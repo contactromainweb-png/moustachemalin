@@ -25,7 +25,12 @@ const nextConfig: NextConfig = {
   },
   partialPrefetching: true,
   // Photos servies en AVIF (le plus léger), sinon WebP, à la taille de l'écran.
-  images: { formats: ["image/avif", "image/webp"], qualities: [60, 70, 75] },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    // Qualité 80 pour les photos de chats (les poils se dégradent vite en dessous), jusqu’à 3840 px pour les écrans Retina.
+    qualities: [80],
+    deviceSizes: [640, 750, 828, 1080, 1280, 1600, 1920, 2560, 3840],
+  },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   turbopack: {
     rules: {

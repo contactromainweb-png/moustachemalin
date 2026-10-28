@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans, Instrument_Serif } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -9,10 +9,18 @@ import "./globals.css";
 
 // Polices Google, hébergées par le site lui-même (aucune requête vers Google).
 // Titres : Bricolage Grotesque (axe de largeur, pour l'étroit très gras). Texte : DM Sans.
+// Mots mis en valeur dans les titres : Instrument Serif italique (classe .mot-serif).
 const display = Bricolage_Grotesque({
   variable: "--font-bricolage",
   subsets: ["latin"],
   axes: ["wdth"],
+});
+
+const serif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
 });
 
 const text = DM_Sans({
@@ -38,7 +46,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" className={`${display.variable} ${text.variable} antialiased`}>
+    <html lang="fr" className={`${display.variable} ${serif.variable} ${text.variable} antialiased`}>
       <body className="flex min-h-svh flex-col">
         <a
           href="#contenu"

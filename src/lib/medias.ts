@@ -1,5 +1,7 @@
-// Photos et vidéos du site (fichiers dans public/media/, crédits détaillés dans content/credits.json).
+// Photos du site (fichiers dans public/media/, crédits détaillés dans content/credits.json).
 // Les pages les appellent par leur nom : changer une photo ici la change partout.
+// Règle « niveau luxe » : source de 3 000 px de large au moins, contrôlée à 100 %, fichier maître de
+// 3 840 px au plus (jamais agrandi) ; next/image en tire les tailles utiles, en qualité 80.
 export type Photo = {
   src: string;
   width: number;
@@ -9,61 +11,60 @@ export type Photo = {
 };
 
 export const PHOTOS = {
-  chatonSaut: {
-    src: "/media/accueil-chaton-saut.jpg",
-    width: 2000,
-    height: 1333,
-    alt: "Un chaton roux en plein saut, pattes tendues vers un rayon de soleil, dans un salon.",
-    credit: "Photo : Dmytro Koplyk, Pexels",
+  chatBlanc: {
+    src: "/media/accueil-chat-blanc.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Gros plan sur un chat blanc aux yeux verts, moustaches déployées, qui regarde l'objectif.",
+    credit: "Photo : realfish, Unsplash",
   },
-  chatTapisPoster: {
-    src: "/media/accueil-chat-tapis-poster.jpg",
-    width: 1280,
-    height: 676,
-    alt: "Un chat roux debout sur un tapis clair, la tête levée.",
-    credit: "Vidéo : cottonbro studio, Pexels",
+  // Recadrage vertical de la même photo (œil, truffe et moustaches) pour le premier écran sur téléphone.
+  chatBlancTelephone: {
+    src: "/media/accueil-chat-blanc-telephone.jpg",
+    width: 1937,
+    height: 3443,
+    alt: "Gros plan sur l'œil vert et les moustaches d'un chat blanc.",
+    credit: "Photo : realfish, Unsplash",
   },
-  // Première image de la vidéo, recadrée en hauteur sur le chat pour le téléphone (JPEG de secours ;
-  // la version AVIF, bien plus légère, est servie en premier, voir VIDEO_ACCUEIL.posterMobileAvif).
-  chatTapisPosterMobile: {
-    src: "/media/accueil-chat-tapis-mobile.jpg",
-    width: 760,
-    height: 1080,
-    alt: "Un chat roux debout sur un tapis clair, la tête levée.",
-    credit: "Vidéo : cottonbro studio, Pexels",
-  },
-  chatFauteuil: {
-    src: "/media/litieres-chat-fauteuil.jpg",
-    width: 2000,
-    height: 1333,
-    alt: "Un chat tigré et blanc endormi, roulé en boule dans un fauteuil orange.",
-    credit: "Photo : Erdem Horat, Pexels",
+  chatChaise: {
+    src: "/media/litieres-chat-chaise.jpg",
+    width: 3840,
+    height: 2880,
+    alt: "Un chat noir et blanc à poils longs assis sur une chaise blanche, dans une pièce claire et dépouillée.",
+    credit: "Photo : Natalia Rudomin, Unsplash",
   },
   chatRobinet: {
-    src: "/media/guide-chat-robinet.jpg",
-    width: 2000,
-    height: 1331,
-    alt: "Un chat bengal penché sur un lavabo, qui boit l'eau qui coule du robinet.",
-    credit: "Photo : Helena Jankovičová Kováčová, Pexels",
+    src: "/media/boire-chat-robinet.jpg",
+    width: 3840,
+    height: 2423,
+    alt: "Une chatte tricolore qui boit, langue sortie, le filet d'eau d'un robinet au-dessus d'un lavabo blanc.",
+    credit: "Photo : Sugarman Joe, Unsplash",
+  },
+  chatonBol: {
+    src: "/media/boire-chaton-bol.jpg",
+    width: 3840,
+    height: 2561,
+    alt: "Un chaton tigré et blanc qui lape l'eau d'un bol en verre.",
+    credit: "Photo : Carolien van Oijen, Unsplash",
   },
   chatBol: {
     src: "/media/guide-chat-bol.jpg",
-    width: 2000,
-    height: 1333,
+    width: 3840,
+    height: 2560,
     alt: "Un chat roux qui boit dans un bol en inox posé sur une couverture.",
     credit: "Photo : Vlad Deep, Pexels",
   },
   chatSoleil: {
-    src: "/media/chat-soleil.jpg",
-    width: 2000,
-    height: 1500,
-    alt: "Un chat roux à poils longs allongé dans une flaque de soleil sur un sol clair.",
-    credit: "Photo : Himanshu Tambe, Pexels",
+    src: "/media/chat-rayon-soleil.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Un chat roux et blanc assis sur un parquet, dans un rayon de soleil, la tête levée vers l'objectif.",
+    credit: "Photo : Kristina Yadykina, Unsplash",
   },
   chatonsArbre: {
     src: "/media/accueil-chatons-arbre.jpg",
-    width: 2000,
-    height: 1500,
+    width: 3840,
+    height: 2880,
     alt: "Deux chatons tigrés installés chacun sur une plateforme d'arbre à chat, contre un mur blanc.",
     credit: "Photo : mraqieb, Pexels",
   },
@@ -81,28 +82,23 @@ export const PHOTOS = {
     alt: "Un chat tigré assis au fond d'un carton ouvert, qui regarde l'objectif.",
     credit: "Photo : Jared Brotman, Pexels",
   },
-  chatCanape: {
-    src: "/media/methode-chat-canape.jpg",
-    width: 2000,
-    height: 1500,
-    alt: "Un salon lumineux avec des plantes à la fenêtre, et un chat qui dort sur un canapé bleu au milieu des coussins.",
-    credit: "Photo : Merve Bayar, Pexels",
-  },
 } satisfies Record<string, Photo>;
 
-// Vidéo du premier écran : 1280 px par défaut, 1920 px pour les écrans larges (voir HeroVideo).
-export const VIDEO_ACCUEIL = {
-  src: "/media/accueil-chat-tapis.mp4",
-  srcLarge: "/media/accueil-chat-tapis-1920.mp4",
-  poster: PHOTOS.chatTapisPoster,
-  posterMobile: PHOTOS.chatTapisPosterMobile,
-  posterMobileAvif: "/media/accueil-chat-tapis-mobile.avif",
-};
+// Chats détourés (fond retiré) qui traversent l'écran dans la section « Les petits soucis ».
+// Décoratifs : texte alternatif vide, mais crédit affiché sous l'étape.
+export const DETOURES = {
+  bond: { src: "/media/detoure-chat-bond.webp", width: 1430, height: 1200, credit: "The3dragons, Unsplash" },
+  saut: { src: "/media/detoure-chat-saut.webp", width: 522, height: 1200, credit: "Jan Laugesen, Pexels" },
+  marche: { src: "/media/detoure-chat-marche.webp", width: 2294, height: 1001, credit: "Kai Arun, Unsplash" },
+  tigre: { src: "/media/detoure-chat-tigre.webp", width: 1962, height: 1075, credit: "Anna Venezia, Pexels" },
+} satisfies Record<string, Omit<Photo, "alt">>;
+
+export type Detoure = (typeof DETOURES)[keyof typeof DETOURES];
 
 // Image de partage par défaut sur les réseaux sociaux (1200 × 630).
 export const IMAGE_PARTAGE = {
   url: "/og-moustache-malin.jpg",
   width: 1200,
   height: 630,
-  alt: "Un chaton roux en plein saut dans un salon baigné de soleil.",
+  alt: "Gros plan sur un chat blanc aux yeux verts.",
 };

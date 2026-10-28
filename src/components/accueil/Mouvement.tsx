@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
+import { SOUCIS } from "@/lib/accueil";
 import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
 
 type Lenis = { scrollTo: (cible: number, options?: { immediate?: boolean }) => void };
 
 // Défilement fluide (Lenis) et mouvements liés au défilement (GSAP ScrollTrigger) de l'accueil.
-// Ordinateur et téléphone (épinglages plus courts sur téléphone) ; rien avec « animations réduites »
-// ou en économie de données. Chargés une fois la page affichée : sans eux, tout est déjà à sa place.
+// Ordinateur et téléphone (version allégée sur téléphone : moins de particules, mosaïque 4 × 4, épinglages plus
+// courts) ; rien avec « animations réduites » ou en économie de données. Chargés une fois la page affichée :
+// sans eux, tout est déjà à sa place.
 export function Mouvement() {
   useEffect(() => {
     if (!peutAnimer()) return;
@@ -23,6 +25,7 @@ export function Mouvement() {
       if (annule) return;
       gsap.registerPlugin(ScrollTrigger);
       const ordinateur = estOrdinateur();
+      const finitions: (() => void)[] = [];
 
       const lenis = new Lenis({ anchors: true, autoRaf: false });
       const tic = (temps: number) => lenis.raf(temps * 1000);
@@ -33,84 +36,15 @@ export function Mouvement() {
 
       const section = document.querySelector<HTMLElement>("[data-soucis]");
       const ctx = gsap.context(() => {
-        // 1. Premier écran : l'image recule et devient une carte aux coins arrondis, puis la page reprend.
-        //    Le titre ne bouge pas : il reste entier à l'écran pendant tout le mouvement.
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: "[data-hero]",
-              start: "top top",
-              end: ordinateur ? "+=60%" : "+=35%",
-              pin: true,
-              scrub: 0.6,
-            },
-          })
-          .to("[data-hero-media]", {
-            scale: ordinateur ? 0.9 : 0.94,
-            borderRadius: ordinateur ? 32 : 24,
-            ease: "power2.out",
-          });
-
-        // 2. Les petits soucis : section épinglée, une étape par écran (un peu plus d'un demi-écran sur téléphone).
-        if (!section) return;
-        section.setAttribute("data-epingle", "");
-        const etapes = gsap.utils.toArray<HTMLElement>("[data-souci]", section);
-        const textes = etapes.map((e) => e.querySelectorAll<HTMLElement>("[data-souci-texte], [data-souci-credit]"));
-        const cadres = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-cadre]")!);
-        const jauges = gsap.utils.toArray<HTMLElement>("[data-jauge]", section);
-        const n = etapes.length;
-        // Décalage des textes : petit sur téléphone, où le texte est près du bas de l'écran.
-        const entree = ordinateur ? 48 : 20;
-        const sortie = ordinateur ? -40 : -20;
-
-        gsap.set(textes.slice(1), { opacity: 0, y: entree });
-        gsap.set(cadres.slice(1), { clipPath: "inset(100% 0% 0% 0%)" });
-        gsap.set(cadres.map((c) => c.querySelector("img")).slice(1), { scale: 1.15 });
-        gsap.set(jauges[0], { scaleX: 1 });
-
-        const marquerActive = (i: number) => etapes.forEach((e, k) => e.toggleAttribute("data-actif", k === i));
-        marquerActive(0);
-
-        const tl = gsap.timeline({
-          defaults: { ease: "none" },
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: `+=${(n - 1) * (ordinateur ? 90 : 60)}%`,
-            pin: true,
-            scrub: 0.6,
-            snap: { snapTo: "labels", inertia: false, duration: { min: 0.2, max: 0.6 }, ease: "power2.inOut" },
-            onUpdate: (st) => marquerActive(Math.round(st.progress * (n - 1))),
-          },
-        });
-        tl.addLabel("etape0", 0);
-        for (let i = 1; i < n; i++) {
-          const debut = i - 1;
-          // Le texte sortant monte et s'efface, puis le suivant arrive d'en dessous : jamais deux textes ensemble.
-          tl.to(textes[i - 1], { opacity: 0, y: sortie, duration: 0.4, ease: "power2.inOut" }, debut)
-            .to(textes[i], { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, debut + 0.45)
-            // La photo suivante se dévoile par le bas, en reculant légèrement (zoom arrière).
-            .to(cadres[i], { clipPath: "inset(0% 0% 0% 0%)", duration: 0.85, ease: "power2.inOut" }, debut)
-            .to(cadres[i].querySelector("img"), { scale: 1, duration: 0.95, ease: "power2.out" }, debut)
-            .to(jauges[i], { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, debut)
-            .addLabel(`etape${i}`, i);
-        }
-
+        heros(gsap, ordinateur);
+        finitions.push(desintegration(gsap, ordinateur));
+        if (section) finitions.push(soucis(gsap, lenis, section, ordinateur));
         ScrollTrigger.refresh();
-
-        // Au clavier, un lien d’une étape cachée qui reçoit le focus ramène le défilement à son étape.
-        etapes.forEach((e, i) =>
-          e.addEventListener("focusin", () => {
-            const st = tl.scrollTrigger;
-            if (!st || e.hasAttribute("data-actif")) return;
-            lenis.scrollTo(st.start + ((st.end - st.start) * i) / (n - 1), { immediate: true });
-          }),
-        );
       });
 
       nettoyer = () => {
+        finitions.forEach((f) => f());
         ctx.revert();
-        section?.removeAttribute("data-epingle");
         gsap.ticker.remove(tic);
         lenis.destroy();
         delete (window as Window & { mmLenis?: Lenis }).mmLenis;
@@ -127,4 +61,225 @@ export function Mouvement() {
   }, []);
 
   return null;
+}
+
+type Gsap = typeof import("gsap").gsap;
+
+// Scène 1 : du très gros plan au chat entier, puis l'image recule en carte aux coins arrondis.
+// Le titre ne bouge pas : il reste entier à l'écran pendant tout le mouvement.
+function heros(gsap: Gsap, ordinateur: boolean) {
+  // Le gros plan de départ vient du CSS (propriété scale) : GSAP le reprend en transform pour le défaire.
+  const zoom = document.querySelector<HTMLElement>("[data-hero-zoom]");
+  if (!zoom) return;
+  const depart = parseFloat(getComputedStyle(zoom).scale) || 1;
+  zoom.style.scale = "none";
+  gsap.set(zoom, { scale: depart });
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: "[data-hero]",
+        start: "top top",
+        end: ordinateur ? "+=90%" : "+=55%",
+        pin: true,
+        scrub: 0.6,
+      },
+    })
+    .to("[data-hero-zoom]", { scale: 1, ease: "power1.inOut", duration: 0.65 }, 0)
+    .to(
+      "[data-hero-media]",
+      { scale: ordinateur ? 0.9 : 0.94, borderRadius: ordinateur ? 32 : 24, ease: "power2.inOut", duration: 0.35 },
+      0.65,
+    );
+}
+
+// Scène 2 : la phrase s'écrit mot par mot en sortant d'un flou, pendant que la photo se désintègre en particules
+// et se reforme en une autre. Le WebGL n'est préparé qu'à l'approche de la section.
+function desintegration(gsap: Gsap, ordinateur: boolean) {
+  const scene = document.querySelector<HTMLElement>("[data-desint-scene]");
+  if (!scene) return () => {};
+  const cadre = scene.querySelector<HTMLElement>("[data-desint-cadre]")!;
+  const canevas = scene.querySelector<HTMLCanvasElement>("[data-desint-canevas]")!;
+  const imageA = scene.querySelector<HTMLImageElement>("[data-desint-a]")!;
+  const imageB = scene.querySelector<HTMLImageElement>("[data-desint-b]")!;
+  const mots = scene.querySelectorAll<HTMLElement>("[data-mot]");
+  let particules: ReturnType<typeof import("./particules").creerParticules> = null;
+  const etat = { progres: 0 };
+  let pret = false;
+
+  const afficher = () => {
+    const p = etat.progres;
+    // Aux deux bouts, les vraies photos (nettes) ; entre les deux, les particules.
+    const enVol = p > 0.015 && p < 0.985 && particules;
+    canevas.style.opacity = enVol ? "1" : "0";
+    imageA.style.opacity = p <= 0.015 || !particules ? String(1 - gsap.utils.clamp(0, 1, (p - 0.45) / 0.1)) : "0";
+    imageB.style.opacity = p >= 0.985 || !particules ? String(gsap.utils.clamp(0, 1, (p - 0.45) / 0.1)) : "0";
+    if (enVol) particules!.dessiner(p);
+  };
+
+  const preparer = async () => {
+    if (pret) return;
+    pret = true;
+    imageA.loading = "eager";
+    imageB.loading = "eager";
+    await Promise.all([imageA.decode(), imageB.decode()]).catch(() => {});
+    const { creerParticules } = await import("./particules");
+    try {
+      particules = creerParticules({ canevas, cadre, imageA, imageB, colonnes: ordinateur ? 150 : 76 });
+    } catch {
+      particules = null;
+    }
+    afficher();
+  };
+
+  const tl = gsap.timeline({
+    defaults: { ease: "none" },
+    scrollTrigger: {
+      trigger: scene,
+      start: "top top",
+      end: ordinateur ? "+=160%" : "+=110%",
+      pin: true,
+      scrub: 0.6,
+      onRefresh: () => particules?.redimensionner(),
+    },
+  });
+  // Les mots sortent du flou un par un ; « heureux » arrive au moment où la photo s'envole.
+  gsap.set(mots, { opacity: 0.12, filter: ordinateur ? "blur(10px)" : "none", y: "0.1em" });
+  tl.to(mots, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.12, stagger: 0.06, ease: "power2.out" }, 0);
+  tl.to(etat, { progres: 1, duration: 0.85, ease: "power1.inOut", onUpdate: afficher }, 0.12);
+
+  // Préparation des particules un écran avant l'arrivée de la section.
+  const observateur = new IntersectionObserver(
+    (entrees) => {
+      if (entrees.some((e) => e.isIntersecting)) {
+        observateur.disconnect();
+        void preparer();
+      }
+    },
+    { rootMargin: "100% 0px" },
+  );
+  observateur.observe(scene);
+
+  return () => {
+    observateur.disconnect();
+    particules?.liberer();
+    imageA.style.opacity = "";
+    imageB.style.opacity = "";
+    canevas.style.opacity = "";
+  };
+}
+
+// Scène 3 : les petits soucis, une étape par écran (un peu plus d'un demi-écran sur téléphone).
+function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: boolean) {
+  section.setAttribute("data-epingle", "");
+  const etapes = gsap.utils.toArray<HTMLElement>("[data-souci]", section);
+  const n = etapes.length;
+  const textes = etapes.map((e) =>
+    e.querySelectorAll<HTMLElement>("[data-souci-texte], [data-souci-geant], [data-souci-credit]"),
+  );
+  const cadres = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-cadre]")!);
+  const images = cadres.map((c) => c.querySelector<HTMLImageElement>("img")!);
+  const chats = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-chat]")!);
+  const jauges = gsap.utils.toArray<HTMLElement>("[data-jauge]", section);
+
+  // La photo de l'étape affichée passe au-dessus des suivantes : elle se décompose et révèle celle d'en dessous.
+  // Les chats restent derrière tous les textes (z 5), les photos au milieu (z 10+), les textes devant (z 20).
+  const photos = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-photo]")!);
+  photos.forEach((p, i) => (p.style.zIndex = String(10 + n - i)));
+  const mosaiques = cadres.slice(0, -1).map((c, i) => mosaique(c, images[i], ordinateur));
+
+  const entree = ordinateur ? 40 : 18;
+  const sortie = ordinateur ? -32 : -14;
+  const flou = (px: number) => (ordinateur ? `blur(${px}px)` : "none");
+  const largeur = () => window.innerWidth;
+
+  gsap.set(textes.slice(1), { opacity: 0, y: entree, filter: flou(6) });
+  gsap.set(images.slice(1), { scale: 1.12 });
+  gsap.set(chats.slice(1), { x: () => largeur(), rotate: 8 });
+  gsap.set(jauges[0], { scaleX: 1 });
+
+  const marquerActive = (i: number) => {
+    etapes.forEach((e, k) => e.toggleAttribute("data-actif", k === i));
+    section.dataset.fond = SOUCIS[i].fond;
+  };
+  marquerActive(0);
+
+  const tl = gsap.timeline({
+    defaults: { ease: "none" },
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: `+=${(n - 1) * (ordinateur ? 100 : 70)}%`,
+      pin: true,
+      scrub: 0.6,
+      invalidateOnRefresh: true,
+      snap: { snapTo: "labels", inertia: false, duration: { min: 0.2, max: 0.6 }, ease: "power2.inOut" },
+      onUpdate: (st) => marquerActive(Math.round(st.progress * (n - 1))),
+    },
+  });
+  tl.addLabel("etape0", 0);
+  for (let i = 1; i < n; i++) {
+    const debut = i - 1;
+    // Fondu enchaîné : le texte sortant s'efface pendant que le suivant arrive ; ils se croisent, jamais d'écran vide.
+    tl.to(textes[i - 1], { opacity: 0, y: sortie, filter: flou(4), duration: 0.55, ease: "power2.inOut" }, debut + 0.05)
+      .to(textes[i], { opacity: 1, y: 0, filter: flou(0), duration: 0.6, ease: "power3.out" }, debut + 0.3)
+      // La photo se décompose en carrés qui disparaissent au hasard ; la suivante recule légèrement dessous.
+      .to(
+        mosaiques[i - 1],
+        { scale: 0, opacity: 0, duration: 0.45, ease: "power2.in", stagger: { amount: 0.45, from: "random" } },
+        debut,
+      )
+      .to(images[i], { scale: 1, duration: 0.95, ease: "power2.out" }, debut)
+      // Le chat de l'étape sort par la gauche en pivotant, le suivant entre par la droite.
+      .to(chats[i - 1], { x: () => -largeur(), rotate: -8, duration: 0.7, ease: "power2.in" }, debut)
+      .to(chats[i], { x: 0, rotate: 0, duration: 0.75, ease: "power3.out" }, debut + 0.25)
+      .to(jauges[i], { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, debut)
+      .addLabel(`etape${i}`, i);
+  }
+
+  // Au clavier, un lien d'une étape cachée qui reçoit le focus ramène le défilement à son étape.
+  etapes.forEach((e, i) =>
+    e.addEventListener("focusin", () => {
+      const st = tl.scrollTrigger;
+      if (!st || e.hasAttribute("data-actif")) return;
+      lenis.scrollTo(st.start + ((st.end - st.start) * i) / (n - 1), { immediate: true });
+    }),
+  );
+
+  return () => {
+    section.removeAttribute("data-epingle");
+    delete section.dataset.fond;
+    etapes.forEach((e) => e.removeAttribute("data-actif"));
+    photos.forEach((p) => (p.style.zIndex = ""));
+    document.querySelectorAll("[data-mosaique]").forEach((m) => m.remove());
+    images.forEach((img) => (img.style.opacity = ""));
+  };
+}
+
+// Recouvre une photo d'une grille de carrés qui en montrent chacun un morceau (même recadrage que la photo),
+// puis cache la photo d'origine. Renvoie les carrés, à animer. Téléphone : 4 × 4 ; ordinateur : 8 de large.
+function mosaique(cadre: HTMLElement, image: HTMLImageElement, ordinateur: boolean) {
+  const boite = cadre.getBoundingClientRect();
+  const colonnes = ordinateur ? 8 : 4;
+  const rangees = ordinateur ? Math.max(4, Math.round((colonnes * boite.height) / boite.width)) : 4;
+  const grille = document.createElement("div");
+  grille.dataset.mosaique = "";
+  grille.setAttribute("aria-hidden", "true");
+  grille.style.cssText = `position:absolute;inset:0;display:grid;grid-template-columns:repeat(${colonnes},1fr);grid-template-rows:repeat(${rangees},1fr)`;
+  const carres: HTMLElement[] = [];
+  for (let r = 0; r < rangees; r++) {
+    for (let c = 0; c < colonnes; c++) {
+      const carre = document.createElement("div");
+      carre.style.cssText = "position:relative;overflow:hidden";
+      const morceau = image.cloneNode() as HTMLImageElement;
+      // Même srcset et même sizes que la photo : le navigateur reprend le fichier déjà chargé.
+      morceau.alt = "";
+      morceau.style.cssText = `position:absolute;max-width:none;width:${colonnes * 100}%;height:${rangees * 100}%;left:${-c * 100}%;top:${-r * 100}%`;
+      carre.appendChild(morceau);
+      grille.appendChild(carre);
+      carres.push(carre);
+    }
+  }
+  cadre.appendChild(grille);
+  image.style.opacity = "0";
+  return carres;
 }

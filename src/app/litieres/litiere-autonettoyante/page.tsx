@@ -7,7 +7,7 @@ export const metadata = articleMetadata(frontmatter);
 
 export default function Page() {
   return (
-    <ArticleTemplate frontmatter={frontmatter} photo={PHOTOS.chatFauteuil}>
+    <ArticleTemplate frontmatter={frontmatter} photo={PHOTOS.chatChaise}>
       <Contenu />
     </ArticleTemplate>
   );

@@ -1,107 +1,122 @@
 [
   {
-    "fichier": "public/media/accueil-chat-tapis.mp4",
-    "auteur": "cottonbro studio",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
-    "licence": "Licence Pexels"
+    "fichier": "public/media/accueil-chat-blanc.jpg",
+    "auteur": "realfish",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/tULo6P9sNSE",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "5165x3443"
   },
   {
-    "fichier": "public/media/accueil-chat-tapis-poster.jpg",
-    "auteur": "cottonbro studio (image extraite de la vidéo)",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
-    "licence": "Licence Pexels"
-  },
-  {
-    "fichier": "public/media/accueil-chat-tapis-1920.mp4",
-    "auteur": "cottonbro studio",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
-    "licence": "Licence Pexels"
-  },
-  {
-    "fichier": "public/media/accueil-chat-tapis-mobile.jpg",
-    "auteur": "cottonbro studio (image extraite de la vidéo, recadrée)",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
-    "licence": "Licence Pexels"
-  },
-  {
-    "fichier": "public/media/accueil-chat-tapis-mobile.avif",
-    "auteur": "cottonbro studio (image extraite de la vidéo, recadrée)",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
-    "licence": "Licence Pexels"
-  },
-  {
-    "fichier": "public/media/accueil-chaton-saut.jpg",
-    "auteur": "Dmytro Koplyk",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/photo/energetic-kitten-mid-jump-in-cozy-interior-setting-39705296/",
-    "licence": "Licence Pexels"
+    "fichier": "public/media/accueil-chat-blanc-telephone.jpg",
+    "auteur": "realfish (recadrage vertical)",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/tULo6P9sNSE",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "5165x3443"
   },
   {
     "fichier": "public/og-moustache-malin.jpg",
-    "auteur": "Dmytro Koplyk (recadrage)",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/photo/energetic-kitten-mid-jump-in-cozy-interior-setting-39705296/",
-    "licence": "Licence Pexels"
+    "auteur": "realfish (recadrage)",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/tULo6P9sNSE",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "5165x3443"
   },
   {
-    "fichier": "public/media/litieres-chat-fauteuil.jpg",
-    "auteur": "Erdem Horat",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/photo/cozy-tabby-cat-relaxing-on-orange-chair-35715970/",
-    "licence": "Licence Pexels"
+    "fichier": "public/media/boire-chat-robinet.jpg",
+    "auteur": "Sugarman Joe",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/ofQGFkGx7_U",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "7008x4422"
   },
   {
-    "fichier": "public/media/guide-chat-robinet.jpg",
-    "auteur": "Helena Jankovičová Kováčová",
+    "fichier": "public/media/boire-chaton-bol.jpg",
+    "auteur": "Carolien van Oijen",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/E5HmmWbknoQ",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "5521x3682"
+  },
+  {
+    "fichier": "public/media/litieres-chat-chaise.jpg",
+    "auteur": "Natalia Rudomin",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/jP6mveFduL4",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "4000x3000"
+  },
+  {
+    "fichier": "public/media/chat-rayon-soleil.jpg",
+    "auteur": "Kristina Yadykina",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/21NRDbMJF94",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "5888x3925"
+  },
+  {
+    "fichier": "public/media/detoure-chat-bond.webp",
+    "auteur": "The3dragons (détourage)",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/DSv3NZ9PpvY",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "3676x3085"
+  },
+  {
+    "fichier": "public/media/detoure-chat-marche.webp",
+    "auteur": "Kai Arun (détourage)",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/JwBeQEV0H8k",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "3872x2592"
+  },
+  {
+    "fichier": "public/media/detoure-chat-tigre.webp",
+    "auteur": "Anna Venezia (détourage)",
     "source": "Pexels",
-    "url": "https://www.pexels.com/photo/cat-drinking-tap-water-from-faucet-16440316/",
-    "licence": "Licence Pexels"
+    "url": "https://www.pexels.com/photo/12200971/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6511x4341"
+  },
+  {
+    "fichier": "public/media/detoure-chat-saut.webp",
+    "auteur": "Jan Laugesen (détourage)",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/12573567/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "2526x3796"
   },
   {
     "fichier": "public/media/guide-chat-bol.jpg",
     "auteur": "Vlad Deep",
     "source": "Pexels",
     "url": "https://www.pexels.com/photo/a-close-up-shot-of-a-cat-drinking-from-a-stainless-steel-bowl-6946867/",
-    "licence": "Licence Pexels"
-  },
-  {
-    "fichier": "public/media/chat-soleil.jpg",
-    "auteur": "Himanshu Tambe",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/photo/relaxed-feline-basking-in-indoor-sunlight-35681668/",
-    "licence": "Licence Pexels"
+    "licence": "Licence Pexels",
+    "resolutionSource": "5472x3648"
   },
   {
     "fichier": "public/media/accueil-chatons-arbre.jpg",
     "auteur": "mraqieb",
     "source": "Pexels",
     "url": "https://www.pexels.com/photo/kittens-on-a-cat-tree-7330190/",
-    "licence": "Licence Pexels"
+    "licence": "Licence Pexels",
+    "resolutionSource": "4032x3024"
   },
   {
     "fichier": "public/media/methode-chat-cartons.jpg",
     "auteur": "大 董",
     "source": "Pexels",
     "url": "https://www.pexels.com/photo/ginger-tabby-cat-sitting-indoors-with-boxes-39501015/",
-    "licence": "Licence Pexels"
+    "licence": "Licence Pexels",
+    "resolutionSource": "6016x4016"
   },
   {
     "fichier": "public/media/methode-chat-carton.jpg",
     "auteur": "Jared Brotman",
     "source": "Pexels",
     "url": "https://www.pexels.com/photo/curious-cat-sitting-in-a-cardboard-box-indoors-35401734/",
-    "licence": "Licence Pexels"
-  },
-  {
-    "fichier": "public/media/methode-chat-canape.jpg",
-    "auteur": "Merve Bayar",
-    "source": "Pexels",
-    "url": "https://www.pexels.com/photo/a-cat-lying-on-the-couch-11591471/",
-    "licence": "Licence Pexels"
+    "licence": "Licence Pexels",
+    "resolutionSource": "4000x2667"
   }
 ]

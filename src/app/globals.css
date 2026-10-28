@@ -19,10 +19,11 @@
 }
 
 /* Couleurs fixes, identiques en mode clair et sombre : en-tête, grandes sections bleu nuit,
-   texte posé sur les photos. */
+   texte posé sur les photos, lavande lumineuse (grands aplats, surlignage ; texte bleu nuit dessus, 7,4:1). */
 :root {
   --nuit: #14213d;
   --blanc: #faf7f2;
+  --lavande: #b9a6ff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -52,8 +53,10 @@
   --color-on-accent: var(--on-accent);
   --color-nuit: var(--nuit);
   --color-blanc: var(--blanc);
+  --color-lavande: var(--lavande);
   --font-display: var(--font-bricolage);
   --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-instrument);
 
   /* Cinq tailles, pas plus. */
   /* Petit texte (mention Amazon, fil d'Ariane, sources) : jamais sous 16 px (cahier des charges §8). */
@@ -106,6 +109,34 @@ body {
   text-wrap: balance;
 }
 
+/* Mot mis en valeur dans un titre : serif italique fine au milieu de la grotesque grasse. */
+.mot-serif {
+  font-family: var(--font-instrument), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  letter-spacing: -0.01em;
+}
+
+/* Titre du premier écran : chaque mot sort d’un flou, l’un après l’autre (CSS seul, dès l’affichage). */
+.mot-entree {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .entree-flou {
+    animation: sort-du-flou 900ms var(--ease-out) both;
+    animation-delay: calc(120ms + var(--i, 0) * 70ms);
+  }
+}
+
+@keyframes sort-du-flou {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(0.12em);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .rise {
     animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -144,4 +175,71 @@ body {
    Les autres restent dans la page (lecteurs d'écran, clavier) ; un focus y ramène le défilement. */
 [data-epingle] [data-souci]:not([data-actif]) [data-souci-texte] {
   pointer-events: none;
+}
+
+/* Accueil, « petits soucis » : chaque souci a son aplat de couleur (couleurs fixes, aussi en mode sombre).
+   En liste simple (sans animation), chaque étape est un panneau de sa couleur ; épinglée, c’est la section
+   entière qui prend la couleur de l’étape affichée, avec un fondu. Contrastes vérifiés : bleu nuit sur orange 6,1:1,
+   sur lavande 7,4:1 ; blanc cassé sur bleu nuit 15:1, orange sur bleu nuit 6,1:1. */
+[data-fond] {
+  background-color: var(--f-fond);
+  color: var(--f-encre);
+}
+[data-soucis][data-fond] {
+  transition:
+    background-color 700ms var(--ease-in-out),
+    color 700ms var(--ease-in-out);
+}
+[data-fond="orange"] {
+  --f-fond: #ff7a1a;
+  --f-encre: #14213d;
+  --f-doux: #14213d;
+  --f-serif: #14213d;
+  --f-jauge: #14213d;
+  --f-souligne: #14213d;
+  --cta-fond: #14213d;
+  --cta-texte: #faf7f2;
+  --cta-rond: #ff7a1a;
+  --cta-fleche: #14213d;
+}
+[data-fond="lavande"] {
+  --f-fond: #b9a6ff;
+  --f-encre: #14213d;
+  --f-doux: #14213d;
+  --f-serif: #14213d;
+  --f-jauge: #14213d;
+  --f-souligne: #14213d;
+  --cta-fond: #14213d;
+  --cta-texte: #faf7f2;
+  --cta-rond: #ff7a1a;
+  --cta-fleche: #14213d;
+}
+[data-fond="nuit"] {
+  --f-fond: #14213d;
+  --f-encre: #faf7f2;
+  --f-doux: rgb(250 247 242 / 0.82);
+  --f-serif: #ff7a1a;
+  --f-jauge: #ff7a1a;
+  --f-souligne: #ff7a1a;
+}
+[data-fond="blanc"] {
+  --f-fond: #faf7f2;
+  --f-encre: #14213d;
+  --f-doux: #5d5750;
+  --f-serif: #14213d;
+  --f-jauge: #ff7a1a;
+  --f-souligne: #ff7a1a;
+  --f-surligne: #b9a6ff;
+}
+[data-fond] .mot-serif {
+  color: var(--f-serif);
+  background-image: linear-gradient(transparent 58%, var(--f-surligne, transparent) 58% 90%, transparent 90%);
+  box-decoration-break: clone;
+}
+[data-fond="nuit"] :focus-visible {
+  outline-color: var(--accent);
+}
+/* Épinglée : les étapes sont transparentes, la couleur vient de la section. */
+[data-epingle] [data-souci] {
+  background-color: transparent;
 }

@@ -31,6 +31,16 @@
 - Chaque média utilisé est listé dans `content/credits.json` (fichier, auteur, source, URL, licence).
 - Pas de visuel montrant un produit de marque identifiable pour illustrer un autre produit.
 - Style recherché : **photos et vidéos réelles, vivantes, chaleureuses** (chats qui jouent, boivent, sautent). Pas d'illustrations dessinées.
+- **Niveau luxe, net partout** (tout le site : accueil, rubriques, articles, guides) :
+  - Toujours télécharger la **taille originale** (« Original » sur Pexels, « Full size » sur Unsplash), jamais les aperçus. Privilégier Unsplash et Pexels.
+  - **Photos : 3 000 px de large minimum à la source** (4 000 px et plus pour le plein écran et les gros plans). **Vidéos : 4K à la source** si possible, 1920 px minimum.
+  - **Rejeter** : flou de bougé, mise au point ratée (sur un gros plan, l'œil parfaitement net), bruit visible, surexposition, filigrane, marque visible, rendu « IA », photo sombre ou terne, cadrage banal de banque d'images.
+  - **Contrôle à 100 %** de chaque fichier avant de le garder : si les poils et les moustaches ne sont pas nets, on jette.
+  - Ambiance commune : lumière naturelle, tons lumineux et chauds, couleurs qui vont avec le bleu nuit, l'orange et la lavande. Légère correction d'exposition ou de balance des blancs si besoin, sans filtre lourd.
+  - **Ne jamais agrandir** une image au-delà de sa taille d'origine. Plusieurs tailles par image via `next/image` (640 à 3840 px) avec des `sizes` corrects ; AVIF/WebP, **qualité 80** (pas moins sur les poils).
+  - Vidéos : H.264 (WebM si utile) en 1920 et 2560 px, débit suffisant pour un pelage net ; le téléphone garde une image fixe.
+  - Chats détourés : détourage propre autour des poils et des moustaches, sinon on change de photo.
+  - Dans le rapport de chaque lot : chaque média avec sa résolution source, sa résolution affichée maximale et son poids final ; signaler toute image affichée plus grand que sa source.
 
 ### Performance (Google et mobile d'abord)
 - Objectifs Core Web Vitals sur mobile : **LCP < 2,5 s, INP < 200 ms, CLS < 0,1**.
@@ -38,13 +48,15 @@
 - La vidéo et les animations ne bloquent **jamais** l'affichage du texte : chargement différé (lazy) après le contenu principal, et uniquement quand la section entre dans l'écran.
 - Respect de `prefers-reduced-motion` : version sans animation lourde.
 - Mobile et appareils faibles : version allégée automatique (DPR plafonné, moins de particules, vidéo remplacée par une image si besoin).
-- Le site n'utilise pas de 3D (pas de Three.js). Les animations au scroll (GSAP) sont chargées uniquement sur l'accueil et les pages vitrines ; les articles n'ont que des apparitions légères en CSS.
+- Pas de modèles 3D (pas d'objets modélisés). WebGL (Three.js) est autorisé **uniquement sur l'accueil et les vitrines**, pour des effets appliqués à de **vraies photos** : photo qui se désintègre en particules, transition en mosaïque de pixels, déformation au scroll, formes abstraites en particules. Chargement après l'affichage du texte, uniquement quand la section approche. Les articles n'embarquent jamais WebGL.
+- Les animations au scroll (GSAP) sont chargées uniquement sur l'accueil et les pages vitrines ; les articles n'ont que des apparitions légères en CSS.
 
 ## 3. Stack technique
 
 - **Next.js** (dernière version stable, App Router) + **TypeScript**
 - **Tailwind CSS**
 - **MDX** pour les articles (contenu dans `content/`)
+- **WebGL** : Three.js, uniquement sur l'accueil et les vitrines, pour des effets sur de vraies photos (particules, mosaïque, déformation) ; jamais de modèles 3D ni dans les articles
 - **Animations au scroll** : **GSAP** + ScrollTrigger, **Lenis** pour le scroll fluide (vitrines uniquement), aussi sur mobile en version allégée
 - **Images** : `next/image` (formats AVIF/WebP, tailles responsives)
 - **Hébergement** : **Netlify** (compte existant du propriétaire, à côté de ses projets clients), déploiement automatique depuis **GitHub**. Utiliser l'adaptateur officiel Next.js de Netlify.
@@ -97,7 +109,9 @@ URLs en français, minuscules, avec tirets, sans accents.
 - Introduction courte, cartes vers les articles, photo ou vidéo d'ambiance.
 
 ### Vitrines animées (4 pages seulement)
-- **Vitrines animées (photos et vidéos réelles, aucune 3D)** : accueil, vitrine litière, vitrine fontaine, quiz. Les effets reposent sur de vraies photos et vidéos de chats : zoom au scroll, découpe en morceaux qui s'éclatent, révélations par masque, galeries horizontales, vidéo qui avance avec le défilement.
+- **Vitrines animées (photos et vidéos réelles, pas de modèles 3D)** : accueil, vitrine litière, vitrine fontaine, quiz. Les effets reposent sur de vraies photos et vidéos de chats : zoom au scroll, particules et mosaïques WebGL tirées des photos, révélations par masque, galeries horizontales, vidéo qui avance avec le défilement.
+- **Quiz** : 5 questions animées, résultat avec 2 ou 3 recommandations.
+- Aucun visuel (photo, effet, illustration) ne reproduit un produit de marque.
 
 ## 6. Composants à créer
 
@@ -121,14 +135,15 @@ URLs en français, minuscules, avec tirets, sans accents.
 
 - Ambiance : lumineuse, moderne, énergique, très contrastée. Les photos de vrais chats sont les héroïnes, en grand format. Référence d'esprit : romainweb.fr (grande photo plein écran, titres très gras, fond clair, une couleur forte, un accent vif, sections qui se construisent au scroll), sans copier ses couleurs ni sa police.
 - Palette : fond blanc cassé (environ #FAF7F2), couleur forte **bleu nuit** (environ #14213D) pour les titres, le header et les grandes sections pleines, accent **orange vif** (environ #FF7A1A) pour les boutons Amazon et les appels à l'action, avec texte bleu nuit sur l'orange (vérifier le contraste). Un gris chaud pour le texte secondaire. Plus de brun ni de caramel.
-- Typographie : titres dans une grotesque très grasse et expressive (proposition : Bricolage Grotesque, Google Fonts), texte dans une sans-serif très lisible (proposition : DM Sans). Titres de l'accueil énormes (jusqu'à 7 à 9 rem sur ordinateur).
+- Troisième couleur : **lavande lumineuse** (environ #B9A6FF), en grands aplats de fond pour certaines sections, en cartes en verre dépoli et en surlignage. Sur l'accueil, les fonds de section **changent de couleur au fil du scroll** (blanc cassé → orange → lavande → bleu nuit), avec des transitions douces. Toujours vérifier les contrastes (texte bleu nuit sur orange et sur lavande).
+- Typographie : titres dans une grotesque très grasse et expressive (proposition : Bricolage Grotesque, Google Fonts), texte dans une sans-serif très lisible (proposition : DM Sans). Titres de l'accueil énormes (jusqu'à 7 à 9 rem sur ordinateur). Les mots mis en valeur dans les titres passent en **serif italique élégante** (proposition : Instrument Serif italique, Google Fonts), souvent en orange ou en lavande. Exemple : « Un chat *heureux* tient à peu de choses ».
 - Thème clair par défaut. Le mode sombre reste possible mais secondaire (fond bleu nuit, pas brun).
 - Mascotte possible plus tard : « Moustache », utilisée dans les vidéos courtes.
 - Accessibilité : contrastes suffisants, navigation au clavier, tailles de texte ≥ 16 px.
 
 ### Skills et outils installés : quand les utiliser
 
-Utilise-les systématiquement aux moments indiqués. Ils améliorent la qualité, mais **ne remplacent jamais les règles de ce fichier** : thème clair par défaut, photos réelles de chats, performance mobile, aucune 3D.
+Utilise-les systématiquement aux moments indiqués. Ils améliorent la qualité, mais **ne remplacent jamais les règles de ce fichier** : thème clair par défaut, photos réelles de chats, performance mobile, pas de modèles 3D (WebGL seulement sur l'accueil et les vitrines).
 
 | Outil | Rôle | Quand |
 | --- | --- | --- |
