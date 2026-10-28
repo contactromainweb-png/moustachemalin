@@ -9,6 +9,14 @@ export const SITE = {
   email: "contact@moustachemalin.fr", // À COMPLÉTER : adresse à créer
 };
 
+// Auteur des articles (signature « Par Romain » et données structurées Person).
+// sameAs : adresses de ses profils publics (LinkedIn, etc.), à ajouter quand Romain les donnera.
+export const AUTEUR = {
+  nom: "Romain",
+  page: "/a-propos/",
+  sameAs: [] as string[],
+};
+
 export const LEGAL = {
   editeur: "Prénom Nom (À COMPLÉTER)",
   statut: "Entrepreneur individuel (À COMPLÉTER)",
@@ -34,6 +42,7 @@ export const RUBRIQUES = [
   { href: "/griffer-grimper/", label: "Griffer et grimper" },
   { href: "/sorties/", label: "Sorties" },
   { href: "/guides/", label: "Guides" },
+  { href: "/outils/", label: "Outils" },
 ];
 
 // Vrai si la page existe déjà sur le site (liste calculée au build dans next.config.ts).

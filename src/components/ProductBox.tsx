@@ -16,7 +16,7 @@ export function ProductBox({ asin, comparatif }: Props) {
       <p className="text-lead font-semibold">{p.name}</p>
       <p className="mt-2 max-w-[55ch]">{espacesFines(p.pour)}</p>
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <AffiliateButton asin={p.asin} exemple={p.exemple} />
+        <AffiliateButton asin={p.asin} emplacement="encadré" exemple={p.exemple} />
         {pageEnLigne(comparatif.href) ? (
           <Link href={comparatif.href} className="text-caramel underline decoration-2 underline-offset-4 hover:text-ink">
             {comparatif.titre}

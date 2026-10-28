@@ -2,6 +2,15 @@ import type { Metadata } from "next";
 import { IMAGE_PARTAGE, PHOTOS } from "@/lib/medias";
 import { RUBRIQUES } from "@/lib/site";
 
+export type TypeArticle = "comparatif" | "guide" | "outil";
+
+// Libellés affichés sur les cartes et les liens, selon le type d'article.
+export const LIBELLES_TYPE: Record<TypeArticle, { nom: string; lire: string }> = {
+  comparatif: { nom: "Comparatif", lire: "Lire le comparatif" },
+  guide: { nom: "Guide", lire: "Lire le guide" },
+  outil: { nom: "Outil", lire: "Utiliser l'outil" },
+};
+
 // Bloc --- en tête de chaque article MDX (exporté sous le nom `frontmatter`).
 export type Frontmatter = {
   title: string; // le H1, avec le mot-clé principal
@@ -9,9 +18,12 @@ export type Frontmatter = {
   description: string; // ≤ 155 caractères
   slug: string;
   rubrique: string; // ex. "litieres"
-  type: "comparatif" | "guide";
+  type: TypeArticle;
   photo?: keyof typeof PHOTOS; // grande photo en tête de l'article (nom dans src/lib/medias.ts)
   motSerif?: string; // mot du titre affiché en serif italique
+  enBref?: string[]; // 3 ou 4 phrases courtes qui répondent directement à la question (encadré « En bref »)
+  pilier?: string; // slug du comparatif pilier de la grappe (un comparatif indique son propre slug)
+  pinImage?: string; // image verticale 1000 × 1500 px pour Pinterest (chemin dans public/)
   updatedAt: string; // AAAA-MM-JJ
   publishedAt?: string; // AAAA-MM-JJ, sinon updatedAt
   products?: string[]; // ASIN classés, pour le schema ItemList des comparatifs
@@ -46,8 +58,11 @@ export function articleMetadata(fm: Frontmatter): Metadata {
       url: cheminArticle(fm),
       publishedTime: fm.publishedAt ?? fm.updatedAt,
       modifiedTime: fm.updatedAt,
-      // Le bloc openGraph d'une page remplace celui du layout : on redonne l'image de partage.
-      images: [IMAGE_PARTAGE],
+      // Le bloc openGraph d'une page remplace celui du layout : on redonne l'image de partage,
+      // puis l'image verticale pour Pinterest quand l'article en a une.
+      images: fm.pinImage
+        ? [IMAGE_PARTAGE, { url: fm.pinImage, width: 1000, height: 1500, alt: fm.title }]
+        : [IMAGE_PARTAGE],
     },
     robots: fm.noindex ? { index: false, follow: false } : undefined,
   };

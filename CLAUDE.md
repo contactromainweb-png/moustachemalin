@@ -172,3 +172,28 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - Mention Amazon présente sur toutes les pages avec liens affiliés.
 - Aucun prix en dur, aucune image Amazon hébergée, aucun faux avis.
 - Chaque média a sa ligne dans `content/credits.json`.
+
+## 11. Confiance, maillage et SEO
+
+### Auteur et confiance (E-E-A-T)
+- Chaque article affiche **« Par Romain »** (lien vers `/a-propos/`) et **« Mis à jour le … »** sous le titre.
+- Données structurées : `Person` pour l'auteur (nom, page, `sameAs` vers ses profils publics quand il les donnera), reliée à `Article` et à `Organization`.
+- Jamais de faux témoignage, de note inventée, de badge de confiance ni de logo « Vu dans… ».
+
+### Encadré « En bref »
+- En haut de chaque article (après le titre et la méthode), un encadré de 3 à 4 phrases courtes qui répondent directement à la question. Champ `enBref` dans le frontmatter MDX. Il sert aux lecteurs pressés et aux résumés des moteurs IA.
+
+### Maillage interne (grappes)
+- Chaque comparatif est le **pilier** d'une grappe. Chaque article satellite (guide, « X ou Y », avis produit, consommables, outil) contient au moins un lien vers son pilier, avec un texte de lien descriptif (ex. « notre comparatif des litières autonettoyantes »), jamais « cliquez ici ».
+- Chaque pilier liste tous ses satellites dans une section « Pour aller plus loin » (masquée tant qu'il n'en a aucun).
+- Aucune page sans lien entrant. Le build lance un contrôle automatique (`scripts/controle-liens.mjs`) qui liste les pages orphelines et les liens internes cassés, et échoue s'il trouve un lien cassé.
+- Le frontmatter de chaque article indique `pilier:` (le slug de son comparatif) pour générer ces liens automatiquement.
+
+### Fraîcheur
+- Chaque comparatif est revérifié une fois par mois (produits toujours en vente, références, caractéristiques). La date « Mis à jour le » ne change que si le contenu a réellement été vérifié ou modifié.
+
+### Pinterest (préparation)
+- Chaque article a une image verticale 1000 × 1500 px (photo + titre court), déclarée dans le frontmatter (`pinImage`), servie dans les métadonnées pour le partage.
+
+### Textes à valider
+- Les passages marqués **[À VALIDER PAR ROMAIN]** ne sont jamais publiés tels quels : ils restent hors du site tant que Romain ne les a pas complétés.

@@ -61,3 +61,76 @@ export const SOUCIS: Souci[] = [
     cadrage: "object-[50%_50%]",
   },
 ];
+
+// Bloc « Selon mon chat » : un profil de chat, sa photo et les pages qui lui répondent.
+// `visible: false` = profil prêt mais masqué, en attendant l'article qui lui correspond (chaton, chat âgé).
+export type Profil = {
+  id: string;
+  mot: [string, string]; // premier mot en grotesque, second en serif italique
+  liens: { href: string; label: string }[];
+  photo: Photo;
+  cadrage: string;
+  visible: boolean;
+};
+
+const mur = (n: string, alt: string, credit: string, width = 1800, height = 1200): Photo => ({
+  src: `/media/mur-${n}.jpg`,
+  width,
+  height,
+  alt,
+  credit,
+});
+
+export const PROFILS: Profil[] = [
+  {
+    id: "appartement",
+    mot: ["En", "appartement"],
+    liens: [{ href: "/litieres/litiere-autonettoyante/", label: "Quelle litière autonettoyante choisir" }],
+    photo: mur("21", "Un chat tigré et blanc couché sur le sol clair d'un appartement, dans un rayon de soleil.", "krazyYangNA, Pexels"),
+    cadrage: "object-[40%_50%]",
+    visible: true,
+  },
+  {
+    id: "plusieurs-chats",
+    mot: ["Plusieurs", "chats"],
+    liens: [{ href: "/litieres/litiere-autonettoyante/#B0DG59SQ5P", label: "La litière pour plusieurs chats" }],
+    photo: mur("10", "Deux chatons qui jouent devant une fenêtre, l'un perché sur un hamac pour chat.", "Anna Hinckel, Pexels"),
+    cadrage: "object-[78%_50%]",
+    visible: true,
+  },
+  {
+    id: "week-end",
+    mot: ["Je pars le", "week-end"],
+    liens: [
+      { href: "/litieres/litiere-autonettoyante/", label: "Une litière qui se vide seule" },
+      { href: "/fontaines/fontaine-a-eau-chat/", label: "Une fontaine à grande réserve" },
+    ],
+    photo: mur("14", "Un chat roux installé seul sous la couette d'un lit, l'air paisible.", "Natalie Bond, Pexels"),
+    cadrage: "object-[60%_50%]",
+    visible: true,
+  },
+  {
+    id: "boit-peu",
+    mot: ["Il boit", "peu"],
+    liens: [{ href: "/guides/mon-chat-ne-boit-pas/", label: "Mon chat ne boit pas : que faire" }],
+    photo: PHOTOS.chatBol,
+    cadrage: "object-[50%_50%]",
+    visible: true,
+  },
+  {
+    id: "chaton",
+    mot: ["Un", "chaton"],
+    liens: [],
+    photo: mur("18", "Un chaton tricolore aux yeux bleus qui avance sur une dalle de pierre.", "Mahmoud Yahyaoui, Pexels", 1806),
+    cadrage: "object-[50%_50%]",
+    visible: false,
+  },
+  {
+    id: "chat-age",
+    mot: ["Un chat", "âgé"],
+    liens: [],
+    photo: mur("29", "Gros plan sur un chat tigré qui somnole, les yeux fermés.", "Magda Ehlers, Pexels"),
+    cadrage: "object-[50%_50%]",
+    visible: false,
+  },
+];

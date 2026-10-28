@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { TitreSerif } from "@/components/TitreSerif";
+import { LIBELLES_TYPE } from "@/lib/articles";
 import { PHOTOS } from "@/lib/medias";
 import { tousLesArticles } from "@/lib/rubriques";
 
@@ -58,14 +59,14 @@ export function Pelote() {
                   ) : null}
                   <div className="px-4 pb-6 pt-5 sm:px-6">
                     <p className="text-small font-medium text-lavande">
-                      {a.type === "comparatif" ? "Comparatif" : "Guide"}
+                      {LIBELLES_TYPE[a.type].nom}
                     </p>
                     <h3 className="font-display mt-2 text-[clamp(1.75rem,1.3rem+1.6vw,2.75rem)]">
                       <TitreSerif titre={a.titre} mot={a.motSerif} />
                     </h3>
                     <p className="mt-3 text-[var(--f-doux)]">{a.description}</p>
                     <p className="mt-5 inline-flex items-center gap-2 font-medium text-accent">
-                      {a.type === "comparatif" ? "Lire le comparatif" : "Lire le guide"}
+                      {LIBELLES_TYPE[a.type].lire}
                       <span
                         aria-hidden="true"
                         className="transition-transform duration-200 ease-[var(--ease-out)] [@media(hover:hover)]:group-hover:translate-x-1"

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Bricolage_Grotesque, DM_Sans, Instrument_Serif } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { IMAGE_PARTAGE } from "@/lib/medias";
-import { SITE } from "@/lib/site";
+import { GOATCOUNTER, UMAMI_ID } from "@/lib/mesure";
+import { AUTEUR, SITE } from "@/lib/site";
 import "./globals.css";
 
 // Polices Google, hébergées par le site lui-même (aucune requête vers Google).
@@ -58,7 +60,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           data={{
             "@context": "https://schema.org",
             "@graph": [
-              { "@type": "Organization", "@id": `${SITE.url}/#organisation`, name: SITE.name, url: SITE.url, email: SITE.email },
+              {
+                "@type": "Organization",
+                "@id": `${SITE.url}/#organisation`,
+                name: SITE.name,
+                url: SITE.url,
+                email: SITE.email,
+                founder: { "@id": `${SITE.url}${AUTEUR.page}#auteur` },
+              },
+              {
+                "@type": "Person",
+                "@id": `${SITE.url}${AUTEUR.page}#auteur`,
+                name: AUTEUR.nom,
+                url: `${SITE.url}${AUTEUR.page}`,
+                ...(AUTEUR.sameAs.length ? { sameAs: AUTEUR.sameAs } : {}),
+                worksFor: { "@id": `${SITE.url}/#organisation` },
+              },
               {
                 "@type": "WebSite",
                 name: SITE.name,
@@ -74,6 +91,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        {/* Statistiques sans cookie (src/lib/mesure.ts) : chargées après la page, seulement si un compte est branché. */}
+        {UMAMI_ID ? (
+          <Script src="https://cloud.umami.is/script.js" data-website-id={UMAMI_ID} strategy="lazyOnload" />
+        ) : null}
+        {GOATCOUNTER ? (
+          <Script
+            src="https://gc.zgo.at/count.js"
+            data-goatcounter={`https://${GOATCOUNTER}.goatcounter.com/count`}
+            strategy="lazyOnload"
+          />
+        ) : null}
       </body>
     </html>
   );

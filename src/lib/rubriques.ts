@@ -9,25 +9,50 @@ import { pageEnLigne, RUBRIQUES } from "@/lib/site";
 // Seuls ceux dont la page existe sont listés : un nouvel article apparaît dans sa rubrique
 // dès que son dossier src/app/<rubrique>/<slug>/ est créé. Comparatifs d'abord, puis du plus récent au plus ancien.
 export function articlesDeRubrique(rubrique: string): ArticleLien[] {
-  return frontmattersEnLigne(rubrique).map((fm) => ({
+  return frontmattersEnLigne(rubrique).map(lien);
+}
+
+function lien(fm: Frontmatter): ArticleLien {
+  return {
     href: cheminArticle(fm),
     titre: fm.title,
     description: fm.description,
     type: fm.type,
     photo: fm.photo,
     motSerif: fm.motSerif,
-  }));
+    updatedAt: fm.updatedAt,
+  };
+}
+
+function tousLesFrontmatters() {
+  return RUBRIQUES.flatMap((r) => frontmattersEnLigne(r.href.replaceAll("/", "")));
+}
+
+// Satellites d'un comparatif pilier : les articles en ligne dont le frontmatter indique `pilier: <slug>`
+// (guides, outils…), pour la section « Pour aller plus loin ». Vide = section masquée.
+export function satellitesDe(slug: string): ArticleLien[] {
+  return tousLesFrontmatters()
+    .filter((fm) => fm.pilier === slug && fm.slug !== slug)
+    .map(lien);
+}
+
+// Les articles les plus récemment mis à jour (accueil, « Derniers articles et mises à jour »).
+export function derniersArticles(nombre: number): ArticleLien[] {
+  return tousLesFrontmatters()
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+    .slice(0, nombre)
+    .map(lien);
 }
 
 // Tous les articles en ligne, rubrique par rubrique (comparatifs d'abord dans chacune).
 export function tousLesArticles(): ArticleLien[] {
-  return RUBRIQUES.flatMap((r) => articlesDeRubrique(r.href.replaceAll("/", "")));
+  return tousLesFrontmatters().map(lien);
 }
 
 // Nombre d'appareils réellement passés en revue dans les comparatifs en ligne (sans doublon) : le compteur de
 // l'accueil ne peut afficher que ce chiffre-là.
 export function appareilsCompares() {
-  const asins = RUBRIQUES.flatMap((r) => frontmattersEnLigne(r.href.replaceAll("/", "")))
+  const asins = tousLesFrontmatters()
     .filter((fm) => fm.type === "comparatif")
     .flatMap((fm) => fm.products ?? []);
   return new Set(asins).size;
