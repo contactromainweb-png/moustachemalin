@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { etatScene } from "@/components/accueil/etat-scene";
-import { peut3D } from "@/lib/capacites";
+import { apresAffichage, peut3D } from "@/lib/capacites";
 
 // Three.js n'est téléchargé que si l'appareil peut l'afficher, et seulement quand la vitrine approche.
 const Scene3D = dynamic(() => import("@/components/accueil/Scene3D"), { ssr: false });
@@ -21,7 +21,8 @@ export function ScenePilote({ ids }: { ids: string[] }) {
     const section = ancre.current?.parentElement;
     if (!section || !peut3D()) return;
 
-    // Chargement quand la vitrine est à moins d'un écran ; la scène ne tourne que quand elle est visible.
+    // Chargement quand la vitrine est à moins d'un écran, mais jamais avant l'affichage de l'image
+    // du premier écran ; la scène ne tourne que quand elle est visible.
     const proche = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
@@ -32,7 +33,7 @@ export function ScenePilote({ ids }: { ids: string[] }) {
       { rootMargin: "100% 0px" },
     );
     const visible = new IntersectionObserver(([e]) => setEnMarche(e.isIntersecting));
-    proche.observe(section);
+    const annulerAttente = apresAffichage(() => proche.observe(section));
     visible.observe(section);
 
     // Avancement dans les chapitres : 0 au début de la gamelle, 3 sur l'arbre à chat.
@@ -44,6 +45,7 @@ export function ScenePilote({ ids }: { ids: string[] }) {
     window.addEventListener("scroll", mesurer, { passive: true });
     window.addEventListener("resize", mesurer);
     return () => {
+      annulerAttente();
       proche.disconnect();
       visible.disconnect();
       window.removeEventListener("scroll", mesurer);

@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { estOrdinateur, peutAnimer } from "@/lib/capacites";
+import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
 
 // Défilement fluide (Lenis) et mouvements liés au défilement (GSAP ScrollTrigger), sur ordinateur seulement.
-// Chargés une fois la page au repos : ils n'entrent jamais dans le premier affichage.
+// Chargés une fois la page chargée et au repos : ils n'entrent jamais dans le premier affichage.
 // Sans eux, tout est déjà à sa place : ils ne font qu'ajouter le mouvement.
 export function Mouvement() {
   useEffect(() => {
@@ -57,16 +57,11 @@ export function Mouvement() {
       };
     };
 
-    // Safari n'a pas requestIdleCallback : petit délai à la place.
-    const auRepos = "requestIdleCallback" in window;
-    const id = auRepos
-      ? window.requestIdleCallback(() => void demarrer(), { timeout: 2500 })
-      : window.setTimeout(() => void demarrer(), 300);
+    const annulerAttente = apresAffichage(() => void demarrer());
 
     return () => {
       annule = true;
-      if (auRepos) window.cancelIdleCallback(id);
-      else window.clearTimeout(id);
+      annulerAttente();
       nettoyer();
     };
   }, []);

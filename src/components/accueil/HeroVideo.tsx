@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { estOrdinateur, peutAnimer } from "@/lib/capacites";
+import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
 
 // Vidéo du premier écran, ajoutée seulement sur ordinateur, une fois la page chargée : l'image fixe
 // en dessous reste le premier élément affiché. Muette, en boucle ; plus on fait défiler la page,
@@ -13,18 +13,7 @@ export function HeroVideo({ src }: { src: string }) {
 
   useEffect(() => {
     if (!peutAnimer() || !estOrdinateur()) return;
-    let annule = false;
-    const lancer = () => {
-      if (annule) return;
-      if ("requestIdleCallback" in window) window.requestIdleCallback(() => !annule && setActive(true), { timeout: 2000 });
-      else setTimeout(() => !annule && setActive(true), 200);
-    };
-    if (document.readyState === "complete") lancer();
-    else window.addEventListener("load", lancer, { once: true });
-    return () => {
-      annule = true;
-      window.removeEventListener("load", lancer);
-    };
+    return apresAffichage(() => setActive(true));
   }, []);
 
   useEffect(() => {
