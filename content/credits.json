@@ -21,7 +21,14 @@
     "licence": "Licence Pexels"
   },
   {
-    "fichier": "public/media/accueil-chat-tapis-poster-mobile.jpg",
+    "fichier": "public/media/accueil-chat-tapis-mobile.jpg",
+    "auteur": "cottonbro studio (image extraite de la vidéo, recadrée)",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",
+    "licence": "Licence Pexels"
+  },
+  {
+    "fichier": "public/media/accueil-chat-tapis-mobile.avif",
     "auteur": "cottonbro studio (image extraite de la vidéo, recadrée)",
     "source": "Pexels",
     "url": "https://www.pexels.com/video/a-cat-catching-the-light-from-a-laser-pointer-6864863/",

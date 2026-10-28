@@ -1,5 +1,5 @@
 // Ce que l'appareil du visiteur peut afficher sur l'accueil (à appeler côté navigateur seulement).
-// Téléphone, mouvement réduit, économie de données ou appareil modeste : photos fixes, sans vidéo ni 3D.
+// Mouvement réduit ou économie de données : photos fixes, sans vidéo ni animation au scroll.
 
 type NavigatorEtendu = Navigator & {
   connection?: { saveData?: boolean };
@@ -17,18 +17,6 @@ export function peutAnimer() {
 // Ordinateur avec souris et écran large.
 export function estOrdinateur() {
   return window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
-}
-
-// Scène 3D : ordinateur, au moins 4 cœurs et 4 Go de mémoire, et WebGL disponible.
-export function peut3D() {
-  if (!peutAnimer() || !estOrdinateur()) return false;
-  const nav = navigator as NavigatorEtendu;
-  if ((nav.hardwareConcurrency ?? 8) < 4 || (nav.deviceMemory ?? 8) < 4) return false;
-  try {
-    return !!document.createElement("canvas").getContext("webgl2");
-  } catch {
-    return false;
-  }
 }
 
 // Lance `action` une fois la page chargée (image du premier écran comprise) et le navigateur au repos :

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Instrument_Serif } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -8,14 +8,15 @@ import { SITE } from "@/lib/site";
 import "./globals.css";
 
 // Polices Google, hébergées par le site lui-même (aucune requête vers Google).
-const display = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
+// Titres : Bricolage Grotesque (axe de largeur, pour l'étroit très gras). Texte : DM Sans.
+const display = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
+  axes: ["wdth"],
 });
 
-const text = Hanken_Grotesk({
-  variable: "--font-hanken-grotesk",
+const text = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
 });
 

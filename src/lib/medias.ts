@@ -23,11 +23,12 @@ export const PHOTOS = {
     alt: "Un chat roux debout sur un tapis clair, la tête levée.",
     credit: "Vidéo : cottonbro studio, Pexels",
   },
-  // Même image, recadrée en hauteur sur le chat : le téléphone n'affiche qu'une tranche du paysage.
+  // Première image de la vidéo, recadrée en hauteur sur le chat pour le téléphone (JPEG de secours ;
+  // la version AVIF, bien plus légère, est servie en premier, voir VIDEO_ACCUEIL.posterMobileAvif).
   chatTapisPosterMobile: {
-    src: "/media/accueil-chat-tapis-poster-mobile.jpg",
-    width: 720,
-    height: 948,
+    src: "/media/accueil-chat-tapis-mobile.jpg",
+    width: 760,
+    height: 1080,
     alt: "Un chat roux debout sur un tapis clair, la tête levée.",
     credit: "Vidéo : cottonbro studio, Pexels",
   },
@@ -95,6 +96,7 @@ export const VIDEO_ACCUEIL = {
   srcLarge: "/media/accueil-chat-tapis-1920.mp4",
   poster: PHOTOS.chatTapisPoster,
   posterMobile: PHOTOS.chatTapisPosterMobile,
+  posterMobileAvif: "/media/accueil-chat-tapis-mobile.avif",
 };
 
 // Image de partage par défaut sur les réseaux sociaux (1200 × 630).

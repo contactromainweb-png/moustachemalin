@@ -35,18 +35,17 @@
 ### Performance (Google et mobile d'abord)
 - Objectifs Core Web Vitals sur mobile : **LCP < 2,5 s, INP < 200 ms, CLS < 0,1**.
 - Toutes les pages sont générées statiquement (SSG).
-- La 3D et la vidéo ne bloquent **jamais** l'affichage du texte : chargement différé (lazy) après le contenu principal, et uniquement quand la section entre dans l'écran.
+- La vidéo et les animations ne bloquent **jamais** l'affichage du texte : chargement différé (lazy) après le contenu principal, et uniquement quand la section entre dans l'écran.
 - Respect de `prefers-reduced-motion` : version sans animation lourde.
 - Mobile et appareils faibles : version allégée automatique (DPR plafonné, moins de particules, vidéo remplacée par une image si besoin).
-- Les articles (comparatifs et guides) n'embarquent **pas** Three.js.
+- Le site n'utilise pas de 3D (pas de Three.js). Les animations au scroll (GSAP) sont chargées uniquement sur l'accueil et les pages vitrines ; les articles n'ont que des apparitions légères en CSS.
 
 ## 3. Stack technique
 
 - **Next.js** (dernière version stable, App Router) + **TypeScript**
 - **Tailwind CSS**
 - **MDX** pour les articles (contenu dans `content/`)
-- **3D** : Three.js via **React Three Fiber** + **@react-three/drei**
-- **Animations au scroll** : **GSAP** + ScrollTrigger, **Lenis** pour le scroll fluide (vitrines uniquement)
+- **Animations au scroll** : **GSAP** + ScrollTrigger, **Lenis** pour le scroll fluide (vitrines uniquement), aussi sur mobile en version allégée
 - **Images** : `next/image` (formats AVIF/WebP, tailles responsives)
 - **Hébergement** : **Netlify** (compte existant du propriétaire, à côté de ses projets clients), déploiement automatique depuis **GitHub**. Utiliser l'adaptateur officiel Next.js de Netlify.
 - **Analyse** : Google Search Console ; statistiques sans cookie à choisir plus tard (outil gratuit), pour éviter un bandeau cookies lourd
@@ -55,7 +54,7 @@
 ## 4. Structure du site
 
 ```
-/                                   Accueil (vitrine 3D)
+/                                   Accueil (vitrine animée)
 /litieres/                          Rubrique
 /litieres/litiere-autonettoyante/   Comparatif pilier
 /fontaines/
@@ -97,12 +96,8 @@ URLs en français, minuscules, avec tirets, sans accents.
 ### Rubrique
 - Introduction courte, cartes vers les articles, photo ou vidéo d'ambiance.
 
-### Vitrines 3D (4 pages seulement)
-- **Accueil** : vidéo plein écran d'un chat (Pexels/Unsplash) qui avance au rythme du scroll, puis une scène 3D stylisée d'appartement : litière, fontaine, gamelle, arbre à chat s'éclairent tour à tour et mènent vers leur rubrique.
-- **Vitrine litière autonettoyante** (en tête du comparatif pilier) : vue éclatée au scroll d'une litière générique (tambour qui tourne, tamis, tiroir).
-- **Vitrine fontaine** : circuit de l'eau animé (pompe, filtre, cascade).
-- **Quiz** : 5 questions animées, résultat avec 2 ou 3 recommandations.
-- Modèles 3D **génériques et originaux**, jamais la reproduction d'un produit de marque.
+### Vitrines animées (4 pages seulement)
+- **Vitrines animées (photos et vidéos réelles, aucune 3D)** : accueil, vitrine litière, vitrine fontaine, quiz. Les effets reposent sur de vraies photos et vidéos de chats : zoom au scroll, découpe en morceaux qui s'éclatent, révélations par masque, galeries horizontales, vidéo qui avance avec le défilement.
 
 ## 6. Composants à créer
 
@@ -124,24 +119,23 @@ URLs en français, minuscules, avec tirets, sans accents.
 
 ## 8. Design
 
-- Ambiance : chaleureuse, premium, lumineuse ; les photos et vidéos de chats sont les héroïnes.
-- Palette de départ : crème chaud, brun caramel, une couleur d'accent vive pour les boutons Amazon ; mode sombre supporté.
-- Typographie : une police de titres avec du caractère, une police de texte très lisible (Google Fonts).
+- Ambiance : lumineuse, moderne, énergique, très contrastée. Les photos de vrais chats sont les héroïnes, en grand format. Référence d'esprit : romainweb.fr (grande photo plein écran, titres très gras, fond clair, une couleur forte, un accent vif, sections qui se construisent au scroll), sans copier ses couleurs ni sa police.
+- Palette : fond blanc cassé (environ #FAF7F2), couleur forte **bleu nuit** (environ #14213D) pour les titres, le header et les grandes sections pleines, accent **orange vif** (environ #FF7A1A) pour les boutons Amazon et les appels à l'action, avec texte bleu nuit sur l'orange (vérifier le contraste). Un gris chaud pour le texte secondaire. Plus de brun ni de caramel.
+- Typographie : titres dans une grotesque très grasse et expressive (proposition : Bricolage Grotesque, Google Fonts), texte dans une sans-serif très lisible (proposition : DM Sans). Titres de l'accueil énormes (jusqu'à 7 à 9 rem sur ordinateur).
+- Thème clair par défaut. Le mode sombre reste possible mais secondaire (fond bleu nuit, pas brun).
 - Mascotte possible plus tard : « Moustache », utilisée dans les vidéos courtes.
 - Accessibilité : contrastes suffisants, navigation au clavier, tailles de texte ≥ 16 px.
 
 ### Skills et outils installés : quand les utiliser
 
-Utilise-les systématiquement aux moments indiqués. Ils améliorent la qualité, mais **ne remplacent jamais les règles de ce fichier** : thème clair crème par défaut, photos réelles de chats, performance mobile, 3D limitée aux 4 vitrines.
+Utilise-les systématiquement aux moments indiqués. Ils améliorent la qualité, mais **ne remplacent jamais les règles de ce fichier** : thème clair par défaut, photos réelles de chats, performance mobile, aucune 3D.
 
 | Outil | Rôle | Quand |
 | --- | --- | --- |
-| **Taste** (`design-taste-frontend`, `high-end-visual-design`) | Direction visuelle haut de gamme, anti « look IA » | Au début de chaque nouveau type de page (accueil, rubrique, comparatif, guide). Garder l'ambiance chaleureuse et lumineuse : pas de style brutaliste ni sombre par défaut. |
+| **Taste** (`design-taste-frontend`, `high-end-visual-design`) | Direction visuelle haut de gamme, anti « look IA » | Au début de chaque nouveau type de page (accueil, rubrique, comparatif, guide). Viser une ambiance lumineuse, moderne et contrastée (bleu nuit et orange vif sur blanc cassé) : pas de style brutaliste ni sombre par défaut. |
 | **Impeccable** (`/impeccable shape`, `craft`, `typeset`, `colorize`, `polish`, `audit`, `critique`) | Structurer, construire puis peaufiner l'interface | `shape` avant de coder une page, `craft` pour la construire, `polish` à la fin de chaque étape, `audit` avant chaque mise en ligne. |
-| **Emil Kowalski** (`emil-design-eng`) | Qualité des animations et micro-interactions (timing, easing, retours au survol et au clic) | Pour toutes les animations : boutons, cartes, apparitions au scroll, et le rythme des vitrines 3D (étape 5). Toujours avec une version `prefers-reduced-motion`. |
+| **Emil Kowalski** (`emil-design-eng`) | Qualité des animations et micro-interactions (timing, easing, retours au survol et au clic) | Pour toutes les animations : boutons, cartes, apparitions au scroll, et le rythme des vitrines animées (étape 5). Toujours avec une version `prefers-reduced-motion`. |
 | **Playwright** (MCP) | Ouvrir le site dans un vrai navigateur, faire des captures, tester en taille mobile (390 px) et ordinateur | À la fin de chaque étape : captures mobile et ordinateur, vérification des liens, de la mention Amazon et de l'absence d'erreurs dans la console. Montre-moi les captures. |
-
-La 3D elle-même (étape 5 et vitrines) se fait avec Three.js, React Three Fiber, drei et GSAP ScrollTrigger (section 3). Aucun de ces skills ne la remplace : ils servent à la direction artistique, au rythme des animations et au contrôle qualité.
 
 ## 9. Ordre de construction
 
@@ -151,7 +145,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 2. **Socle** : layout, header, footer (mention Amazon), pages légales, `/a-propos`, `/methode`, `/affiliation`.
 3. **Modèles** : comparatif, guide, rubrique + tous les composants de la section 6, avec un faux produit d'exemple.
 4. **Premier vrai contenu** : le comparatif « litière autonettoyante » et le guide « mon chat ne boit pas » (textes fournis séparément).
-5. **Accueil vitrine** : vidéo au scroll + scène 3D, avec versions allégées mobile et mouvement réduit.
+5. **Accueil vitrine** : photos et vidéos de chats animées au scroll (GSAP), versions allégées mobile et mouvement réduit.
 6. **SEO technique** : sitemap, robots, schemas, metadata ; contrôle Lighthouse mobile.
 7. **Mise en ligne** : branchement du domaine moustachemalin.fr sur Netlify, déclaration dans Google Search Console.
 8. Plus tard : vitrines litière et fontaine, quiz, API Amazon, newsletter.
@@ -159,7 +153,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 ## 10. Définition de « terminé »
 
 - Le site se lance sans erreur et la commande de build passe.
-- Score Lighthouse mobile ≥ 90 en performance sur les articles (≥ 75 sur les vitrines 3D).
+- Score Lighthouse mobile ≥ 90 en performance sur les articles (≥ 75 sur les vitrines animées).
 - Mention Amazon présente sur toutes les pages avec liens affiliés.
 - Aucun prix en dur, aucune image Amazon hébergée, aucun faux avis.
 - Chaque média a sa ligne dans `content/credits.json`.
