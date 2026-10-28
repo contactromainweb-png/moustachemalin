@@ -6,6 +6,13 @@ import { PHOTOS } from "@/lib/medias";
 const ORDINATEUR = "(min-width: 1024px)";
 const TELEPHONE = "(max-width: 1023.98px)";
 
+// Téléphone : la photo est encodée à l'avance en AVIF (scripts/photo-premier-ecran.mjs, mêmes largeurs), bien plus
+// légère que celle du service d'images à finesse égale : c'est l'élément le plus grand du premier écran (LCP).
+const LARGEURS_TELEPHONE = [640, 828, 960, 1080, 1280, 1600];
+const TAILLE_TELEPHONE = "125vw"; // la photo est agrandie de 25 % (gros plan), d'où plus que la largeur d'écran
+const srcSetTelephone = (format: "avif" | "webp") =>
+  LARGEURS_TELEPHONE.map((l) => `/media/premier-ecran/chat-blanc-${l}.${format} ${l}w`).join(", ");
+
 // Le titre, mot par mot : chaque mot sort d'un flou (CSS .entree-flou), « sans se tromper » en serif italique orange.
 const MOTS = ["Bien", "équiper", "son", "chat,"];
 const MOTS_SERIF = ["sans", "se", "tromper"];
@@ -25,20 +32,11 @@ export function HeroAccueil() {
     quality: 80,
     sizes: "160vw",
   });
-  const { props: telephone } = getImageProps({
-    alt: photo.alt,
-    src: mobile.src,
-    width: mobile.width,
-    height: mobile.height,
-    quality: 80,
-    sizes: "125vw",
-    loading: "eager",
-    fetchPriority: "high",
-  });
-  preload(telephone.src, {
+  preload("/media/premier-ecran/chat-blanc-960.avif", {
     as: "image",
-    imageSrcSet: telephone.srcSet,
-    imageSizes: telephone.sizes,
+    type: "image/avif",
+    imageSrcSet: srcSetTelephone("avif"),
+    imageSizes: TAILLE_TELEPHONE,
     fetchPriority: "high",
     media: TELEPHONE,
   });
@@ -60,8 +58,17 @@ export function HeroAccueil() {
       <div data-hero-media className="absolute inset-0 overflow-hidden">
         <picture>
           <source media={ORDINATEUR} srcSet={ordinateur.srcSet} sizes={ordinateur.sizes} />
+          <source type="image/avif" srcSet={srcSetTelephone("avif")} sizes={TAILLE_TELEPHONE} />
+          {/* Secours WebP pour les navigateurs sans AVIF. */}
           <img
-            {...telephone}
+            src="/media/premier-ecran/chat-blanc-960.webp"
+            srcSet={srcSetTelephone("webp")}
+            sizes={TAILLE_TELEPHONE}
+            width={mobile.width}
+            height={mobile.height}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             alt={photo.alt}
             data-hero-zoom
             className="absolute inset-0 h-full w-full origin-[73%_30%] scale-[1.25] object-cover object-[50%_35%] lg:origin-[76%_38%] lg:scale-[1.6] lg:object-[50%_40%]"
