@@ -1,7 +1,7 @@
 import { PHOTOS, type Photo } from "@/lib/medias";
 
 // Les quatre objets de l'appartement, dans l'ordre où la scène les éclaire.
-// Les phrases viennent des articles en ligne (guide « Mon chat ne boit pas », comparatif des litières).
+// Les phrases viennent des articles en ligne (guide « Mon chat ne boit pas », comparatifs des fontaines et des litières).
 // Un lien vers une page pas encore écrite est masqué automatiquement (voir pageEnLigne).
 export type Chapitre = {
   id: "gamelle" | "fontaine" | "litiere" | "arbre";
@@ -33,8 +33,8 @@ export const CHAPITRES: Chapitre[] = [
     id: "fontaine",
     nom: "La fontaine",
     fait: "Beaucoup de chats préfèrent l'eau qui bouge.",
-    detail: "Une fontaine garde l'eau filtrée et oxygénée.",
-    lien: { href: "/guides/mon-chat-ne-boit-pas/", label: "Lire le guide « Mon chat ne boit pas »" },
+    detail: "6 fontaines comparées sur leurs fiches techniques.",
+    lien: { href: "/fontaines/fontaine-a-eau-chat/", label: "Lire le comparatif des fontaines" },
     photo: PHOTOS.chatRobinet,
     cadrage: "object-[64%_50%]",
     colonne: 2,

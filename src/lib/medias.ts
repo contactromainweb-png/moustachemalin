@@ -23,6 +23,14 @@ export const PHOTOS = {
     alt: "Un chat roux debout sur un tapis clair, la tête levée.",
     credit: "Vidéo : cottonbro studio, Pexels",
   },
+  // Même image, recadrée en hauteur sur le chat : le téléphone n'affiche qu'une tranche du paysage.
+  chatTapisPosterMobile: {
+    src: "/media/accueil-chat-tapis-poster-mobile.jpg",
+    width: 720,
+    height: 948,
+    alt: "Un chat roux debout sur un tapis clair, la tête levée.",
+    credit: "Vidéo : cottonbro studio, Pexels",
+  },
   chatFauteuil: {
     src: "/media/litieres-chat-fauteuil.jpg",
     width: 2000,
@@ -81,9 +89,12 @@ export const PHOTOS = {
   },
 } satisfies Record<string, Photo>;
 
+// Vidéo du premier écran : 1280 px par défaut, 1920 px pour les écrans larges (voir HeroVideo).
 export const VIDEO_ACCUEIL = {
   src: "/media/accueil-chat-tapis.mp4",
+  srcLarge: "/media/accueil-chat-tapis-1920.mp4",
   poster: PHOTOS.chatTapisPoster,
+  posterMobile: PHOTOS.chatTapisPosterMobile,
 };
 
 // Image de partage par défaut sur les réseaux sociaux (1200 × 630).

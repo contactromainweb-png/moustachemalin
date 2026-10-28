@@ -37,6 +37,15 @@ export const SPEC_LABELS: Record<string, string> = {
   application: "Application",
   montage: "Montage",
   garantie: "Garantie",
+  // Fontaines
+  capacite: "Capacité",
+  materiau: "Matériau",
+  filtration: "Filtration",
+  debit: "Débit",
+  alimentation: "Alimentation",
+  indicateurs: "Indicateurs",
+  securite: "Sécurité",
+  pompe: "Pompe",
 };
 
 export function specLabel(cle: string) {

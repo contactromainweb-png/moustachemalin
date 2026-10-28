@@ -1,0 +1,31 @@
+{
+  "asin": "B0CXPG7K79",
+  "slug": "petkit-eversweet-max",
+  "name": "PETKIT Eversweet Max sans fil",
+  "brand": "PETKIT",
+  "category": "fontaine-a-eau-chat",
+  "specs": {
+    "capacite": "3 L",
+    "materiau": "ABS alimentaire + plateau inox 304",
+    "filtration": "Coton filtrant + charbon actif",
+    "alimentation": "Sans fil, batterie (jusqu'à 83 jours annoncés en mode batterie)",
+    "bruit": "26 dB annoncés",
+    "application": "Oui (consommation d'eau, horaires de distribution)"
+  },
+  "pour": "Les chats qui mordillent les câbles, et ceux qui veulent suivre la consommation d'eau sur leur téléphone.",
+  "pros": [
+    "Sans fil : aucun câble à mordiller, posable n'importe où",
+    "Très silencieuse (26 dB annoncés)",
+    "Suivi de la consommation dans l'application",
+    "Plateau en inox"
+  ],
+  "cons": [
+    "En mode batterie, l'eau ne coule que par intermittence",
+    "La plus chère de notre sélection"
+  ],
+  "entretien": "Recharger la batterie, nettoyer le plateau, changer le filtre.",
+  "consommables": [
+    "Filtres PETKIT Eversweet"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+}

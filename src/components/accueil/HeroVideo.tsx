@@ -6,19 +6,24 @@ import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
 // Vidéo du premier écran, ajoutée seulement sur ordinateur, une fois la page chargée : l'image fixe
 // en dessous reste le premier élément affiché. Muette, en boucle ; plus on fait défiler la page,
 // plus le chat accélère (vitesse de lecture, jamais de saut dans la vidéo).
-export function HeroVideo({ src }: { src: string }) {
-  const [active, setActive] = useState(false);
+// Version 1920 px seulement si la vidéo s'affiche sur plus de 1400 pixels réels (grand écran ou écran dense).
+export function HeroVideo({ src, srcLarge }: { src: string; srcLarge: string }) {
+  const [source, setSource] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!peutAnimer() || !estOrdinateur()) return;
-    return apresAffichage(() => setActive(true));
-  }, []);
+    return apresAffichage(() => {
+      // La vidéo occupe 10 colonnes sur 12.
+      const largeur = window.innerWidth * (10 / 12) * window.devicePixelRatio;
+      setSource(largeur > 1400 ? srcLarge : src);
+    });
+  }, [src, srcLarge]);
 
   useEffect(() => {
     const video = ref.current;
-    if (!active || !video) return;
+    if (!source || !video) return;
 
     let vitesse = 1;
     let dernierY = window.scrollY;
@@ -55,13 +60,13 @@ export function HeroVideo({ src }: { src: string }) {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", auScroll);
     };
-  }, [active]);
+  }, [source]);
 
-  if (!active) return null;
+  if (!source) return null;
   return (
     <video
       ref={ref}
-      src={src}
+      src={source}
       muted
       loop
       playsInline

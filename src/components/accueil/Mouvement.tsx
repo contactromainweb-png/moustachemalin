@@ -36,12 +36,13 @@ export function Mouvement() {
           scrollTrigger: { trigger: "[data-hero]", start: "top top", end: "bottom top", scrub: true },
         });
         // Chaque carte arrive depuis la colonne précédente : elle avance d'une colonne par objet.
-        gsap.utils.toArray<HTMLElement>("[data-carte]").forEach((carte) => {
+        // La première est déjà dans la première colonne : elle monte sur place, pour ne jamais sortir de l'écran.
+        gsap.utils.toArray<HTMLElement>("[data-carte]").forEach((carte, i) => {
           gsap.fromTo(
             carte,
-            { xPercent: -100 },
+            i === 0 ? { y: 64 } : { xPercent: -100 },
             {
-              xPercent: 0,
+              ...(i === 0 ? { y: 0 } : { xPercent: 0 }),
               ease: "none",
               scrollTrigger: { trigger: carte.parentElement, start: "top bottom", end: "top 25%", scrub: 0.6 },
             },

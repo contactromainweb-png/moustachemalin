@@ -1,7 +1,11 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import Link from "next/link";
+import { preload } from "react-dom";
 import { HeroVideo } from "@/components/accueil/HeroVideo";
 import { VIDEO_ACCUEIL } from "@/lib/medias";
+
+const ORDINATEUR = "(min-width: 1024px)";
+const TELEPHONE = "(max-width: 1023.98px)";
 
 // Les cinq aplats de la colonne de droite : chacun est la couleur du chapitre vers lequel il mène.
 const NUANCIER = [
@@ -16,6 +20,27 @@ const NUANCIER = [
 // Sur ordinateur, la phrase d'introduction se pose sur la vidéo ; sur téléphone, elle passe sous le nuancier.
 export function HeroAccueil() {
   const poster = VIDEO_ACCUEIL.poster;
+  const mobile = VIDEO_ACCUEIL.posterMobile;
+  // Deux images : un recadrage vertical léger pour le téléphone, l'image paysage pour l'ordinateur.
+  // Chacune n'est préchargée que sur l'écran qui l'affiche.
+  const commun = { alt: "", fill: true, quality: 60, fetchPriority: "high" as const };
+  const { props: ordinateur } = getImageProps({ ...commun, src: poster.src, sizes: "83vw" });
+  const { props: telephone } = getImageProps({ ...commun, src: mobile.src, sizes: "100vw" });
+  preload(telephone.src, {
+    as: "image",
+    imageSrcSet: telephone.srcSet,
+    imageSizes: telephone.sizes,
+    fetchPriority: "high",
+    media: TELEPHONE,
+  });
+  preload(ordinateur.src, {
+    as: "image",
+    imageSrcSet: ordinateur.srcSet,
+    imageSizes: ordinateur.sizes,
+    fetchPriority: "high",
+    media: ORDINATEUR,
+  });
+
   return (
     <section
       data-hero
@@ -24,17 +49,15 @@ export function HeroAccueil() {
     >
       <div className="relative h-[64svh] min-h-[26rem] overflow-hidden bg-field lg:col-span-10 lg:col-start-1 lg:row-start-1 lg:h-auto lg:min-h-0">
         <div data-hero-media className="absolute inset-0">
-          <Image
-            src={poster.src}
-            alt={poster.alt}
-            fill
-            preload
-            fetchPriority="high"
-            quality={60}
-            sizes="(min-width: 1024px) 83vw, 100vw"
-            className="object-cover object-[70%_50%]"
-          />
-          <HeroVideo src={VIDEO_ACCUEIL.src} />
+          <picture>
+            <source media={ORDINATEUR} srcSet={ordinateur.srcSet} sizes={ordinateur.sizes} />
+            <img
+              {...telephone}
+              alt={poster.alt}
+              className="absolute inset-0 h-full w-full object-cover lg:object-[70%_50%]"
+            />
+          </picture>
+          <HeroVideo src={VIDEO_ACCUEIL.src} srcLarge={VIDEO_ACCUEIL.srcLarge} />
         </div>
 
         <div className="absolute left-0 top-0 bg-paper px-4 pb-4 pt-3 sm:px-6 lg:px-8 lg:pb-7 lg:pt-5">

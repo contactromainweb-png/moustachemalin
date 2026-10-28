@@ -1,0 +1,34 @@
+{
+  "asin": "B095PZ8ZXZ",
+  "slug": "catit-pixi-2-5l",
+  "name": "Catit Pixi 2,5 L",
+  "brand": "Catit",
+  "category": "fontaine-a-eau-chat",
+  "badge": "Le meilleur globalement",
+  "specs": {
+    "capacite": "2,5 L",
+    "materiau": "Plastique",
+    "filtration": "Triple : fibre de coton, charbon actif, résine échangeuse d'ions",
+    "debit": "3 réglages",
+    "alimentation": "Secteur (USB avec adaptateur)",
+    "indicateurs": "Voyant de niveau d'eau bas, veilleuse",
+    "securite": "Arrêt automatique de la pompe"
+  },
+  "pour": "Un ou deux chats, pour qui veut une valeur sûre aux filtres faciles à trouver.",
+  "pros": [
+    "Marque spécialiste du chat, très répandue",
+    "Filtre triple dont une résine qui adoucit l'eau du robinet",
+    "Voyant qui prévient quand il faut remettre de l'eau",
+    "Arrêt automatique de la pompe à sec"
+  ],
+  "cons": [
+    "Plastique : demande un nettoyage régulier",
+    "Fonctionne branchée sur secteur",
+    "Niveau sonore non chiffré par le fabricant"
+  ],
+  "entretien": "Changer le filtre régulièrement (vendu par packs de 3 ou 6), nettoyer le réservoir et la pompe.",
+  "consommables": [
+    "Filtres Catit Pixi (packs de 3 ou 6)"
+  ],
+  "source": "Fiche produit La Compagnie des Animaux (informations fabricant), consultée le 26/10/2026"
+}
