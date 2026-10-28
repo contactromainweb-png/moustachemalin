@@ -47,6 +47,8 @@ const withMDX = createMDX({
     // Tableaux Markdown, et lecture du bloc --- en tête des articles (exporté sous le nom `frontmatter`).
     remarkPlugins: [
       "remark-gfm",
+      // Passages « À VALIDER PAR ROMAIN » retirés avant publication (plugin du projet).
+      path.join(process.cwd(), "plugins/remark-a-valider.mjs"),
       "remark-frontmatter",
       ["remark-mdx-frontmatter", { name: "frontmatter" }],
       // Espaces insécables avant « : ; ? ! » (plugin du projet, dossier plugins/).

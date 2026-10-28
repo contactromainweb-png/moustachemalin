@@ -11,16 +11,22 @@ type Props = {
   photo?: StagePhoto;
   // Mot affiché en grand sur le panneau tant qu'aucune photo n'est choisie.
   stageWord: string;
+  // Portrait (page À propos) : sur téléphone, la photo vient juste après l'introduction, au format vertical.
+  portrait?: boolean;
   children: ReactNode;
 };
 
 // Mise en page « scène partagée » des pages institutionnelles :
 // ordinateur : à droite une photo qui reste en place, à gauche une colonne de lecture.
-// Téléphone : la photo vient après le texte, pour que le titre reste le premier élément affiché (LCP).
-export function StagePage({ title, lead, updated, photo, stageWord, children }: Props) {
+// Téléphone : la photo vient après le texte, pour que le titre reste le premier élément affiché (LCP) ;
+// un portrait vient juste après l'introduction (le titre reste au-dessus).
+export function StagePage({ title, lead, updated, photo, stageWord, portrait = false, children }: Props) {
+  const zones = portrait ? "[grid-template-areas:'intro'_'photo'_'corps']" : "[grid-template-areas:'intro'_'corps'_'photo']";
   const colonne = "px-4 sm:px-8 lg:pl-[max(2rem,calc((100vw-90rem)/2+2rem))] lg:pr-16";
   return (
-    <div className="grid [grid-template-areas:'intro'_'corps'_'photo'] lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] lg:grid-rows-[auto_1fr] lg:[grid-template-areas:'intro_photo'_'corps_photo']">
+    <div
+      className={`grid ${zones} lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] lg:grid-rows-[auto_1fr] lg:[grid-template-areas:'intro_photo'_'corps_photo']`}
+    >
       <div className={`${colonne} pt-10 [grid-area:intro] lg:pt-20`}>
         <h1 className="font-display rise max-w-[14ch] text-display">{title}</h1>
         <p className="rise mt-8 max-w-[38ch] text-lead" style={{ "--i": 1 } as React.CSSProperties}>
@@ -37,9 +43,9 @@ export function StagePage({ title, lead, updated, photo, stageWord, children }: 
 
       <aside
         aria-hidden={photo ? undefined : true}
-        className={`${photo ? "mb-8 px-4 sm:px-8" : "hidden"} [grid-area:photo] lg:sticky lg:top-0 lg:mb-0 lg:block lg:h-svh lg:self-start lg:p-3`}
+        className={`${photo ? (portrait ? "mt-10 px-4 sm:px-8" : "mb-8 px-4 sm:px-8") : "hidden"} [grid-area:photo] lg:sticky lg:top-0 lg:mb-0 lg:block lg:h-svh lg:self-start lg:p-3`}
       >
-        <figure className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-lavande lg:aspect-auto lg:h-full lg:rounded-[2rem]">
+        <figure className={`relative ${portrait ? "aspect-[4/5] max-w-md" : "aspect-[4/3]"} overflow-hidden rounded-[1.5rem] bg-lavande lg:aspect-auto lg:h-full lg:max-w-none lg:rounded-[2rem]`}>
           {photo ? (
             <>
               {/* Ordinateur : plus grand élément de l'écran, demandé en priorité. Téléphone : chargé à l'approche. */}
@@ -47,11 +53,12 @@ export function StagePage({ title, lead, updated, photo, stageWord, children }: 
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                loading="lazy"
+                loading={portrait ? "eager" : "lazy"}
                 fetchPriority="high"
                 quality={80}
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover"
+                style={photo.position ? { objectPosition: photo.position } : undefined}
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-paper px-5 py-3 text-small text-ink-soft lg:py-4">
                 {photo.credit}

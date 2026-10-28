@@ -8,6 +8,7 @@ export type Photo = {
   height: number;
   alt: string;
   credit: string; // affiché sous la photo
+  position?: string; // point gardé au centre quand la photo est recadrée (CSS object-position), sinon le centre
 };
 
 export const PHOTOS = {
@@ -67,6 +68,15 @@ export const PHOTOS = {
     height: 2880,
     alt: "Deux chatons tigrés installés chacun sur une plateforme d'arbre à chat, contre un mur blanc.",
     credit: "Photo : mraqieb, Pexels",
+  },
+  // Portrait de Romain (photo personnelle, 1518 × 1892 : utilisée telle quelle, jamais agrandie).
+  romain: {
+    src: "/media/romain.jpg",
+    width: 1518,
+    height: 1892,
+    alt: "Romain, auteur de Moustache Malin",
+    credit: "Photo : Romain",
+    position: "50% 30%",
   },
 } satisfies Record<string, Photo>;
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { StagePage, type StagePhoto } from "@/components/StagePage";
 import { TitreSerif } from "@/components/TitreSerif";
+import { LIBELLES_TYPE, type TypeArticle } from "@/lib/articles";
 import { PHOTOS } from "@/lib/medias";
 import { espacesFines } from "@/lib/typo";
 
@@ -9,9 +10,10 @@ export type ArticleLien = {
   href: string;
   titre: string;
   description: string;
-  type: "comparatif" | "guide";
+  type: TypeArticle;
   photo?: keyof typeof PHOTOS;
   motSerif?: string;
+  updatedAt?: string;
 };
 
 type Props = {
@@ -52,14 +54,14 @@ export function RubriqueTemplate({ titre, intro, articles, photo }: Props) {
                 ) : null}
                 <div className="flex flex-1 flex-col px-5 pb-6 pt-5">
                   <p className="text-small font-medium text-ink-soft">
-                    {a.type === "comparatif" ? "Comparatif" : "Guide"}
+                    {LIBELLES_TYPE[a.type].nom}
                   </p>
                   <span className="mt-2 block font-display text-[1.6rem] leading-tight">
                     <TitreSerif titre={a.titre} mot={a.motSerif} />
                   </span>
                   <span className="mt-3 block">{espacesFines(a.description)}</span>
                   <span className="mt-auto block pt-5 font-medium underline decoration-2 underline-offset-[6px]">
-                    {a.type === "comparatif" ? "Lire le comparatif" : "Lire le guide"}
+                    {LIBELLES_TYPE[a.type].lire}
                   </span>
                 </div>
               </Link>

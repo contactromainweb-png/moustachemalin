@@ -223,6 +223,8 @@ body {
   --f-serif: #ff7a1a;
   --f-jauge: #ff7a1a;
   --f-souligne: #ff7a1a;
+  /* Pas de surlignage sur bleu nuit, même posé dans une section claire (cartes photo de l'accueil). */
+  --f-surligne: transparent;
 }
 [data-fond="blanc"] {
   --f-fond: #faf7f2;

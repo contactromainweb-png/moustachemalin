@@ -20,7 +20,7 @@ export function ProductCard({ asin }: { asin: string }) {
           </p>
           <div>
             <AmazonLivePrice asin={p.asin} />
-            <AffiliateButton asin={p.asin} exemple={p.exemple} />
+            <AffiliateButton asin={p.asin} emplacement="fiche" exemple={p.exemple} />
             <AmazonDisclosure className="mt-3 max-w-[50ch]" />
           </div>
         </div>

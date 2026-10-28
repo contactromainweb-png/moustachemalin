@@ -310,5 +310,13 @@
     "url": "https://www.pexels.com/photo/30001432/",
     "licence": "Licence Pexels",
     "resolutionSource": "4480x6720"
+  },
+  {
+    "fichier": "public/media/romain.jpg",
+    "auteur": "Romain (photo personnelle)",
+    "source": "Romain",
+    "url": "",
+    "licence": "Photo personnelle de Romain, tous droits réservés",
+    "resolutionSource": "1518x1892"
   }
 ]

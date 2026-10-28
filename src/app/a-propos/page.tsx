@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
 import { StagePage } from "@/components/StagePage";
+import { formatDate } from "@/components/UpdatedDate";
 import { PHOTOS } from "@/lib/medias";
-import Contenu from "../../../content/pages/a-propos.mdx";
+import Contenu, { frontmatter } from "../../../content/pages/a-propos.mdx";
 
 export const metadata: Metadata = {
-  title: "À propos",
-  description: "Qui écrit Moustache Malin, pourquoi le site existe et comment il gagne sa vie, en toute transparence.",
+  title: { absolute: frontmatter.metaTitle ?? frontmatter.title },
+  description: frontmatter.description,
   alternates: { canonical: "/a-propos/" },
 };
 
+// Texte : content/pages/a-propos.mdx. Les passages « À VALIDER PAR ROMAIN » sont retirés à la construction
+// (plugins/remark-a-valider.mjs). Portrait de Romain à droite sur ordinateur, après le texte sur téléphone.
 export default function Page() {
   return (
     <StagePage
       title="Derrière les moustaches"
       lead="Un site qui lit les fiches techniques à votre place, pour que le bon équipement arrive du premier coup."
       stageWord="Bonjour"
-      photo={PHOTOS.chatSoleil}
+      updated={formatDate(frontmatter.updatedAt)}
+      photo={PHOTOS.romain}
+      portrait
     >
       <Contenu />
     </StagePage>

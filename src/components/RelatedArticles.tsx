@@ -6,13 +6,21 @@ export type Related = { href: string; label: string };
 
 // Maillage interne en bas d'article. Les pages pas encore écrites sont masquées ;
 // si aucune n'existe, toute la section (titre compris) disparaît.
-export function RelatedArticles({ links, titre = "À lire aussi" }: { links: Related[]; titre?: string }) {
+export function RelatedArticles({
+  links,
+  titre = "À lire aussi",
+  id = "a-lire-aussi",
+}: {
+  links: Related[];
+  titre?: string;
+  id?: string;
+}) {
   const enLigne = links.filter((l) => pageEnLigne(l.href));
   if (enLigne.length === 0) return null;
 
   return (
-    <section aria-labelledby="a-lire-aussi" className="reveal my-14">
-      <h2 id="a-lire-aussi" className="font-display mb-8 text-head">
+    <section aria-labelledby={id} className="reveal my-14">
+      <h2 id={id} className="font-display mb-8 text-head">
         {titre}
       </h2>
       <ul className="space-y-3">

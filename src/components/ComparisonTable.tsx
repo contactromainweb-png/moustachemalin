@@ -36,6 +36,7 @@ export function ComparisonTable({ asins, columns }: { asins: string[]; columns: 
                   </a>
                   <div className="mt-3">
                     <AffiliateButton
+                      emplacement="tableau"
                       asin={p.asin}
                       exemple={p.exemple}
                       className="min-h-11 whitespace-nowrap px-4"
@@ -65,7 +66,7 @@ export function ComparisonTable({ asins, columns }: { asins: string[]; columns: 
                 </div>
               ))}
             </dl>
-            <AffiliateButton asin={p.asin} exemple={p.exemple} className="mt-5 w-full" />
+            <AffiliateButton asin={p.asin} emplacement="tableau" exemple={p.exemple} className="mt-5 w-full" />
           </li>
         ))}
       </ul>

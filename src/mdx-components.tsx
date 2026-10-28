@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AffiliateButton } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { CalloutLink } from "@/components/CalloutLink";
+import { EnBref } from "@/components/EnBref";
 import { PhotoMdx } from "@/components/Figure";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { FAQ } from "@/components/FAQ";
@@ -14,6 +15,7 @@ import { ProsCons } from "@/components/ProsCons";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { TopPicks } from "@/components/TopPicks";
 import { VetNotice } from "@/components/VetNotice";
+import { WaterCalculator } from "@/components/WaterCalculator";
 import { pageEnLigne } from "@/lib/site";
 
 // Mise en forme des textes écrits en MDX (dossier content/).
@@ -57,6 +59,7 @@ const components: MDXComponents = {
   // Placée seule dans un article : un peu d'air avant le texte qui suit.
   AmazonDisclosure: (props: { className?: string }) => <AmazonDisclosure className="mb-10" {...props} />,
   CalloutLink,
+  EnBref,
   Photo: PhotoMdx,
   ComparisonTable,
   FAQ,
@@ -68,6 +71,7 @@ const components: MDXComponents = {
   RelatedArticles,
   TopPicks,
   VetNotice,
+  WaterCalculator,
 };
 
 export function useMDXComponents(): MDXComponents {
