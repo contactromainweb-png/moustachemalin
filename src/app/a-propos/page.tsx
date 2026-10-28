@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 // Texte : content/pages/a-propos.mdx. Les passages « À VALIDER PAR ROMAIN » sont retirés à la construction
-// (plugins/remark-a-valider.mjs) ; la photo de Romain prendra la place de la photo du chat quand il l'aura fournie.
+// (plugins/remark-a-valider.mjs). Portrait de Romain à droite sur ordinateur, après le texte sur téléphone.
 export default function Page() {
   return (
     <StagePage
@@ -19,7 +19,8 @@ export default function Page() {
       lead="Un site qui lit les fiches techniques à votre place, pour que le bon équipement arrive du premier coup."
       stageWord="Bonjour"
       updated={formatDate(frontmatter.updatedAt)}
-      photo={PHOTOS.chatSoleil}
+      photo={PHOTOS.romain}
+      portrait
     >
       <Contenu />
     </StagePage>

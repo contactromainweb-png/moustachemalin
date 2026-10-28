@@ -69,7 +69,6 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
             "@id": `${SITE.url}${AUTEUR.page}#auteur`,
             name: AUTEUR.nom,
             url: `${SITE.url}${AUTEUR.page}`,
-            ...(AUTEUR.sameAs.length ? { sameAs: AUTEUR.sameAs } : {}),
             worksFor: { "@id": `${SITE.url}/#organisation` },
           },
           publisher: { "@type": "Organization", "@id": `${SITE.url}/#organisation`, name: SITE.name, url: SITE.url },

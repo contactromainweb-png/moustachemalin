@@ -73,7 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 "@id": `${SITE.url}${AUTEUR.page}#auteur`,
                 name: AUTEUR.nom,
                 url: `${SITE.url}${AUTEUR.page}`,
-                ...(AUTEUR.sameAs.length ? { sameAs: AUTEUR.sameAs } : {}),
+                image: `${SITE.url}${AUTEUR.photo}`,
                 worksFor: { "@id": `${SITE.url}/#organisation` },
               },
               {

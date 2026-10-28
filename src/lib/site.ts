@@ -9,12 +9,12 @@ export const SITE = {
   email: "contact@moustachemalin.fr", // À COMPLÉTER : adresse à créer
 };
 
-// Auteur des articles (signature « Par Romain » et données structurées Person).
-// sameAs : adresses de ses profils publics (LinkedIn, etc.), à ajouter quand Romain les donnera.
+// Auteur des articles (signature « Par Romain » et données structurées Person, avec sa photo).
+// Volontairement aucun lien vers d'autres sites (pas de sameAs) : demande de Romain.
 export const AUTEUR = {
   nom: "Romain",
   page: "/a-propos/",
-  sameAs: [] as string[],
+  photo: "/media/romain.jpg",
 };
 
 export const LEGAL = {

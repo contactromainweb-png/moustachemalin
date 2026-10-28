@@ -1,16 +1,12 @@
 # Bloc d'accueil « Qui écrit ici »
 
-> Texte court pour l'accueil. Les passages **[À VALIDER PAR ROMAIN]** doivent être confirmés ou corrigés avant publication.
-
 ## Qui écrit ici
 
-**Bonjour, moi c'est Romain.**
+**Bonjour, moi c'est Romain. Et voici Kira.**
 
-Je crée des sites internet dans le Jura **[À VALIDER PAR ROMAIN : garder ou retirer cette précision]**. J'ai lancé Moustache Malin avec une idée simple : vous éviter de passer des heures à comparer des fiches produits pour finalement acheter le mauvais appareil.
+Kira, c'est ma chatte : un peu plus d'un an, fofolle, joueuse comme un petit chien, et fan de l'eau qui coule du robinet. Avant elle, j'ai eu beaucoup d'autres chats. Le canapé griffé, la litière qui sent, le chat qui ne boit pas assez : je connais.
 
-Je ne teste pas les produits en laboratoire, et je le dis clairement. Je fais le travail de fond à votre place : je lis les fiches techniques ligne par ligne, je compare les modèles critère par critère, et je vous dis pour quel chat chaque appareil est fait.
-
-**[À VALIDER PAR ROMAIN : si tu as ou as eu un chat, ajoute une phrase avec son prénom et un détail vrai (ex. « Mon chat X m'a appris que… »). Sinon, supprime ce paragraphe : on n'invente rien.]**
+J'en ai tiré une conviction : le bon équipement change vraiment la vie d'un chat, et la vôtre. Ici, je fais le tri à votre place. Je ne teste pas en laboratoire, je le dis clairement : je décortique les fiches techniques et je vous dis pour quel chat chaque appareil est fait.
 
 → En savoir plus sur moi et sur notre méthode
 

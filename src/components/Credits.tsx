@@ -18,10 +18,16 @@ export function Credits() {
     <ul className="mb-6 max-w-[65ch] space-y-2">
       {liste.map((c) => (
         <li key={c.fichier}>
-          {c.fichier} : {c.auteur},{" "}
-          <a href={c.url} className="text-caramel underline underline-offset-4" rel="noopener" target="_blank">
-            {c.source}
-          </a>{" "}
+          {c.fichier} : {c.auteur}
+          {/* Photo personnelle (sans adresse source) : pas de lien. */}
+          {c.url ? (
+            <>
+              ,{" "}
+              <a href={c.url} className="text-caramel underline underline-offset-4" rel="noopener" target="_blank">
+                {c.source}
+              </a>
+            </>
+          ) : null}{" "}
           ({c.licence})
         </li>
       ))}
