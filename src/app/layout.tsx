@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Bricolage_Grotesque, DM_Sans, Instrument_Serif } from "next/font/google";
+import { DM_Sans, Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -10,12 +11,16 @@ import { AUTEUR, SITE } from "@/lib/site";
 import "./globals.css";
 
 // Polices Google, hébergées par le site lui-même (aucune requête vers Google).
-// Titres : Bricolage Grotesque (axe de largeur, pour l'étroit très gras). Texte : DM Sans.
+// Titres : Bricolage Grotesque, réduite à la seule variante utilisée (graisse 800, largeur 88 %) : 20 Ko au lieu
+// de 76, dessin identique (voir scripts/police-titres.mjs). Texte : DM Sans.
 // Mots mis en valeur dans les titres : Instrument Serif italique (classe .mot-serif).
-const display = Bricolage_Grotesque({
+const display = localFont({
+  src: "./polices/bricolage-grotesque-800-88.woff2",
   variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["wdth"],
+  weight: "800",
+  style: "normal",
+  display: "swap",
+  declarations: [{ prop: "font-stretch", value: "88%" }],
 });
 
 const serif = Instrument_Serif({
