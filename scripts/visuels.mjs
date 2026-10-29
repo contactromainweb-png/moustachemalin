@@ -45,6 +45,12 @@ const PINS = [
     haut: "Mon chat ne", serif: "boit pas", bas: "pourquoi, et comment l'aider" },
   { slug: "combien-eau-chat", photo: "guide-chat-bol.jpg", credit: "Vlad Deep, Pexels", cadrage: "50% 50%",
     haut: "Combien d'eau", serif: "doit-il boire ?", bas: "le calculateur gratuit" },
+  { slug: "distributeur-croquettes-chat", photo: "repas-chat-gamelle.jpg", credit: "roselino rocha, Pexels", cadrage: "30% 50%",
+    haut: "Distributeur de", serif: "croquettes", bas: "pour chat : notre comparatif" },
+  { slug: "litiere-autonettoyante-danger", photo: "litieres-chat-meuble.jpg", credit: "Helena Jankovičová Kováčová, Pexels",
+    cadrage: "55% 50%", haut: "Litière autonettoyante :", serif: "dangereux ?", bas: "les vrais risques, les sécurités" },
+  { slug: "petkit-pura-max-2-avis", photo: "litieres-chat-fenetre.jpg", credit: "大 董, Pexels", cadrage: "72% 50%",
+    haut: "PETKIT Pura Max 2 :", serif: "notre avis", bas: "face à la Neakasa M1 Lite" },
 ];
 
 fs.mkdirSync(path.join(RACINE, "public/media/pin"), { recursive: true });

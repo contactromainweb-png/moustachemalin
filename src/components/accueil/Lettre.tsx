@@ -4,6 +4,8 @@ import Link from "next/link";
 // (adresse d'envoi du formulaire de l'outil gratuit choisi par Romain), et à n'activer qu'après un essai complet
 // d'inscription. La case de consentement est obligatoire. La page Confidentialité affiche sa section dès que la
 // variable existe. Le nom du champ e-mail (EMAIL) suit Brevo ; à ajuster si un autre outil est choisi.
+// Dans l'outil d'envoi : page de remerciement = https://moustachemalin.fr/lettre/merci/ (mot de Kira), et messages
+// signés « Romain et Kira ».
 const ACTION = process.env.NEXT_PUBLIC_NEWSLETTER_URL;
 
 export function Lettre() {

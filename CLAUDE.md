@@ -197,3 +197,17 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 
 ### Textes à valider
 - Les passages marqués **[À VALIDER PAR ROMAIN]** ne sont jamais publiés tels quels : ils restent hors du site tant que Romain ne les a pas complétés.
+
+### La voix de Kira
+- **Qui est Kira.** La chatte de Romain : un peu plus d'un an, fofolle, très joueuse, « un vrai petit chien » qui rapporte ses jouets aux pieds de Romain. Elle adore boire l'eau qui coule du robinet. Elle passe un temps fou dans sa litière à tout recouvrir soigneusement. Romain lui rapporte un jouet à chaque course.
+- **Son rôle.** Mascotte et personnalité du site. **Romain conseille, Kira donne le sourire.**
+- **Règles d'or**
+  1. **Kira ne dit que des choses vraies sur elle.** On n'invente aucune habitude, aucun goût, aucune anecdote. Une nouvelle info sur Kira doit venir de Romain.
+  2. **Kira ne donne jamais d'avis sur un produit qu'elle n'a pas utilisé.** Jamais « j'adore cette litière » ni « j'ai testé ». Si un jour Romain achète un produit et que Kira l'utilise vraiment, ce sera un vrai test, présenté comme tel.
+  3. **Kira ne donne aucun conseil de santé.**
+  4. **Court** : 1 à 3 phrases maximum par encadré, un seul encadré par article.
+  5. **Ton** : première personne, espiègle, un peu diva, tendre avec « son humain ». Pas de langage bébé, pas d'emojis.
+  6. Signature visuelle : petite photo ronde de Kira (fournie par Romain) + « Le mot de Kira ».
+- **Où Kira parle :** un encadré par article (composant `KiraNote`, placé après l'introduction), la page 404, les messages de confirmation (newsletter : `/lettre/merci/`, formulaire), la newsletter (signée « Romain et Kira »), les réseaux sociaux.
+- **Où Kira ne parle pas :** les comparatifs eux-mêmes (tableaux, fiches, avis), les encadrés de méthode, de santé ou d'affiliation, les mentions légales.
+- **Photo** : tant que Romain ne l'a pas fournie, un rond neutre la remplace. Pour l'ajouter : déposer la photo dans `public/media/` et renseigner `KIRA.photo` dans `src/lib/site.ts`.

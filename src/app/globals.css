@@ -17,6 +17,8 @@
   --accent: #ff7a1a;
   --on-accent: #14213d;
   --surligne: #b9a6ff;
+  /* Encadré « Le mot de Kira » : lavande claire en clair, bleu nuit en sombre. */
+  --kira-fond: #ece6ff;
 }
 
 /* Couleurs fixes, identiques en mode clair et sombre : en-tête, grandes sections bleu nuit,
@@ -40,6 +42,7 @@
     --accent: #ff7a1a;
     --on-accent: #14213d;
     --surligne: rgb(185 166 255 / 0.32);
+    --kira-fond: #1d2d4f;
   }
 }
 
@@ -56,6 +59,7 @@
   --color-nuit: var(--nuit);
   --color-blanc: var(--blanc);
   --color-lavande: var(--lavande);
+  --color-kira: var(--kira-fond);
   --font-display: var(--font-bricolage);
   --font-sans: var(--font-dm-sans);
   --font-serif: var(--font-instrument);

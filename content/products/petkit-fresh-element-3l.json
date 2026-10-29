@@ -1,0 +1,33 @@
+{
+  "asin": "B0CD7N5X3K",
+  "slug": "petkit-fresh-element-3l",
+  "name": "PETKIT distributeur connecté 3 L",
+  "brand": "PETKIT",
+  "category": "distributeur-croquettes-chat",
+  "badge": "Le meilleur globalement",
+  "specs": {
+    "capacite": "3 L (environ 1,33 kg de croquettes)",
+    "repas": "Jusqu'à 10 repas par jour",
+    "programmation": "Application (Wi-Fi 2,4 GHz)",
+    "alimentation": "USB + piles de secours (non incluses)",
+    "bol": "Inox 304",
+    "fraicheur": "Ouverture à fermeture automatique + sachet déshydratant"
+  },
+  "pour": "Ceux qui veulent régler et surveiller les repas depuis leur téléphone, même à distance.",
+  "pros": [
+    "Horaires et historique des repas dans l'application",
+    "Trappe qui se referme après chaque repas : croquettes au sec",
+    "Piles de secours en cas de coupure de courant",
+    "Bol en inox, plus hygiénique"
+  ],
+  "cons": [
+    "Wi-Fi 2,4 GHz uniquement",
+    "Adaptateur USB et piles non fournis"
+  ],
+  "entretien": "Laver le bol inox et le réservoir régulièrement, changer le sachet déshydratant.",
+  "consommables": [
+    "Sachets déshydratants PETKIT",
+    "Piles de secours"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 29/10/2026"
+}

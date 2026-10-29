@@ -46,6 +46,15 @@ export const SPEC_LABELS: Record<string, string> = {
   indicateurs: "Indicateurs",
   securite: "Sécurité",
   pompe: "Pompe",
+  // Distributeurs de croquettes
+  repas: "Repas",
+  programmation: "Programmation",
+  fonctionnement: "Fonctionnement",
+  bol: "Bol",
+  bols: "Bols",
+  camera: "Caméra",
+  voix: "Message vocal",
+  fraicheur: "Fraîcheur",
 };
 
 export function specLabel(cle: string) {

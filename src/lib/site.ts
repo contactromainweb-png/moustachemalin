@@ -17,6 +17,12 @@ export const AUTEUR = {
   photo: "/media/romain.jpg",
 };
 
+// Kira, la chatte de Romain et mascotte du site (encadrés « Le mot de Kira », page 404, confirmations).
+// photo : chemin dans public/ quand Romain l'aura fournie (ex. "/media/kira.jpg"), sinon un rond neutre s'affiche.
+export const KIRA: { photo: string | null } = {
+  photo: null,
+};
+
 export const LEGAL = {
   editeur: "Prénom Nom (À COMPLÉTER)",
   statut: "Entrepreneur individuel (À COMPLÉTER)",

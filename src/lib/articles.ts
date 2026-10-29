@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { IMAGE_PARTAGE, PHOTOS } from "@/lib/medias";
 import { RUBRIQUES } from "@/lib/site";
 
-export type TypeArticle = "comparatif" | "guide" | "outil";
+export type TypeArticle = "comparatif" | "guide" | "avis" | "outil";
 
 // Libellés affichés sur les cartes et les liens, selon le type d'article.
 export const LIBELLES_TYPE: Record<TypeArticle, { nom: string; lire: string }> = {
   comparatif: { nom: "Comparatif", lire: "Lire le comparatif" },
   guide: { nom: "Guide", lire: "Lire le guide" },
+  avis: { nom: "Avis", lire: "Lire l'avis" },
   outil: { nom: "Outil", lire: "Utiliser l'outil" },
 };
 
