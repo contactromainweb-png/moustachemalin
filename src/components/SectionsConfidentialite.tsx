@@ -18,7 +18,7 @@ const p = "reveal mb-5 max-w-[65ch]";
 
 export function MesureAudience() {
   const outil = UMAMI_ID
-    ? { nom: "Umami Cloud", hebergement: "Umami Software (serveurs dans l'Union européenne)" }
+    ? { nom: "Umami Cloud", hebergement: "Umami Software" }
     : GOATCOUNTER
       ? { nom: "GoatCounter", hebergement: "GoatCounter (Martin Tournoij, serveurs dans l'Union européenne)" }
       : null;
@@ -29,10 +29,12 @@ export function MesureAudience() {
         <>
           <p className={p}>
             Nous utilisons {outil.nom}, un outil de statistiques <strong className="font-semibold">sans cookie</strong> qui
-            ne vous suit pas d&apos;un site à l&apos;autre et ne permet pas de vous identifier. Il compte les pages vues et,
-            quand vous cliquez sur un bouton ou un lien vers Amazon, la page, le produit et son emplacement. Ces chiffres
-            nous disent quels comparatifs sont utiles. Hébergement&nbsp;: {outil.hebergement}.
+            ne vous suit pas d&apos;un site à l&apos;autre et ne collecte <strong className="font-semibold">aucune donnée
+            personnelle</strong>&nbsp;: il ne permet pas de vous identifier. Il compte les pages vues et, quand vous cliquez
+            sur un bouton ou un lien vers Amazon, la page, le produit et son emplacement. Ces chiffres nous disent quels
+            comparatifs sont utiles. Hébergement&nbsp;: {outil.hebergement}.
           </p>
+          {UMAMI_ID ? <p className={p}>Ces statistiques sont conservées 6&nbsp;mois.</p> : null}
           <p className={p}>Aucune donnée n&apos;est vendue ni partagée à des fins publicitaires.</p>
         </>
       ) : (
@@ -50,8 +52,9 @@ export function LettreInformation() {
   return (
     <Section titre="La lettre d'information">
       <p className={p}>
-        Si vous demandez la checklist, votre adresse e-mail est enregistrée chez notre outil d&apos;envoi, uniquement pour
-        vous envoyer la checklist puis, au plus une fois par mois, les nouveaux comparatifs. Base légale&nbsp;: votre
+        Si vous demandez la checklist, seule votre adresse e-mail est collectée, avec votre accord. Elle est enregistrée
+        chez Brevo (Sendinblue SAS, entreprise française), notre outil d&apos;envoi, uniquement pour vous envoyer la
+        checklist puis, au plus une fois par mois, les nouveaux comparatifs. La base légale de ce traitement est votre
         consentement, donné en cochant la case du formulaire.
       </p>
       <p className={p}>

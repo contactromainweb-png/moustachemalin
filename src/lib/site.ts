@@ -6,7 +6,7 @@ export const SITE = {
   name: "Moustache Malin",
   url: "https://moustachemalin.fr",
   tagline: "Le bon équipement pour un chat heureux, sans se tromper.",
-  email: "contact@moustachemalin.fr", // À COMPLÉTER : adresse à créer
+  email: "contact@moustachemalin.fr", // confirmée par Romain le 30/10/2026 (boîte à créer au branchement du domaine)
 };
 
 // Auteur des articles (signature « Par Romain » et données structurées Person, avec sa photo).
@@ -23,18 +23,23 @@ export const KIRA: { photo: string | null } = {
   photo: null,
 };
 
+// Mentions légales. Pas de numéro de téléphone (aucun fourni par Romain : ligne retirée).
+// Hébergeur : adresse et contact vérifiés le 30 octobre 2026 sur netlify.com (politique de confidentialité et
+// conditions d'utilisation) ; Netlify ne publie pas de numéro de téléphone.
 export const LEGAL = {
-  editeur: "Prénom Nom (À COMPLÉTER)",
-  statut: "Entrepreneur individuel (À COMPLÉTER)",
+  editeur: "Romain Cahagne",
+  statut: "entrepreneur individuel (micro-entreprise)",
   adresse: "Adresse postale (À COMPLÉTER)",
   siret: "SIRET (À COMPLÉTER)",
-  directeurPublication: "Prénom Nom (À COMPLÉTER)",
+  directeurPublication: "Romain Cahagne",
   hebergeur: {
     nom: "Netlify, Inc.",
     adresse: "101 2nd Street, San Francisco, CA 94105, États-Unis",
+    email: "support@netlify.com",
     site: "https://www.netlify.com",
   },
-  miseAJour: "26 octobre 2026",
+  miseAJour: "26 octobre 2026", // pages Méthode et Affiliation
+  miseAJourMentions: "30 octobre 2026", // pages Mentions légales et Confidentialité
 };
 
 export const AMAZON_DISCLOSURE =

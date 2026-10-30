@@ -14,7 +14,7 @@ export default function Page() {
     <DocPage
       title="Mentions légales"
       lead="Qui édite le site, qui l'héberge, et d'où viennent ses images."
-      updated={LEGAL.miseAJour}>
+      updated={LEGAL.miseAJourMentions}>
       <Contenu />
     </DocPage>
   );
