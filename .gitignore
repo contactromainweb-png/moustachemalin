@@ -52,3 +52,7 @@ next-env.d.ts
 # captures d'écran de contrôle (Playwright)
 /captures/
 .playwright-mcp/
+
+# Photos personnelles de Kira (originaux, dont 3 pas encore utilisées) : gardées sur l'ordinateur, pas sur GitHub (dépôt public).
+# Celles du site sont copiées dans public/media/kira/.
+/photos-kira/

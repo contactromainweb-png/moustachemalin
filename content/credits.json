@@ -374,5 +374,37 @@
     "url": "https://www.pexels.com/photo/cat-near-tap-water-in-sink-16440309/",
     "licence": "Licence Pexels",
     "resolutionSource": "3885x2585"
+  },
+  {
+    "fichier": "public/media/kira/kira-portrait.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "800x800"
+  },
+  {
+    "fichier": "public/media/kira/kira-joue-plumeau.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1536x2048"
+  },
+  {
+    "fichier": "public/media/kira/kira-sphinx-table.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1536x2048"
+  },
+  {
+    "fichier": "public/media/kira/kira-et-le-bouledogue.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1536x2048"
   }
 ]

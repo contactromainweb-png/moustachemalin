@@ -17,7 +17,7 @@ export default function NotFound() {
 
   return (
     <div className="mx-auto max-w-[90rem] px-4 pb-24 pt-16 sm:px-8 sm:pt-28">
-      <Portrait taille="size-20 sm:size-24" />
+      <Portrait taille="size-20 sm:size-24" prioritaire />
       <h1 className="font-display mt-8 max-w-[16ch] text-display">
         Kira est passée <span className="mot-serif">par là</span>
       </h1>
