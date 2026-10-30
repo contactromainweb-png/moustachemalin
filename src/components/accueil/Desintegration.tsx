@@ -55,9 +55,6 @@ export function Desintegration() {
               className="object-cover object-[50%_40%]"
             />
           </div>
-          <figcaption className="mt-2 text-small text-[var(--f-doux)]">
-            Photos : realfish et Carolien van Oijen, Unsplash
-          </figcaption>
         </figure>
 
         {/* Les particules sont dessinées sur toute la scène : le tourbillon déborde du cadre. */}

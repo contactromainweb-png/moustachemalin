@@ -66,9 +66,6 @@ export function SelonMonChat() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-small text-ink-soft">
-          Photos : {profils.map((p) => p.photo.credit.replace(/^Photo : /, "")).join(" · ")}
-        </p>
       </div>
     </section>
   );

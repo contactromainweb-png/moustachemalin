@@ -1,6 +1,6 @@
 // Fabrique les visuels hors site, avec Chrome sans fenêtre (installé sur l'ordinateur) :
 // - les images Pinterest 1000 × 1500 px de chaque article (public/media/pin/<slug>.jpg), photo déjà créditée
-//   du site + titre court, aux couleurs de Moustache Malin ;
+//   du site + titre court, aux couleurs de Moustache Malin (crédits réunis sur la page /credits-photos/) ;
 // - le PDF de la checklist offerte (content/lead-magnet/checklist-accueillir-un-chat.pdf, pas dans public/ :
 //   il sera déposé chez l'outil de lettre d'information).
 // Lancement : node scripts/visuels.mjs
@@ -37,14 +37,20 @@ function chrome(args) {
 
 // --- Images Pinterest -------------------------------------------------------------------------------------------
 const PINS = [
-  { slug: "litiere-autonettoyante", photo: "litieres-chat-chaise.jpg", credit: "Natalia Rudomin, Unsplash", cadrage: "50% 40%",
+  { slug: "litiere-autonettoyante", photo: "litieres-chat-chaise.jpg", cadrage: "50% 40%",
     haut: "Litière", serif: "autonettoyante", bas: "notre comparatif 2026" },
-  { slug: "fontaine-a-eau-chat", photo: "boire-chat-robinet.jpg", credit: "Sugarman Joe, Unsplash", cadrage: "40% 50%",
+  { slug: "fontaine-a-eau-chat", photo: "boire-chat-robinet.jpg", cadrage: "40% 50%",
     haut: "Fontaine à", serif: "eau", bas: "pour chat : notre comparatif" },
-  { slug: "mon-chat-ne-boit-pas", photo: "boire-chaton-bol.jpg", credit: "Carolien van Oijen, Unsplash", cadrage: "50% 50%",
+  { slug: "mon-chat-ne-boit-pas", photo: "boire-chaton-bol.jpg", cadrage: "50% 50%",
     haut: "Mon chat ne", serif: "boit pas", bas: "pourquoi, et comment l'aider" },
-  { slug: "combien-eau-chat", photo: "guide-chat-bol.jpg", credit: "Vlad Deep, Pexels", cadrage: "50% 50%",
+  { slug: "combien-eau-chat", photo: "guide-chat-bol.jpg", cadrage: "50% 50%",
     haut: "Combien d'eau", serif: "doit-il boire ?", bas: "le calculateur gratuit" },
+  { slug: "distributeur-croquettes-chat", photo: "repas-chat-gamelle.jpg", cadrage: "30% 50%",
+    haut: "Distributeur de", serif: "croquettes", bas: "pour chat : notre comparatif" },
+  { slug: "litiere-autonettoyante-danger", photo: "litieres-chat-meuble.jpg",
+    cadrage: "55% 50%", haut: "Litière autonettoyante :", serif: "dangereux ?", bas: "les vrais risques, les sécurités" },
+  { slug: "petkit-pura-max-2-avis", photo: "litieres-chat-fenetre.jpg", cadrage: "72% 50%",
+    haut: "PETKIT Pura Max 2 :", serif: "notre avis", bas: "face à la Neakasa M1 Lite" },
 ];
 
 fs.mkdirSync(path.join(RACINE, "public/media/pin"), { recursive: true });
@@ -64,7 +70,7 @@ for (const pin of PINS) {
     <div class="texte">
       <h1 class="titre">${pin.haut} <span class="serif">${pin.serif}</span></h1>
       <p class="bas">${pin.bas}</p>
-      <div class="pied"><span class="titre marque">moustachemalin.fr</span><span>Photo : ${pin.credit}</span></div>
+      <div class="pied"><span class="titre marque">moustachemalin.fr</span></div>
     </div>
   </body></html>`;
   const source = path.join(TEMP, `${pin.slug}.html`);

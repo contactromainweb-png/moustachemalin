@@ -71,9 +71,6 @@ export function Soucis() {
                     className={`object-cover ${s.cadrage}`}
                   />
                 </div>
-                <figcaption data-souci-credit className="mt-2 text-small text-[var(--f-doux)]">
-                  {s.photo.credit}
-                </figcaption>
               </figure>
 
               <div

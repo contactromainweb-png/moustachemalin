@@ -30,7 +30,7 @@ export function MesureAudience() {
           <p className={p}>
             Nous utilisons {outil.nom}, un outil de statistiques <strong className="font-semibold">sans cookie</strong> qui
             ne vous suit pas d&apos;un site à l&apos;autre et ne permet pas de vous identifier. Il compte les pages vues et,
-            quand vous cliquez sur un bouton vers Amazon, la page, le produit et l&apos;emplacement du bouton. Ces chiffres
+            quand vous cliquez sur un bouton ou un lien vers Amazon, la page, le produit et son emplacement. Ces chiffres
             nous disent quels comparatifs sont utiles. Hébergement&nbsp;: {outil.hebergement}.
           </p>
           <p className={p}>Aucune donnée n&apos;est vendue ni partagée à des fins publicitaires.</p>

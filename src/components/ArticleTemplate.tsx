@@ -44,7 +44,6 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
                 className="object-cover"
               />
             </div>
-            <figcaption className="mt-2 text-small text-ink-soft">{image.credit}</figcaption>
           </figure>
         ) : null}
       </header>

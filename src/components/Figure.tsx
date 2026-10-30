@@ -10,7 +10,7 @@ type Props = {
   className?: string;
 };
 
-// Photo avec son crédit dessous. Format paysage 3:2, coins droits.
+// Photo d'article (les crédits sont réunis sur la page /credits-photos/). Format paysage 3:2, coins droits.
 // Toujours en chargement différé : masquée (display: none), elle n'est pas téléchargée du tout,
 // ce qui garde le titre comme premier élément affiché sur téléphone (LCP).
 export function Figure({ photo, sizes, enTete = false, className = "" }: Props) {
@@ -27,7 +27,6 @@ export function Figure({ photo, sizes, enTete = false, className = "" }: Props) 
         quality={80}
         className="aspect-[3/2] w-full bg-field object-cover"
       />
-      <figcaption className="mt-2 text-small text-ink-soft">{photo.credit}</figcaption>
     </figure>
   );
 }

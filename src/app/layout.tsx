@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { DM_Sans, Instrument_Serif } from "next/font/google";
+import { Instrument_Serif } from "next/font/google";
 import localFont from "next/font/local";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -12,7 +12,8 @@ import "./globals.css";
 
 // Polices Google, hébergées par le site lui-même (aucune requête vers Google).
 // Titres : Bricolage Grotesque, réduite à la seule variante utilisée (graisse 800, largeur 88 %) : 20 Ko au lieu
-// de 76, dessin identique (voir scripts/police-titres.mjs). Texte : DM Sans.
+// de 76, dessin identique (voir scripts/police-titres.mjs). Texte : DM Sans, réduite aux graisses 400 à 600 : 22 Ko au
+// lieu de 36, mêmes largeurs de texte (voir scripts/police-texte.mjs).
 // Mots mis en valeur dans les titres : Instrument Serif italique (classe .mot-serif).
 const display = localFont({
   src: "./polices/bricolage-grotesque-800-88.woff2",
@@ -30,9 +31,12 @@ const serif = Instrument_Serif({
   style: "italic",
 });
 
-const text = DM_Sans({
+const text = localFont({
+  src: "./polices/dm-sans-400-600.woff2",
   variable: "--font-dm-sans",
-  subsets: ["latin"],
+  weight: "400 600",
+  style: "normal",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

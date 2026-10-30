@@ -318,5 +318,29 @@
     "url": "",
     "licence": "Photo personnelle de Romain, tous droits réservés",
     "resolutionSource": "1518x1892"
+  },
+  {
+    "fichier": "public/media/repas-chat-gamelle.jpg",
+    "auteur": "roselino rocha",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/calico-cat-eating-from-a-bowl-in-sunlit-shadows-38356202/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5184x3456"
+  },
+  {
+    "fichier": "public/media/litieres-chat-meuble.jpg",
+    "auteur": "Helena Jankovičová Kováčová",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/tabby-cat-in-sunlit-room-with-intriguing-gaze-30001425/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6255x4170"
+  },
+  {
+    "fichier": "public/media/litieres-chat-fenetre.jpg",
+    "auteur": "大 董",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/curious-orange-tabby-cat-sitting-by-window-34389844/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6016x4016"
   }
 ]

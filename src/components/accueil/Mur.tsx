@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { MUR, MUR_CENTRE, PHOTOS } from "@/lib/medias";
 import { appareilsCompares } from "@/lib/rubriques";
 
@@ -18,7 +17,7 @@ function taillesVignette(largeur: number, hauteur: number) {
 const VIGNETTES = [
   ...MUR,
   ...[PHOTOS.chatSoleil, PHOTOS.chatChaise, PHOTOS.chatBol, PHOTOS.chatonsArbre, PHOTOS.chatRobinet].map(
-    ({ src, width, height, credit }) => ({ src, width, height, credit }),
+    ({ src, width, height }) => ({ src, width, height }),
   ),
 ].slice(0, 34);
 
@@ -77,13 +76,6 @@ export function Mur() {
           </h2>
           <p data-mur-legende className="mt-6 max-w-[40ch] text-lead text-blanc/85">
             Dans nos comparatifs, fiche technique après fiche technique.
-          </p>
-          <p data-mur-legende className="absolute bottom-5 left-4 right-4 text-small text-blanc/75">
-            Photos : Pexels et Unsplash,{" "}
-            <Link href="/mentions-legales/" className="underline underline-offset-4">
-              crédits détaillés
-            </Link>
-            .
           </p>
         </div>
       </div>

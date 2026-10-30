@@ -186,7 +186,7 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
   const etapes = gsap.utils.toArray<HTMLElement>("[data-souci]", section);
   const n = etapes.length;
   const textes = etapes.map((e) =>
-    e.querySelectorAll<HTMLElement>("[data-souci-texte], [data-souci-geant], [data-souci-credit]"),
+    e.querySelectorAll<HTMLElement>("[data-souci-texte], [data-souci-geant]"),
   );
   const cadres = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-cadre]")!);
   const images = cadres.map((c) => c.querySelector<HTMLImageElement>("img")!);

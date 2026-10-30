@@ -7,7 +7,7 @@ export type Photo = {
   width: number;
   height: number;
   alt: string;
-  credit: string; // affiché sous la photo
+  credit: string; // auteur et source, pour mémoire (la page /credits-photos/ lit content/credits.json)
   position?: string; // point gardé au centre quand la photo est recadrée (CSS object-position), sinon le centre
 };
 
@@ -68,6 +68,27 @@ export const PHOTOS = {
     height: 2880,
     alt: "Deux chatons tigrés installés chacun sur une plateforme d'arbre à chat, contre un mur blanc.",
     credit: "Photo : mraqieb, Pexels",
+  },
+  chatGamelle: {
+    src: "/media/repas-chat-gamelle.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Une chatte tricolore qui lève les yeux de sa gamelle en inox remplie de croquettes, dans un rayon de soleil.",
+    credit: "Photo : roselino rocha, Pexels",
+  },
+  chatMeuble: {
+    src: "/media/litieres-chat-meuble.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Un chat tigré aux yeux dorés qui avance prudemment sous un meuble, dans une lumière chaude.",
+    credit: "Photo : Helena Jankovičová Kováčová, Pexels",
+  },
+  chatFenetre: {
+    src: "/media/litieres-chat-fenetre.jpg",
+    width: 3840,
+    height: 2563,
+    alt: "Un chat roux assis devant la fenêtre ouverte d'un appartement, dans la lumière du soir.",
+    credit: "Photo : 大 董, Pexels",
   },
   // Portrait de Romain (photo personnelle, 1518 × 1892 : utilisée telle quelle, jamais agrandie).
   romain: {
