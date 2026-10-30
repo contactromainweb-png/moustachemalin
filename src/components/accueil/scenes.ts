@@ -1,11 +1,11 @@
-// Scènes 4 à 7 de l'accueil : animations liées au défilement (GSAP ScrollTrigger), appelées par Mouvement.
+// Scènes 4 à 7 de l'accueil sur ordinateur : animations liées au défilement (GSAP ScrollTrigger), appelées par Mouvement.
 // Chaque fonction renvoie de quoi tout défaire. Sans elles (pas de JavaScript, « animations réduites »),
 // les sections sont déjà complètes et immobiles.
 
 type Gsap = typeof import("gsap").gsap;
 
 // Scène 4 : la pelote tourne doucement, un peu plus vite quand on fait défiler ; les cartes entrent par le bas.
-export function pelote(gsap: Gsap, ordinateur: boolean) {
+export function pelote(gsap: Gsap) {
   const section = document.querySelector<HTMLElement>("[data-pelote]");
   if (!section) return () => {};
   const canevas = section.querySelector<HTMLCanvasElement>("[data-pelote-canevas]")!;
@@ -35,7 +35,7 @@ export function pelote(gsap: Gsap, ordinateur: boolean) {
       if (!rendu) {
         const { creerPelote } = await import("./pelote-webgl");
         try {
-          rendu = creerPelote(canevas, !ordinateur);
+          rendu = creerPelote(canevas, false);
         } catch {
           rendu = null;
         }
@@ -56,8 +56,8 @@ export function pelote(gsap: Gsap, ordinateur: boolean) {
   });
   gsap.utils.toArray<HTMLElement>("[data-pelote-carte]", section).forEach((carte, i) => {
     gsap.from(carte, {
-      y: ordinateur ? 90 : 40,
-      rotate: ordinateur ? (i % 2 ? 2.5 : -2.5) : 0,
+      y: 90,
+      rotate: i % 2 ? 2.5 : -2.5,
       opacity: 0,
       duration: 1,
       ease: "power3.out",
@@ -75,7 +75,7 @@ export function pelote(gsap: Gsap, ordinateur: boolean) {
 
 // Scène 5 : la photo du centre, plein écran, recule jusqu'à sa case ; les autres vignettes arrivent autour
 // (du centre vers les bords) ; puis le voile bleu nuit tombe et le compteur monte jusqu'au vrai chiffre.
-export function mur(gsap: Gsap, ordinateur: boolean) {
+export function mur(gsap: Gsap) {
   const scene = document.querySelector<HTMLElement>("[data-mur-scene]");
   if (!scene) return () => {};
   const centre = scene.querySelector<HTMLElement>("[data-mur-centre]")!;
@@ -104,7 +104,7 @@ export function mur(gsap: Gsap, ordinateur: boolean) {
     scrollTrigger: {
       trigger: scene,
       start: "top top",
-      end: ordinateur ? "+=190%" : "+=130%",
+      end: "+=190%",
       pin: true,
       scrub: 0.6,
       invalidateOnRefresh: true,
@@ -141,8 +141,8 @@ export function mur(gsap: Gsap, ordinateur: boolean) {
 }
 
 // Scène 6 : la fiche se remplit, devient tableau, le critère du titre défile et allume sa ligne, puis le badge.
-// Ordinateur : section épinglée. Téléphone : la fiche et le tableau se construisent au fil du défilement.
-export function comparaison(gsap: Gsap, ordinateur: boolean) {
+// Section épinglée.
+export function comparaison(gsap: Gsap) {
   const section = document.querySelector<HTMLElement>("[data-comparaison]");
   if (!section) return () => {};
   const lignesFiche = section.querySelectorAll<HTMLElement>("[data-fiche-ligne]");
@@ -152,34 +152,6 @@ export function comparaison(gsap: Gsap, ordinateur: boolean) {
   const badges = section.querySelectorAll<HTMLElement>("[data-badge]");
   const colonneChoix = section.querySelector<HTMLElement>("[data-tableau-colonne='choix']");
   const allume = "rgb(185 166 255 / 0.38)";
-
-  if (!ordinateur) {
-    gsap.from(lignesFiche, {
-      opacity: 0,
-      x: -16,
-      stagger: 0.1,
-      duration: 0.6,
-      ease: "power2.out",
-      scrollTrigger: { trigger: fiche, start: "top 80%" },
-    });
-    rangees.forEach((cellules) =>
-      gsap.from(cellules, {
-        opacity: 0,
-        y: 14,
-        duration: 0.5,
-        ease: "power2.out",
-        scrollTrigger: { trigger: cellules[0], start: "top 88%" },
-      }),
-    );
-    gsap.from(badges, {
-      opacity: 0,
-      scale: 1.3,
-      duration: 0.5,
-      ease: "back.out(2)",
-      scrollTrigger: { trigger: badges[badges.length - 1], start: "top 90%" },
-    });
-    return () => {};
-  }
 
   section.setAttribute("data-defile", "");
   const mots = gsap.utils.toArray<HTMLElement>("[data-critere]", section);

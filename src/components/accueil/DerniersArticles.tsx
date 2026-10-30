@@ -5,12 +5,13 @@ import { derniersArticles } from "@/lib/rubriques";
 import { espacesFines } from "@/lib/typo";
 
 // Bloc B : les trois articles mis à jour le plus récemment, avec leur date (lue dans le frontmatter `updatedAt`).
+// Sous 1024 px, « Selon mon chat » est masqué : la section suit directement l'aplat lavande, d'où sa marge du haut.
 export function DerniersArticles() {
   const articles = derniersArticles(3);
   if (articles.length === 0) return null;
 
   return (
-    <section data-fond="page" aria-labelledby="titre-derniers" className="px-4 pb-24 sm:px-8 lg:pb-32">
+    <section data-fond="page" aria-labelledby="titre-derniers" className="px-4 pb-24 max-lg:pt-20 sm:px-8 lg:pb-32">
       <div className="mx-auto grid max-w-[90rem] gap-10 lg:grid-cols-12 lg:gap-12">
         <h2 id="titre-derniers" className="reveal font-display text-head lg:col-span-4">
           Derniers articles et <span className="mot-serif">mises à jour</span>

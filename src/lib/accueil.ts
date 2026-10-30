@@ -63,6 +63,41 @@ export const SOUCIS: Souci[] = [
   },
 ];
 
+// Cartes « Mon problème, c'est… » : téléphone et tablette seulement, juste après le premier écran. Elles reprennent
+// en quatre cartes les soucis et les profils de chat, deux sections réservées à l'ordinateur.
+export type Probleme = { id: string; titre: string; href: string; photo: Photo; cadrage: string };
+
+export const PROBLEMES: Probleme[] = [
+  {
+    id: "litiere",
+    titre: "La litière qui sent",
+    href: "/litieres/litiere-autonettoyante/",
+    photo: PHOTOS.chatChaise,
+    cadrage: "object-[50%_40%]",
+  },
+  {
+    id: "boit-peu",
+    titre: "Il boit peu",
+    href: "/guides/mon-chat-ne-boit-pas/",
+    photo: PHOTOS.chatRobinet,
+    cadrage: "object-[40%_50%]",
+  },
+  {
+    id: "week-end",
+    titre: "Je pars le week-end",
+    href: "/repas/distributeur-croquettes-chat/",
+    photo: PHOTOS.chatGamelle,
+    cadrage: "object-[50%_50%]",
+  },
+  {
+    id: "griffes",
+    titre: "Il griffe tout",
+    href: "/griffer-grimper/griffoir-chat/",
+    photo: PHOTOS.chatGriffes,
+    cadrage: "object-[50%_40%]",
+  },
+];
+
 // Bloc « Selon mon chat » : un profil de chat, sa photo et les pages qui lui répondent.
 // `visible: false` = profil prêt mais masqué, en attendant l'article qui lui correspond (chaton, chat âgé).
 export type Profil = {

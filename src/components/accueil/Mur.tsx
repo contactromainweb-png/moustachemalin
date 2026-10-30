@@ -6,6 +6,7 @@ import { appareilsCompares } from "@/lib/rubriques";
 // Le chiffre est calculé au build : les appareils réellement passés en revue dans les comparatifs en ligne.
 // Ordinateur : mur de 7 × 5 ; téléphone : 5 × 5. La photo du centre est placée d'office au milieu de la grille.
 // Sans JavaScript ou avec « animations réduites » : le mur entier, voilé de bleu nuit, et le compteur par-dessus.
+// Téléphone et tablette : section moins haute, sans blocage ; seul le chiffre monte quand il apparaît (Mouvement).
 
 // Les vignettes ont toutes le format 4:5 ; une photo paysage est rognée sur les côtés, donc affichée plus large que
 // sa case. Largeur de case : 128vw / 7 (ordinateur), 150vw / 5 (téléphone), agrandie 1,2 fois au départ du zoom.
@@ -27,7 +28,7 @@ export function Mur() {
 
   return (
     <section data-mur aria-labelledby="titre-mur" className="relative overflow-hidden bg-nuit text-blanc">
-      <div data-mur-scene className="relative grid h-svh min-h-[36rem] place-items-center overflow-hidden">
+      <div data-mur-scene className="relative grid h-[34rem] place-items-center overflow-hidden lg:h-svh lg:min-h-[36rem]">
         <div
           data-mur-grille
           aria-hidden="true"
@@ -70,11 +71,11 @@ export function Mur() {
             <span data-mur-compteur className="font-display text-[clamp(8rem,34vw,24rem)] leading-[0.8] tabular-nums">
               {total}
             </span>
-            <span data-mur-legende className="font-display mt-4 text-[clamp(2rem,1.2rem+3.4vw,4.5rem)]">
+            <span data-mur-legende data-apparait className="font-display mt-4 text-[clamp(2rem,1.2rem+3.4vw,4.5rem)]">
               appareils passés au <span className="mot-serif text-accent">crible</span>
             </span>
           </h2>
-          <p data-mur-legende className="mt-6 max-w-[40ch] text-lead text-blanc/85">
+          <p data-mur-legende data-apparait style={{ "--i": 2 } as React.CSSProperties} className="mt-6 max-w-[40ch] text-lead text-blanc/85">
             Dans nos comparatifs, fiche technique après fiche technique.
           </p>
         </div>

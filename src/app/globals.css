@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Téléphone, tablette ou écran tactile : tout ce qui n'est pas un ordinateur à souris d'au moins 1024 px
+   (le contraire exact de estOrdinateur(), src/lib/capacites.ts). Accueil : photo fixe au lieu des particules. */
+@custom-variant tactile {
+  @media (max-width: 1023.98px) {
+    @slot;
+  }
+  @media not all and (pointer: fine) {
+    @slot;
+  }
+}
+
 /* Palette Moustache Malin : blanc cassé, bleu nuit (titres, en-tête, grandes sections pleines),
    orange vif réservé aux boutons Amazon et aux appels à l'action, avec texte bleu nuit dessus (6,1:1).
    Les liens dans le texte restent bleu nuit, soulignés d'orange : l'orange seul est trop clair pour du texte.
@@ -160,6 +171,23 @@ body {
       animation-timeline: view();
       animation-range: entry 0% entry 60%;
     }
+  }
+}
+
+/* Accueil sur téléphone et tablette (data-apparitions, posé sur <html> par Mouvement) : chaque bloc apparaît une
+   seule fois en arrivant à l'écran, fondu et léger glissement, sans rien bloquer. Les blocs déjà visibles au chargement
+   sont marqués data-vu d'emblée : rien ne disparaît sous les yeux. Avec « animations réduites », rien ne bouge. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-apparitions] [data-apparait] {
+    animation: none;
+    transition:
+      opacity 350ms var(--ease-out),
+      transform 350ms var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+  [data-apparitions] [data-apparait]:not([data-vu]) {
+    opacity: 0;
+    transform: translateY(16px);
   }
 }
 
