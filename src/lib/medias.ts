@@ -181,10 +181,11 @@ export const MUR: Omit<Photo, "alt">[] = [
   { src: "/media/mur-29.jpg", width: 1800, height: 1200, credit: "Magda Ehlers, Pexels" },
 ];
 
-// Image de partage par défaut sur les réseaux sociaux (1200 × 630).
+// Image de partage par défaut sur les réseaux sociaux (1200 × 630) : le logo, fabriqué par src/app/opengraph-image.tsx
+// (servi à l'adresse /opengraph-image). Le layout la reçoit automatiquement ; les articles la redonnent ici.
 export const IMAGE_PARTAGE = {
-  url: "/og-moustache-malin.jpg",
+  url: "/opengraph-image/", // avec la barre finale (trailingSlash) : réponse directe, sans redirection
   width: 1200,
   height: 630,
-  alt: "Gros plan sur un chat blanc aux yeux verts.",
+  alt: "Logo Moustache Malin : une tête de chat orange aux six moustaches, qui fait un clin d'œil.",
 };

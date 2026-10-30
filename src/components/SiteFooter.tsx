@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
+import { Logo, MotMalin, RELIEF_TITRE } from "@/components/Logo";
 import { PAGES_INFO, rubriquesEnLigne, SITE } from "@/lib/site";
 
 export function SiteFooter() {
@@ -11,7 +12,8 @@ export function SiteFooter() {
       <div className="mx-auto max-w-[90rem]">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-[34ch]">
-            <p className="text-lead">{SITE.tagline}</p>
+            <Logo fond="theme" taille="pied" />
+            <p className="mt-6 text-lead">{SITE.tagline}</p>
             <AmazonDisclosure className="mt-6" />
           </div>
           {rubriques.length > 0 ? (
@@ -45,7 +47,8 @@ export function SiteFooter() {
           aria-hidden="true"
           className="font-display mt-20 text-[clamp(3.5rem,13.5vw,13rem)] text-caramel [main:has([data-fin-pleine])+footer_&]:hidden"
         >
-          {SITE.name}
+          <span style={{ textShadow: RELIEF_TITRE.moustache }}>Moustache</span>{" "}
+          <MotMalin relief={RELIEF_TITRE.malin} />
         </p>
         <p className="mt-6 text-small text-ink-soft">
           © {process.env.BUILD_YEAR} {SITE.name} · <a href={`mailto:${SITE.email}`} className="underline underline-offset-4">{SITE.email}</a> ·{" "}

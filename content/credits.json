@@ -16,14 +16,6 @@
     "resolutionSource": "5165x3443"
   },
   {
-    "fichier": "public/og-moustache-malin.jpg",
-    "auteur": "realfish (recadrage)",
-    "source": "Unsplash",
-    "url": "https://unsplash.com/photos/tULo6P9sNSE",
-    "licence": "Licence Unsplash",
-    "resolutionSource": "5165x3443"
-  },
-  {
     "fichier": "public/media/boire-chat-robinet.jpg",
     "auteur": "Sugarman Joe",
     "source": "Unsplash",
@@ -414,5 +406,13 @@
     "url": "",
     "licence": "Tous droits réservés",
     "resolutionSource": "1536x2048"
+  },
+  {
+    "fichier": "public/brand/logo-mark.svg",
+    "auteur": "Logo créé pour Moustache Malin",
+    "source": "Création originale",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "vectoriel (SVG)"
   }
 ]

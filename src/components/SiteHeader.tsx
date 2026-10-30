@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { rubriquesEnLigne, SITE } from "@/lib/site";
+import { Logo } from "@/components/Logo";
+import { rubriquesEnLigne } from "@/lib/site";
 
 const linkClass =
   "py-2 underline-offset-[6px] decoration-2 decoration-accent hover:underline transition-colors duration-200";
@@ -11,9 +12,7 @@ export function SiteHeader() {
   return (
     <header className="relative z-30 bg-nuit px-4 text-blanc sm:px-8">
       <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-6">
-        <Link href="/" className="font-display py-2 text-[1.5rem] sm:text-[1.75rem]">
-          {SITE.name}
-        </Link>
+        <Logo fond="sombre" taille="entete" />
 
         {rubriques.length > 0 ? (
           <>

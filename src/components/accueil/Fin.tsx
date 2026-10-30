@@ -1,11 +1,12 @@
 import { BoutonAction } from "@/components/BoutonAction";
+import { RELIEF_TITRE } from "@/components/Logo";
 import { tousLesArticles } from "@/lib/rubriques";
 import { SITE } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
 
 // Scène 7 : grande section bleu nuit. Son bord supérieur forme un dôme léger qui s'aplatit en arrivant à l'écran
 // (Mouvement anime son échelle verticale : transform seul, rien à repeindre).
-// « Moustache Malin » en très grand, et les comparatifs en boutons orange. Le pied de page s'y colle (data-fin-pleine).
+// « Moustache malin » en très grand, comme le logo, et les comparatifs en boutons orange. Le pied de page s'y colle (data-fin-pleine).
 export function Fin() {
   const comparatifs = tousLesArticles().filter((a) => a.type === "comparatif");
 
@@ -22,11 +23,11 @@ export function Fin() {
             id="titre-fin"
             className="font-display text-[clamp(4rem,1rem+11vw,15rem)] lg:whitespace-nowrap"
           >
-            <span data-fin-mot className="inline-block">
+            <span data-fin-mot className="inline-block" style={{ textShadow: RELIEF_TITRE.moustache }}>
               Moustache
             </span>{" "}
-            <span data-fin-mot className="mot-serif inline-block text-accent">
-              Malin
+            <span data-fin-mot className="mot-serif inline-block text-accent" style={{ textShadow: RELIEF_TITRE.malin }}>
+              malin
             </span>
           </h2>
           <p className="mt-8 max-w-[30ch] text-lead text-blanc/85">{SITE.tagline}</p>
