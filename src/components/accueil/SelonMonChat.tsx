@@ -7,6 +7,7 @@ import { espacesFines } from "@/lib/typo";
 // Bloc A, « Selon mon chat » : quatre profils en cartes photo, chacun mène aux pages qui lui répondent.
 // Les profils masqués (chaton, chat âgé) attendent leur article ; un lien vers une page absente disparaît.
 // Une carte à lien unique est cliquable en entier (le lien s'étend sur la carte).
+// Ordinateur seulement : sous 1024 px, les cartes « Mon problème » (Problemes) la remplacent.
 export function SelonMonChat() {
   const profils = PROFILS.filter((p) => p.visible)
     .map((p) => ({ ...p, liens: p.liens.filter((l) => pageEnLigne(l.href.split("#")[0])) }))
@@ -14,7 +15,7 @@ export function SelonMonChat() {
   if (profils.length === 0) return null;
 
   return (
-    <section data-fond="page" aria-labelledby="titre-selon" className="px-4 py-24 sm:px-8 lg:py-32">
+    <section data-fond="page" aria-labelledby="titre-selon" className="px-4 py-24 max-lg:hidden sm:px-8 lg:py-32">
       <div className="mx-auto max-w-[90rem]">
         <h2 id="titre-selon" className="reveal font-display text-[clamp(2.75rem,1.4rem+5vw,6.5rem)]">
           Selon mon <span className="mot-serif">chat</span>

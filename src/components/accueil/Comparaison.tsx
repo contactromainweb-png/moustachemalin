@@ -35,9 +35,9 @@ export function Comparaison() {
     <section data-comparaison data-fond="lavande" aria-labelledby="titre-comparaison" className="group/comp relative overflow-x-clip">
       <div
         data-comparaison-scene
-        className="mx-auto grid max-w-[90rem] gap-10 px-4 py-24 sm:px-8 lg:min-h-svh lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-16"
+        className="mx-auto grid max-w-[90rem] gap-10 px-4 py-16 sm:px-8 lg:min-h-svh lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-16"
       >
-        <div className="lg:col-span-5">
+        <div data-apparait className="lg:col-span-5">
           <h2 id="titre-comparaison" className="font-display text-[clamp(2.75rem,1.4rem+5vw,6.5rem)]">
             <span className="sr-only">
               Nous comparons la sécurité, le bruit, l&apos;entretien et le coût.
@@ -78,10 +78,11 @@ export function Comparaison() {
         </div>
 
         <div data-comparaison-machine aria-hidden="true" className="relative lg:col-span-7">
-          {/* 1. La fiche technique du premier appareil. */}
+          {/* 1. La fiche technique du premier appareil (ordinateur seulement : sur téléphone, le tableau suffit). */}
           <div
             data-fiche
-            className="max-w-[26rem] rounded-[1.5rem] bg-blanc p-6 text-nuit shadow-[0_24px_60px_-28px_rgb(20_33_61/0.45)]"
+            data-apparait
+            className="max-w-[26rem] rounded-[1.5rem] max-lg:hidden bg-blanc p-6 text-nuit shadow-[0_24px_60px_-28px_rgb(20_33_61/0.45)]"
           >
             <p className="text-small font-medium text-nuit/80">Fiche technique</p>
             <p className="font-display mt-1 text-[1.75rem]">{fiche.name}</p>
@@ -104,7 +105,8 @@ export function Comparaison() {
               Téléphone : chaque critère devient un petit bloc, un modèle par ligne. */}
           <div
             data-tableau
-            className="relative mt-6 overflow-hidden rounded-[1.5rem] bg-blanc text-nuit shadow-[0_24px_60px_-28px_rgb(20_33_61/0.45)] lg:group-data-[defile]/comp:absolute lg:group-data-[defile]/comp:inset-x-0 lg:group-data-[defile]/comp:top-[18%] lg:group-data-[defile]/comp:mt-0"
+            data-apparait
+            className="relative overflow-hidden rounded-[1.5rem] bg-blanc lg:mt-6 text-nuit shadow-[0_24px_60px_-28px_rgb(20_33_61/0.45)] lg:group-data-[defile]/comp:absolute lg:group-data-[defile]/comp:inset-x-0 lg:group-data-[defile]/comp:top-[18%] lg:group-data-[defile]/comp:mt-0"
           >
             <div className="grid text-[1rem] leading-snug lg:grid-cols-[minmax(0,0.9fr)_repeat(3,minmax(0,1fr))]">
               <div className="max-lg:hidden lg:p-4 lg:pt-11" />

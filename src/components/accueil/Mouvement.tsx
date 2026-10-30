@@ -7,14 +7,16 @@ import { comparaison, fin, mur, pelote } from "./scenes";
 
 type Lenis = { scrollTo: (cible: number, options?: { immediate?: boolean }) => void };
 
-// Défilement fluide (Lenis) et mouvements liés au défilement (GSAP ScrollTrigger) de l'accueil.
-// Ordinateur et téléphone (version allégée sur téléphone : moins de particules, mosaïque 4 × 4, épinglages plus
-// courts) ; rien avec « animations réduites » ou en économie de données. Chargés une fois la page affichée :
-// sans eux, tout est déjà à sa place.
+// Mouvements de l'accueil ; rien avec « animations réduites » ou en économie de données.
+// Ordinateur à souris (≥ 1024 px) : défilement fluide (Lenis) et scènes liées au défilement (GSAP ScrollTrigger),
+// chargés une fois la page affichée ; sans eux, tout est déjà à sa place.
+// Téléphone, tablette, écran tactile : défilement natif, aucune section bloquée, ni Lenis ni GSAP. Chaque bloc
+// apparaît une seule fois en arrivant à l'écran et le compteur monte quand il apparaît (voir apparitions).
 // Aucun aimantage (snap) : la page ne bouge jamais d'elle-même, seul le visiteur fait défiler.
 export function Mouvement() {
   useEffect(() => {
     if (!peutAnimer()) return;
+    if (!estOrdinateur()) return apparitions();
     let nettoyer = () => {};
     let annule = false;
 
@@ -26,10 +28,6 @@ export function Mouvement() {
       ]);
       if (annule) return;
       gsap.registerPlugin(ScrollTrigger);
-      // Sur téléphone, la barre d'adresse qui apparaît ou disparaît ne recalcule pas les épinglages
-      // (sinon la page saute au milieu d'un défilement).
-      ScrollTrigger.config({ ignoreMobileResize: true });
-      const ordinateur = estOrdinateur();
       const finitions: (() => void)[] = [];
 
       const lenis = new Lenis({ anchors: true, autoRaf: false });
@@ -41,10 +39,10 @@ export function Mouvement() {
 
       const section = document.querySelector<HTMLElement>("[data-soucis]");
       const ctx = gsap.context(() => {
-        heros(gsap, ordinateur);
-        finitions.push(desintegration(gsap, ordinateur));
-        if (section) finitions.push(soucis(gsap, lenis, section, ordinateur));
-        finitions.push(pelote(gsap, ordinateur), mur(gsap, ordinateur), comparaison(gsap, ordinateur), fin(gsap));
+        heros(gsap);
+        finitions.push(desintegration(gsap));
+        if (section) finitions.push(soucis(gsap, lenis, section));
+        finitions.push(pelote(gsap), mur(gsap), comparaison(gsap), fin(gsap));
         ScrollTrigger.refresh();
       });
 
@@ -69,11 +67,70 @@ export function Mouvement() {
   return null;
 }
 
+// Téléphone et tablette : fondu et léger glissement de chaque bloc à son entrée dans l'écran, une seule fois
+// (transition CSS, voir [data-apparitions] dans globals.css), puis le compteur du mur qui monte jusqu'au vrai chiffre.
+function apparitions() {
+  const blocs = Array.from(document.querySelectorAll<HTMLElement>("main [data-apparait], main .reveal"));
+  const compteur = document.querySelector<HTMLElement>("[data-mur-compteur]");
+  const total = Number(compteur?.textContent) || 0;
+  const hauteur = window.innerHeight;
+  const dejaVisible = (el: HTMLElement) => el.getBoundingClientRect().top < hauteur;
+  let animation = 0;
+
+  // Ce qui est déjà à l'écran reste tel quel ; le reste attend son tour.
+  blocs.forEach((el) => {
+    el.setAttribute("data-apparait", "");
+    if (dejaVisible(el)) el.setAttribute("data-vu", "");
+  });
+  document.documentElement.setAttribute("data-apparitions", "");
+
+  const observateur = new IntersectionObserver(
+    (entrees) => {
+      for (const e of entrees) {
+        if (!e.isIntersecting) continue;
+        e.target.setAttribute("data-vu", "");
+        observateur.unobserve(e.target);
+      }
+    },
+    { rootMargin: "0px 0px -8% 0px" },
+  );
+  blocs.filter((el) => !el.hasAttribute("data-vu")).forEach((el) => observateur.observe(el));
+
+  // Compteur : 0 tant qu'il n'est pas arrivé, puis il monte en 1,2 s (ralenti à la fin).
+  let observateurCompteur: IntersectionObserver | null = null;
+  if (compteur && total > 0 && !dejaVisible(compteur)) {
+    compteur.textContent = "0";
+    observateurCompteur = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        observateurCompteur?.disconnect();
+        const debut = performance.now();
+        const pas = (t: number) => {
+          const p = Math.min(1, (t - debut) / 1200);
+          compteur.textContent = String(Math.round(total * (1 - (1 - p) ** 3)));
+          if (p < 1) animation = requestAnimationFrame(pas);
+        };
+        animation = requestAnimationFrame(pas);
+      },
+      { threshold: 0.6 },
+    );
+    observateurCompteur.observe(compteur);
+  }
+
+  return () => {
+    observateur.disconnect();
+    observateurCompteur?.disconnect();
+    cancelAnimationFrame(animation);
+    if (compteur) compteur.textContent = String(total);
+    document.documentElement.removeAttribute("data-apparitions");
+  };
+}
+
 type Gsap = typeof import("gsap").gsap;
 
-// Scène 1 : du très gros plan au chat entier, puis l'image recule en carte aux coins arrondis.
+// Scène 1: du très gros plan au chat entier, puis l'image recule en carte aux coins arrondis.
 // Le titre ne bouge pas : il reste entier à l'écran pendant tout le mouvement.
-function heros(gsap: Gsap, ordinateur: boolean) {
+function heros(gsap: Gsap) {
   // Le gros plan de départ vient du CSS (propriété scale, réglée pour ne jamais dépasser la définition de la
   // photo) : GSAP le reprend en transform pour le défaire.
   const zoom = document.querySelector<HTMLElement>("[data-hero-zoom]");
@@ -86,7 +143,7 @@ function heros(gsap: Gsap, ordinateur: boolean) {
       scrollTrigger: {
         trigger: "[data-hero]",
         start: "top top",
-        end: ordinateur ? "+=90%" : "+=55%",
+        end: "+=90%",
         pin: true,
         scrub: 0.6,
       },
@@ -94,14 +151,14 @@ function heros(gsap: Gsap, ordinateur: boolean) {
     .to("[data-hero-zoom]", { scale: 1, ease: "power1.inOut", duration: 0.65 }, 0)
     .to(
       "[data-hero-media]",
-      { scale: ordinateur ? 0.9 : 0.94, borderRadius: ordinateur ? 32 : 24, ease: "power2.inOut", duration: 0.35 },
+      { scale: 0.9, borderRadius: 32, ease: "power2.inOut", duration: 0.35 },
       0.65,
     );
 }
 
 // Scène 2 : la phrase s'écrit mot par mot en sortant d'un flou, pendant que la photo se désintègre en particules
 // et se reforme en une autre. Le WebGL n'est préparé qu'à l'approche de la section.
-function desintegration(gsap: Gsap, ordinateur: boolean) {
+function desintegration(gsap: Gsap) {
   const scene = document.querySelector<HTMLElement>("[data-desint-scene]");
   if (!scene) return () => {};
   const cadre = scene.querySelector<HTMLElement>("[data-desint-cadre]")!;
@@ -131,7 +188,7 @@ function desintegration(gsap: Gsap, ordinateur: boolean) {
     await Promise.all([imageA.decode(), imageB.decode()]).catch(() => {});
     const { creerParticules } = await import("./particules");
     try {
-      particules = creerParticules({ canevas, cadre, imageA, imageB, colonnes: ordinateur ? 150 : 76 });
+      particules = creerParticules({ canevas, cadre, imageA, imageB, colonnes: 150 });
     } catch {
       particules = null;
     }
@@ -143,7 +200,7 @@ function desintegration(gsap: Gsap, ordinateur: boolean) {
     scrollTrigger: {
       trigger: scene,
       start: "top top",
-      end: ordinateur ? "+=160%" : "+=110%",
+      end: "+=160%",
       pin: true,
       scrub: 0.6,
       onRefresh: () => particules?.redimensionner(),
@@ -153,7 +210,7 @@ function desintegration(gsap: Gsap, ordinateur: boolean) {
   // Avant leur tour, ils restent lisibles (contraste 3:1 au moins, grand texte) : blanc à 40 %, orange à 68 %.
   gsap.set(mots, {
     opacity: (_: number, mot: HTMLElement) => (mot.classList.contains("mot-serif") ? 0.68 : 0.4),
-    filter: ordinateur ? "blur(10px)" : "none",
+    filter: "blur(10px)",
     y: "0.1em",
   });
   tl.to(mots, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.12, stagger: 0.06, ease: "power2.out" }, 0);
@@ -180,8 +237,8 @@ function desintegration(gsap: Gsap, ordinateur: boolean) {
   };
 }
 
-// Scène 3 : les petits soucis, une étape par écran (un peu plus d'un demi-écran sur téléphone).
-function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: boolean) {
+// Scène 3 : les petits soucis, une étape par écran.
+function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement) {
   section.setAttribute("data-epingle", "");
   const etapes = gsap.utils.toArray<HTMLElement>("[data-souci]", section);
   const n = etapes.length;
@@ -196,11 +253,11 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
   // Les photos sont au milieu (z 10+), les textes devant (z 20), le mot géant tout devant (z 30).
   const photos = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-photo]")!);
   photos.forEach((p, i) => (p.style.zIndex = String(10 + n - i)));
-  const mosaiques = cadres.slice(0, -1).map((c, i) => mosaique(c, images[i], ordinateur));
+  const mosaiques = cadres.slice(0, -1).map((c, i) => mosaique(c, images[i]));
 
-  const entree = ordinateur ? 40 : 18;
-  const sortie = ordinateur ? -32 : -14;
-  const flou = (px: number) => (ordinateur ? `blur(${px}px)` : "none");
+  const entree = 40;
+  const sortie = -32;
+  const flou = (px: number) => `blur(${px}px)`;
 
   gsap.set(textes.slice(1), { opacity: 0, y: entree, filter: flou(6) });
   gsap.set(images.slice(1), { scale: 1.12 });
@@ -219,7 +276,7 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
     scrollTrigger: {
       trigger: section,
       start: "top top",
-      end: `+=${(n - 1 + queue) * (ordinateur ? 100 : 70)}%`,
+      end: `+=${(n - 1 + queue) * 100}%`,
       pin: true,
       scrub: 0.6,
       onUpdate: (st) => marquerActive(gsap.utils.clamp(0, n - 1, Math.round(st.progress * (n - 1 + queue)))),
@@ -264,11 +321,11 @@ function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement, ordinateur: bool
 }
 
 // Recouvre une photo d'une grille de carrés qui en montrent chacun un morceau (même recadrage que la photo),
-// puis cache la photo d'origine. Renvoie les carrés, à animer. Téléphone : 4 × 4 ; ordinateur : 8 de large.
-function mosaique(cadre: HTMLElement, image: HTMLImageElement, ordinateur: boolean) {
+// puis cache la photo d'origine. Renvoie les carrés, à animer : 8 de large.
+function mosaique(cadre: HTMLElement, image: HTMLImageElement) {
   const boite = cadre.getBoundingClientRect();
-  const colonnes = ordinateur ? 8 : 4;
-  const rangees = ordinateur ? Math.max(4, Math.round((colonnes * boite.height) / boite.width)) : 4;
+  const colonnes = 8;
+  const rangees = Math.max(4, Math.round((colonnes * boite.height) / boite.width));
   const grille = document.createElement("div");
   grille.dataset.mosaique = "";
   grille.setAttribute("aria-hidden", "true");

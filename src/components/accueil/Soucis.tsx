@@ -9,10 +9,11 @@ import { pageEnLigne } from "@/lib/site";
 // la suivante, et les textes passent en fondu enchaîné.
 // Le mot géant ouvre chaque étape, en haut et au premier plan : il reste entier à l'écran pendant toute la lecture.
 // Sans JavaScript ou avec « animations réduites », c'est une liste de panneaux colorés : tout reste lisible et cliquable.
+// Ordinateur seulement : sous 1024 px, les cartes « Mon problème » (Problemes) la remplacent.
 
 export function Soucis() {
   return (
-    <section id="soucis" data-soucis aria-labelledby="titre-soucis" className="group/soucis overflow-x-clip">
+    <section id="soucis" data-soucis aria-labelledby="titre-soucis" className="group/soucis overflow-x-clip max-lg:hidden">
       <div
         data-soucis-scene
         className="mx-auto max-w-[90rem] px-4 py-20 sm:px-8 lg:py-32 group-data-[epingle]/soucis:flex group-data-[epingle]/soucis:h-svh group-data-[epingle]/soucis:flex-col group-data-[epingle]/soucis:py-5 lg:group-data-[epingle]/soucis:py-8"
