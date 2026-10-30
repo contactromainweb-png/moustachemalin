@@ -120,6 +120,15 @@ export const PHOTOS = {
     credit: "Photo : Helena Jankovičová Kováčová, Pexels",
     position: "50% 30%",
   },
+  // Kira qui joue avec sa canne à plumes (photo personnelle de Romain, 1536 × 2048) : portrait rond de « Qui écrit ici ».
+  kiraPlumeau: {
+    src: "/media/kira/kira-joue-plumeau.jpg",
+    width: 1536,
+    height: 2048,
+    alt: "Kira, la chatte de Romain",
+    credit: "Photo : Romain, photo personnelle",
+    position: "62% 55%",
+  },
   // Kira sur son ancien arbre à chat (photo personnelle de Romain, prise le soir : légèrement éclaircie, 1536 × 2048).
   kiraArbre: {
     src: "/media/kira/kira-arbre-a-chat.jpg",
