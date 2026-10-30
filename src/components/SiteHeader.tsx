@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
+import { MenuTelephone } from "@/components/MenuTelephone";
 import { rubriquesEnLigne } from "@/lib/site";
 
 const linkClass =
@@ -29,8 +30,8 @@ export function SiteHeader() {
               </ul>
             </nav>
 
-            {/* Téléphone : menu dépliant, fonctionne sans JavaScript. */}
-            <details className="group lg:hidden">
+            {/* Téléphone : menu dépliant, fonctionne sans JavaScript ; il se referme en changeant de page. */}
+            <MenuTelephone className="group lg:hidden">
               <summary className="flex min-h-11 cursor-pointer list-none items-center rounded-full bg-accent px-5 text-small font-medium text-on-accent transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] [&::-webkit-details-marker]:hidden">
                 <span className="group-open:hidden">Menu</span>
                 <span className="hidden group-open:inline">Fermer</span>
@@ -49,7 +50,7 @@ export function SiteHeader() {
                   ))}
                 </ul>
               </nav>
-            </details>
+            </MenuTelephone>
           </>
         ) : null}
       </div>
