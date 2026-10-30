@@ -4,7 +4,7 @@ import { AffiliateButton } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { CalloutLink } from "@/components/CalloutLink";
 import { EnBref } from "@/components/EnBref";
-import { PhotoMdx } from "@/components/Figure";
+import { PhotoMdx, PhotoMoyenne } from "@/components/Figure";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { FAQ } from "@/components/FAQ";
 import { KiraGalerie } from "@/components/KiraGalerie";
@@ -63,6 +63,7 @@ const components: MDXComponents = {
   CalloutLink,
   EnBref,
   Photo: PhotoMdx,
+  PhotoMoyenne,
   ComparisonTable,
   FAQ,
   KiraGalerie,

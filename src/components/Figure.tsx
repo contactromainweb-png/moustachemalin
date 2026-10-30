@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PHOTOS, type Photo } from "@/lib/medias";
+import { espacesFines } from "@/lib/typo";
 
 type Props = {
   photo: Photo;
@@ -27,6 +28,30 @@ export function Figure({ photo, sizes, enTete = false, className = "" }: Props) 
         quality={80}
         className="aspect-[3/2] w-full bg-field object-cover"
       />
+    </figure>
+  );
+}
+
+// Dans un article MDX, photo verticale en taille moyenne avec sa légende : <PhotoMoyenne nom="kiraArbre" />
+// (photos personnelles de 1536 px de large : jamais en pleine largeur).
+export function PhotoMoyenne({ nom }: { nom: keyof typeof PHOTOS }) {
+  const photo: Photo = PHOTOS[nom];
+  if (!photo) throw new Error(`Photo inconnue dans PHOTOS (src/lib/medias.ts) : ${nom}`);
+  return (
+    <figure className="reveal my-12 max-w-[22rem]">
+      <Image
+        src={photo.src}
+        width={photo.width}
+        height={photo.height}
+        alt={photo.alt}
+        sizes="(min-width: 640px) 22rem, calc(100vw - 2rem)"
+        loading="lazy"
+        quality={80}
+        className="aspect-[3/4] w-full rounded-[1.25rem] bg-field object-cover"
+      />
+      {photo.legende ? (
+        <figcaption className="mt-3 text-small text-ink-soft">{espacesFines(photo.legende)}</figcaption>
+      ) : null}
     </figure>
   );
 }

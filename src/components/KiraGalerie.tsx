@@ -9,9 +9,9 @@ const PHOTOS: { src: string; alt: string; legende?: string }[] = [
   { src: "/media/kira/kira-joue-plumeau.jpg", alt: "Kira qui joue avec sa canne à plumes" },
   { src: "/media/kira/kira-sphinx-table.jpg", alt: "Kira posée en sphinx sur la table" },
   {
-    src: "/media/kira/kira-et-le-bouledogue.jpg",
-    alt: "Kira et un bouledogue français",
-    legende: "Kira, « un vrai petit chien »… à côté d'un vrai petit chien.",
+    src: "/media/kira/kira-joue-avec-romain.jpg",
+    alt: "Kira qui joue avec Romain",
+    legende: "Séance de jeu quotidienne.",
   },
 ];
 

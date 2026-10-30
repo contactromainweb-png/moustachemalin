@@ -400,7 +400,15 @@
     "resolutionSource": "1536x2048"
   },
   {
-    "fichier": "public/media/kira/kira-et-le-bouledogue.jpg",
+    "fichier": "public/media/kira/kira-joue-avec-romain.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1536x2048"
+  },
+  {
+    "fichier": "public/media/kira/kira-arbre-a-chat.jpg",
     "auteur": "Romain",
     "source": "Photo personnelle",
     "url": "",
