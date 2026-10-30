@@ -103,7 +103,6 @@ export const PROFILS: Profil[] = [
     mot: ["Je pars le", "week-end"],
     liens: [
       { href: "/litieres/litiere-autonettoyante/", label: "Une litière qui se vide seule" },
-      { href: "/fontaines/fontaine-a-eau-chat/", label: "Une fontaine à grande réserve" },
       { href: "/repas/distributeur-croquettes-chat/", label: "Un distributeur de croquettes" },
     ],
     photo: mur("14", "Un chat roux installé seul sous la couette d'un lit, l'air paisible.", "Natalie Bond, Pexels"),
