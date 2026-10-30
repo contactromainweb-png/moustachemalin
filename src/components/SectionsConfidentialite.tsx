@@ -18,7 +18,7 @@ const p = "reveal mb-5 max-w-[65ch]";
 
 export function MesureAudience() {
   const outil = UMAMI_ID
-    ? { nom: "Umami Cloud", hebergement: "Umami Software" }
+    ? { nom: "Umami Cloud", hebergement: "Umami Software, données hébergées dans l'Union européenne" }
     : GOATCOUNTER
       ? { nom: "GoatCounter", hebergement: "GoatCounter (Martin Tournoij, serveurs dans l'Union européenne)" }
       : null;
