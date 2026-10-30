@@ -52,7 +52,7 @@ export const RUBRIQUES = [
   { href: "/litieres/", label: "Litières" },
   { href: "/fontaines/", label: "Fontaines" },
   { href: "/repas/", label: "Repas" },
-  { href: "/griffer-grimper/", label: "Griffer et grimper" },
+  { href: "/griffer-grimper/", label: "Griffer, grimper" },
   { href: "/sorties/", label: "Sorties" },
   { href: "/guides/", label: "Guides" },
   { href: "/outils/", label: "Outils" },

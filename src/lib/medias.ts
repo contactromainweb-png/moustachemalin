@@ -90,6 +90,35 @@ export const PHOTOS = {
     alt: "Un chat roux assis devant la fenêtre ouverte d'un appartement, dans la lumière du soir.",
     credit: "Photo : 大 董, Pexels",
   },
+  chatsPasserelles: {
+    src: "/media/griffer-chats-passerelles.jpg",
+    width: 3840,
+    height: 2563,
+    alt: "Un chat noir et blanc et un chat tigré qui se promènent sur des passerelles en bois fixées à un mur blanc.",
+    credit: "Photo : Arina Krasnikova, Pexels",
+  },
+  chatArbre: {
+    src: "/media/griffer-chat-arbre.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Un chat Devon Rex allongé sur la plateforme moelleuse d'un arbre à chat, près d'une fenêtre ensoleillée.",
+    credit: "Photo : Chen EdisoN, Pexels",
+  },
+  chatGriffes: {
+    src: "/media/griffer-chat-griffes.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Un chat tigré dressé sur ses pattes arrière qui fait ses griffes sur un tronc, en contre-jour.",
+    credit: "Photo : Fred AUGÉ, Pexels",
+  },
+  chatEvier: {
+    src: "/media/boire-chat-robinet-evier.jpg",
+    width: 3840,
+    height: 2555,
+    alt: "Un chat Bengal penché sur un lavabo blanc qui boit le filet d'eau du robinet.",
+    credit: "Photo : Helena Jankovičová Kováčová, Pexels",
+    position: "50% 30%",
+  },
   // Portrait de Romain (photo personnelle, 1518 × 1892 : utilisée telle quelle, jamais agrandie).
   romain: {
     src: "/media/romain.jpg",

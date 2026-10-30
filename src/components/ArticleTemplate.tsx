@@ -19,7 +19,7 @@ type Props = { frontmatter: Frontmatter; photo?: Photo; children: ReactNode };
 export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
   const chemin = cheminArticle(fm);
   const url = new URL(chemin, SITE.url).toString();
-  const image = photo ?? (fm.photo ? PHOTOS[fm.photo] : undefined);
+  const image: Photo | undefined = photo ?? (fm.photo ? PHOTOS[fm.photo] : undefined);
 
   return (
     <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10">
@@ -42,6 +42,7 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
                 quality={80}
                 sizes="(min-width: 90rem) 86rem, (min-width: 640px) calc(100vw - 4rem), calc(100vw - 2rem)"
                 className="object-cover"
+                style={image.position ? { objectPosition: image.position } : undefined}
               />
             </div>
           </figure>

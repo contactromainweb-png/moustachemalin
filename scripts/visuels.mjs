@@ -51,6 +51,12 @@ const PINS = [
     cadrage: "55% 50%", haut: "Litière autonettoyante :", serif: "dangereux ?", bas: "les vrais risques, les sécurités" },
   { slug: "petkit-pura-max-2-avis", photo: "litieres-chat-fenetre.jpg", cadrage: "72% 50%",
     haut: "PETKIT Pura Max 2 :", serif: "notre avis", bas: "face à la Neakasa M1 Lite" },
+  { slug: "arbre-a-chat", photo: "griffer-chat-arbre.jpg", credit: "Chen EdisoN, Pexels", cadrage: "38% 50%",
+    haut: "Arbre à chat :", serif: "lequel choisir ?", bas: "notre comparatif 2026" },
+  { slug: "griffoir-chat", photo: "griffer-chat-griffes.jpg", credit: "Fred AUGÉ, Pexels", cadrage: "62% 50%",
+    haut: "Griffoir pour chat :", serif: "adieu le canapé", bas: "notre comparatif 2026" },
+  { slug: "catit-pixi-avis", photo: "boire-chat-robinet-evier.jpg", credit: "Helena Jankovičová Kováčová, Pexels",
+    cadrage: "55% 50%", haut: "Catit Pixi :", serif: "notre avis", bas: "face à la PETLIBRO Dockstream" },
 ];
 
 fs.mkdirSync(path.join(RACINE, "public/media/pin"), { recursive: true });
