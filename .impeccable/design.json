@@ -1,317 +1,300 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-27T17:28:18.113Z",
+  "generatedAt": "2026-10-30T20:06:17.292Z",
   "title": "Design System: Moustache Malin",
   "extensions": {
     "colorMeta": {
       "paper": {
         "role": "neutral",
-        "displayName": "Papier crème",
-        "canonical": "#f6efe4",
+        "displayName": "Blanc cassé",
+        "canonical": "#faf7f2",
         "tonalRamp": [
-          "#272624",
-          "#41403d",
-          "#5c5955",
-          "#837f79",
-          "#aaa59e",
-          "#ccc6bd",
-          "#e6e0d5",
-          "#f8f2e9"
+          "#323130",
+          "#646361",
+          "#969491",
+          "#c8c6c2",
+          "#faf7f2",
+          "#fcfaf7",
+          "#fdfcfa",
+          "#fefefd"
         ],
-        "darkCanonical": "#16100b"
+        "darkCanonical": "#0f1a31"
       },
       "field": {
         "role": "neutral",
         "displayName": "Champ",
-        "canonical": "#ece1cf",
+        "canonical": "#efe9e0",
         "tonalRamp": [
-          "#282623",
-          "#433f3a",
-          "#5d5952",
-          "#857f75",
-          "#ada598",
-          "#d0c6b6",
-          "#eadfcd",
-          "#f7f2ea"
+          "#302f2d",
+          "#605d5a",
+          "#8f8c86",
+          "#bfbab3",
+          "#efe9e0",
+          "#f5f1eb",
+          "#f9f7f4",
+          "#fdfcfb"
         ],
-        "darkCanonical": "#231a12"
+        "darkCanonical": "#182641"
       },
       "ink": {
         "role": "neutral",
-        "displayName": "Encre brune",
-        "canonical": "#22170e",
+        "displayName": "Bleu nuit (texte)",
+        "canonical": "#14213d",
         "tonalRamp": [
-          "#2f251c",
-          "#473e37",
-          "#605852",
-          "#857f7a",
-          "#a9a5a2",
-          "#c9c6c4",
-          "#e2e0df",
-          "#f3f2f2"
+          "#04070c",
+          "#080d18",
+          "#0c1425",
+          "#101a31",
+          "#14213d",
+          "#666f81",
+          "#adb1bb",
+          "#e3e4e8"
         ],
-        "darkCanonical": "#f3eadc"
+        "darkCanonical": "#f4f1ec"
       },
       "ink-soft": {
         "role": "neutral",
-        "displayName": "Encre douce",
-        "canonical": "#5a4838",
+        "displayName": "Gris chaud",
+        "canonical": "#5d5750",
         "tonalRamp": [
-          "#2e251d",
-          "#4d3d30",
-          "#675748",
-          "#8a7e72",
-          "#ada49d",
-          "#ccc6c1",
-          "#e3e0dd",
-          "#f3f2f1"
+          "#131110",
+          "#252320",
+          "#383430",
+          "#4a4640",
+          "#5d5750",
+          "#96928d",
+          "#c6c4c2",
+          "#ecebea"
         ],
-        "darkCanonical": "#c7b6a3"
+        "darkCanonical": "#b9b4ac"
       },
-      "caramel": {
-        "role": "secondary",
-        "displayName": "Caramel",
-        "canonical": "#84501f",
+      "nuit": {
+        "role": "primary",
+        "displayName": "Bleu nuit",
+        "canonical": "#14213d",
         "tonalRamp": [
-          "#3a230e",
-          "#603a17",
-          "#855221",
-          "#a17a54",
-          "#bda288",
-          "#d6c4b4",
-          "#e9dfd6",
-          "#f6f2ee"
+          "#04070c",
+          "#080d18",
+          "#0c1425",
+          "#101a31",
+          "#14213d",
+          "#666f81",
+          "#adb1bb",
+          "#e3e4e8"
         ],
-        "darkCanonical": "#e3bd84"
+        "darkCanonical": "#14213d"
       },
-      "caramel-field": {
-        "role": "secondary",
-        "displayName": "Caramel plein",
-        "canonical": "#6b4019",
-        "tonalRamp": [
-          "#3a230e",
-          "#613a17",
-          "#7a5431",
-          "#997b60",
-          "#b7a390",
-          "#d2c5b9",
-          "#e6dfd9",
-          "#f5f2ef"
-        ],
-        "darkCanonical": "#4a2c11"
-      },
-      "on-caramel": {
+      "blanc": {
         "role": "neutral",
-        "displayName": "Crème sur caramel",
-        "canonical": "#f6efe4",
+        "displayName": "Blanc cassé fixe",
+        "canonical": "#faf7f2",
         "tonalRamp": [
-          "#272624",
-          "#41403d",
-          "#5c5955",
-          "#837f79",
-          "#aaa59e",
-          "#ccc6bd",
-          "#e6e0d5",
-          "#f8f2e9"
+          "#323130",
+          "#646361",
+          "#969491",
+          "#c8c6c2",
+          "#faf7f2",
+          "#fcfaf7",
+          "#fdfcfa",
+          "#fefefd"
         ],
-        "darkCanonical": "#f3eadc"
+        "darkCanonical": "#faf7f2"
+      },
+      "on-nuit": {
+        "role": "neutral",
+        "displayName": "Texte sur bleu nuit",
+        "canonical": "#faf7f2",
+        "tonalRamp": [
+          "#323130",
+          "#646361",
+          "#969491",
+          "#c8c6c2",
+          "#faf7f2",
+          "#fcfaf7",
+          "#fdfcfa",
+          "#fefefd"
+        ],
+        "darkCanonical": "#faf7f2"
       },
       "accent": {
         "role": "primary",
-        "displayName": "Safran",
-        "canonical": "#f2a20c",
+        "displayName": "Orange vif",
+        "canonical": "#ff7a1a",
         "tonalRamp": [
-          "#372503",
-          "#5c3d05",
-          "#805606",
-          "#b77b09",
-          "#efa00c",
-          "#f7c362",
-          "#fadea9",
-          "#fdf1db"
+          "#331805",
+          "#66310a",
+          "#994910",
+          "#cc6215",
+          "#ff7a1a",
+          "#ffa96a",
+          "#ffd0af",
+          "#ffefe4"
         ],
-        "darkCanonical": "#f2a20c"
+        "darkCanonical": "#ff7a1a"
       },
       "on-accent": {
-        "role": "neutral",
-        "displayName": "Encre sur safran",
-        "canonical": "#22170e",
+        "role": "primary",
+        "displayName": "Texte sur orange",
+        "canonical": "#14213d",
         "tonalRamp": [
-          "#2f251c",
-          "#473e37",
-          "#605852",
-          "#857f7a",
-          "#a9a5a2",
-          "#c9c6c4",
-          "#e2e0df",
-          "#f3f2f2"
+          "#04070c",
+          "#080d18",
+          "#0c1425",
+          "#101a31",
+          "#14213d",
+          "#666f81",
+          "#adb1bb",
+          "#e3e4e8"
         ],
-        "darkCanonical": "#22170e"
+        "darkCanonical": "#14213d"
       },
-      "ch-gamelle": {
+      "lavande": {
+        "role": "secondary",
+        "displayName": "Lavande lumineuse",
+        "canonical": "#b9a6ff",
+        "tonalRamp": [
+          "#252133",
+          "#4a4266",
+          "#6f6499",
+          "#9485cc",
+          "#b9a6ff",
+          "#d2c5ff",
+          "#e7e0ff",
+          "#f7f4ff"
+        ],
+        "darkCanonical": "#b9a6ff"
+      },
+      "on-lavande": {
+        "role": "secondary",
+        "displayName": "Texte sur lavande",
+        "canonical": "#14213d",
+        "tonalRamp": [
+          "#04070c",
+          "#080d18",
+          "#0c1425",
+          "#101a31",
+          "#14213d",
+          "#666f81",
+          "#adb1bb",
+          "#e3e4e8"
+        ],
+        "darkCanonical": "#14213d"
+      },
+      "kira": {
+        "role": "secondary",
+        "displayName": "Lavande claire (mot de Kira)",
+        "canonical": "#ece6ff",
+        "tonalRamp": [
+          "#2f2e33",
+          "#5e5c66",
+          "#8e8a99",
+          "#bdb8cc",
+          "#ece6ff",
+          "#f3efff",
+          "#f8f6ff",
+          "#fdfcff"
+        ],
+        "darkCanonical": "#1d2d4f"
+      },
+      "relief-moustache": {
         "role": "tertiary",
-        "displayName": "Aplat gamelle",
-        "canonical": "#e9dcc6",
+        "displayName": "Relief de « Moustache »",
+        "canonical": "#b9a6ff",
         "tonalRamp": [
-          "#282622",
-          "#433f39",
-          "#5e5950",
-          "#867f72",
-          "#afa594",
-          "#d2c6b2",
-          "#ebdfcb",
-          "#f7f2ea"
+          "#252133",
+          "#4a4266",
+          "#6f6499",
+          "#9485cc",
+          "#b9a6ff",
+          "#d2c5ff",
+          "#e7e0ff",
+          "#f7f4ff"
         ]
       },
-      "ch-fontaine": {
+      "relief-malin": {
         "role": "tertiary",
-        "displayName": "Aplat fontaine",
-        "canonical": "#d8bf98",
+        "displayName": "Relief de « malin »",
+        "canonical": "#b84a06",
         "tonalRamp": [
-          "#2b261e",
-          "#473f32",
-          "#645846",
-          "#8e7e64",
-          "#b9a482",
-          "#dbc5a1",
-          "#ecdfcc",
-          "#f7f2ea"
-        ]
-      },
-      "ch-litiere": {
-        "role": "tertiary",
-        "displayName": "Aplat litière",
-        "canonical": "#c49a68",
-        "tonalRamp": [
-          "#2f2519",
-          "#4e3e2a",
-          "#6e563a",
-          "#9d7b53",
-          "#c8a172",
-          "#dcc4a6",
-          "#ecdfcf",
-          "#f7f2eb"
-        ]
-      },
-      "ch-arbre": {
-        "role": "tertiary",
-        "displayName": "Aplat arbre à chat",
-        "canonical": "#a97a4b",
-        "tonalRamp": [
-          "#322416",
-          "#543c25",
-          "#755534",
-          "#a8794a",
-          "#c2a180",
-          "#d9c4af",
-          "#eadfd3",
-          "#f6f2ed"
-        ]
-      },
-      "ch-articles": {
-        "role": "tertiary",
-        "displayName": "Aplat articles",
-        "canonical": "#6b4019",
-        "tonalRamp": [
-          "#3a230e",
-          "#613a17",
-          "#7a5431",
-          "#997b60",
-          "#b7a390",
-          "#d2c5b9",
-          "#e6dfd9",
-          "#f5f2ef"
-        ]
-      },
-      "ch-methode": {
-        "role": "tertiary",
-        "displayName": "Aplat méthode",
-        "canonical": "#22170e",
-        "tonalRamp": [
-          "#2f251c",
-          "#473e37",
-          "#605852",
-          "#857f7a",
-          "#a9a5a2",
-          "#c9c6c4",
-          "#e2e0df",
-          "#f3f2f2"
-        ]
-      },
-      "ch-encre": {
-        "role": "neutral",
-        "displayName": "Encre des chapitres",
-        "canonical": "#22170e",
-        "tonalRamp": [
-          "#2f251c",
-          "#473e37",
-          "#605852",
-          "#857f7a",
-          "#a9a5a2",
-          "#c9c6c4",
-          "#e2e0df",
-          "#f3f2f2"
-        ]
-      },
-      "ch-creme": {
-        "role": "neutral",
-        "displayName": "Crème des chapitres",
-        "canonical": "#f6efe4",
-        "tonalRamp": [
-          "#272624",
-          "#41403d",
-          "#5c5955",
-          "#837f79",
-          "#aaa59e",
-          "#ccc6bd",
-          "#e6e0d5",
-          "#f8f2e9"
+          "#250f01",
+          "#4a1e02",
+          "#6e2c04",
+          "#933b05",
+          "#b84a06",
+          "#d1895d",
+          "#e6c0a8",
+          "#f6e9e1"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "H1 de l'accueil et des pages institutionnelles."
+        "purpose": "H1 de l'accueil et des pages institutionnelles, Bricolage Grotesque 800."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "H2 de section, titres des encadrés caramel et des cartes d'articles."
+        "purpose": "H2 de section et titres des encadrés bleu nuit."
+      },
+      "accent-word": {
+        "displayName": "Mot en serif",
+        "purpose": "Un mot par titre en Instrument Serif italique (.mot-serif, TitreSerif) ; « malin » du logo."
       },
       "title": {
         "displayName": "Lead",
-        "purpose": "Chapeaux, questions de FAQ, noms de produits."
+        "purpose": "Chapeaux, mot de Kira, noms de produits (DM Sans)."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Texte courant."
+        "purpose": "Texte courant (DM Sans), colonne de 44rem."
       },
       "label": {
         "displayName": "Small",
-        "purpose": "Crédits, dates, mention Amazon, fil d'Ariane, navigation ; jamais sous 16 px."
+        "purpose": "Dates, sources, mention Amazon, fil d'Ariane, navigation ; jamais sous 16 px."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "relief-logo",
+        "value": "0 2px 0 #b9a6ff (Moustache), 0 2px 0 #b84a06 (malin) ; 0.035em dans les grands titres",
+        "purpose": "Relief plein du nom dans le logo et les titres de marque."
+      },
+      {
+        "name": "carte-accueil",
+        "value": "0 24px 60px -28px rgb(20 33 61 / 0.45)",
+        "purpose": "Cartes de la scène de comparaison de l'accueil seulement."
+      }
+    ],
     "motion": [
       {
         "name": "rise",
         "value": "700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; from opacity 0 + translateY(24px); delay calc(var(--i) * 80ms)",
-        "purpose": "Entrée du H1 et du chapeau d'en-tête au chargement ; absente en mouvement réduit."
+        "purpose": "Entrée du H1 et du chapeau d'en-tête ; absente en mouvement réduit."
+      },
+      {
+        "name": "entree-flou",
+        "value": "900ms cubic-bezier(0.23, 1, 0.32, 1) both; from opacity 0 + blur(14px) + translateY(0.12em); delay 120ms + i * 70ms",
+        "purpose": "Titre du premier écran de l'accueil, mot par mot ; absente en mouvement réduit."
       },
       {
         "name": "reveal",
         "value": "animation-timeline: view(); animation-range: entry 0% entry 60%; from translateY(20px); linear",
-        "purpose": "Entrée des blocs au défilement, translation seule sans fondu, CSS pur ; absente en mouvement réduit ou sans support."
+        "purpose": "Entrée des blocs au défilement, translation seule sans fondu, CSS pur."
       },
       {
         "name": "press",
-        "value": "transform 200ms ease-out; hover translateY(-2px); active translateY(0) scale(0.98)",
-        "purpose": "Retour au survol et au clic des boutons et encadrés-liens."
+        "value": "transform 150ms cubic-bezier(0.23, 1, 0.32, 1); active scale(0.97); flèche translateX(4px) au survol (pointeur fin)",
+        "purpose": "Boutons d'action en pilule et bouton « Menu »."
+      },
+      {
+        "name": "fonds",
+        "value": "background-color, color 700ms cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "Changement de couleur des scènes épinglées de l'accueil."
       },
       {
         "name": "vitrine",
-        "value": "GSAP ScrollTrigger + Lenis chargés à l'inactivité ; carte xPercent -100 -> 0 (scrub 0.6) ; média du héros scale 1 -> 1.08 (scrub)",
-        "purpose": "Accueil seulement, ordinateur (>= 1024px, pointeur fin), sans mouvement réduit ni économie de données ; 3D en plus : 4 coeurs, 4 Go, WebGL2."
+        "value": "GSAP ScrollTrigger + Lenis + WebGL (particules, pelote) chargés après l'affichage",
+        "purpose": "Accueil seulement, ordinateur capable (src/lib/capacites.ts), sans mouvement réduit ni économie de données."
       }
     ],
     "breakpoints": [
@@ -328,6 +311,10 @@
         "value": "1024px"
       },
       {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
         "name": "container",
         "value": "90rem"
       }
@@ -335,92 +322,91 @@
   },
   "components": [
     {
-      "name": "Bouton Amazon (safran)",
+      "name": "Bouton d'action (pilule orange)",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Action principale : Amazon dans les articles, premier bouton de l'accueil.",
-      "html": "<a class=\"ds-btn-primary\" href=\"#\">Voir le prix sur Amazon</a>",
-      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;background:var(--accent,#f2a20c);color:var(--on-accent,#22170e);font-weight:500;font-size:1.0625rem;text-decoration:none;border-radius:0;transition:transform 200ms ease-out}.ds-btn-primary:hover{transform:translateY(-2px)}.ds-btn-primary:active{transform:translateY(0) scale(.98)}.ds-btn-primary:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
+      "refersTo": "button-action",
+      "description": "Appel à l'action de l'accueil et des pages : pilule orange, texte bleu nuit, flèche dans un rond bleu nuit.",
+      "html": "<a class=\"ds-btn-action\" href=\"#\"><span>Voir le comparatif</span><span class=\"ds-btn-rond\" aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-btn-action{display:inline-flex;align-items:center;gap:16px;min-height:52px;padding:8px 8px 8px 24px;border-radius:9999px;background:var(--accent,#ff7a1a);color:var(--on-accent,#14213d);font-weight:500;text-decoration:none;transition:transform 150ms cubic-bezier(.23,1,.32,1)}.ds-btn-action:active{transform:scale(.97)}.ds-btn-rond{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;background:#14213d;color:#faf7f2;transition:transform 200ms cubic-bezier(.23,1,.32,1)}@media (hover:hover) and (pointer:fine){.ds-btn-action:hover .ds-btn-rond{transform:translateX(4px)}}.ds-btn-action:focus-visible{outline:3px solid var(--caramel,#14213d);outline-offset:3px}"
     },
     {
-      "name": "Bouton encre",
+      "name": "Bouton Amazon",
       "kind": "button",
-      "refersTo": "button-ink",
-      "description": "Action secondaire sur fond clair (menu mobile, envoi de formulaire).",
-      "html": "<button class=\"ds-btn-ink\">S'inscrire</button>",
-      "css": ".ds-btn-ink{min-height:48px;padding:0 24px;background:var(--ink,#22170e);color:var(--paper,#f6efe4);border:0;border-radius:0;font:inherit;font-size:1.0625rem;cursor:pointer}.ds-btn-ink:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
+      "refersTo": "button-amazon",
+      "description": "Bouton vers la fiche Amazon dans les articles : rectangle orange à angles droits, texte bleu nuit.",
+      "html": "<a class=\"ds-btn-amazon\" href=\"#\" rel=\"sponsored nofollow noopener\">Voir le prix sur Amazon</a>",
+      "css": ".ds-btn-amazon{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;background:var(--accent,#ff7a1a);color:var(--on-accent,#14213d);font-weight:500;text-decoration:none;border-radius:0;transition:transform 150ms ease-out}.ds-btn-amazon:hover{transform:translateY(-2px)}.ds-btn-amazon:active{transform:translateY(0)}.ds-btn-amazon:focus-visible{outline:3px solid var(--caramel,#14213d);outline-offset:3px}"
     },
     {
-      "name": "Bouton crème sur fond sombre",
-      "kind": "button",
-      "refersTo": "button-on-dark",
-      "description": "Action dans les cartes de chapitres et la section méthode de l'accueil.",
-      "html": "<div class=\"ds-dark\"><a class=\"ds-btn-cream\" href=\"#\">Lire notre méthode complète</a></div>",
-      "css": ".ds-dark{background:var(--ch-encre,#22170e);padding:24px}.ds-btn-cream{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;background:var(--ch-creme,#f6efe4);color:var(--ch-encre,#22170e);font-weight:500;text-decoration:none;transition:transform 200ms ease-out}.ds-btn-cream:hover{transform:translateY(-2px)}.ds-btn-cream:active{transform:translateY(0) scale(.98)}"
+      "name": "En-tête bleu nuit avec logo",
+      "kind": "navigation",
+      "refersTo": "header",
+      "description": "Bandeau bleu nuit de 64 px, logo en variante sombre, rubriques soulignées d'orange au survol, pilule orange « Menu » sur téléphone.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-logo\" href=\"#\"><img src=\"/brand/logo-mark-dark.svg\" alt=\"\" width=\"40\" height=\"42\"><span><span class=\"ds-logo-m\">Moustache</span> <span class=\"ds-logo-malin\">malin</span></span></a><span class=\"ds-menu\">Menu</span></header>",
+      "css": ".ds-header{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 16px;background:#14213d;color:#faf7f2}.ds-logo{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;font-size:1.375rem;line-height:1;white-space:nowrap}.ds-logo-m{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-stretch:88%;letter-spacing:-.035em;text-shadow:0 2px 0 #b9a6ff}.ds-logo-malin{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-size:1.12em;color:#ff7a1a;text-shadow:0 2px 0 #b84a06}.ds-menu{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:9999px;background:#ff7a1a;color:#14213d;font-weight:500}"
     },
     {
-      "name": "Champ e-mail",
-      "kind": "input",
-      "refersTo": "input-text",
-      "description": "Champ du formulaire de newsletter.",
-      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"votre@adresse.fr\">",
-      "css": ".ds-input{min-height:48px;padding:0 16px;background:var(--paper,#f6efe4);color:var(--ink,#22170e);border:2px solid var(--ink,#22170e);border-radius:0;font-size:1.125rem}.ds-input:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
-    },
-    {
-      "name": "En-tête",
-      "kind": "nav",
-      "description": "Nom en Instrument Serif ; rubriques soulignées en caramel au survol.",
-      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-logo\" href=\"#\">Moustache Malin</a><nav><a href=\"#\">Litières</a><a href=\"#\">Guides</a></nav></header>",
-      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 32px;background:var(--paper,#f6efe4);color:var(--ink,#22170e)}.ds-nav-logo{font-family:var(--font-instrument-serif,'Instrument Serif'),Georgia,serif;font-size:2rem;letter-spacing:-.02em;color:inherit;text-decoration:none}.ds-nav nav{display:flex;gap:28px}.ds-nav nav a{padding:8px 0;color:inherit;text-decoration:none;text-underline-offset:4px;text-decoration-thickness:2px}.ds-nav nav a:hover{text-decoration-line:underline;text-decoration-color:var(--caramel,#84501f)}.ds-nav a:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}"
-    },
-    {
-      "name": "Carte d'article",
+      "name": "Encadré « En bref »",
       "kind": "card",
-      "refersTo": "card-field",
-      "description": "Lien vers un article sur champ ; passe au caramel plein au survol.",
-      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-t\">Litière autonettoyante</span><span>Six modèles comparés à partir des fiches techniques.</span><span class=\"ds-card-l\">Lire le comparatif</span></a>",
-      "css": ".ds-card{display:block;padding:24px 32px;background:var(--field,#ece1cf);color:var(--ink,#22170e);text-decoration:none;transition:background-color 150ms,color 150ms}.ds-card:hover{background:var(--caramel-field,#6b4019);color:var(--on-caramel,#f6efe4)}.ds-card:focus-visible{outline:3px solid var(--caramel,#84501f);outline-offset:3px}.ds-card span{display:block;max-width:55ch}.ds-card-t{font-family:var(--font-instrument-serif,'Instrument Serif'),Georgia,serif;font-size:clamp(2.25rem,1.5rem + 3.2vw,4rem);line-height:.95;letter-spacing:-.02em;font-weight:400;margin-bottom:8px}.ds-card-l{margin-top:16px;font-weight:500;text-decoration:underline;text-underline-offset:4px}"
+      "refersTo": "en-bref",
+      "description": "Haut d'article : contour lavande, arrondi 1,5 rem, puces rondes orange.",
+      "html": "<aside class=\"ds-enbref\"><h2>En bref</h2><ul><li>Une réponse directe à la question.</li></ul></aside>",
+      "css": ".ds-enbref{border:2px solid #b9a6ff;border-radius:1.5rem;padding:24px 32px;color:var(--ink,#14213d)}.ds-enbref h2{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:1.75rem;margin:0}.ds-enbref ul{list-style:none;padding:0;margin:16px 0 0}.ds-enbref li{display:flex;gap:12px}.ds-enbref li::before{content:'';flex:none;width:8px;height:8px;margin-top:.6em;border-radius:9999px;background:#ff7a1a}"
     },
     {
-      "name": "Encadré caramel",
+      "name": "Le mot de Kira",
       "kind": "card",
-      "refersTo": "card-caramel",
-      "description": "Encadré vétérinaire, renvoi vers un article, premier choix de la sélection.",
-      "html": "<aside class=\"ds-callout\"><p class=\"ds-callout-t\">En cas de doute, consultez votre vétérinaire</p><p>Cette page parle d'équipement et ne remplace pas un avis vétérinaire.</p></aside>",
-      "css": ".ds-callout{padding:28px 32px;background:var(--caramel-field,#6b4019);color:var(--on-caramel,#f6efe4)}.ds-callout p{margin:0;max-width:60ch}.ds-callout .ds-callout-t{font-family:var(--font-instrument-serif,'Instrument Serif'),Georgia,serif;font-size:clamp(2.25rem,1.5rem + 3.2vw,4rem);line-height:.95;letter-spacing:-.02em;font-weight:400;margin-bottom:12px}"
+      "refersTo": "kira-note",
+      "description": "Un par article : fond lavande claire, arrondi 1,5 rem, portrait rond, texte en serif italique.",
+      "html": "<aside class=\"ds-kira\"><span class=\"ds-kira-portrait\" aria-hidden=\"true\">K</span><div><p class=\"ds-kira-titre\">Le mot de Kira</p><p class=\"ds-kira-texte\">Un fait vrai sur Kira, écrit par Romain.</p></div></aside>",
+      "css": ".ds-kira{display:flex;gap:24px;max-width:44rem;border-radius:1.5rem;padding:24px 32px;background:var(--kira-fond,#ece6ff);color:var(--ink,#14213d)}.ds-kira-portrait{display:flex;flex:none;align-items:center;justify-content:center;width:64px;height:64px;border-radius:9999px;background:#b9a6ff;color:#14213d;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:1.75rem}.ds-kira-titre{font-weight:500;margin:0}.ds-kira-texte{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:1.5rem;line-height:1.3;margin:8px 0 0}"
     },
     {
-      "name": "Nuancier des chapitres",
-      "kind": "custom",
-      "description": "Colonne de cinq aplats-liens du premier écran de l'accueil, du clair au foncé.",
-      "html": "<nav class=\"ds-swatch\"><a href=\"#\" style=\"background:#e9dcc6;color:#22170e\">La gamelle</a><a href=\"#\" style=\"background:#d8bf98;color:#22170e\">La fontaine</a><a href=\"#\" style=\"background:#c49a68;color:#22170e\">La litière</a><a href=\"#\" style=\"background:#6b4019;color:#f6efe4\">Déjà comparé</a><a href=\"#\" style=\"background:#22170e;color:#f6efe4\">Notre méthode</a></nav>",
-      "css": ".ds-swatch{display:grid;width:220px}.ds-swatch a{display:flex;min-height:96px;padding:20px;font-size:1rem;text-decoration:none;text-underline-offset:4px;text-decoration-thickness:2px}.ds-swatch a:hover{text-decoration-line:underline}"
+      "name": "Aplat bleu nuit",
+      "kind": "card",
+      "refersTo": "card-nuit",
+      "description": "Renvoi vers un article, encadré santé, choix n° 1 : bleu nuit plein, texte blanc cassé, angles droits.",
+      "html": "<a class=\"ds-nuit\" href=\"#\"><span class=\"ds-nuit-titre\">Le comparatif des fontaines</span><span>Lire l'article</span></a>",
+      "css": ".ds-nuit{display:block;padding:28px 32px;background:var(--caramel-field,#14213d);color:var(--on-caramel,#faf7f2);text-decoration:none;transition:transform 150ms ease-out}.ds-nuit:hover{transform:translateY(-2px)}.ds-nuit-titre{display:block;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-stretch:88%;letter-spacing:-.035em;line-height:.92;font-size:clamp(2.25rem,1.5rem + 3.2vw,4rem);margin-bottom:12px}"
+    },
+    {
+      "name": "Titre avec mot en serif",
+      "kind": "typography",
+      "refersTo": "accent-word",
+      "description": "Titre en grotesque 800 dont un mot passe en serif italique, surligné de lavande sur fond clair.",
+      "html": "<h1 class=\"ds-titre\">Litière <span class=\"ds-serif\">autonettoyante</span> : notre comparatif</h1>",
+      "css": ".ds-titre{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-stretch:88%;letter-spacing:-.035em;line-height:.92;font-size:clamp(3rem,1.6rem + 6.4vw,7.5rem);color:var(--ink,#14213d)}.ds-serif{position:relative;isolation:isolate;display:inline-block;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;font-stretch:normal;letter-spacing:-.01em}.ds-serif::before{content:'';position:absolute;z-index:-1;left:.02em;right:-.02em;bottom:.2em;height:.3em;border-radius:.05em;background:#b9a6ff;transform:skewX(-12deg)}"
     }
   ],
   "narrative": {
-    "northStar": "À hauteur de moustaches",
-    "overview": "L'appartement vu à 25 cm du sol. Un papier crème chaud porte tout ; le brun caramel et l'encre brun très foncé arrivent en aplats pleins, jamais en dégradés ni en ombres. La couleur vit dans ces aplats et dans les photos de vrais chats, qui sont les héroïnes des pages. Instrument Serif donne la voix (grands titres serrés), Hanken Grotesk porte la lecture.\n\nLes surfaces sont plates et à angles droits. La hiérarchie se fait par la taille du texte, le changement d'aplat et l'espace, pas par des filets, des ombres ou des étiquettes au-dessus des titres. Une seule couleur vive, le safran, est réservée à l'action principale.\n\nThème clair crème par défaut ; le mode sombre suit uniquement le réglage de l'appareil.",
+    "northStar": "Un chat heureux tient à peu de choses",
+    "overview": "Un site lumineux, moderne et contrasté. Le blanc cassé porte la lecture, le bleu nuit donne la structure (en-tête, titres, grandes sections pleines), l'orange vif sert à agir et la lavande lumineuse apporte la douceur en aplats et en surlignage. Titres en Bricolage Grotesque très grasse, un mot mis en valeur en Instrument Serif italique, texte en DM Sans. Les photos de vrais chats, et Kira, la chatte de Romain, sont les héroïnes des pages.\n\nL'accueil est une vitrine en scènes aux fonds changeants ; les articles restent sobres et plats.\n\nThème clair par défaut ; le mode sombre (fond bleu nuit) suit seulement le réglage de l'appareil.",
     "keyCharacteristics": [
-      "Aplats pleins, angles droits, aucune ombre au repos.",
-      "Deux polices, cinq tailles de texte, rien sous 16 px.",
-      "Safran pour l'action principale (Amazon, premier bouton de l'accueil) et rien d'autre.",
-      "Photos réelles de chats (Pexels), toujours créditées sous l'image.",
-      "Mouvement léger en CSS partout ; vidéo, 3D, GSAP et Lenis seulement sur les vitrines et sur ordinateur capable."
+      "Trois couleurs fortes sur blanc cassé : bleu nuit, orange, lavande.",
+      "Trois polices : grotesque 800, serif italique pour un mot, DM Sans pour lire ; cinq tailles, rien sous 16 px.",
+      "Formes douces (photos et encadrés arrondis, pilules) ; aplats de lecture des articles à angles droits.",
+      "Logo : symbole du chat au clin d'œil + « Moustache » grotesque + « malin » serif orange, en relief.",
+      "Mouvement CSS léger partout ; vidéo, WebGL, GSAP et Lenis seulement sur l'accueil et sur ordinateur capable."
     ],
     "rules": [
       {
-        "name": "La règle du safran",
-        "body": "Le safran signale l'action qui compte : Amazon dans les articles, un seul bouton sur le premier écran de l'accueil. Une action secondaire prend l'encre (`button-ink`) ou le crème sur fond sombre (`button-on-dark`).",
+        "name": "La règle du nom",
+        "body": "Dans le logo et les grands titres de marque, « malin » est en minuscule, serif italique orange, avec son relief.",
+        "section": "logo"
+      },
+      {
+        "name": "La règle de l'orange",
+        "body": "L'orange signale l'action (Amazon, un appel à l'action par écran, bouton « Menu »), toujours en fond avec texte bleu nuit, jamais en texte sur fond clair.",
         "section": "colors"
       },
       {
-        "name": "La règle des aplats",
-        "body": "La couleur arrive en champs pleins de bord à bord, avec le texte fixé pour chaque champ. Pas de dégradé, pas de transparence décorative sur les fonds.",
+        "name": "La règle des couples fixés",
+        "body": "Bleu nuit sur blanc cassé, champ, orange et lavande ; blanc cassé ou orange sur bleu nuit.",
         "section": "colors"
       },
       {
         "name": "La règle des cinq tailles",
-        "body": "small, body, lead, head, display, et rien d'autre ; les rares tailles en clamp() propres à un composant (nom du pied de page, H1 d'article, titres de chapitres) restent des titres en Instrument Serif.",
+        "body": "small, body, lead, head, display ; les tailles propres à un composant restent des titres en Bricolage Grotesque.",
         "section": "typography"
       },
       {
@@ -429,27 +415,10 @@
         "section": "typography"
       },
       {
-        "name": "La règle du plat au repos",
-        "body": "Rien ne flotte. Au survol, un bouton ou un encadré-lien monte de 2 px (translation), sans ombre.",
+        "name": "La règle du plat dans les articles",
+        "body": "Aucune ombre ni 3D dans un comparatif, un guide ou un avis ; au survol, un bouton ou un encadré-lien monte de 2 px.",
         "section": "elevation"
       }
-    ],
-    "dos": [
-      "Do poser chaque texte sur un aplat plein avec son couple fixé (encre sur papier/champ/aplats clairs, crème sur caramel plein et encre).",
-      "Do garder le safran pour Amazon et pour une seule action principale par écran, avec le texte encre dessus.",
-      "Do utiliser de vraies photos de chats libres de droits (Pexels, Unsplash, Pixabay), listées dans `content/credits.json` et créditées sous l'image.",
-      "Do animer les entrées par translation seule (`.reveal` : 20 px, liée au défilement, CSS pur) et réserver `.rise` (fondu + 24 px, 700 ms, cascade de 80 ms) aux titres et chapeaux d'en-tête ; les deux disparaissent avec `prefers-reduced-motion`.",
-      "Do charger vidéo, Three.js, GSAP et Lenis seulement sur les vitrines, après l'affichage, et seulement sur ordinateur (≥ 1024 px, pointeur fin) sans mouvement réduit ni économie de données ; la 3D exige en plus 4 cœurs, 4 Go et WebGL2 (`src/lib/capacites.ts`).",
-      "Do donner 44 px minimum à chaque cible tactile (48 px pour les boutons)."
-    ],
-    "donts": [
-      "Don't arrondir un angle ni ajouter une ombre portée à un élément d'interface.",
-      "Don't séparer des blocs avec des filets ou des bordures ; utiliser l'aplat et l'espace.",
-      "Don't placer une étiquette ou un sur-titre au-dessus d'un titre, ni de texte en capitales espacées.",
-      "Don't écrire du texte en safran ou en caramel clair sur papier.",
-      "Don't mettre de 3D, de GSAP ou de Lenis dans un article (comparatif ou guide).",
-      "Don't utiliser d'illustration dessinée, d'image Amazon ou de produit de marque identifiable pour en illustrer un autre.",
-      "Don't descendre sous 16 px de texte."
     ]
   }
 }
