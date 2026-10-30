@@ -3,6 +3,9 @@
 //   NEXT_PUBLIC_UMAMI_ID = identifiant du site dans Umami (« Website ID »)
 //   NEXT_PUBLIC_GOATCOUNTER = code du compte GoatCounter (ex. « moustachemalin » pour moustachemalin.goatcounter.com)
 // La page Confidentialité décrit automatiquement l'outil activé.
+// Choix de Romain : Umami Cloud. Website ID de Moustache Malin, à mettre dans NEXT_PUBLIC_UMAMI_ID sur Netlify
+// SEULEMENT au branchement du domaine moustachemalin.fr (pas avant) : 92f20f01-6d02-46b2-ad67-6ac0a1f3c43a
+// (équivaut au script <script defer src="https://cloud.umami.is/script.js" data-website-id="…"> fourni par Umami).
 export const UMAMI_ID = process.env.NEXT_PUBLIC_UMAMI_ID;
 export const GOATCOUNTER = process.env.NEXT_PUBLIC_GOATCOUNTER;
 export const MESURE_ACTIVE = Boolean(UMAMI_ID || GOATCOUNTER);
