@@ -23,14 +23,16 @@ export const KIRA: { photo: string | null } = {
   photo: null,
 };
 
-// Mentions légales. Pas de numéro de téléphone (aucun fourni par Romain : ligne retirée).
+// Mentions légales. SIRET et adresse : fiche officielle du SIREN 944 980 580 (recherche-entreprises.api.gouv.fr),
+// validés par Romain le 30/10/2026, sans le numéro d'appartement ; à changer après sa modification de micro-entreprise.
+// Pas de numéro de téléphone (aucun fourni par Romain : ligne retirée).
 // Hébergeur : adresse et contact vérifiés le 30 octobre 2026 sur netlify.com (politique de confidentialité et
 // conditions d'utilisation) ; Netlify ne publie pas de numéro de téléphone.
 export const LEGAL = {
   editeur: "Romain Cahagne",
   statut: "entrepreneur individuel (micro-entreprise)",
-  adresse: "Adresse postale (À COMPLÉTER)",
-  siret: "SIRET (À COMPLÉTER)",
+  adresse: "53 rue François-René de Chateaubriand, 44600 Saint-Nazaire",
+  siret: "944 980 580 00012",
   directeurPublication: "Romain Cahagne",
   hebergeur: {
     nom: "Netlify, Inc.",
