@@ -74,7 +74,6 @@ export function Pelote() {
                         →
                       </span>
                     </p>
-                    {photo ? <p className="mt-4 text-small text-[var(--f-doux)]">{photo.credit}</p> : null}
                   </div>
                 </Link>
               </li>

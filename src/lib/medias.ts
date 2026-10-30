@@ -7,7 +7,7 @@ export type Photo = {
   width: number;
   height: number;
   alt: string;
-  credit: string; // affiché sous la photo
+  credit: string; // auteur et source, pour mémoire (la page /credits-photos/ lit content/credits.json)
   position?: string; // point gardé au centre quand la photo est recadrée (CSS object-position), sinon le centre
 };
 

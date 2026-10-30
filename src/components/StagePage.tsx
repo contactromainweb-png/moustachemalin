@@ -60,9 +60,6 @@ export function StagePage({ title, lead, updated, photo, stageWord, portrait = f
                 className="object-cover"
                 style={photo.position ? { objectPosition: photo.position } : undefined}
               />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-paper px-5 py-3 text-small text-ink-soft lg:py-4">
-                {photo.credit}
-              </figcaption>
             </>
           ) : (
             <p

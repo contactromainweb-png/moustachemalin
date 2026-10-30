@@ -1,4 +1,4 @@
-import { AffiliateButton } from "@/components/AffiliateButton";
+import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { AmazonLivePrice } from "@/components/AmazonLivePrice";
 import { ProductVisual } from "@/components/ProductVisual";
@@ -23,6 +23,7 @@ export function ProductCard({ asin, niveau = 4 }: { asin: string; niveau?: 3 | 4
           <div>
             <AmazonLivePrice asin={p.asin} />
             <AffiliateButton asin={p.asin} emplacement="fiche" exemple={p.exemple} />
+            {p.exemple ? null : <LienAvisAmazon asin={p.asin} className="mt-2" />}
             <AmazonDisclosure className="mt-3 max-w-[50ch]" />
           </div>
         </div>

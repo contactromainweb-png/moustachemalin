@@ -117,7 +117,6 @@ export function HeroAccueil() {
                 Lire le comparatif des litières
               </BoutonAction>
             </div>
-            <p className="mt-6 text-small text-blanc/75">{photo.credit}</p>
           </div>
         </div>
       </div>
