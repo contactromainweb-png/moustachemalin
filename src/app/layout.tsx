@@ -5,7 +5,6 @@ import localFont from "next/font/local";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { IMAGE_PARTAGE } from "@/lib/medias";
 import { GOATCOUNTER, UMAMI_ID } from "@/lib/mesure";
 import { AUTEUR, SITE } from "@/lib/site";
 import "./globals.css";
@@ -50,9 +49,9 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     locale: "fr_FR",
     type: "website",
-    images: [IMAGE_PARTAGE],
+    // Image de partage : src/app/opengraph-image.tsx (ajoutée automatiquement par Next).
   },
-  twitter: { card: "summary_large_image", images: [IMAGE_PARTAGE.url] },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

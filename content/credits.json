@@ -16,14 +16,6 @@
     "resolutionSource": "5165x3443"
   },
   {
-    "fichier": "public/og-moustache-malin.jpg",
-    "auteur": "realfish (recadrage)",
-    "source": "Unsplash",
-    "url": "https://unsplash.com/photos/tULo6P9sNSE",
-    "licence": "Licence Unsplash",
-    "resolutionSource": "5165x3443"
-  },
-  {
     "fichier": "public/media/boire-chat-robinet.jpg",
     "auteur": "Sugarman Joe",
     "source": "Unsplash",
@@ -374,5 +366,13 @@
     "url": "https://www.pexels.com/photo/cat-near-tap-water-in-sink-16440309/",
     "licence": "Licence Pexels",
     "resolutionSource": "3885x2585"
+  },
+  {
+    "fichier": "public/brand/logo-mark.svg",
+    "auteur": "Logo créé pour Moustache Malin",
+    "source": "Création originale",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "vectoriel (SVG)"
   }
 ]
