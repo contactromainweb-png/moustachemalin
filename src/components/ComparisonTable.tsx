@@ -8,7 +8,7 @@ import { espacesFines } from "@/lib/typo";
 // `columns` = les clés de "specs" à comparer, dans l'ordre voulu. Le titre est écrit dans l'article.
 export function ComparisonTable({ asins, columns }: { asins: string[]; columns: string[] }) {
   const produits = asins.map(getProduct);
-  const valeur = (specs: Record<string, string>, cle: string) => espacesFines(specs[cle] ?? "Non communiqué");
+  const valeur = (specs: Record<string, string>, cle: string) => espacesFines(specs[cle] ?? "Non précisé");
 
   return (
     <section id="tableau-comparatif" aria-label="Tableau comparatif" className="reveal mb-14 mt-8">

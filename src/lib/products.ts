@@ -55,6 +55,25 @@ export const SPEC_LABELS: Record<string, string> = {
   camera: "Caméra",
   voix: "Message vocal",
   fraicheur: "Fraîcheur",
+  // Arbres à chat et griffoirs
+  hauteur: "Hauteur",
+  encombrement: "Encombrement au sol",
+  couchages: "Couchages",
+  griffoirs: "Griffoirs",
+  jeux: "Jeux",
+  charge: "Charge maximale",
+  stabilite: "Stabilité",
+  fixation: "Fixation",
+  materiaux: "Matériaux",
+  matiere: "Matière",
+  chats: "Nombre de chats",
+  dimensions: "Dimensions",
+  finition: "Finition",
+  usage: "Usage",
+  installation: "Installation",
+  bonus: "En plus",
+  tailles: "Tailles",
+  reversible: "Réversible",
 };
 
 export function specLabel(cle: string) {

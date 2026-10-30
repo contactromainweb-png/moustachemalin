@@ -342,5 +342,37 @@
     "url": "https://www.pexels.com/photo/curious-orange-tabby-cat-sitting-by-window-34389844/",
     "licence": "Licence Pexels",
     "resolutionSource": "6016x4016"
+  },
+  {
+    "fichier": "public/media/griffer-chats-passerelles.jpg",
+    "auteur": "Arina Krasnikova",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/cats-playing-on-their-wooden-play-house-mount-on-wall-7726077/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "4000x2670"
+  },
+  {
+    "fichier": "public/media/griffer-chat-arbre.jpg",
+    "auteur": "Chen EdisoN",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/relaxing-devon-rex-cat-on-sunlit-cat-tree-35077714/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "9504x6336"
+  },
+  {
+    "fichier": "public/media/griffer-chat-griffes.jpg",
+    "auteur": "Fred AUGÉ",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/tabby-cat-clawing-at-tree-in-sunlight-30232655/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6000x4000"
+  },
+  {
+    "fichier": "public/media/boire-chat-robinet-evier.jpg",
+    "auteur": "Helena Jankovičová Kováčová",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/cat-near-tap-water-in-sink-16440309/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "3885x2585"
   }
 ]
