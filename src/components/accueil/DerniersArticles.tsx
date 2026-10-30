@@ -5,7 +5,8 @@ import { derniersArticles } from "@/lib/rubriques";
 import { espacesFines } from "@/lib/typo";
 
 // Bloc B : les trois articles mis à jour le plus récemment, avec leur date (lue dans le frontmatter `updatedAt`).
-// Sous 1024 px, « Selon mon chat » est masqué : la section suit directement l'aplat lavande, d'où sa marge du haut.
+// Sous 1024 px, « Selon mon chat » est masqué : la section suit directement l'aplat lavande, d'où sa marge du haut ;
+// seuls les deux premiers articles y sont affichés, pour que la page tienne en dix écrans.
 export function DerniersArticles() {
   const articles = derniersArticles(3);
   if (articles.length === 0) return null;
@@ -17,8 +18,8 @@ export function DerniersArticles() {
           Derniers articles et <span className="mot-serif">mises à jour</span>
         </h2>
         <ol className="space-y-4 lg:col-span-8">
-          {articles.map((a) => (
-            <li key={a.href} className="reveal">
+          {articles.map((a, i) => (
+            <li key={a.href} className={`reveal ${i >= 2 ? "max-lg:hidden" : ""}`}>
               <Link
                 href={a.href}
                 className="group grid gap-x-8 gap-y-2 rounded-[1.5rem] bg-field px-5 py-6 transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.99] sm:grid-cols-[11rem_1fr_auto] sm:items-center sm:px-8"

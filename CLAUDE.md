@@ -208,6 +208,6 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
   4. **Court** : 1 à 3 phrases maximum par encadré, un seul encadré par article.
   5. **Ton** : première personne, espiègle, un peu diva, tendre avec « son humain ». Pas de langage bébé, pas d'emojis.
   6. Signature visuelle : petite photo ronde de Kira (fournie par Romain) + « Le mot de Kira ».
-- **Où Kira parle :** un encadré par article (composant `KiraNote`, placé après l'introduction), la page 404, les messages de confirmation (newsletter : `/lettre/merci/`, formulaire), la newsletter (signée « Romain et Kira »), les réseaux sociaux.
+- **Où Kira parle :** un encadré par article (composant `KiraNote`, placé après l'introduction), l'accueil (un encadré juste après les cartes « Mon problème, c'est… », texte de Romain), la page 404, les messages de confirmation (newsletter : `/lettre/merci/`, formulaire), la newsletter (signée « Romain et Kira »), les réseaux sociaux.
 - **Où Kira ne parle pas :** les comparatifs eux-mêmes (tableaux, fiches, avis), les encadrés de méthode, de santé ou d'affiliation, les mentions légales.
 - **Photo** : tant que Romain ne l'a pas fournie, un rond neutre la remplace. Pour l'ajouter : déposer la photo dans `public/media/` et renseigner `KIRA.photo` dans `src/lib/site.ts`.
