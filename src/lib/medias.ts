@@ -9,6 +9,7 @@ export type Photo = {
   alt: string;
   credit: string; // auteur et source, pour mémoire (la page /credits-photos/ lit content/credits.json)
   position?: string; // point gardé au centre quand la photo est recadrée (CSS object-position), sinon le centre
+  legende?: string; // légende affichée sous la photo (PhotoMoyenne)
 };
 
 export const PHOTOS = {
@@ -118,6 +119,15 @@ export const PHOTOS = {
     alt: "Un chat Bengal penché sur un lavabo blanc qui boit le filet d'eau du robinet.",
     credit: "Photo : Helena Jankovičová Kováčová, Pexels",
     position: "50% 30%",
+  },
+  // Kira sur son ancien arbre à chat (photo personnelle de Romain, prise le soir : légèrement éclaircie, 1536 × 2048).
+  kiraArbre: {
+    src: "/media/kira/kira-arbre-a-chat.jpg",
+    width: 1536,
+    height: 2048,
+    alt: "Kira qui joue en haut de son ancien arbre à chat",
+    credit: "Photo : Romain, photo personnelle",
+    legende: "Kira sur son ancien arbre à chat, un modèle d'entrée de gamme qui ne fait pas partie de notre sélection.",
   },
   // Portrait de Romain (photo personnelle, 1518 × 1892 : utilisée telle quelle, jamais agrandie).
   romain: {

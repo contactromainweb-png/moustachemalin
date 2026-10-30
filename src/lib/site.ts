@@ -20,7 +20,7 @@ export const AUTEUR = {
 // Kira, la chatte de Romain et mascotte du site (encadrés « Le mot de Kira », page 404, confirmations).
 // photo : chemin dans public/ quand Romain l'aura fournie (ex. "/media/kira.jpg"), sinon un rond neutre s'affiche.
 export const KIRA: { photo: string | null } = {
-  photo: null,
+  photo: "/media/kira/kira-portrait.jpg", // photo personnelle de Romain, 800 × 800
 };
 
 // Mentions légales. SIRET et adresse : fiche officielle du SIREN 944 980 580 (recherche-entreprises.api.gouv.fr),

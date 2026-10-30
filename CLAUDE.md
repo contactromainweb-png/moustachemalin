@@ -199,7 +199,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - Les passages marqués **[À VALIDER PAR ROMAIN]** ne sont jamais publiés tels quels : ils restent hors du site tant que Romain ne les a pas complétés.
 
 ### La voix de Kira
-- **Qui est Kira.** La chatte de Romain : un peu plus d'un an, fofolle, très joueuse, « un vrai petit chien » qui rapporte ses jouets aux pieds de Romain. Elle adore boire l'eau qui coule du robinet. Elle passe un temps fou dans sa litière à tout recouvrir soigneusement. Romain lui rapporte un jouet à chaque course.
+- **Qui est Kira.** La chatte de Romain : un peu plus d'un an, fofolle, très joueuse, « un vrai petit chien » qui rapporte ses jouets aux pieds de Romain. Elle adore boire l'eau qui coule du robinet. Elle passe un temps fou dans sa litière à tout recouvrir soigneusement. Romain lui rapporte un jouet à chaque course. Kira a eu un arbre à chat d’entrée de gamme, sur lequel elle joue avec les pompons.
 - **Son rôle.** Mascotte et personnalité du site. **Romain conseille, Kira donne le sourire.**
 - **Règles d'or**
   1. **Kira ne dit que des choses vraies sur elle.** On n'invente aucune habitude, aucun goût, aucune anecdote. Une nouvelle info sur Kira doit venir de Romain.

@@ -4,7 +4,7 @@ import { KIRA } from "@/lib/site";
 
 // « Le mot de Kira » : un seul encadré par article, placé après l'introduction (charte dans CLAUDE.md, section 11).
 // Kira ne dit que des choses vraies sur elle, ne donne aucun avis produit ni conseil de santé : le texte vient de Romain.
-// Tant que Romain n'a pas fourni sa photo (KIRA.photo vide), un rond neutre avec son initiale la remplace.
+// Portrait rond : KIRA.photo (src/lib/site.ts) ; si elle est vide, un rond neutre avec son initiale la remplace.
 export function KiraNote({ children }: { children: ReactNode }) {
   return (
     <aside
@@ -22,15 +22,17 @@ export function KiraNote({ children }: { children: ReactNode }) {
   );
 }
 
-export function Portrait({ taille = "size-14 sm:size-16" }: { taille?: string }) {
+// prioritaire : portrait affiché dès le premier écran (page 404, confirmation de la lettre), demandé tout de suite.
+export function Portrait({ taille = "size-14 sm:size-16", prioritaire = false }: { taille?: string; prioritaire?: boolean }) {
   if (KIRA.photo) {
     return (
       <Image
         src={KIRA.photo}
         alt="Kira, la chatte de Romain"
-        width={128}
-        height={128}
+        width={192}
+        height={192}
         quality={80}
+        priority={prioritaire}
         className={`${taille} shrink-0 rounded-full object-cover`}
       />
     );
