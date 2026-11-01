@@ -24,7 +24,8 @@ export type Frontmatter = {
   motSerif?: string; // mot du titre affiché en serif italique
   enBref?: string[]; // 3 ou 4 phrases courtes qui répondent directement à la question (encadré « En bref »)
   pilier?: string; // slug du comparatif pilier de la grappe (un comparatif indique son propre slug)
-  pinImage?: string; // image verticale 1000 × 1500 px pour Pinterest (chemin dans public/)
+  pinTitre?: string; // titre court de l'image Pinterest, sinon la partie du titre avant « : » (scripts/pins.mjs)
+  pinCadrage?: string; // point de la photo gardé dans l'image Pinterest (ex. "62% 50%"), sinon sa position
   updatedAt: string; // AAAA-MM-JJ
   publishedAt?: string; // AAAA-MM-JJ, sinon updatedAt
   products?: string[]; // ASIN classés, pour le schema ItemList des comparatifs
@@ -37,6 +38,11 @@ export type Frontmatter = {
 
 export function cheminArticle(fm: Frontmatter) {
   return `/${fm.rubrique}/${fm.slug}/`;
+}
+
+// Image verticale 1000 × 1500 px pour Pinterest, fabriquée avant chaque build par scripts/pins.mjs.
+export function pinArticle(fm: Frontmatter) {
+  return `/pins/${fm.slug}.jpg`;
 }
 
 export function rubriqueArticle(fm: Frontmatter) {
@@ -64,13 +70,10 @@ export function articleMetadata(fm: Frontmatter): Metadata {
       url: cheminArticle(fm),
       publishedTime: fm.publishedAt ?? fm.updatedAt,
       modifiedTime: fm.updatedAt,
-      // Le bloc openGraph d'une page remplace celui du layout : d'abord la photo d'en-tête de l'article (au moins
-      // 1200 px de large, pour Google Discover), sinon l'image de partage du site ; puis l'image verticale pour
-      // Pinterest quand l'article en a une.
-      images: [
-        photoPartage(fm) ?? IMAGE_PARTAGE,
-        ...(fm.pinImage ? [{ url: fm.pinImage, width: 1000, height: 1500, alt: fm.title }] : []),
-      ],
+      // Le bloc openGraph d'une page remplace celui du layout : la photo d'en-tête de l'article (au moins 1200 px
+      // de large, pour Google Discover), sinon l'image de partage du site. L'image verticale pour Pinterest est
+      // signalée à part, dans la page (ArticleTemplate).
+      images: [photoPartage(fm) ?? IMAGE_PARTAGE],
     },
     // Sans noindex, la clé reste absente : la page garde la balise robots du layout (grandes vignettes).
     ...(fm.noindex ? { robots: { index: false, follow: false } } : {}),

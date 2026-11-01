@@ -59,3 +59,6 @@ next-env.d.ts
 /photos-kira-2/
 # Photos des chats de la famille de Romain (originaux, dont certaines gardées pour plus tard) : mêmes raisons.
 /photos-famille/
+
+# Images Pinterest, fabriquées avant chaque build (scripts/pins.mjs).
+/public/pins/
