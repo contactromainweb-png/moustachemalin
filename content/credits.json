@@ -507,6 +507,15 @@
     "description": "Black Pearl, le chat noir de la compagne de Romain, qui traverse le jardin"
   },
   {
+    "fichier": "public/media/famille/black-pearl-profil.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1500x2000",
+    "description": "Black Pearl, le chat noir de la compagne de Romain, assis dans l'herbe"
+  },
+  {
     "fichier": "public/media/famille/chichoune-arbre-a-chat.jpg",
     "auteur": "Romain",
     "source": "Photo personnelle",
@@ -746,6 +755,46 @@
     "url": "https://www.pexels.com/photo/27297163/",
     "licence": "Licence Pexels",
     "resolutionSource": "4000x6000"
+  },
+  {
+    "fichier": "public/media/articles/sorties-chat-roux-porte.jpg",
+    "auteur": "Jess Chen",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/31672384/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "4000x6000"
+  },
+  {
+    "fichier": "public/media/articles/chatiere-chat-tricolore.jpg",
+    "auteur": "Artem Kniaz",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/AA0mTuZtGsw",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "6602x4401"
+  },
+  {
+    "fichier": "public/media/articles/chat-griffe-canape.jpg",
+    "auteur": "Thức Trần",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/ShkQG_DfCtQ",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "6000x4000"
+  },
+  {
+    "fichier": "public/media/articles/chat-griffoir-poteau.jpg",
+    "auteur": "Ihnatsi Yfull",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/JE0_aIfB6FI",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "3000x4500"
+  },
+  {
+    "fichier": "public/media/articles/chat-renifle-plante.jpg",
+    "auteur": "FOX",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/30319465/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5793x3862"
   },
   {
     "fichier": "public/media/articles/chat-roux-assis-parquet-clair.jpg",

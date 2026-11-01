@@ -44,7 +44,7 @@ function tousLesFrontmatters() {
 // (guides, outils…), pour la section « Pour aller plus loin ». Vide = section masquée.
 export function satellitesDe(slug: string): ArticleLien[] {
   return tousLesFrontmatters()
-    .filter((fm) => fm.pilier === slug && fm.slug !== slug)
+    .filter((fm) => (fm.pilier === slug || fm.autresPiliers?.includes(slug)) && fm.slug !== slug)
     .map(lien);
 }
 

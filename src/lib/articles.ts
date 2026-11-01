@@ -24,6 +24,7 @@ export type Frontmatter = {
   motSerif?: string; // mot du titre affiché en serif italique
   enBref?: string[]; // 3 ou 4 phrases courtes qui répondent directement à la question (encadré « En bref »)
   pilier?: string; // slug du comparatif pilier de la grappe (un comparatif indique son propre slug)
+  autresPiliers?: string[]; // autres comparatifs dont l'article est aussi un satellite (« Pour aller plus loin »)
   pinTitre?: string; // titre court de l'image Pinterest, sinon la partie du titre avant « : » (scripts/pins.mjs)
   pinCadrage?: string; // point de la photo gardé dans l'image Pinterest (ex. "62% 50%"), sinon sa position
   updatedAt: string; // AAAA-MM-JJ

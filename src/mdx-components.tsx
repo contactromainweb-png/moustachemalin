@@ -65,6 +65,7 @@ const components: MDXComponents = {
   AffiliateButton,
   // Placée seule dans un article : un peu d'air avant le texte qui suit.
   AmazonDisclosure: (props: { className?: string }) => <AmazonDisclosure className="mb-10" {...props} />,
+  Callout: Encadre,
   CalloutLink,
   Encadre,
   EncadreOutil,

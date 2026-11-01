@@ -36,6 +36,14 @@ export function Problemes() {
                 →
               </span>
             </Link>
+            {p.guide && pageEnLigne(p.guide.href) ? (
+              <Link
+                href={p.guide.href}
+                className="mt-1 inline-block py-2 text-small font-medium underline decoration-accent decoration-2 underline-offset-4"
+              >
+                {p.guide.label}
+              </Link>
+            ) : null}
           </li>
         ))}
       </ul>
