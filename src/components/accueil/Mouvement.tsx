@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { SOUCIS } from "@/lib/accueil";
 import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
 import { comparaison, fin, mur, pelote } from "./scenes";
@@ -13,8 +13,12 @@ type Lenis = { scrollTo: (cible: number, options?: { immediate?: boolean }) => v
 // Téléphone, tablette, écran tactile : défilement natif, aucune section bloquée, ni Lenis ni GSAP. Chaque bloc
 // apparaît une seule fois en arrivant à l'écran et le compteur monte quand il apparaît (voir apparitions).
 // Aucun aimantage (snap) : la page ne bouge jamais d'elle-même, seul le visiteur fait défiler.
+// Changement de page : tout est défait dans le nettoyage d'un effet de mise en page (useLayoutEffect), qui s'exécute
+// pendant la mise à jour du DOM et non après. Mouvement est placé en tête de l'accueil : React le démonte avant les
+// sections, donc les épinglages sont retirés (pin-spacer défaits) avant que React ne retire ces sections.
+// Chaque élément épinglé est en plus l'unique enfant d'un conteneur dédié (voir HeroAccueil, Soucis, etc.).
 export function Mouvement() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!peutAnimer()) return;
     if (!estOrdinateur()) return apparitions();
     let nettoyer = () => {};
@@ -38,18 +42,23 @@ export function Mouvement() {
       (window as Window & { mmLenis?: Lenis }).mmLenis = lenis;
 
       const section = document.querySelector<HTMLElement>("[data-soucis]");
+      // Tout ce que GSAP crée ici (tweens, timelines, ScrollTrigger, épinglages) est enregistré dans ce contexte,
+      // limité à <main>, et défait d'un coup par ctx.revert().
       const ctx = gsap.context(() => {
         heros(gsap);
         finitions.push(desintegration(gsap));
         if (section) finitions.push(soucis(gsap, lenis, section));
         finitions.push(pelote(gsap), mur(gsap), comparaison(gsap), fin(gsap));
         ScrollTrigger.refresh();
-      });
+      }, document.querySelector("main") ?? undefined);
 
       nettoyer = () => {
-        finitions.forEach((f) => f());
+        // Les épinglages d'abord : chaque élément revient à sa place dans le DOM que React connaît.
         ctx.revert();
+        finitions.forEach((f) => f());
+        ScrollTrigger.getAll().forEach((t) => t.kill());
         gsap.ticker.remove(tic);
+        gsap.ticker.lagSmoothing(500, 33);
         lenis.destroy();
         delete (window as Window & { mmLenis?: Lenis }).mmLenis;
       };

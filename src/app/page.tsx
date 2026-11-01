@@ -29,6 +29,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      {/* En premier : démonté avant les sections au changement de page (voir Mouvement). */}
+      <Mouvement />
       <HeroAccueil />
       <Problemes />
       <MotDeKira />
@@ -42,7 +44,6 @@ export default function Home() {
       <QuiEcrit />
       <Lettre />
       <Fin />
-      <Mouvement />
     </>
   );
 }
