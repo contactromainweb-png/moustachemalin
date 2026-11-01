@@ -104,6 +104,7 @@ URLs en français, minuscules, avec tirets, sans accents.
 - Répond à une question (« Mon chat ne boit pas »), structure claire, ton rassurant.
 - Pour tout sujet de santé : encadré « En cas de doute, consultez votre vétérinaire ». Aucun conseil médical.
 - Renvoie vers le comparatif adapté avec un encadré produit.
+- **Chaque nouveau guide problème contient un `CalloutLink` et un `NotreChoix`** (1 ou 2 produits de son comparatif pilier, placé juste après le CalloutLink ou après la partie qui en parle). `NotreChoix` affiche le nom, « Pour qui » (JSON produit), le bouton Amazon et le lien vers les avis clients, avec la mention Amazon dessous ; aucun prix, aucune note ; un ASIN inconnu fait échouer le build.
 
 ### Rubrique
 - Introduction courte, cartes vers les articles, photo ou vidéo d'ambiance.

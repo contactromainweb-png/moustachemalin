@@ -9,6 +9,13 @@ export const SITE = {
   email: "contact@moustachemalin.fr", // confirmée par Romain le 30/10/2026 (boîte à créer au branchement du domaine)
 };
 
+// Comptes du site sur les réseaux : liens du pied de page et `sameAs` du schema Organization. TikTok reste masqué tant
+// que NEXT_PUBLIC_TIKTOK_URL est vide (variables d'environnement Netlify).
+export const RESEAUX = [
+  { nom: "Pinterest", url: "https://www.pinterest.fr/moustachemalin/" },
+  { nom: "TikTok", url: process.env.NEXT_PUBLIC_TIKTOK_URL || "" },
+].filter((r) => r.url) as { nom: "Pinterest" | "TikTok"; url: string }[];
+
 // Logo carré pour les données structurées (Organization, éditeur des articles) : Google demande une image matricielle.
 export const LOGO = { src: "/brand/icon-512.png", width: 512, height: 512 };
 

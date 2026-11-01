@@ -92,7 +92,8 @@ export function Mur() {
           <h2 id="titre-mur" className="flex flex-col items-center">
             <span data-mur-compteur className="font-display text-[clamp(8rem,34vw,24rem)] leading-[0.8] tabular-nums">
               {total}
-            </span>
+            </span>{" "}
+            {/* L'espace ci-dessus : le titre se lit « 36 appareils passés au crible », pas « 36appareils ». */}
             <span data-mur-legende data-apparait className="font-display mt-4 text-[clamp(2rem,1.2rem+3.4vw,4.5rem)]">
               appareils passés au <span className="mot-serif text-accent">crible</span>
             </span>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { StagePage } from "@/components/StagePage";
 import { BANDE } from "@/lib/bande";
 import { PHOTOS } from "@/lib/medias";
@@ -53,6 +54,28 @@ export default function Page() {
               <p className="mt-1 text-small font-medium text-ink-soft">{c.chezQui}</p>
               <p className="mt-3">{espacesFines(c.phrase)}</p>
             </div>
+          </li>
+        ))}
+      </ul>
+
+      {/* Texte de Romain : aucun chat de la bande n'a testé de produit (CLAUDE.md §11). */}
+      <p className="mt-16 max-w-[60ch]">
+        {espacesFines(
+          "Aucun chat de la bande n'a testé de produit pour nos comparatifs. Le jour où Kira testera un appareil pour de vrai, on le dira clairement, photos à l'appui.",
+        )}
+      </p>
+      <ul className="mt-4 flex flex-wrap gap-x-8">
+        {[
+          { href: "/methode/", label: "Notre méthode" },
+          { href: "/a-propos/", label: "Qui écrit ici" },
+        ].map((l) => (
+          <li key={l.href}>
+            <Link
+              href={l.href}
+              className="inline-flex min-h-11 items-center font-medium underline decoration-accent decoration-2 underline-offset-[6px]"
+            >
+              {l.label}
+            </Link>
           </li>
         ))}
       </ul>

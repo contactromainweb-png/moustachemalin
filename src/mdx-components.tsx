@@ -15,6 +15,7 @@ import { KiraCousins, KiraGalerie } from "@/components/KiraGalerie";
 import { KiraNote } from "@/components/KiraNote";
 import { MethodNote } from "@/components/MethodNote";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { NotreChoix } from "@/components/NotreChoix";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { ProsCons } from "@/components/ProsCons";
@@ -81,6 +82,7 @@ const components: MDXComponents = {
   KiraNote,
   MethodNote,
   NewsletterForm,
+  NotreChoix,
   ProductBox,
   ProductCard,
   ProsCons,
