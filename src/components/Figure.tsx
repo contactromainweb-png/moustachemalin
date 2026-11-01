@@ -32,22 +32,25 @@ export function Figure({ photo, sizes, enTete = false, className = "" }: Props) 
   );
 }
 
-// Dans un article MDX, photo verticale en taille moyenne avec sa légende : <PhotoMoyenne nom="kiraArbre" />
-// (photos personnelles de 1536 px de large : jamais en pleine largeur).
+// Dans un article MDX, photo en taille moyenne avec sa légende : <PhotoMoyenne nom="kiraArbre" />
+// (photos personnelles et photos d'appoint : jamais en pleine largeur). Verticale : format 3:4, 22rem au plus ;
+// en largeur : format 3:2, 36rem au plus. Dimensions fixées, chargée à l'approche (pas de décalage de la page).
 export function PhotoMoyenne({ nom }: { nom: keyof typeof PHOTOS }) {
   const photo: Photo = PHOTOS[nom];
   if (!photo) throw new Error(`Photo inconnue dans PHOTOS (src/lib/medias.ts) : ${nom}`);
+  const paysage = photo.width > photo.height;
   return (
-    <figure className="reveal my-12 max-w-[22rem]">
+    <figure className={`reveal my-12 ${paysage ? "max-w-[36rem]" : "max-w-[22rem]"}`}>
       <Image
         src={photo.src}
         width={photo.width}
         height={photo.height}
         alt={photo.alt}
-        sizes="(min-width: 640px) 22rem, calc(100vw - 2rem)"
+        sizes={paysage ? "(min-width: 640px) 36rem, calc(100vw - 2rem)" : "(min-width: 640px) 22rem, calc(100vw - 2rem)"}
         loading="lazy"
         quality={80}
-        className="aspect-[3/4] w-full rounded-[1.25rem] bg-field object-cover"
+        className={`${paysage ? "aspect-[3/2]" : "aspect-[3/4]"} w-full rounded-[1.25rem] bg-field object-cover`}
+        style={photo.position ? { objectPosition: photo.position } : undefined}
       />
       {photo.legende ? (
         <figcaption className="mt-3 text-small text-ink-soft">{espacesFines(photo.legende)}</figcaption>

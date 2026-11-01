@@ -9,6 +9,9 @@ export const SITE = {
   email: "contact@moustachemalin.fr", // confirmée par Romain le 30/10/2026 (boîte à créer au branchement du domaine)
 };
 
+// Logo carré pour les données structurées (Organization, éditeur des articles) : Google demande une image matricielle.
+export const LOGO = { src: "/brand/icon-512.png", width: 512, height: 512 };
+
 // Auteur des articles (signature « Par Romain » et données structurées Person, avec sa photo).
 // Volontairement aucun lien vers d'autres sites (pas de sameAs) : demande de Romain.
 export const AUTEUR = {
@@ -78,4 +81,5 @@ export const PAGES_INFO = [
   { href: "/affiliation/", label: "Affiliation" },
   { href: "/mentions-legales/", label: "Mentions légales" },
   { href: "/confidentialite/", label: "Confidentialité" },
+  { href: "/contact/", label: "Contact" },
 ];

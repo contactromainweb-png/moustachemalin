@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { JsonLd } from "@/components/JsonLd";
 import { StagePage, type StagePhoto } from "@/components/StagePage";
 import { TitreSerif } from "@/components/TitreSerif";
 import { LIBELLES_TYPE, type TypeArticle } from "@/lib/articles";
 import { PHOTOS, type Photo } from "@/lib/medias";
+import { SITE } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
 
 export type ArticleLien = {
@@ -21,6 +25,10 @@ type Groupe = { type: TypeArticle; articles: ArticleLien[] };
 type Props = {
   titre: string;
   intro: string;
+  chemin: string; // adresse de la page, ex. "/litieres/" (fil d'Ariane, liste ItemList)
+  // Texte de la rubrique sous les cartes (content/rubriques/<rubrique>.mdx : à quoi sert l'équipement, comment
+  // choisir, liens vers chaque article, mini FAQ).
+  texte?: ReactNode;
   photo?: StagePhoto;
   // Petite photo d'ambiance posée avant les cartes (page /guides/ : Rebelle), en plus de la grande photo de la scène.
   vignette?: Photo;
@@ -31,15 +39,23 @@ const TITRES_GROUPE: Record<TypeArticle, [string, string, string]> = {
   guide: ["Nos", "guides", ""],
   avis: ["Nos", "avis", " détaillés"],
   outil: ["Nos", "outils", ""],
-  comparatif: ["Un comparatif par", "rubrique", ""],
+  comparatif: ["Nos", "comparatifs", ""],
 };
 
 // Page de rubrique : introduction courte, cartes vers les articles (grande photo, titre avec son mot en serif
 // italique), photo d'ambiance qui reste en place sur ordinateur. Apparitions légères en CSS seulement.
 // `groupes` au lieu d'`articles` : les cartes sont rangées par type d'article, un titre par groupe (page /guides/).
-export function RubriqueTemplate({ titre, intro, articles, groupes, photo, vignette }: Props) {
+// Fil d'Ariane au-dessus du titre ; schema ItemList avec tous les articles listés.
+export function RubriqueTemplate({ titre, intro, chemin, texte, articles, groupes, photo, vignette }: Props) {
+  const liste = groupes ? groupes.flatMap((g) => g.articles) : articles;
   return (
-    <StagePage title={titre} lead={intro} photo={photo} stageWord={titre}>
+    <StagePage
+      title={titre}
+      lead={intro}
+      photo={photo}
+      stageWord={titre}
+      filAriane={<Breadcrumbs items={[{ label: titre, href: chemin }]} />}
+    >
       {vignette ? (
         <Image
           src={vignette.src}
@@ -72,6 +88,21 @@ export function RubriqueTemplate({ titre, intro, articles, groupes, photo, vigne
           <Cartes articles={articles} />
         </>
       )}
+      {texte ? <div className="mt-24">{texte}</div> : null}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: titre,
+          url: new URL(chemin, SITE.url).toString(),
+          itemListElement: liste.map((a, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: a.titre,
+            url: new URL(a.href, SITE.url).toString(),
+          })),
+        }}
+      />
     </StagePage>
   );
 }
@@ -91,7 +122,7 @@ function Cartes({ articles }: { articles: ArticleLien[] }) {
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <Image
                     src={image.src}
-                    alt=""
+                    alt={image.alt}
                     fill
                     quality={80}
                     sizes="(min-width: 1024px) 22rem, (min-width: 640px) 50vw, 100vw"

@@ -1,4 +1,4 @@
-// Scènes 4 à 7 de l'accueil sur ordinateur : animations liées au défilement (GSAP ScrollTrigger), appelées par Mouvement.
+// Scènes 4, 5 et 7 de l'accueil sur ordinateur : animations liées au défilement (GSAP ScrollTrigger), appelées par Mouvement.
 // Chaque fonction renvoie de quoi tout défaire. Sans elles (pas de JavaScript, « animations réduites »),
 // les sections sont déjà complètes et immobiles.
 
@@ -137,60 +137,6 @@ export function mur(gsap: Gsap) {
 
   return () => {
     compteur.textContent = String(total);
-  };
-}
-
-// Scène 6 : la fiche se remplit, devient tableau, le critère du titre défile et allume sa ligne, puis le badge.
-// Section épinglée.
-export function comparaison(gsap: Gsap) {
-  const section = document.querySelector<HTMLElement>("[data-comparaison]");
-  if (!section) return () => {};
-  const lignesFiche = section.querySelectorAll<HTMLElement>("[data-fiche-ligne]");
-  const fiche = section.querySelector<HTMLElement>("[data-fiche]")!;
-  const tableau = section.querySelector<HTMLElement>("[data-tableau]")!;
-  const rangees = gsap.utils.toArray<HTMLElement>("[data-tableau-ligne]", section).map((r) => r.querySelectorAll<HTMLElement>("[data-ligne-fond]"));
-  const badges = section.querySelectorAll<HTMLElement>("[data-badge]");
-  const colonneChoix = section.querySelector<HTMLElement>("[data-tableau-colonne='choix']");
-  const allume = "rgb(185 166 255 / 0.38)";
-
-  section.setAttribute("data-defile", "");
-  const mots = gsap.utils.toArray<HTMLElement>("[data-critere]", section);
-  gsap.set(mots.slice(1), { yPercent: 105 });
-  const scene = section.querySelector<HTMLElement>("[data-comparaison-scene]")!;
-
-  const tl = gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: { trigger: scene, start: "top top", end: "+=230%", pin: true, scrub: 0.6 },
-  });
-  tl.from(lignesFiche, { opacity: 0, x: -24, duration: 0.05, stagger: 0.04, ease: "power2.out" }, 0.02)
-    .to(fiche, { y: -50, scale: 0.92, opacity: 0.35, duration: 0.1, ease: "power2.inOut" }, 0.24)
-    .from(tableau, { opacity: 0, y: 70, duration: 0.1, ease: "power2.out" }, 0.27);
-  rangees.forEach((cellules, r) => tl.from(cellules, { opacity: 0, y: 16, duration: 0.05, stagger: 0.012, ease: "power2.out" }, 0.33 + r * 0.03));
-  // Un critère à la fois : le mot du titre change, sa ligne s'allume.
-  const debut = 0.48;
-  const pas = 0.11;
-  mots.forEach((mot, i) => {
-    const t = debut + i * pas;
-    if (i > 0) {
-      tl.to(mots[i - 1], { yPercent: -105, duration: 0.04, ease: "power2.inOut" }, t)
-        .to(mot, { yPercent: 0, duration: 0.04, ease: "power2.inOut" }, t)
-        .to(rangees[i - 1], { backgroundColor: "rgb(185 166 255 / 0)", duration: 0.04 }, t);
-    }
-    tl.to(rangees[i], { backgroundColor: allume, duration: 0.04 }, t);
-  });
-  const fin = debut + mots.length * pas;
-  tl.to(rangees[rangees.length - 1], { backgroundColor: "rgb(185 166 255 / 0)", duration: 0.04 }, fin)
-    .fromTo(
-      badges,
-      { opacity: 0, scale: 1.8, rotate: -22 },
-      { opacity: 1, scale: 1, rotate: -6, duration: 0.07, ease: "back.out(2.2)" },
-      fin + 0.02,
-    );
-  if (colonneChoix) tl.to(colonneChoix, { backgroundColor: "rgb(255 122 26 / 0.14)", duration: 0.05 }, fin + 0.02);
-  tl.to({}, { duration: 0.08 });
-
-  return () => {
-    section.removeAttribute("data-defile");
   };
 }
 

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><title>Formulaires (détection Netlify)</title><meta name="robots" content="noindex"></head>
+<body>
+<!-- Copie cachée du formulaire de contact (src/components/ContactForm.tsx), lue par Netlify au déploiement pour
+     enregistrer le formulaire « contact ». Les envois du site arrivent ici. Garder les mêmes noms de champs. -->
+<form name="contact" method="POST" action="/contact/merci/" data-netlify="true" netlify-honeypot="adresse-postale" hidden>
+  <input type="text" name="prenom">
+  <input type="email" name="email">
+  <select name="sujet">
+    <option>Question sur un produit</option>
+    <option>Suggestion d'article</option>
+    <option>Partenariat</option>
+    <option>Autre</option>
+  </select>
+  <textarea name="message"></textarea>
+  <input type="checkbox" name="consentement" value="oui">
+  <input type="text" name="adresse-postale">
+</form>
+</body>
+</html>

@@ -24,7 +24,7 @@ export function Problemes() {
             >
               <Image
                 src={p.photo.src}
-                alt=""
+                alt={p.photo.alt}
                 fill
                 quality={80}
                 sizes="(min-width: 640px) 45vw, 46vw"

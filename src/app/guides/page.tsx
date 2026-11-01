@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <RubriqueTemplate
+      chemin="/guides/"
       titre="Tous nos guides et avis"
       intro="Les questions qu'on se pose tous avec un chat, nos avis détaillés sur un appareil, nos outils et un comparatif par rubrique. Pour tout souci de santé, votre vétérinaire reste la bonne adresse."
       groupes={articlesParType()}

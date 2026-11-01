@@ -45,6 +45,11 @@ export function rubriqueArticle(fm: Frontmatter) {
   return { href, label: connue?.label ?? fm.rubrique.charAt(0).toUpperCase() + fm.rubrique.slice(1) };
 }
 
+function photoPartage(fm: Frontmatter) {
+  const p = fm.photo ? PHOTOS[fm.photo] : undefined;
+  return p && p.width >= 1200 ? { url: p.src, width: p.width, height: p.height, alt: p.alt } : undefined;
+}
+
 export function articleMetadata(fm: Frontmatter): Metadata {
   const titre = fm.metaTitle ?? fm.title;
   return {
@@ -59,12 +64,15 @@ export function articleMetadata(fm: Frontmatter): Metadata {
       url: cheminArticle(fm),
       publishedTime: fm.publishedAt ?? fm.updatedAt,
       modifiedTime: fm.updatedAt,
-      // Le bloc openGraph d'une page remplace celui du layout : on redonne l'image de partage,
-      // puis l'image verticale pour Pinterest quand l'article en a une.
-      images: fm.pinImage
-        ? [IMAGE_PARTAGE, { url: fm.pinImage, width: 1000, height: 1500, alt: fm.title }]
-        : [IMAGE_PARTAGE],
+      // Le bloc openGraph d'une page remplace celui du layout : d'abord la photo d'en-tête de l'article (au moins
+      // 1200 px de large, pour Google Discover), sinon l'image de partage du site ; puis l'image verticale pour
+      // Pinterest quand l'article en a une.
+      images: [
+        photoPartage(fm) ?? IMAGE_PARTAGE,
+        ...(fm.pinImage ? [{ url: fm.pinImage, width: 1000, height: 1500, alt: fm.title }] : []),
+      ],
     },
-    robots: fm.noindex ? { index: false, follow: false } : undefined,
+    // Sans noindex, la clé reste absente : la page garde la balise robots du layout (grandes vignettes).
+    ...(fm.noindex ? { robots: { index: false, follow: false } } : {}),
   };
 }

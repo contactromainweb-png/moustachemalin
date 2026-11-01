@@ -3,7 +3,7 @@
 import { useLayoutEffect } from "react";
 import { SOUCIS } from "@/lib/accueil";
 import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
-import { comparaison, fin, mur, pelote } from "./scenes";
+import { fin, mur, pelote } from "./scenes";
 
 type Lenis = { scrollTo: (cible: number, options?: { immediate?: boolean }) => void };
 
@@ -48,7 +48,7 @@ export function Mouvement() {
         heros(gsap);
         finitions.push(desintegration(gsap));
         if (section) finitions.push(soucis(gsap, lenis, section));
-        finitions.push(pelote(gsap), mur(gsap), comparaison(gsap), fin(gsap));
+        finitions.push(pelote(gsap), mur(gsap), fin(gsap));
         ScrollTrigger.refresh();
       }, document.querySelector("main") ?? undefined);
 

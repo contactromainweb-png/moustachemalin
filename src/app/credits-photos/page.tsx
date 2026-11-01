@@ -16,7 +16,7 @@ export default function Page() {
       </h1>
       <p className="rise mt-6 max-w-[48ch] text-lead" style={{ "--i": 1 } as React.CSSProperties}>
         Merci aux photographes dont les images illustrent le site. Elles viennent de banques d&apos;images libres pour un
-        usage commercial (Pexels, Unsplash), sauf le portrait de Romain&#8239;; aucune n&apos;est reprise d&apos;Amazon
+        usage commercial (Pexels, Unsplash), sauf les photos personnelles de Romain (lui, Kira et les chats de sa famille)&#8239;; aucune n&apos;est reprise d&apos;Amazon
         ou d&apos;un fabricant.
       </p>
       <div className="mt-16">

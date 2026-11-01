@@ -44,24 +44,26 @@ export function derniersArticles(nombre: number): ArticleLien[] {
     .map(lien);
 }
 
+// Fil RSS (/feed.xml) : tous les articles en ligne, du plus récemment mis à jour au plus ancien.
+export function articlesDuFlux(): Frontmatter[] {
+  return tousLesFrontmatters().sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+}
+
 // Tous les articles en ligne, rubrique par rubrique (comparatifs d'abord dans chacune).
 export function tousLesArticles(): ArticleLien[] {
   return tousLesFrontmatters().map(lien);
 }
 
 // Page /guides/ : tous les articles en ligne qui ne sont pas des comparatifs, regroupés selon le `type` de leur
-// frontmatter (un nouveau guide, avis ou outil y apparaît de lui-même, quelle que soit sa rubrique), puis le premier
-// comparatif de chaque rubrique. Un groupe vide n'est pas renvoyé.
+// frontmatter (un nouveau guide, avis ou outil y apparaît de lui-même, quelle que soit sa rubrique), puis tous les
+// comparatifs, rubrique par rubrique. Un groupe vide n'est pas renvoyé.
 export function articlesParType() {
   const articles = tousLesArticles();
   const groupes: { type: TypeArticle; articles: ArticleLien[] }[] = [
     { type: "guide", articles: articles.filter((a) => a.type === "guide") },
     { type: "avis", articles: articles.filter((a) => a.type === "avis") },
     { type: "outil", articles: articles.filter((a) => a.type === "outil") },
-    {
-      type: "comparatif",
-      articles: RUBRIQUES.flatMap((r) => articles.find((a) => a.type === "comparatif" && a.href.startsWith(r.href)) ?? []),
-    },
+    { type: "comparatif", articles: articles.filter((a) => a.type === "comparatif") },
   ];
   return groupes.filter((g) => g.articles.length > 0);
 }

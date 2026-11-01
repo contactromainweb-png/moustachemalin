@@ -15,6 +15,15 @@ function taillesVignette(largeur: number, hauteur: number) {
   return `(min-width: 1024px) ${Math.ceil(18.3 * f)}vw, ${Math.ceil(30 * f)}vw`;
 }
 
+// Les vignettes ne dépassent jamais 1 280 px affichés : 4 largeurs suffisent, au lieu des 13 de next/image.
+// Le HTML de l'accueil s'en trouve nettement allégé (le mur répétait 34 longues listes), ce qui l'affiche plus vite.
+const LARGEURS_VIGNETTE = [384, 640, 960, 1280];
+const adresse = (src: string, w: number) => `/_next/image?url=${encodeURIComponent(src)}&w=${w}&q=80`;
+function srcsetVignette(src: string, largeur: number) {
+  const largeurs = LARGEURS_VIGNETTE.filter((w) => w <= largeur);
+  return largeurs.map((w) => `${adresse(src, w)} ${w}w`).join(", ");
+}
+
 const VIGNETTES = [
   ...MUR,
   ...[PHOTOS.chatSoleil, PHOTOS.chatChaise, PHOTOS.chatBol, PHOTOS.chatonsArbre, PHOTOS.chatRobinet].map(
@@ -53,13 +62,15 @@ export function Mur() {
               data-mur-vignette
               className={`relative aspect-[4/5] overflow-hidden rounded-[0.9rem] ${i >= 24 ? "max-lg:hidden" : ""}`}
             >
-              <Image
-                src={p.src}
-                alt=""
-                fill
+              {/* eslint-disable-next-line @next/next/no-img-element -- srcset court fait à la main, voir plus haut */}
+              <img
+                src={adresse(p.src, 640)}
+                srcSet={srcsetVignette(p.src, p.width)}
                 sizes={taillesVignette(p.width, p.height)}
-                quality={80}
-                className="object-cover"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
           ))}

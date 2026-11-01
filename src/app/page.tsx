@@ -15,12 +15,14 @@ import { SelonMonChat } from "@/components/accueil/SelonMonChat";
 import { Soucis } from "@/components/accueil/Soucis";
 
 export const metadata: Metadata = {
+  description:
+    "Litières autonettoyantes, fontaines, distributeurs, arbres à chat : nos comparatifs honnêtes pour bien équiper votre chat, sans se tromper.",
   alternates: { canonical: "/" },
 };
 
 // Accueil vitrine (brief-da-spectaculaire.md), sept scènes : gros plan sur un chat, photo qui se désintègre en
 // particules, les petits soucis du quotidien, la pelote et les articles, le mur de photos et son compteur, la
-// comparaison qui se construit ; puis les blocs de confiance (selon mon chat, derniers articles, qui écrit ici,
+// liste de ce qu'on vérifie (sans blocage) ; puis les blocs de confiance (selon mon chat, derniers articles, qui écrit ici,
 // transparence, lettre masquée tant qu'elle n'est pas branchée), légers et sans WebGL ; enfin la grande section de
 // fin. Tout le texte est dans le HTML ; défilement fluide, particules et animations s'ajoutent après l'affichage.
 // Téléphone et tablette (moins de 1024 px) : page resserrée. Les cartes « Mon problème » suivent le premier écran
