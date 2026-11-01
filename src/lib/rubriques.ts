@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse } from "yaml";
 import type { ArticleLien } from "@/components/RubriqueTemplate";
-import { cheminArticle, type Frontmatter } from "@/lib/articles";
+import { cheminArticle, type Frontmatter, type TypeArticle } from "@/lib/articles";
 import { pageEnLigne, RUBRIQUES } from "@/lib/site";
 
 // Articles d'une rubrique, lus dans content/<rubrique>/*.mdx (bloc --- en tête de fichier).
@@ -47,6 +47,23 @@ export function derniersArticles(nombre: number): ArticleLien[] {
 // Tous les articles en ligne, rubrique par rubrique (comparatifs d'abord dans chacune).
 export function tousLesArticles(): ArticleLien[] {
   return tousLesFrontmatters().map(lien);
+}
+
+// Page /guides/ : tous les articles en ligne qui ne sont pas des comparatifs, regroupés selon le `type` de leur
+// frontmatter (un nouveau guide, avis ou outil y apparaît de lui-même, quelle que soit sa rubrique), puis le premier
+// comparatif de chaque rubrique. Un groupe vide n'est pas renvoyé.
+export function articlesParType() {
+  const articles = tousLesArticles();
+  const groupes: { type: TypeArticle; articles: ArticleLien[] }[] = [
+    { type: "guide", articles: articles.filter((a) => a.type === "guide") },
+    { type: "avis", articles: articles.filter((a) => a.type === "avis") },
+    { type: "outil", articles: articles.filter((a) => a.type === "outil") },
+    {
+      type: "comparatif",
+      articles: RUBRIQUES.flatMap((r) => articles.find((a) => a.type === "comparatif" && a.href.startsWith(r.href)) ?? []),
+    },
+  ];
+  return groupes.filter((g) => g.articles.length > 0);
 }
 
 // Nombre d'appareils réellement passés en revue dans les comparatifs en ligne (sans doublon) : le compteur de

@@ -10,7 +10,7 @@ export function Problemes() {
   if (problemes.length === 0) return null;
 
   return (
-    <section data-fond="page" aria-labelledby="titre-problemes" className="px-4 pb-6 pt-12 sm:px-8 lg:hidden">
+    <section data-fond="page" aria-labelledby="titre-problemes" className="px-4 pb-2 pt-12 sm:px-8 lg:hidden">
       <h2 id="titre-problemes" data-apparait className="font-display text-head">
         Mon <span className="mot-serif">problème</span>, c&apos;est…
       </h2>

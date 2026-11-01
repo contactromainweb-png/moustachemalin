@@ -4,24 +4,37 @@ import { BoutonAction } from "@/components/BoutonAction";
 import { PHOTOS } from "@/lib/medias";
 import { AUTEUR } from "@/lib/site";
 
-// Blocs C et D : « Qui écrit ici » (texte de content/pages/qui-ecrit-ici.md, avec le portrait de Romain)
+// Blocs C et D : « Qui écrit ici » (texte de content/pages/qui-ecrit-ici.md, avec les portraits de Romain et de Kira)
 // puis « Comment on gagne notre vie » en bandeau orange.
 export function QuiEcrit() {
   return (
     <>
       <section data-fond="page" aria-labelledby="titre-qui" className="px-4 pb-24 sm:px-8 lg:pb-32">
         <div className="mx-auto grid max-w-[90rem] items-center gap-10 rounded-[2rem] bg-field p-6 sm:p-10 lg:grid-cols-12 lg:gap-16 lg:p-16">
-          {/* Portrait de Romain en rond, cadré sur le visage. */}
-          <div className="reveal relative aspect-square w-40 overflow-hidden rounded-full bg-lavande sm:w-56 lg:col-span-4 lg:w-full lg:max-w-[22rem]">
-            <Image
-              src={PHOTOS.romain.src}
-              alt={PHOTOS.romain.alt}
-              fill
-              quality={80}
-              sizes="(min-width: 1024px) 22rem, (min-width: 640px) 14rem, 10rem"
-              className="object-cover"
-              style={{ objectPosition: PHOTOS.romain.position }}
-            />
+          {/* Portraits ronds : Romain, cadré sur le visage, et Kira à côté, un peu plus petite, qui le chevauche. */}
+          <div className="reveal flex items-end lg:col-span-4">
+            <div className="relative aspect-square w-36 shrink-0 overflow-hidden rounded-full bg-lavande sm:w-52 lg:w-[16rem]">
+              <Image
+                src={PHOTOS.romain.src}
+                alt={PHOTOS.romain.alt}
+                fill
+                quality={80}
+                sizes="(min-width: 1024px) 16rem, (min-width: 640px) 13rem, 9rem"
+                className="object-cover"
+                style={{ objectPosition: PHOTOS.romain.position }}
+              />
+            </div>
+            <div className="relative -ml-6 aspect-square w-28 shrink-0 overflow-hidden rounded-full bg-lavande ring-4 ring-field sm:w-40 lg:-ml-10 lg:w-[11rem]">
+              <Image
+                src={PHOTOS.kiraPlumeau.src}
+                alt={PHOTOS.kiraPlumeau.alt}
+                fill
+                quality={80}
+                sizes="(min-width: 1024px) 19rem, (min-width: 640px) 17rem, 12rem"
+                className="scale-[1.7] object-cover"
+                style={{ objectPosition: PHOTOS.kiraPlumeau.position, transformOrigin: PHOTOS.kiraPlumeau.position }}
+              />
+            </div>
           </div>
           <div className="lg:col-span-8">
             <h2 id="titre-qui" className="reveal font-display text-[clamp(2.75rem,1.4rem+5vw,6rem)]">

@@ -28,7 +28,7 @@ export function Mur() {
 
   return (
     <section data-mur aria-labelledby="titre-mur" className="relative overflow-hidden bg-nuit text-blanc">
-      <div data-mur-scene className="relative grid h-[34rem] place-items-center overflow-hidden lg:h-svh lg:min-h-[36rem]">
+      <div data-mur-scene className="relative grid h-[32rem] place-items-center overflow-hidden lg:h-svh lg:min-h-[36rem]">
         <div
           data-mur-grille
           aria-hidden="true"
