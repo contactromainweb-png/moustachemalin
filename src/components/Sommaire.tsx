@@ -45,7 +45,7 @@ export function Sommaire({ titres: json }: { titres: string }) {
             href={`#${t.id}`}
             aria-current={t.id === actif ? "location" : undefined}
             onClick={fermer ? () => details.current?.removeAttribute("open") : undefined}
-            className="block rounded-lg border-l-4 border-transparent px-3 py-2 transition-colors duration-150 hover:bg-field aria-[current]:border-accent aria-[current]:bg-field aria-[current]:font-semibold"
+            className="block rounded-lg px-3 py-2 transition-colors duration-150 hover:bg-field aria-[current]:bg-lavande/45 aria-[current]:font-semibold"
           >
             {t.titre}
           </a>
