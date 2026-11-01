@@ -22,19 +22,16 @@ export function Desintegration() {
         className="relative mx-auto grid max-w-[90rem] content-center gap-8 px-4 py-12 sm:px-8 lg:min-h-svh lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-12"
       >
         <h2 id="titre-phrase" data-apparait className="font-display text-[clamp(3rem,1.2rem+6vw,8rem)] lg:col-span-6 lg:max-w-[9ch]">
-          {/* La phrase entière pour les lecteurs d'écran ; à l'écran, les mots séparés qui sortent du flou un par un
+          {/* Une seule copie de la phrase, lue par tous : les mots séparés (espaces compris) sortent du flou un par un
               au défilement (ils restent pâles tant que le visiteur n'est pas arrivé à la scène). */}
-          <span className="sr-only">{PHRASE.join(" ")}</span>
-          <span aria-hidden="true">
-            {PHRASE.map((mot, i) => (
-              <span key={mot}>
-                <span data-mot className={`inline-block ${mot === MOT_SERIF ? "mot-serif" : ""}`}>
-                  {mot}
-                </span>
-                {i < PHRASE.length - 1 ? " " : null}
+          {PHRASE.map((mot, i) => (
+            <span key={mot}>
+              <span data-mot className={`inline-block ${mot === MOT_SERIF ? "mot-serif" : ""}`}>
+                {mot}
               </span>
-            ))}
-          </span>
+              {i < PHRASE.length - 1 ? " " : null}
+            </span>
+          ))}
         </h2>
 
         <figure data-apparait className="lg:col-span-6 lg:col-start-7" style={{ "--i": 2 } as React.CSSProperties}>
@@ -50,10 +47,13 @@ export function Desintegration() {
               quality={80}
               className="hidden object-cover object-[50%_40%] tactile:block"
             />
+            {/* Copie de la photo de Kira dans laquelle les particules se reforment : décorative (alt vide). Le texte
+                alternatif de Kira reste sur la version tactile ci-dessus, celui du chat roux sur la photo de départ. */}
             <Image
               data-desint-b
               src={b.src}
-              alt={b.alt}
+              alt=""
+              aria-hidden="true"
               fill
               sizes="(min-width: 1024px) 75vw, 180vw"
               quality={80}

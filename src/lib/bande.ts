@@ -11,7 +11,7 @@ export const BANDE: Cousin[] = [
   {
     prenom: "Sucette",
     chezQui: "La chatte de la compagne de Romain",
-    phrase: "Un fauteuil, une boule de poils, zéro bruit. Sucette dort, on chuchote.",
+    phrase: "Sortie au jardin, pour une fois. D'habitude, Sucette dort en boule sur son fauteuil, sans un bruit.",
     photo: {
       src: "/media/famille/sucette-jardin-violettes.jpg",
       alt: "Sucette, la chatte tigrée de la compagne de Romain, dans l'herbe du jardin parmi les violettes",
@@ -63,7 +63,7 @@ export const BANDE: Cousin[] = [
   {
     prenom: "Chichoune",
     chezQui: "La chatte de la sœur de Romain",
-    phrase: "Câline et joueuse, Chichoune a trouvé le meilleur guichet à caresses : la table.",
+    phrase: "Câline et joueuse, Chichoune prend de la hauteur. Pour les caresses, elle préfère la table.",
     photo: {
       src: "/media/famille/chichoune-arbre-a-chat.jpg",
       alt: "Chichoune, la chatte tricolore de la sœur de Romain, dans la niche d'un arbre à chat",
