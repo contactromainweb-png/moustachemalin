@@ -41,6 +41,7 @@ export function ComparisonTable({ asins, columns }: { asins: string[]; columns: 
                       exemple={p.exemple}
                       className="min-h-11 whitespace-nowrap px-4"
                     />
+                    {p.exemple ? null : <LienAvisAmazon asin={p.asin} className="mt-1 text-small font-normal" />}
                   </div>
                 </th>
                 {columns.map((c) => (

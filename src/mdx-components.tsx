@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AffiliateButton } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { CalloutLink } from "@/components/CalloutLink";
+import { Encadre } from "@/components/Encadre";
 import { EncadreOutil } from "@/components/Outils";
 import { EnBref } from "@/components/EnBref";
 import { Consommables } from "@/components/Consommables";
@@ -62,7 +63,9 @@ const components: MDXComponents = {
   AffiliateButton,
   // Placée seule dans un article : un peu d'air avant le texte qui suit.
   AmazonDisclosure: (props: { className?: string }) => <AmazonDisclosure className="mb-10" {...props} />,
+  Callout: Encadre,
   CalloutLink,
+  Encadre,
   EncadreOutil,
   EnBref,
   Photo: PhotoMdx,

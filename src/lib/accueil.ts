@@ -11,7 +11,7 @@ export type Souci = {
   titre: string;
   texte: string;
   lien: { href: string; label: string };
-  lienSecondaire?: { href: string; label: string };
+  liensSecondaires?: { href: string; label: string }[];
   photo: Photo;
   // Point de la photo gardé au centre quand elle est recadrée.
   cadrage: string;
@@ -26,6 +26,7 @@ export const SOUCIS: Souci[] = [
     texte:
       "Une litière autonettoyante range les déchets dans un bac fermé : vous le videz toutes les une à deux semaines.",
     lien: { href: "/litieres/litiere-autonettoyante/", label: "Lire le comparatif des litières" },
+    liensSecondaires: [{ href: "/litieres/litiere-sent-mauvais/", label: "Lire le guide « Litière qui sent mauvais »" }],
     photo: PHOTOS.chatChaise,
     cadrage: "object-[50%_40%]",
   },
@@ -36,7 +37,7 @@ export const SOUCIS: Souci[] = [
     titre: "Le chat qui boit peu",
     texte: "Beaucoup de chats préfèrent l'eau qui coule. Une fontaine la garde filtrée et en mouvement.",
     lien: { href: "/guides/mon-chat-ne-boit-pas/", label: "Lire le guide « Mon chat ne boit pas »" },
-    lienSecondaire: { href: "/fontaines/fontaine-a-eau-chat/", label: "Voir le comparatif des fontaines" },
+    liensSecondaires: [{ href: "/fontaines/fontaine-a-eau-chat/", label: "Voir le comparatif des fontaines" }],
     photo: PHOTOS.chatRobinet,
     cadrage: "object-[40%_50%]",
   },
@@ -57,21 +58,33 @@ export const SOUCIS: Souci[] = [
     titre: "Les griffes",
     texte: "Un griffoir au bon endroit protège le canapé. Un arbre à chat lui donne de quoi grimper et dormir en hauteur.",
     lien: { href: "/griffer-grimper/griffoir-chat/", label: "Lire le comparatif des griffoirs" },
-    lienSecondaire: { href: "/griffer-grimper/arbre-a-chat/", label: "Voir le comparatif des arbres à chat" },
+    liensSecondaires: [
+      { href: "/griffer-grimper/chat-griffe-canape/", label: "Lire le guide « Mon chat griffe le canapé »" },
+      { href: "/griffer-grimper/arbre-a-chat/", label: "Voir le comparatif des arbres à chat" },
+    ],
     photo: PHOTOS.chatonsArbre,
     cadrage: "object-[50%_50%]",
   },
 ];
 
 // Cartes « Mon problème, c'est… » : téléphone et tablette seulement, juste après le premier écran. Elles reprennent
-// en quatre cartes les soucis et les profils de chat, deux sections réservées à l'ordinateur.
-export type Probleme = { id: string; titre: string; href: string; photo: Photo; cadrage: string };
+// en quatre cartes les soucis et les profils de chat, deux sections réservées à l'ordinateur. `guide` : lien texte
+// sous la carte, vers le guide qui répond au même souci.
+export type Probleme = {
+  id: string;
+  titre: string;
+  href: string;
+  guide?: { href: string; label: string };
+  photo: Photo;
+  cadrage: string;
+};
 
 export const PROBLEMES: Probleme[] = [
   {
     id: "litiere",
     titre: "La litière qui sent",
     href: "/litieres/litiere-autonettoyante/",
+    guide: { href: "/litieres/litiere-sent-mauvais/", label: "Le guide anti-odeurs" },
     photo: PHOTOS.chatChaise,
     cadrage: "object-[50%_40%]",
   },
@@ -93,6 +106,7 @@ export const PROBLEMES: Probleme[] = [
     id: "griffes",
     titre: "Il griffe tout",
     href: "/griffer-grimper/griffoir-chat/",
+    guide: { href: "/griffer-grimper/chat-griffe-canape/", label: "Le guide « canapé griffé »" },
     photo: PHOTOS.chatGriffes,
     cadrage: "object-[50%_40%]",
   },

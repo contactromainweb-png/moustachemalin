@@ -57,6 +57,12 @@ const PINS = [
     haut: "Griffoir pour chat :", serif: "adieu le canapé", bas: "notre comparatif 2026" },
   { slug: "catit-pixi-avis", photo: "boire-chat-robinet-evier.jpg", credit: "Helena Jankovičová Kováčová, Pexels",
     cadrage: "55% 50%", haut: "Catit Pixi :", serif: "notre avis", bas: "face à la PETLIBRO Dockstream" },
+  { slug: "chatiere", photo: "articles/sorties-chat-roux-porte.jpg", cadrage: "50% 55%",
+    haut: "Chatière :", serif: "laquelle choisir ?", bas: "notre comparatif 2026" },
+  { slug: "litiere-sent-mauvais", photo: "articles/chat-renifle-plante.jpg", cadrage: "62% 40%",
+    haut: "Litière qui sent", serif: "mauvais", bas: "les causes, les solutions" },
+  { slug: "chat-griffe-canape", photo: "articles/chat-griffe-canape.jpg", cadrage: "45% 50%",
+    haut: "Mon chat griffe le", serif: "canapé", bas: "pourquoi, et comment l'en détourner" },
 ];
 
 fs.mkdirSync(path.join(RACINE, "public/media/pin"), { recursive: true });

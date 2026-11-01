@@ -1,0 +1,31 @@
+{
+  "asin": "B00AE2OW6W",
+  "slug": "sureflap-grande-chatiere-puce",
+  "name": "SureFlap grande chatière à puce électronique",
+  "brand": "SureFlap (Sure Petcare)",
+  "category": "chatiere",
+  "badge": "Pour les grands chats",
+  "specs": {
+    "type": "Électronique (lit la puce)",
+    "ouverture": "178 × 170 mm",
+    "alimentation": "4 piles C, jusqu'à 1 an annoncé",
+    "animaux": "Jusqu'à 32 identifiants",
+    "verrouillage": "Entrée sélective, mode couvre-feu"
+  },
+  "pour": "Un grand chat (Maine Coon…) ou un petit chien, avec la sélection par puce.",
+  "pros": [
+    "Ouverture plus grande qu'une chatière classique",
+    "Mode couvre-feu : verrouillage automatique à l'heure choisie",
+    "Jusqu'à 32 animaux enregistrés"
+  ],
+  "cons": [
+    "Piles C non incluses",
+    "Accessoires de montage vendus séparément",
+    "Découpe plus grande à prévoir"
+  ],
+  "entretien": "Nettoyer le volet et les capteurs, changer les piles une fois par an environ.",
+  "consommables": [
+    "4 piles C par an environ"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 01/11/2026"
+}

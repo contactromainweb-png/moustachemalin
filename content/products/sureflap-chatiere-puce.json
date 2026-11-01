@@ -1,0 +1,32 @@
+{
+  "asin": "B003EGIM3O",
+  "slug": "sureflap-chatiere-puce",
+  "name": "SureFlap chatière à puce électronique",
+  "brand": "SureFlap (Sure Petcare)",
+  "category": "chatiere",
+  "badge": "Le meilleur globalement",
+  "specs": {
+    "type": "Électronique (lit la puce)",
+    "ouverture": "142 × 120 mm",
+    "alimentation": "4 piles AA, jusqu'à 12 mois annoncés",
+    "animaux": "Jusqu'à 32 identifiants",
+    "verrouillage": "Entrée sélective"
+  },
+  "pour": "Un chat pucé qui sort, dans un quartier où d'autres chats rôdent.",
+  "pros": [
+    "Ne s'ouvre que pour les chats enregistrés (puce ou médaillon de la marque)",
+    "Jusqu'à 32 animaux enregistrés",
+    "Programmation à un seul bouton",
+    "Garantie 3 ans annoncée par le fabricant"
+  ],
+  "cons": [
+    "Piles non incluses",
+    "Accessoires de montage (mur, vitre) vendus séparément",
+    "Ouverture de taille standard : pas pour les très grands chats"
+  ],
+  "entretien": "Nettoyer le volet et les capteurs, changer les piles une fois par an environ.",
+  "consommables": [
+    "4 piles AA par an environ"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 01/11/2026"
+}

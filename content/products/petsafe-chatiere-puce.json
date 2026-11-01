@@ -1,0 +1,30 @@
+{
+  "asin": "B0756GW8SJ",
+  "slug": "petsafe-chatiere-puce",
+  "name": "PetSafe chatière à puce électronique",
+  "brand": "PetSafe",
+  "category": "chatiere",
+  "badge": "Électronique, petit prix",
+  "specs": {
+    "type": "Électronique (lit la puce)",
+    "alimentation": "Piles",
+    "animaux": "Jusqu'à 40 identifiants",
+    "verrouillage": "4 positions : ouvert, fermé, entrée seule, sortie seule"
+  },
+  "pour": "Ceux qui veulent une chatière à puce avec 4 positions de verrouillage.",
+  "pros": [
+    "Lit l'identifiant de la puce du chat",
+    "Jusqu'à 40 animaux programmables",
+    "4 positions de verrouillage",
+    "Joints et double aimant contre les courants d'air"
+  ],
+  "cons": [
+    "Pour un chat sans puce, il faut acheter une clé programmable en plus",
+    "Animal jusqu'à 7 kg selon le fabricant"
+  ],
+  "entretien": "Nettoyer le volet et le joint, changer les piles quand le voyant le signale.",
+  "consommables": [
+    "Piles"
+  ],
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 01/11/2026"
+}

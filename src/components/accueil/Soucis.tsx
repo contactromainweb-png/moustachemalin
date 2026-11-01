@@ -87,14 +87,17 @@ export function Soucis() {
                   {pageEnLigne(s.lien.href) ? (
                     <div className="mt-4 flex flex-col items-start gap-1 lg:mt-8 lg:gap-4">
                       <BoutonAction href={s.lien.href}>{s.lien.label}</BoutonAction>
-                      {s.lienSecondaire && pageEnLigne(s.lienSecondaire.href) ? (
-                        <Link
-                          href={s.lienSecondaire.href}
-                          className="py-2 font-medium underline decoration-[var(--f-souligne)] decoration-2 underline-offset-[6px]"
-                        >
-                          {s.lienSecondaire.label}
-                        </Link>
-                      ) : null}
+                      {s.liensSecondaires
+                        ?.filter((l) => pageEnLigne(l.href))
+                        .map((l) => (
+                          <Link
+                            key={l.href}
+                            href={l.href}
+                            className="py-2 font-medium underline decoration-[var(--f-souligne)] decoration-2 underline-offset-[6px]"
+                          >
+                            {l.label}
+                          </Link>
+                        ))}
                     </div>
                   ) : (
                     <p className="mt-4 text-[var(--f-doux)]">Comparatif en préparation.</p>
