@@ -10,18 +10,17 @@
 [[plugins]]
   package = "./plugins/indexnow"
 
-# --- À ACTIVER AU BRANCHEMENT DU DOMAINE (retirer les « # » des lignes ci-dessous) ---
-# Une seule adresse officielle : https://moustachemalin.fr. L'ancienne adresse Netlify et le « www » y renvoient
-# définitivement (301), page par page. Les aperçus deploy-preview-… ne sont pas concernés (autre adresse).
-#
-# [[redirects]]
-#   from = "https://moustachemalin.netlify.app/*"
-#   to = "https://moustachemalin.fr/:splat"
-#   status = 301
-#   force = true
-#
-# [[redirects]]
-#   from = "https://www.moustachemalin.fr/*"
-#   to = "https://moustachemalin.fr/:splat"
-#   status = 301
-#   force = true
+# Une seule adresse officielle : https://moustachemalin.fr (domaine branché le 1er novembre 2026). L'ancienne
+# adresse Netlify et le « www » y renvoient définitivement (301), page par page. Les aperçus deploy-preview-… ne sont
+# pas concernés (autre adresse).
+[[redirects]]
+  from = "https://moustachemalin.netlify.app/*"
+  to = "https://moustachemalin.fr/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.moustachemalin.fr/*"
+  to = "https://moustachemalin.fr/:splat"
+  status = 301
+  force = true

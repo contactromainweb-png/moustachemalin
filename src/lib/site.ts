@@ -43,8 +43,8 @@ export const LEGAL = {
     email: "support@netlify.com",
     site: "https://www.netlify.com",
   },
-  miseAJour: "26 octobre 2026", // pages Méthode et Affiliation
-  miseAJourMentions: "30 octobre 2026", // pages Mentions légales et Confidentialité
+  miseAJour: "1er novembre 2026", // pages Méthode et Affiliation
+  miseAJourMentions: "1er novembre 2026", // pages Mentions légales et Confidentialité
 };
 
 export const AMAZON_DISCLOSURE =
