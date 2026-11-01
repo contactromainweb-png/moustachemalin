@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GOATCOUNTER, UMAMI_ID } from "@/lib/mesure";
-import { AUTEUR, SITE } from "@/lib/site";
+import { AUTEUR, LOGO, SITE } from "@/lib/site";
 import "./globals.css";
 
 // Polices Google, hébergées par le site lui-même (aucune requête vers Google).
@@ -52,11 +52,26 @@ export const metadata: Metadata = {
     // Image de partage : src/app/opengraph-image.tsx (ajoutée automatiquement par Next).
   },
   twitter: { card: "summary_large_image" },
+  // Grandes vignettes autorisées dans Google (Discover, Images). Une page noindex remplace ce bloc par le sien.
+  robots: { index: true, follow: true, "max-image-preview": "large" },
+  // Balises de vérification : vides tant que le domaine n'est pas branché. Google Search Console se vérifie de
+  // préférence par DNS chez OVH (rien à mettre ici) ; sinon, coller le code dans la variable Netlify
+  // NEXT_PUBLIC_GOOGLE_VERIFICATION. Bing Webmaster Tools : import depuis Search Console, ou code dans
+  // NEXT_PUBLIC_BING_VERIFICATION.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } : undefined,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr" className={`${display.variable} ${serif.variable} ${text.variable} antialiased`}>
+      <head>
+        {/* Fil RSS des articles (src/app/feed.xml/route.ts). Ici plutôt que dans metadata.alternates, que le canonical
+            de chaque page remplace. */}
+        <link rel="alternate" type="application/rss+xml" title={`${SITE.name} : les articles`} href="/feed.xml" />
+      </head>
       <body className="flex min-h-svh flex-col">
         <a
           href="#contenu"
@@ -74,6 +89,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 name: SITE.name,
                 url: SITE.url,
                 email: SITE.email,
+                logo: { "@type": "ImageObject", url: `${SITE.url}${LOGO.src}`, width: LOGO.width, height: LOGO.height },
                 founder: { "@id": `${SITE.url}${AUTEUR.page}#auteur` },
               },
               {

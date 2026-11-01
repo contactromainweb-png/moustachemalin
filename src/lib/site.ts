@@ -9,6 +9,9 @@ export const SITE = {
   email: "contact@moustachemalin.fr", // confirmée par Romain le 30/10/2026 (boîte à créer au branchement du domaine)
 };
 
+// Logo carré pour les données structurées (Organization, éditeur des articles) : Google demande une image matricielle.
+export const LOGO = { src: "/brand/icon-512.png", width: 512, height: 512 };
+
 // Auteur des articles (signature « Par Romain » et données structurées Person, avec sa photo).
 // Volontairement aucun lien vers d'autres sites (pas de sameAs) : demande de Romain.
 export const AUTEUR = {
@@ -20,7 +23,7 @@ export const AUTEUR = {
 // Kira, la chatte de Romain et mascotte du site (encadrés « Le mot de Kira », page 404, confirmations).
 // photo : chemin dans public/ quand Romain l'aura fournie (ex. "/media/kira.jpg"), sinon un rond neutre s'affiche.
 export const KIRA: { photo: string | null } = {
-  photo: "/media/kira/kira-portrait.jpg", // photo personnelle de Romain, 800 × 800
+  photo: "/media/kira/kira-tete-yeux-bleus.jpg", // photo personnelle de Romain : tête de kira-assise-yeux-bleus, 800 × 800
 };
 
 // Mentions légales. SIRET et adresse : fiche officielle du SIREN 944 980 580 (recherche-entreprises.api.gouv.fr),
@@ -78,4 +81,5 @@ export const PAGES_INFO = [
   { href: "/affiliation/", label: "Affiliation" },
   { href: "/mentions-legales/", label: "Mentions légales" },
   { href: "/confidentialite/", label: "Confidentialité" },
+  { href: "/contact/", label: "Contact" },
 ];

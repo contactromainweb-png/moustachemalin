@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
+import Texte from "../../../content/rubriques/litieres.mdx";
 
 export const metadata: Metadata = {
   title: "Litières pour chat : comparatifs",
@@ -13,10 +14,12 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <RubriqueTemplate
+      chemin="/litieres/"
+      texte={<Texte />}
       titre="Litières"
       intro="Autonettoyante ou classique, ouverte ou fermée : de quoi choisir la litière qui convient à votre chat et à votre logement."
       articles={articlesDeRubrique("litieres")}
-      photo={PHOTOS.chatChaise}
+      photo={PHOTOS.appartementChatBlanc}
     />
   );
 }

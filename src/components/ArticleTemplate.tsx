@@ -6,9 +6,9 @@ import { TitreSerif } from "@/components/TitreSerif";
 import { PourAllerPlusLoin } from "@/components/PourAllerPlusLoin";
 import { Signature } from "@/components/Signature";
 import { cheminArticle, rubriqueArticle, type Frontmatter } from "@/lib/articles";
-import { PHOTOS, type Photo } from "@/lib/medias";
+import { IMAGE_PARTAGE, PHOTOS, type Photo } from "@/lib/medias";
 import { getProduct } from "@/lib/products";
-import { AUTEUR, SITE } from "@/lib/site";
+import { AUTEUR, LOGO, SITE } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
 
 // Modèle commun aux comparatifs, aux guides et aux outils. Le corps (MethodNote, mention Amazon, encadré « En bref »,
@@ -32,7 +32,11 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
         <Signature date={fm.updatedAt} className="rise mt-6" />
         {image ? (
           // Grande photo d'en-tête, aussi sur téléphone : demandée en priorité, c'est le plus grand élément affiché.
-          <figure className="rise mt-10 lg:mt-14" style={{ "--i": 2 } as React.CSSProperties}>
+          // Page d'outil : pas de photo sur téléphone, pour que le calculateur soit visible dès le premier écran.
+          <figure
+            className={`rise mt-10 lg:mt-14 ${fm.type === "outil" ? "max-lg:hidden" : ""}`}
+            style={{ "--i": 2 } as React.CSSProperties}
+          >
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-field sm:aspect-[16/9] lg:aspect-[21/9] lg:rounded-[2rem]">
               <Image
                 src={image.src}
@@ -63,6 +67,8 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
           datePublished: fm.publishedAt ?? fm.updatedAt,
           dateModified: fm.updatedAt,
           mainEntityOfPage: url,
+          // Photo d'en-tête de l'article, sinon l'image de partage du site (1200 × 630).
+          image: new URL(image?.src ?? IMAGE_PARTAGE.url, SITE.url).toString(),
           inLanguage: "fr-FR",
           author: {
             "@type": "Person",
@@ -71,7 +77,13 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
             url: `${SITE.url}${AUTEUR.page}`,
             worksFor: { "@id": `${SITE.url}/#organisation` },
           },
-          publisher: { "@type": "Organization", "@id": `${SITE.url}/#organisation`, name: SITE.name, url: SITE.url },
+          publisher: {
+            "@type": "Organization",
+            "@id": `${SITE.url}/#organisation`,
+            name: SITE.name,
+            url: SITE.url,
+            logo: { "@type": "ImageObject", url: `${SITE.url}${LOGO.src}`, width: LOGO.width, height: LOGO.height },
+          },
         }}
       />
       {fm.type === "comparatif" && fm.products?.length ? (

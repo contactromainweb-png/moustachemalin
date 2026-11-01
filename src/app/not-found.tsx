@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PHOTOS } from "@/lib/medias";
@@ -8,6 +9,12 @@ import { espacesFines } from "@/lib/typo";
 // Page 404 : Kira prend la parole (charte « La voix de Kira », CLAUDE.md section 11), puis les pages toujours en
 // place : l'accueil, chaque comparatif en ligne et les guides. Au-dessus du texte, une petite photo de Kira, tête
 // penchée, l'air innocent (premier écran : chargée tout de suite).
+// Cachée aux moteurs (et absente du plan du site) : remplace la balise robots du layout.
+export const metadata: Metadata = {
+  title: "Page introuvable",
+  robots: { index: false, follow: true },
+};
+
 export default function NotFound() {
   const liens = [
     { href: "/", label: "Accueil" },

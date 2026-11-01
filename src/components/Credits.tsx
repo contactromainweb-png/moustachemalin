@@ -1,8 +1,14 @@
 import Image from "next/image";
 import credits from "../../content/credits.json";
+import { COUSINS, GALERIE } from "@/components/KiraGalerie";
+import { MUR, MUR_CENTRE, PHOTOS } from "@/lib/medias";
+
+// Description de chaque photo, reprise de src/lib/medias.ts et des galeries de Kira (même texte que sur les pages où elle apparaît).
+const DESCRIPTIONS = new Map([...Object.values(PHOTOS), ...MUR, MUR_CENTRE, ...GALERIE, ...COUSINS].map((p) => [p.src, p.alt]));
 
 type Credit = {
   fichier: string;
+  description?: string; // photo absente de src/lib/medias.ts
   auteur: string;
   source: string;
   url: string;
@@ -27,7 +33,7 @@ export function Credits() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1rem] bg-field">
                 <Image
                   src={src}
-                  alt=""
+                  alt={DESCRIPTIONS.get(src) ?? c.description ?? ""}
                   fill
                   loading="lazy"
                   quality={80}

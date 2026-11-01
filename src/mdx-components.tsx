@@ -3,7 +3,9 @@ import Link from "next/link";
 import { AffiliateButton } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { CalloutLink } from "@/components/CalloutLink";
+import { EncadreOutil } from "@/components/Outils";
 import { EnBref } from "@/components/EnBref";
+import { Consommables } from "@/components/Consommables";
 import { PhotoMdx, PhotoMoyenne } from "@/components/Figure";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { FAQ } from "@/components/FAQ";
@@ -61,10 +63,12 @@ const components: MDXComponents = {
   // Placée seule dans un article : un peu d'air avant le texte qui suit.
   AmazonDisclosure: (props: { className?: string }) => <AmazonDisclosure className="mb-10" {...props} />,
   CalloutLink,
+  EncadreOutil,
   EnBref,
   Photo: PhotoMdx,
   PhotoMoyenne,
   ComparisonTable,
+  Consommables,
   FAQ,
   KiraCousins,
   KiraGalerie,

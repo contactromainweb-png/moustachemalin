@@ -8,7 +8,7 @@ import { espacesFines } from "@/lib/typo";
 // kira-sphinx-table.jpg reste dans public/media/kira/ mais n'est plus montrée (moins nette que les nouvelles).
 type PhotoGalerie = { src: string; alt: string; width: number; height: number; legende?: string };
 
-const PHOTOS: PhotoGalerie[] = [
+export const GALERIE: PhotoGalerie[] = [
   { src: "/media/kira/kira-tete-penchee.jpg", alt: "Kira, tête penchée, qui regarde l'objectif", width: 1545, height: 1906 },
   {
     src: "/media/kira/kira-attrape-jouet.jpg",
@@ -29,7 +29,7 @@ const PHOTOS: PhotoGalerie[] = [
 
 // Les chats de la famille de Romain (photos personnelles, publiées avec l'accord de leurs propriétaires).
 // Ce ne sont pas des photos de Kira, et ils ne « parlent » pas : seule Kira a une voix. Aucun prénom de propriétaire.
-const COUSINS: PhotoGalerie[] = [
+export const COUSINS: PhotoGalerie[] = [
   {
     src: "/media/famille/sucette-jardin-violettes.jpg",
     alt: "Sucette, la chatte de la compagne de Romain, au jardin parmi les violettes",
@@ -76,7 +76,7 @@ export function KiraGalerie() {
       </div>
       {/* contain:inline-size : la rangée défile dans la page au lieu d'élargir la colonne qui la contient. */}
       <ul className="-mx-4 flex [contain:inline-size] snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 xl:grid-cols-4">
-        {PHOTOS.map((p) => (
+        {GALERIE.map((p) => (
           <li key={p.src} className="w-[68vw] shrink-0 snap-start sm:w-auto">
             <Vignette photo={p} sizes="(min-width: 1280px) 11rem, (min-width: 640px) 22rem, 68vw" />
           </li>

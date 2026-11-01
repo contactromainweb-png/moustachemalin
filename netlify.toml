@@ -4,3 +4,24 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Envoi des pages nouvelles ou modifiées à Bing après chaque déploiement (IndexNow). Inactif tant que la variable
+# INDEXNOW ne vaut pas « on » et que le domaine moustachemalin.fr n'est pas l'adresse principale (voir le fichier).
+[[plugins]]
+  package = "./plugins/indexnow"
+
+# --- À ACTIVER AU BRANCHEMENT DU DOMAINE (retirer les « # » des lignes ci-dessous) ---
+# Une seule adresse officielle : https://moustachemalin.fr. L'ancienne adresse Netlify et le « www » y renvoient
+# définitivement (301), page par page. Les aperçus deploy-preview-… ne sont pas concernés (autre adresse).
+#
+# [[redirects]]
+#   from = "https://moustachemalin.netlify.app/*"
+#   to = "https://moustachemalin.fr/:splat"
+#   status = 301
+#   force = true
+#
+# [[redirects]]
+#   from = "https://www.moustachemalin.fr/*"
+#   to = "https://moustachemalin.fr/:splat"
+#   status = 301
+#   force = true

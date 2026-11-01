@@ -1,4 +1,4 @@
-import { PHOTOS, type Photo } from "@/lib/medias";
+import { MUR, PHOTOS, type Photo } from "@/lib/medias";
 
 // Section « Les petits soucis du quotidien » : un souci par étape, avec sa couleur, son mot géant, sa photo et son article.
 // Les phrases viennent des articles en ligne (comparatifs des litières et des fontaines, guide « Mon chat ne boit pas »).
@@ -109,20 +109,15 @@ export type Profil = {
   visible: boolean;
 };
 
-const mur = (n: string, alt: string, credit: string, width = 1800, height = 1200): Photo => ({
-  src: `/media/mur-${n}.jpg`,
-  width,
-  height,
-  alt,
-  credit,
-});
+// Photo n° n du mur de l’accueil (src/lib/medias.ts), avec sa description.
+const mur = (n: number): Photo => MUR[n - 1];
 
 export const PROFILS: Profil[] = [
   {
     id: "appartement",
     mot: ["En", "appartement"],
     liens: [{ href: "/litieres/litiere-autonettoyante/", label: "Quelle litière autonettoyante choisir" }],
-    photo: mur("21", "Un chat tigré et blanc couché sur le sol clair d'un appartement, dans un rayon de soleil.", "krazyYangNA, Pexels"),
+    photo: mur(21),
     cadrage: "object-[40%_50%]",
     visible: true,
   },
@@ -141,7 +136,7 @@ export const PROFILS: Profil[] = [
       { href: "/litieres/litiere-autonettoyante/", label: "Une litière qui se vide seule" },
       { href: "/repas/distributeur-croquettes-chat/", label: "Un distributeur de croquettes" },
     ],
-    photo: mur("14", "Un chat roux installé seul sous la couette d'un lit, l'air paisible.", "Natalie Bond, Pexels"),
+    photo: mur(14),
     cadrage: "object-[60%_50%]",
     visible: true,
   },
@@ -149,7 +144,7 @@ export const PROFILS: Profil[] = [
     id: "boit-peu",
     mot: ["Il boit", "peu"],
     liens: [{ href: "/guides/mon-chat-ne-boit-pas/", label: "Mon chat ne boit pas : que faire" }],
-    photo: PHOTOS.chatBol,
+    photo: PHOTOS.chatGrisTasse,
     cadrage: "object-[50%_50%]",
     visible: true,
   },
@@ -157,7 +152,7 @@ export const PROFILS: Profil[] = [
     id: "chaton",
     mot: ["Un", "chaton"],
     liens: [],
-    photo: mur("18", "Un chaton tricolore aux yeux bleus qui avance sur une dalle de pierre.", "Mahmoud Yahyaoui, Pexels", 1806),
+    photo: mur(18),
     cadrage: "object-[50%_50%]",
     visible: false,
   },
@@ -165,7 +160,7 @@ export const PROFILS: Profil[] = [
     id: "chat-age",
     mot: ["Un chat", "âgé"],
     liens: [],
-    photo: mur("29", "Gros plan sur un chat tigré qui somnole, les yeux fermés.", "Magda Ehlers, Pexels"),
+    photo: mur(29),
     cadrage: "object-[50%_50%]",
     visible: false,
   },

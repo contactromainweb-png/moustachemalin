@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { BoutonAction } from "@/components/BoutonAction";
 import { TitreSerif } from "@/components/TitreSerif";
+import { PROBLEMES, PROFILS, SOUCIS } from "@/lib/accueil";
 import { LIBELLES_TYPE } from "@/lib/articles";
+import { attribuerPhotos, sources } from "@/lib/cartes";
 import { PHOTOS } from "@/lib/medias";
 import { tousLesArticles } from "@/lib/rubriques";
 
@@ -21,8 +23,18 @@ const PRINCIPAUX = [
   "/griffer-grimper/arbre-a-chat/",
 ];
 
+// Les cartes ne reprennent aucune photo déjà montrée plus haut (premier écran, soucis, problèmes, profils) : un
+// article dont la photo d'en-tête y figure prend une autre de ses photos (lib/cartes.ts).
+const DEJA_SUR_LA_PAGE = () =>
+  sources(
+    PHOTOS.chatBlanc,
+    ...SOUCIS.map((s) => s.photo),
+    ...PROBLEMES.map((p) => p.photo),
+    ...PROFILS.filter((p) => p.visible).map((p) => p.photo),
+  );
+
 export function Pelote() {
-  const articles = tousLesArticles();
+  const articles = attribuerPhotos(tousLesArticles(), DEJA_SUR_LA_PAGE());
   if (articles.length === 0) return null;
   const principaux = PRINCIPAUX.map((href) => articles.find((a) => a.href === href)).filter((a) => a !== undefined);
 

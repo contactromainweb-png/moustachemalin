@@ -4,7 +4,7 @@ import { LEGAL } from "@/lib/site";
 import Contenu from "../../../content/pages/affiliation.mdx";
 
 export const metadata: Metadata = {
-  title: "Affiliation Amazon",
+  title: { absolute: "Comment Moustache Malin gagne sa vie" },
   description: "Moustache Malin est Partenaire Amazon : ce que cela veut dire, ce que cela change (rien) pour le prix que vous payez.",
   alternates: { canonical: "/affiliation/" },
 };
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <StagePage
-      title="Nos liens Amazon, expliqués"
+      title="Comment Moustache Malin gagne sa vie"
       lead="Le site est gratuit et sans publicité. Il vit des commissions versées par Amazon, et voici comment."
       updated={LEGAL.miseAJour}
       stageWord="Transparence"

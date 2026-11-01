@@ -1,150 +1,107 @@
 import Link from "next/link";
-import { getProduct } from "@/lib/products";
+import { BoutonAction } from "@/components/BoutonAction";
 import { pageEnLigne } from "@/lib/site";
+import { espacesFines } from "@/lib/typo";
 
-// Scène 6 : « Comment nous comparons ». Un vrai comparatif se construit sous les yeux : la fiche technique d'un
-// appareil se remplit, devient un tableau à trois colonnes, puis le badge « Notre choix » se pose sur le modèle
-// retenu dans le comparatif des litières. Pendant ce temps, le critère du titre défile : sécurité, bruit,
-// entretien, coût, et la ligne correspondante s'allume. Toutes les valeurs viennent des fiches produits
-// (content/products) ; « Non précisé » quand le fabricant ne donne rien.
+// « Ce qu'on vérifie avant de vous recommander un appareil » : les quatre critères de nos comparatifs, expliqués
+// avec l'exemple des litières autonettoyantes, sans nom de produit. Simple apparition des cartes (CSS), aucune section
+// bloquée au défilement. Téléphone : mêmes cartes, empilées.
 
-const CRITERES = [
-  { mot: "sécurité", ligne: "Capteurs" },
-  { mot: "bruit", ligne: "Bruit annoncé" },
-  { mot: "entretien", ligne: "Bac à déchets" },
-  { mot: "coût", ligne: "Consommables à racheter" },
-];
-
-// Le meilleur globalement, le meilleur pour plusieurs chats, le meilleur petit budget (comparatif des litières).
-const ASINS = ["B0D9QGW2M6", "B0DG59SQ5P", "B0H1WVSVQ3"];
 const COMPARATIF = "/litieres/litiere-autonettoyante/";
 
-export function Comparaison() {
-  const produits = ASINS.map(getProduct);
-  const valeurs = (p: (typeof produits)[number]) => [
-    p.specs.capteurs ?? "Non précisé",
-    p.specs.bruit ?? "Non précisé",
-    (p.specs.bacDechets ?? "Non précisé").replace(/ \(.*\)$/, ""),
-    `${p.consommables.length} : ${p.consommables.map((c) => c.toLowerCase()).join(", ")}`,
-  ];
-  const nomCourt = (p: (typeof produits)[number]) => p.name.replace(/ litière autonettoyante ouverte/, "");
-  const fiche = produits[0];
-  const choix = 0;
+// Icônes au trait, dessinées sur une grille de 24 px.
+const CRITERES: { titre: string; texte: string; icone: React.ReactNode }[] = [
+  {
+    titre: "Sécurité",
+    texte: "Combien de capteurs détectent le chat, et que se passe-t-il s'il entre pendant un nettoyage ?",
+    icone: (
+      <>
+        <path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3Z" />
+        <path d="m8.8 12.2 2.2 2.2 4.3-4.6" />
+      </>
+    ),
+  },
+  {
+    titre: "Bruit",
+    texte: "Le niveau sonore annoncé par le fabricant, quand il le donne. Sinon, on le dit.",
+    icone: (
+      <>
+        <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z" />
+        <path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.2 6.5a8 8 0 0 1 0 11" />
+      </>
+    ),
+  },
+  {
+    titre: "Entretien",
+    texte: "Tous les combien vider le bac à déchets, et ce qui se démonte pour le nettoyer.",
+    icone: (
+      <>
+        <path d="M5 7.5h14M9.5 7.5V5h5v2.5" />
+        <path d="M6.5 7.5 7.4 19a1.5 1.5 0 0 0 1.5 1.4h6.2a1.5 1.5 0 0 0 1.5-1.4l.9-11.5" />
+        <path d="M10.3 11v5.5M13.7 11v5.5" />
+      </>
+    ),
+  },
+  {
+    titre: "Coût réel",
+    texte: "Le prix d'achat ne suffit pas : on liste les consommables à racheter (sacs, filtres…).",
+    icone: (
+      <>
+        <path d="M6 3.5h12v17l-2-1.3-2 1.3-2-1.3-2 1.3-2-1.3-2 1.3v-17Z" />
+        <path d="M9 8.5h6M9 12h6M9 15.5h3.5" />
+      </>
+    ),
+  },
+];
 
+export function Comparaison() {
   return (
-    <section data-comparaison data-fond="lavande" aria-labelledby="titre-comparaison" className="group/comp relative overflow-x-clip">
-      <div
-        data-comparaison-scene
-        className="mx-auto grid max-w-[90rem] gap-10 px-4 py-16 sm:px-8 lg:min-h-svh lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-16"
-      >
-        <div data-apparait className="lg:col-span-5">
-          <h2 id="titre-comparaison" className="font-display text-[clamp(2.75rem,1.4rem+5vw,6.5rem)]">
-            <span className="sr-only">
-              Nous comparons la sécurité, le bruit, l&apos;entretien et le coût.
-            </span>
-            <span aria-hidden="true">
-              Nous comparons{" "}
-              <span className="block">
-                {/* Le critère défile (data-defile, posé par Mouvement) ; sans animation, seul le premier est affiché. */}
-                <span data-critere-fenetre className="relative inline-grid overflow-hidden align-bottom">
-                  {CRITERES.map((c, i) => (
-                    <span
-                      key={c.mot}
-                      data-critere
-                      className={`mot-serif col-start-1 row-start-1 pb-[0.12em] ${i ? "hidden group-data-[defile]/comp:block" : ""}`}
-                    >
-                      {i === 0 ? "la " : i === 1 ? "le " : i === 2 ? "l'" : "le "}
-                      {c.mot}
-                    </span>
-                  ))}
-                </span>
-              </span>
-            </span>
+    <section data-fond="lavande" aria-labelledby="titre-comparaison" className="px-4 py-20 sm:px-8 lg:py-32">
+      <div className="mx-auto max-w-[90rem]">
+        <div className="max-w-[46rem]">
+          <h2 id="titre-comparaison" data-apparait className="reveal font-display text-[clamp(2.5rem,1.4rem+4vw,5.5rem)]">
+            Ce qu&apos;on <span className="mot-serif">vérifie</span> avant de vous recommander un appareil
           </h2>
-          <p className="mt-8 max-w-[38ch] text-lead">
-            Chaque appareil part de sa fiche technique : nous la relevons ligne par ligne, puis nous comparons les
-            modèles critère par critère. Quand le fabricant ne dit rien, nous l&apos;écrivons.
+          <p data-apparait className="reveal mt-6 text-lead">
+            Exemple avec les litières autonettoyantes, notre comparatif le plus lu.
           </p>
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
-            {pageEnLigne(COMPARATIF) ? (
-              <Link href={COMPARATIF} className="py-2 font-medium underline decoration-2 underline-offset-[6px]">
-                Voir le comparatif complet
-              </Link>
-            ) : null}
-            <Link href="/methode/" className="py-2 font-medium underline decoration-2 underline-offset-[6px]">
-              Notre méthode
-            </Link>
-          </div>
         </div>
 
-        <div data-comparaison-machine aria-hidden="true" className="relative lg:col-span-7">
-          {/* 1. La fiche technique du premier appareil (ordinateur seulement : sur téléphone, le tableau suffit). */}
-          <div
-            data-fiche
-            data-apparait
-            className="max-w-[26rem] rounded-[1.5rem] max-lg:hidden bg-blanc p-6 text-nuit shadow-[0_24px_60px_-28px_rgb(20_33_61/0.45)]"
-          >
-            <p className="text-small font-medium text-nuit/80">Fiche technique</p>
-            <p className="font-display mt-1 text-[1.75rem]">{fiche.name}</p>
-            <dl className="mt-4 divide-y divide-nuit/10">
-              {[
-                ["Type", fiche.specs.type],
-                ["Bac à déchets", fiche.specs.bacDechets],
-                ["Poids du chat", fiche.specs.poidsChat],
-                ["Capteurs", fiche.specs.capteurs],
-              ].map(([t, v]) => (
-                <div key={t} data-fiche-ligne className="flex justify-between gap-4 py-2.5">
-                  <dt className="text-nuit/80">{t}</dt>
-                  <dd className="text-right font-medium">{v}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-6">
+          {CRITERES.map((c, i) => (
+            <li
+              key={c.titre}
+              data-apparait
+              style={{ "--i": i } as React.CSSProperties}
+              className="reveal flex flex-col rounded-[1.5rem] bg-blanc p-6 text-nuit shadow-[0_24px_60px_-34px_rgb(20_33_61/0.45)] lg:p-8"
+            >
+              <svg
+                aria-hidden="true"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-nuit"
+              >
+                {c.icone}
+              </svg>
+              <h3 className="font-display mt-6 text-[1.75rem] leading-tight">{c.titre}</h3>
+              <p className="mt-3">{espacesFines(c.texte)}</p>
+            </li>
+          ))}
+        </ul>
 
-          {/* 2. Le tableau : trois modèles, quatre critères. 3. Le badge sur le modèle retenu.
-              Téléphone : chaque critère devient un petit bloc, un modèle par ligne. */}
-          <div
-            data-tableau
-            data-apparait
-            className="relative overflow-hidden rounded-[1.5rem] bg-blanc lg:mt-6 text-nuit shadow-[0_24px_60px_-28px_rgb(20_33_61/0.45)] lg:group-data-[defile]/comp:absolute lg:group-data-[defile]/comp:inset-x-0 lg:group-data-[defile]/comp:top-[18%] lg:group-data-[defile]/comp:mt-0"
-          >
-            <div className="grid text-[1rem] leading-snug lg:grid-cols-[minmax(0,0.9fr)_repeat(3,minmax(0,1fr))]">
-              <div className="max-lg:hidden lg:p-4 lg:pt-11" />
-              {produits.map((p, i) => (
-                <div
-                  key={p.asin}
-                  data-tableau-colonne={i === choix ? "choix" : undefined}
-                  className="relative px-2.5 py-3 font-display text-[1.05rem] max-lg:hidden lg:p-4 lg:pt-11 lg:text-[1.35rem]"
-                >
-                  {nomCourt(p)}
-                  {i === choix ? (
-                    <span
-                      data-badge
-                      className="absolute left-3 top-2.5 rotate-[-6deg] rounded-full bg-accent px-3 py-1 font-sans text-small font-semibold text-on-accent shadow-md max-lg:hidden"
-                    >
-                      Notre choix
-                    </span>
-                  ) : null}
-                </div>
-              ))}
-              {CRITERES.map((c, r) => (
-                <div key={c.ligne} data-tableau-ligne className="contents">
-                  <div data-ligne-fond className="border-t border-nuit/10 px-4 pb-1 pt-4 text-small font-medium text-nuit/80 lg:p-4 lg:text-[1rem]">
-                    {c.ligne}
-                  </div>
-                  {produits.map((p) => (
-                    <div key={p.asin} data-ligne-fond className="px-4 pb-2 last:pb-4 lg:border-t lg:border-nuit/10 lg:p-4">
-                      <span className="font-medium lg:hidden">{nomCourt(p)} : </span>
-                      {valeurs(p)[r]}
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <p data-badge className="border-t border-nuit/10 bg-accent px-4 py-3 font-medium text-on-accent lg:hidden">
-              Notre choix : {produits[choix].name}
-            </p>
-          </div>
+        <div data-apparait className="reveal mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
+          {pageEnLigne(COMPARATIF) ? (
+            <BoutonAction href={COMPARATIF}>Voir le comparatif des litières autonettoyantes</BoutonAction>
+          ) : null}
+          <Link href="/methode/" className="py-2 font-medium underline decoration-2 underline-offset-[6px]">
+            Notre méthode en détail
+          </Link>
         </div>
       </div>
     </section>

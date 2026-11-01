@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <RubriqueTemplate
+      chemin="/exemples/rubrique/"
       titre="Exemples"
       intro="Cette rubrique d'exemple montre le modèle de page qui accueillera les comparatifs et les guides de chaque catégorie."
       articles={[

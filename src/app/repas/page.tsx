@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
+import Texte from "../../../content/rubriques/repas.mdx";
 
 export const metadata: Metadata = {
   title: "Repas du chat : comparatifs",
@@ -13,10 +14,12 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <RubriqueTemplate
+      chemin="/repas/"
+      texte={<Texte />}
       titre="Repas"
       intro="Repas à heure fixe, portions réglées, absence d'un week-end : de quoi choisir le distributeur qui convient à votre chat et à votre rythme."
       articles={articlesDeRubrique("repas")}
-      photo={PHOTOS.chatGamelle}
+      photo={PHOTOS.chatAttendPorte}
     />
   );
 }

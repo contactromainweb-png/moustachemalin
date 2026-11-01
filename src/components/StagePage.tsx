@@ -14,6 +14,8 @@ type Props = {
   stageWord: string;
   // Portrait (page À propos) : sur téléphone, la photo vient juste après l'introduction, au format vertical.
   portrait?: boolean;
+  // Fil d'Ariane, au-dessus du titre (pages rubriques).
+  filAriane?: ReactNode;
   children: ReactNode;
 };
 
@@ -22,7 +24,7 @@ type Props = {
 // Téléphone : la photo vient après le texte, pour que le titre reste le premier élément affiché (LCP) ;
 // un portrait vient juste après l'introduction (le titre reste au-dessus).
 // Une photo verticale garde un format vertical sur téléphone ; sa légende (photo.legende) est posée en pastille sur la photo.
-export function StagePage({ title, lead, updated, photo, stageWord, portrait = false, children }: Props) {
+export function StagePage({ title, lead, updated, photo, stageWord, portrait = false, filAriane, children }: Props) {
   const vertical = portrait || (photo !== undefined && photo.height > photo.width);
   const zones = portrait ? "[grid-template-areas:'intro'_'photo'_'corps']" : "[grid-template-areas:'intro'_'corps'_'photo']";
   const colonne = "px-4 sm:px-8 lg:pl-[max(2rem,calc((100vw-90rem)/2+2rem))] lg:pr-16";
@@ -30,7 +32,8 @@ export function StagePage({ title, lead, updated, photo, stageWord, portrait = f
     <div
       className={`grid ${zones} lg:grid-cols-[minmax(0,11fr)_minmax(0,9fr)] lg:grid-rows-[auto_1fr] lg:[grid-template-areas:'intro_photo'_'corps_photo']`}
     >
-      <div className={`${colonne} pt-10 [grid-area:intro] lg:pt-20`}>
+      <div className={`${colonne} ${filAriane ? "pt-6 lg:pt-10" : "pt-10 lg:pt-20"} [grid-area:intro]`}>
+        {filAriane ? <div className="mb-6 lg:mb-10">{filAriane}</div> : null}
         <h1 className="font-display rise max-w-[14ch] text-display">{title}</h1>
         <p className="rise mt-8 max-w-[38ch] text-lead" style={{ "--i": 1 } as React.CSSProperties}>
           {lead}
