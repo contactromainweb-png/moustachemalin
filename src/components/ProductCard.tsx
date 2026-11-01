@@ -7,11 +7,10 @@ import { getProduct } from "@/lib/products";
 import { espacesFines } from "@/lib/typo";
 
 // Fiche détaillée d'un produit, appelée par son ASIN : <ProductCard asin="B0..." />
-// Le titre (### Nom : rôle) est écrit dans l'article, juste au-dessus. Sans ce titre (fiche placée directement sous
-// un titre ##, comme dans un avis), niveau={3} garde une hiérarchie de titres sans saut.
-export function ProductCard({ asin, niveau = 4 }: { asin: string; niveau?: 3 | 4 }) {
+// Le titre (### Nom : rôle) est écrit dans l'article, juste au-dessus. Les intitulés de la fiche (points forts,
+// entretien…) sont du texte en gras, pas des titres : ils se répéteraient à l'identique d'une fiche à l'autre.
+export function ProductCard({ asin }: { asin: string }) {
   const p = getProduct(asin);
-  const Titre = niveau === 3 ? "h3" : "h4";
   return (
     <section id={p.asin} aria-label={`Fiche : ${p.name}`} className="reveal mb-10 mt-6 scroll-mt-8">
       <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10">
@@ -30,16 +29,16 @@ export function ProductCard({ asin, niveau = 4 }: { asin: string; niveau?: 3 | 4
       </div>
 
       <div className="mt-8">
-        <ProsCons pros={p.pros} cons={p.cons} niveau={niveau} />
+        <ProsCons pros={p.pros} cons={p.cons} />
       </div>
 
       <div className="mt-8 grid gap-8 bg-field px-5 py-6 sm:grid-cols-2 sm:px-8">
         <div>
-          <Titre className="font-semibold">Entretien</Titre>
+          <p className="font-semibold">Entretien</p>
           <p className="mt-2">{espacesFines(p.entretien)}</p>
         </div>
         <div>
-          <Titre className="font-semibold">Consommables à racheter</Titre>
+          <p className="font-semibold">Consommables à racheter</p>
           <ul className="mt-2 space-y-1">
             {p.consommables.map((c) => (
               <li key={c}>{espacesFines(c)}</li>

@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test \"tests/*.test.ts\"",
-    "postbuild": "node scripts/controle-liens.mjs && node scripts/controle-images.mjs"
+    "postbuild": "node scripts/controle-liens.mjs && node scripts/controle-titres.mjs && node scripts/controle-images.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

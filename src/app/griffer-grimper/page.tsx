@@ -5,9 +5,9 @@ import { articlesDeRubrique } from "@/lib/rubriques";
 import Texte from "../../../content/rubriques/griffer-grimper.mdx";
 
 export const metadata: Metadata = {
-  title: "Griffer, grimper : arbres à chat et griffoirs",
+  title: "Griffer, grimper : arbre à chat, griffoir",
   description:
-    "Arbres à chat et griffoirs : nos comparatifs fondés sur les fiches techniques des fabricants, pour que votre chat grimpe et griffe ailleurs que sur le canapé.",
+    "Arbres à chat et griffoirs : nos comparatifs fondés sur les fiches techniques des fabricants, pour que votre chat griffe ailleurs que sur le canapé.",
   alternates: { canonical: "/griffer-grimper/" },
 };
 

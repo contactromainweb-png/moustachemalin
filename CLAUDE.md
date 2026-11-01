@@ -193,7 +193,9 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - Chaque comparatif est revérifié une fois par mois (produits toujours en vente, références, caractéristiques). La date « Mis à jour le » ne change que si le contenu a réellement été vérifié ou modifié.
 
 ### Pinterest (préparation)
-- Chaque article a une image verticale 1000 × 1500 px (photo + titre court), déclarée dans le frontmatter (`pinImage`), servie dans les métadonnées pour le partage.
+- Chaque article en ligne (comparatif, avis, guide, outil) a une image verticale 1000 × 1500 px (photo d'en-tête + titre court + logo), **fabriquée automatiquement avant chaque build** par `scripts/pins.mjs` dans `public/pins/<slug>.jpg` (dossier non suivi par git, moins de 300 Ko par image). Rien à déclarer : le chemin se déduit du slug.
+- Champs facultatifs du frontmatter : `pinTitre` (titre court, sinon la partie du titre avant « : ») et `pinCadrage` (point de la photo gardé, ex. `"15% 50%"`, sinon la `position` de la photo).
+- L'image est servie par `<link rel="image_src">` et `data-pin-media` sur la photo d'en-tête, et dans le flux RSS (`enclosure` + `media:content`). `og:image` reste la photo d'en-tête horizontale.
 
 ### Textes à valider
 - Les passages marqués **[À VALIDER PAR ROMAIN]** ne sont jamais publiés tels quels : ils restent hors du site tant que Romain ne les a pas complétés.

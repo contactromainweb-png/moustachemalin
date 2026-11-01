@@ -4,14 +4,17 @@ import { PHOTOS } from "@/lib/medias";
 const PHRASE = ["Un", "chat", "heureux", "tient", "à", "peu", "de", "choses."];
 const MOT_SERIF = "heureux";
 
-// Scène 2, sur fond bleu nuit (les particules claires y brillent) : la photo du chat blanc se désintègre en particules qui tourbillonnent, puis se reforment
-// en un chaton qui boit, pendant que la phrase s'écrit mot par mot (voir Mouvement et particules.ts).
+// Scène 2, sur fond bleu nuit (les particules claires y brillent) : la photo d'un chat roux devant une fenêtre se
+// désintègre en particules qui tourbillonnent, puis se reforment, pendant que la phrase s'écrit mot par mot (voir
+// Mouvement et particules.ts).
 // Sans JavaScript ou avec « animations réduites » : la phrase entière et la première photo, immobiles.
 // Les particules se reforment en Kira, la chatte de Romain, qui regarde en l'air.
 // Téléphone, tablette, écran tactile (variante tactile:) : pas de particules ; la phrase et la photo de Kira, qui
 // apparaissent en fondu (data-apparait).
 export function Desintegration() {
-  const { chatBlanc: a, kiraRegardeEnHaut: b } = PHOTOS;
+  // Pas le chat blanc du premier écran : sur ordinateur, le bas du premier écran et le haut de cette scène sont
+  // visibles ensemble, la même photo y apparaîtrait deux fois.
+  const { chatFenetre: a, kiraRegardeEnHaut: b } = PHOTOS;
   return (
     <section data-desintegration data-fond="nuit" aria-labelledby="titre-phrase" className="relative">
       <div
