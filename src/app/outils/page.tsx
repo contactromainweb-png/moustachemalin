@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fluxDansHead } from "@/lib/flux";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "Outils pratiques pour votre chat",
   description:
     "Des calculateurs gratuits pour répondre aux questions du quotidien : eau à boire, autonomie d'un distributeur, coût d'une litière, nombre de bacs.",
-  alternates: { canonical: "/outils/" },
+  alternates: { canonical: "/outils/", types: fluxDansHead("conseils") },
 };
 
 export default function Page() {

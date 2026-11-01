@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fluxDansHead } from "@/lib/flux";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesParType } from "@/lib/rubriques";
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
   title: "Tous nos guides et avis",
   description:
     "Nos guides pratiques, nos avis détaillés, nos outils et un comparatif par rubrique, réunis sur une seule page pour bien équiper votre chat.",
-  alternates: { canonical: "/guides/" },
+  alternates: { canonical: "/guides/", types: fluxDansHead("conseils") },
 };
 
 // Toutes rubriques confondues, rangés par type d'après le frontmatter : un nouveau guide, avis ou outil apparaît ici

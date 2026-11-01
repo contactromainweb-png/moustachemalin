@@ -55,6 +55,10 @@ for (const f of fichiersHtml(RACINE)) {
   }
   if (html.includes('id="a-lire-aussi"') && html.includes('id="pour-aller-plus-loin"'))
     erreurs.push(`${url} : « À lire aussi » et « Pour aller plus loin » sur la même page (garder le second)`);
+  // « Pour aller plus loin » hors des litières : jamais le comparatif litières par défaut (CLAUDE.md §11).
+  const plusLoin = html.match(/id="pour-aller-plus-loin"[\s\S]*?<\/section>/)?.[0] ?? "";
+  if (!url.startsWith("/litieres/") && plusLoin.includes('href="/litieres/litiere-autonettoyante/"'))
+    erreurs.push(`${url} : « Pour aller plus loin » renvoie au comparatif litières hors de sa rubrique`);
   // React sépare un texte variable du texte fixe par <!-- --> : retirés avant de chercher la phrase.
   if (/-avis\/$/.test(url) && html.replaceAll("<!-- -->", "").includes("ce comparatif repose sur"))
     erreurs.push(`${url} : page avis, la méthode doit dire « cet avis repose sur » (<MethodNote avis />)`);

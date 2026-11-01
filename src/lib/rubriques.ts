@@ -48,6 +48,13 @@ export function satellitesDe(slug: string): ArticleLien[] {
     .map(lien);
 }
 
+// Voisins d'un comparatif (frontmatter `voisins`), dans l'ordre indiqué : seuls ceux en ligne sont renvoyés.
+export function voisinsDe(slug: string): ArticleLien[] {
+  const tous = tousLesFrontmatters();
+  const voisins = tous.find((fm) => fm.slug === slug)?.voisins ?? [];
+  return voisins.flatMap((v) => tous.filter((fm) => fm.slug === v)).map(lien);
+}
+
 // Les articles les plus récemment mis à jour (accueil, « Derniers articles et mises à jour »).
 export function derniersArticles(nombre: number): ArticleLien[] {
   return tousLesFrontmatters()

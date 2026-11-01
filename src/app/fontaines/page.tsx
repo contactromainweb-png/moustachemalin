@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fluxDansHead } from "@/lib/flux";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "Fontaines à eau pour chat : comparatifs",
   description:
     "Fontaines à eau pour chat, branchées ou sans fil, en plastique ou en inox : nos comparatifs fondés sur les fiches techniques des fabricants.",
-  alternates: { canonical: "/fontaines/" },
+  alternates: { canonical: "/fontaines/", types: fluxDansHead("fontaines") },
 };
 
 export default function Page() {
