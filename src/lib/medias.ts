@@ -120,14 +120,88 @@ export const PHOTOS = {
     credit: "Photo : Helena Jankovičová Kováčová, Pexels",
     position: "50% 30%",
   },
-  // Kira qui joue avec sa canne à plumes (photo personnelle de Romain, 1536 × 2048) : portrait rond de « Qui écrit ici ».
-  kiraPlumeau: {
-    src: "/media/kira/kira-joue-plumeau.jpg",
-    width: 1536,
-    height: 2048,
-    alt: "Kira, la chatte de Romain",
+  // Photos personnelles de Romain (Kira), droits à lui. kira-assise-yeux-bleus : recadrée en carré sans le coin de
+  // téléviseur ; portrait rond de « Qui écrit ici ».
+  kiraAssise: {
+    src: "/media/kira/kira-assise-yeux-bleus.jpg",
+    width: 1704,
+    height: 1704,
+    alt: "Kira, la chatte de Romain, assise au salon",
     credit: "Photo : Romain, photo personnelle",
-    position: "62% 55%",
+    position: "62% 40%",
+  },
+  kiraRegardeEnHaut: {
+    src: "/media/kira/kira-regarde-en-haut.jpg",
+    width: 1571,
+    height: 2023,
+    alt: "Kira qui regarde en l'air, attentive",
+    credit: "Photo : Romain, photo personnelle",
+    position: "50% 40%",
+  },
+  kiraTetePenchee: {
+    src: "/media/kira/kira-tete-penchee.jpg",
+    width: 1545,
+    height: 1906,
+    alt: "Kira, l'air innocent",
+    credit: "Photo : Romain, photo personnelle",
+    position: "45% 35%",
+  },
+  kiraDebout: {
+    src: "/media/kira/kira-debout-deux-pattes.jpg",
+    width: 1519,
+    height: 2357,
+    alt: "Kira debout sur ses pattes arrière pour attraper un jouet",
+    credit: "Photo : Romain, photo personnelle",
+    position: "50% 30%",
+    legende: "Kira s'étire de tout son long pour attraper son jouet. Grimper et s'étirer, c'est un besoin.",
+  },
+  // Chats de la famille de Romain (photos personnelles, publiées avec l'accord de leurs propriétaires). Ce ne sont
+  // jamais des photos de Kira ; aucun prénom de propriétaire n'est écrit.
+  sucetteJardin: {
+    src: "/media/famille/sucette-jardin-violettes.jpg",
+    width: 1500,
+    height: 2000,
+    alt: "Sucette, la chatte de la compagne de Romain, au jardin parmi les violettes",
+    credit: "Photo : Romain, photo personnelle",
+    position: "50% 45%",
+  },
+  sucetteBlackPearlSieste: {
+    src: "/media/famille/sucette-et-black-pearl-sieste.jpg",
+    width: 1320,
+    height: 1760,
+    alt: "Sucette et Black Pearl, en pleine sieste au soleil",
+    credit: "Photo : Romain, photo personnelle",
+    legende: "Deux chats, deux caractères : avec plusieurs chats, la capacité du bac compte double.",
+  },
+  rebelleSieste: {
+    src: "/media/famille/rebelle-sieste.jpg",
+    width: 1341,
+    height: 746,
+    alt: "Rebelle, la chatte du père de Romain, en pleine sieste sur une table",
+    credit: "Photo : Romain, photo personnelle",
+  },
+  imotepArbre: {
+    src: "/media/famille/imotep-arbre-a-chat.jpg",
+    width: 1376,
+    height: 2208,
+    alt: "Imotep, le chat de la sœur de Romain, installé sur son arbre à chat près d'une fenêtre",
+    credit: "Photo : Romain, photo personnelle",
+    legende: "Imotep, le chat de ma sœur, installé près de la fenêtre, en poste d'observation.",
+  },
+  chichouneGriffoir: {
+    src: "/media/famille/chichoune-griffoir-carton.jpg",
+    width: 1932,
+    height: 1997,
+    alt: "Chichoune, une chatte tricolore, debout sur un griffoir plat en carton",
+    credit: "Photo : Romain, photo personnelle",
+    legende: "Chichoune sur son griffoir en carton : les résidus autour, c'est le signe qu'il sert.",
+  },
+  chichouneUtiliseGriffoir: {
+    src: "/media/famille/chichoune-utilise-griffoir.jpg",
+    width: 1443,
+    height: 1752,
+    alt: "Chichoune penchée sur son griffoir en carton",
+    credit: "Photo : Romain, photo personnelle",
   },
   // Kira sur son ancien arbre à chat (photo personnelle de Romain, prise le soir : légèrement éclaircie, 1536 × 2048).
   kiraArbre: {

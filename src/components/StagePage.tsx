@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 import type { Photo } from "@/lib/medias";
+import { espacesFines } from "@/lib/typo";
 
 export type StagePhoto = Photo;
 
@@ -20,7 +21,9 @@ type Props = {
 // ordinateur : à droite une photo qui reste en place, à gauche une colonne de lecture.
 // Téléphone : la photo vient après le texte, pour que le titre reste le premier élément affiché (LCP) ;
 // un portrait vient juste après l'introduction (le titre reste au-dessus).
+// Une photo verticale garde un format vertical sur téléphone ; sa légende (photo.legende) est posée en pastille sur la photo.
 export function StagePage({ title, lead, updated, photo, stageWord, portrait = false, children }: Props) {
+  const vertical = portrait || (photo !== undefined && photo.height > photo.width);
   const zones = portrait ? "[grid-template-areas:'intro'_'photo'_'corps']" : "[grid-template-areas:'intro'_'corps'_'photo']";
   const colonne = "px-4 sm:px-8 lg:pl-[max(2rem,calc((100vw-90rem)/2+2rem))] lg:pr-16";
   return (
@@ -45,7 +48,7 @@ export function StagePage({ title, lead, updated, photo, stageWord, portrait = f
         aria-hidden={photo ? undefined : true}
         className={`${photo ? (portrait ? "mt-10 px-4 sm:px-8" : "mb-8 px-4 sm:px-8") : "hidden"} [grid-area:photo] lg:sticky lg:top-0 lg:mb-0 lg:block lg:h-svh lg:self-start lg:p-3`}
       >
-        <figure className={`relative ${portrait ? "aspect-[4/5] max-w-md" : "aspect-[4/3]"} overflow-hidden rounded-[1.5rem] bg-lavande lg:aspect-auto lg:h-full lg:max-w-none lg:rounded-[2rem]`}>
+        <figure className={`relative ${vertical ? "aspect-[4/5] max-w-md" : "aspect-[4/3]"} overflow-hidden rounded-[1.5rem] bg-lavande lg:aspect-auto lg:h-full lg:max-w-none lg:rounded-[2rem]`}>
           {photo ? (
             <>
               {/* Ordinateur : plus grand élément de l'écran, demandé en priorité. Téléphone : chargé à l'approche. */}
@@ -60,6 +63,11 @@ export function StagePage({ title, lead, updated, photo, stageWord, portrait = f
                 className="object-cover"
                 style={photo.position ? { objectPosition: photo.position } : undefined}
               />
+              {photo.legende ? (
+                <figcaption className="absolute inset-x-3 bottom-3 rounded-[1rem] bg-paper/95 px-4 py-3 text-small text-ink lg:inset-x-6 lg:bottom-6 lg:max-w-[34rem]">
+                  {espacesFines(photo.legende)}
+                </figcaption>
+              ) : null}
             </>
           ) : (
             <p

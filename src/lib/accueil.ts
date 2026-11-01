@@ -130,8 +130,8 @@ export const PROFILS: Profil[] = [
     id: "plusieurs-chats",
     mot: ["Plusieurs", "chats"],
     liens: [{ href: "/litieres/litiere-autonettoyante/#B0DG59SQ5P", label: "La litière pour plusieurs chats" }],
-    photo: mur("10", "Deux chatons qui jouent devant une fenêtre, l'un perché sur un hamac pour chat.", "Anna Hinckel, Pexels"),
-    cadrage: "object-[78%_50%]",
+    photo: PHOTOS.sucetteBlackPearlSieste,
+    cadrage: "object-[50%_55%]",
     visible: true,
   },
   {

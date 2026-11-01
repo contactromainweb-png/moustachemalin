@@ -3,7 +3,7 @@ import Link from "next/link";
 import { StagePage, type StagePhoto } from "@/components/StagePage";
 import { TitreSerif } from "@/components/TitreSerif";
 import { LIBELLES_TYPE, type TypeArticle } from "@/lib/articles";
-import { PHOTOS } from "@/lib/medias";
+import { PHOTOS, type Photo } from "@/lib/medias";
 import { espacesFines } from "@/lib/typo";
 
 export type ArticleLien = {
@@ -22,6 +22,8 @@ type Props = {
   titre: string;
   intro: string;
   photo?: StagePhoto;
+  // Petite photo d'ambiance posée avant les cartes (page /guides/ : Rebelle), en plus de la grande photo de la scène.
+  vignette?: Photo;
 } & ({ articles: ArticleLien[]; groupes?: never } | { groupes: Groupe[]; articles?: never });
 
 // Titre de chaque groupe (page /guides/) : le mot du milieu en serif italique.
@@ -35,9 +37,20 @@ const TITRES_GROUPE: Record<TypeArticle, [string, string, string]> = {
 // Page de rubrique : introduction courte, cartes vers les articles (grande photo, titre avec son mot en serif
 // italique), photo d'ambiance qui reste en place sur ordinateur. Apparitions légères en CSS seulement.
 // `groupes` au lieu d'`articles` : les cartes sont rangées par type d'article, un titre par groupe (page /guides/).
-export function RubriqueTemplate({ titre, intro, articles, groupes, photo }: Props) {
+export function RubriqueTemplate({ titre, intro, articles, groupes, photo, vignette }: Props) {
   return (
     <StagePage title={titre} lead={intro} photo={photo} stageWord={titre}>
+      {vignette ? (
+        <Image
+          src={vignette.src}
+          alt={vignette.alt}
+          width={vignette.width}
+          height={vignette.height}
+          quality={80}
+          sizes="(min-width: 640px) 20rem, 80vw"
+          className="mb-14 w-full max-w-[20rem] rounded-[1.25rem] bg-field"
+        />
+      ) : null}
       {groupes ? (
         groupes.map((g, i) => {
           const [avant, mot, apres] = TITRES_GROUPE[g.type];
