@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fluxDansHead } from "@/lib/flux";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "Sorties : chatières manuelles et à puce",
   description:
     "Chatières manuelles ou à puce : notre comparatif fondé sur les fiches des fabricants, pour laisser sortir votre chat sans ouvrir à tout le monde.",
-  alternates: { canonical: "/sorties/" },
+  alternates: { canonical: "/sorties/", types: fluxDansHead("conseils") },
 };
 
 export default function Page() {

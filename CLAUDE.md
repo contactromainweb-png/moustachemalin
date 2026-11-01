@@ -185,7 +185,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 
 ### Maillage interne (grappes)
 - Chaque comparatif est le **pilier** d'une grappe. Chaque article satellite (guide, « X ou Y », avis produit, consommables, outil) contient au moins un lien vers son pilier, avec un texte de lien descriptif (ex. « notre comparatif des litières autonettoyantes »), jamais « cliquez ici ».
-- Chaque pilier liste tous ses satellites dans une section « Pour aller plus loin » (masquée tant qu'il n'en a aucun).
+- Chaque pilier liste ses satellites dans une section « Pour aller plus loin » (masquée tant qu'il n'en a aucun), suivis de ses voisins (frontmatter `voisins:`, slugs d'articles de la même rubrique ou d'une rubrique proche ; jamais le comparatif litières par défaut). **4 liens au plus** : au-delà, le build échoue. Un seul bloc de liens en bas de page : pas de « À lire aussi » dans un comparatif qui a « Pour aller plus loin ».
 - Aucune page sans lien entrant. Le build lance un contrôle automatique (`scripts/controle-liens.mjs`) qui liste les pages orphelines et les liens internes cassés, et échoue s'il trouve un lien cassé.
 - Le frontmatter de chaque article indique `pilier:` (le slug de son comparatif) pour générer ces liens automatiquement.
 
@@ -223,3 +223,9 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
   - **Chichoune** est câline et joueuse ; elle monte sur la table pour réclamer des caresses.
 - Les cousins ne parlent pas : seule Kira a une voix. Leurs photos ne sont jamais présentées comme des photos de Kira.
 - **Une légende visible n'est jamais une copie du texte alternatif.** L'alt décrit la photo pour les lecteurs d'écran ; la légende dit autre chose (un trait réel ci-dessus, ou un conseil lié à l'article).
+
+## 11 bis. Flux RSS par rubrique (Pinterest)
+- Chaque nouveau contenu doit avoir son image `/pins/<slug>.jpg` et apparaître dans le flux RSS de sa rubrique (correspondance rubrique → flux → tableau Pinterest : Litières → Litières pour chat ; Fontaines → Fontaines à eau pour chat ; Repas → Distributeurs de croquettes pour chat ; Griffer-grimper → Arbres à chat et griffoirs ; Guides, Outils, Sorties → Conseils pour chat).
+- Les flux : `/litieres/feed.xml`, `/fontaines/feed.xml`, `/repas/feed.xml`, `/griffer-grimper/feed.xml`, `/conseils/feed.xml` (Guides, Outils, Sorties). `/feed.xml` reste le flux général de tout le site.
+- Générés au build par `src/lib/flux.ts` (RSS 2.0, UTF-8) : titre, URL canonique (link et guid), date de publication (`publishedAt`, sinon `updatedAt`), meta description, image en `enclosure` et `media:content`. Un contenu sans image `/pins/` en est écarté, avec un avertissement au build qui nomme la page.
+- Chaque page de rubrique annonce son flux dans le `<head>` (`<link rel="alternate" type="application/rss+xml">`).

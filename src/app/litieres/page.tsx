@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fluxDansHead } from "@/lib/flux";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "Litières pour chat : comparatifs",
   description:
     "Litières autonettoyantes et bacs à litière : nos comparatifs fondés sur les fiches techniques des fabricants, pour choisir sans se tromper.",
-  alternates: { canonical: "/litieres/" },
+  alternates: { canonical: "/litieres/", types: fluxDansHead("litieres") },
 };
 
 export default function Page() {

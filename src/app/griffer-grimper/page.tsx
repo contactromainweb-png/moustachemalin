@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fluxDansHead } from "@/lib/flux";
 import { RubriqueTemplate } from "@/components/RubriqueTemplate";
 import { PHOTOS } from "@/lib/medias";
 import { articlesDeRubrique } from "@/lib/rubriques";
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: "Griffer, grimper : arbre à chat, griffoir",
   description:
     "Arbres à chat et griffoirs : nos comparatifs fondés sur les fiches techniques des fabricants, pour que votre chat griffe ailleurs que sur le canapé.",
-  alternates: { canonical: "/griffer-grimper/" },
+  alternates: { canonical: "/griffer-grimper/", types: fluxDansHead("griffer-grimper") },
 };
 
 export default function Page() {
