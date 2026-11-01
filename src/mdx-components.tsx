@@ -7,7 +7,7 @@ import { EnBref } from "@/components/EnBref";
 import { PhotoMdx, PhotoMoyenne } from "@/components/Figure";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { FAQ } from "@/components/FAQ";
-import { KiraGalerie } from "@/components/KiraGalerie";
+import { KiraCousins, KiraGalerie } from "@/components/KiraGalerie";
 import { KiraNote } from "@/components/KiraNote";
 import { MethodNote } from "@/components/MethodNote";
 import { NewsletterForm } from "@/components/NewsletterForm";
@@ -66,6 +66,7 @@ const components: MDXComponents = {
   PhotoMoyenne,
   ComparisonTable,
   FAQ,
+  KiraCousins,
   KiraGalerie,
   KiraNote,
   MethodNote,

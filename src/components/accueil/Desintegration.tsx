@@ -7,10 +7,11 @@ const MOT_SERIF = "heureux";
 // Scène 2, sur fond bleu nuit (les particules claires y brillent) : la photo du chat blanc se désintègre en particules qui tourbillonnent, puis se reforment
 // en un chaton qui boit, pendant que la phrase s'écrit mot par mot (voir Mouvement et particules.ts).
 // Sans JavaScript ou avec « animations réduites » : la phrase entière et la première photo, immobiles.
-// Téléphone, tablette, écran tactile (variante tactile:) : pas de particules ; la phrase et une autre photo, un chat
-// dans un rayon de soleil (la première est déjà celle du premier écran), qui apparaissent en fondu (data-apparait).
+// Les particules se reforment en Kira, la chatte de Romain, qui regarde en l'air.
+// Téléphone, tablette, écran tactile (variante tactile:) : pas de particules ; la phrase et la photo de Kira, qui
+// apparaissent en fondu (data-apparait).
 export function Desintegration() {
-  const { chatBlanc: a, chatonBol: b, chatSoleil: fixe } = PHOTOS;
+  const { chatBlanc: a, kiraRegardeEnHaut: b } = PHOTOS;
   return (
     <section data-desintegration data-fond="nuit" aria-labelledby="titre-phrase" className="relative">
       <div
@@ -39,12 +40,12 @@ export function Desintegration() {
             className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] sm:aspect-[3/2] lg:aspect-auto lg:h-[min(76svh,48rem)]"
           >
             <Image
-              src={fixe.src}
-              alt={fixe.alt}
+              src={b.src}
+              alt={b.alt}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               quality={80}
-              className="hidden object-cover object-[78%_45%] tactile:block"
+              className="hidden object-cover object-[50%_40%] tactile:block"
             />
             <Image
               data-desint-b

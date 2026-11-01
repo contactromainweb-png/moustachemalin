@@ -16,7 +16,7 @@ export default function Page() {
       titre="Griffer, grimper"
       intro="Un chat a besoin de faire ses griffes, de grimper et d'observer la maison d'en haut. Griffoirs et arbres à chat : de quoi lui offrir tout ça, sans sacrifier le canapé."
       articles={articlesDeRubrique("griffer-grimper")}
-      photo={PHOTOS.chatsPasserelles}
+      photo={PHOTOS.kiraDebout}
     />
   );
 }

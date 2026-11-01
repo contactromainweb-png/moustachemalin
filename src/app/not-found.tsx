@@ -1,11 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Portrait } from "@/components/KiraNote";
+import { PHOTOS } from "@/lib/medias";
 import { tousLesArticles } from "@/lib/rubriques";
 import { pageEnLigne } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
 
 // Page 404 : Kira prend la parole (charte « La voix de Kira », CLAUDE.md section 11), puis les pages toujours en
-// place : l'accueil, chaque comparatif en ligne et les guides.
+// place : l'accueil, chaque comparatif en ligne et les guides. Au-dessus du texte, une petite photo de Kira, tête
+// penchée, l'air innocent (premier écran : chargée tout de suite).
 export default function NotFound() {
   const liens = [
     { href: "/", label: "Accueil" },
@@ -17,7 +19,17 @@ export default function NotFound() {
 
   return (
     <div className="mx-auto max-w-[90rem] px-4 pb-24 pt-16 sm:px-8 sm:pt-28">
-      <Portrait taille="size-20 sm:size-24" prioritaire />
+      <Image
+        src={PHOTOS.kiraTetePenchee.src}
+        alt={PHOTOS.kiraTetePenchee.alt}
+        width={PHOTOS.kiraTetePenchee.width}
+        height={PHOTOS.kiraTetePenchee.height}
+        priority
+        quality={80}
+        sizes="(min-width: 640px) 10rem, 8rem"
+        className="aspect-[4/5] w-32 rounded-[1.25rem] bg-field object-cover sm:w-40"
+        style={{ objectPosition: PHOTOS.kiraTetePenchee.position }}
+      />
       <h1 className="font-display mt-8 max-w-[16ch] text-display">
         Kira est passée <span className="mot-serif">par là</span>
       </h1>

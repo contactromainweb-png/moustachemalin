@@ -19,6 +19,7 @@ export default function Page() {
       intro="Les questions qu'on se pose tous avec un chat, nos avis détaillés sur un appareil, nos outils et un comparatif par rubrique. Pour tout souci de santé, votre vétérinaire reste la bonne adresse."
       groupes={articlesParType()}
       photo={PHOTOS.chatSoleil}
+      vignette={PHOTOS.rebelleSieste}
     />
   );
 }
