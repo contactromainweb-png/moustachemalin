@@ -13,6 +13,28 @@ const ICONES: Record<string, React.ReactNode> = {
       <path d="M9.4 14.2a2.7 2.7 0 0 0 2.6 2.6" />
     </>
   ),
+  // Un calendrier : combien de jours tient le réservoir.
+  "autonomie-distributeur-croquettes": (
+    <>
+      <rect x="4" y="5.5" width="16" height="14.5" rx="2" />
+      <path d="M8 3.5v4M16 3.5v4M4 10h16M8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17h.01M12 17h.01" />
+    </>
+  ),
+  // Une pièce marquée de l'euro : le coût réel.
+  "cout-litiere-autonettoyante": (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M15 8.6a4 4 0 1 0 0 6.8M7.5 11h5.5M7.5 13.2h5" />
+    </>
+  ),
+  // Deux bacs à litière vus de face : le nombre de bacs.
+  "combien-de-litieres": (
+    <>
+      <path d="M2.5 11.5h8.5l-1.2 6H3.7l-1.2-6Z" />
+      <path d="M13 11.5h8.5l-1.2 6h-6.1l-1.2-6Z" />
+      <path d="M5 9c.8-.7 2.2-.7 3 0M15.5 9c.8-.7 2.2-.7 3 0" />
+    </>
+  ),
 };
 
 // Icône générique : une calculatrice.

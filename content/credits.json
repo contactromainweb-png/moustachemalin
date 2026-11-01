@@ -498,6 +498,24 @@
     "resolutionSource": "1656x2208"
   },
   {
+    "fichier": "public/media/famille/black-pearl-jardin.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1500x2000",
+    "description": "Black Pearl, le chat noir de la compagne de Romain, qui traverse le jardin"
+  },
+  {
+    "fichier": "public/media/famille/chichoune-arbre-a-chat.jpg",
+    "auteur": "Romain",
+    "source": "Photo personnelle",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1242x2208",
+    "description": "Chichoune, la chatte tricolore de la sœur de Romain, installée dans la niche d'un arbre à chat"
+  },
+  {
     "fichier": "public/media/famille/sucette-et-black-pearl-sieste.jpg",
     "auteur": "Romain",
     "source": "Photo personnelle",
@@ -726,6 +744,30 @@
     "auteur": "Zişan Özdemir",
     "source": "Pexels",
     "url": "https://www.pexels.com/photo/27297163/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "4000x6000"
+  },
+  {
+    "fichier": "public/media/articles/chat-roux-assis-parquet-clair.jpg",
+    "auteur": "Lily Lili",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/30394939/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "4160x6240"
+  },
+  {
+    "fichier": "public/media/articles/chat-tigre-boit-bol-inox.jpg",
+    "auteur": "Linny (Frosty)",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/14553201/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "3456x5184"
+  },
+  {
+    "fichier": "public/media/articles/chat-roux-boit-verre-eau.jpg",
+    "auteur": "Liisbet Luup",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/40061374/",
     "licence": "Licence Pexels",
     "resolutionSource": "4000x6000"
   }

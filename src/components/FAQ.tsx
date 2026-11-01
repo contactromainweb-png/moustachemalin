@@ -7,7 +7,7 @@ export type Question = { q: string; a: string };
 export function FAQ({ items, titre = "Questions fréquentes" }: { items: Question[]; titre?: string }) {
   return (
     <section aria-labelledby="faq" className="reveal my-14">
-      <h2 id="faq" className="font-display mb-8 text-head">
+      <h2 id="faq" className="font-display mb-8 scroll-mt-20 text-head">
         {titre}
       </h2>
       <div className="space-y-3">

@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 // Image de partage par défaut (Open Graph, 1200 × 630), fabriquée à la construction du site avec les vraies polices :
 // le symbole à gauche, « Moustache malin » en relief à droite, la promesse du site dessous.
 // Polices TTF dans src/app/polices/og/ (next/og ne lit pas le WOFF2), produites par scripts/polices-og.mjs.
-// Les articles ajoutent leur propre image verticale (Pinterest) quand ils en ont une : voir articleMetadata.
+// Les articles signalent en plus leur image verticale pour Pinterest (scripts/pins.mjs, ArticleTemplate).
 export const alt = "Logo Moustache Malin : une tête de chat orange aux six moustaches, qui fait un clin d'œil.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

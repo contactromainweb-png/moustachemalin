@@ -75,8 +75,16 @@ export function rubriquesEnLigne() {
   return RUBRIQUES.filter((r) => pageEnLigne(r.href));
 }
 
+// Menu principal : après les rubriques, les pages à part (affichées seulement si leur page existe).
+export const MENU_PLUS = [{ href: "/la-bande-de-kira/", label: "La bande de Kira" }];
+
+export function menuEnLigne() {
+  return [...rubriquesEnLigne(), ...MENU_PLUS.filter((p) => pageEnLigne(p.href))];
+}
+
 export const PAGES_INFO = [
   { href: "/a-propos/", label: "À propos" },
+  { href: "/la-bande-de-kira/", label: "La bande de Kira" },
   { href: "/methode/", label: "Notre méthode" },
   { href: "/affiliation/", label: "Affiliation" },
   { href: "/mentions-legales/", label: "Mentions légales" },

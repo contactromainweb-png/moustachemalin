@@ -3,7 +3,9 @@ import Link from "next/link";
 import { AffiliateButton } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { CalloutLink } from "@/components/CalloutLink";
+import { Encadre } from "@/components/Encadre";
 import { EncadreOutil } from "@/components/Outils";
+import { Sommaire } from "@/components/Sommaire";
 import { EnBref } from "@/components/EnBref";
 import { Consommables } from "@/components/Consommables";
 import { PhotoMdx, PhotoMoyenne } from "@/components/Figure";
@@ -19,14 +21,15 @@ import { ProsCons } from "@/components/ProsCons";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { TopPicks } from "@/components/TopPicks";
 import { VetNotice } from "@/components/VetNotice";
-import { WaterCalculator } from "@/components/WaterCalculator";
 import { pageEnLigne } from "@/lib/site";
 
 // Mise en forme des textes écrits en MDX (dossier content/).
-// Les composants listés en bas sont utilisables directement dans un article, sans import.
+// Les composants listés en bas sont utilisables directement dans un article, sans import. Les composants
+// interactifs propres à une seule page (calculateurs, liste de signes) n'y sont pas : la page les passe elle-même
+// à son contenu (<Contenu components={{ … }} />), pour que leur JavaScript ne soit chargé que sur elle.
 const components: MDXComponents = {
   h2: (props) => (
-    <h2 className="reveal font-display mb-6 mt-20 max-w-[22ch] text-head first:mt-0" {...props} />
+    <h2 className="reveal font-display mb-6 mt-20 max-w-[22ch] scroll-mt-20 text-head first:mt-0" {...props} />
   ),
   h3: (props) => <h3 className="reveal mb-3 mt-10 text-lead font-semibold" {...props} />,
   p: (props) => <p className="reveal mb-5 max-w-[65ch]" {...props} />,
@@ -63,7 +66,9 @@ const components: MDXComponents = {
   // Placée seule dans un article : un peu d'air avant le texte qui suit.
   AmazonDisclosure: (props: { className?: string }) => <AmazonDisclosure className="mb-10" {...props} />,
   CalloutLink,
+  Encadre,
   EncadreOutil,
+  Sommaire,
   EnBref,
   Photo: PhotoMdx,
   PhotoMoyenne,
@@ -81,7 +86,6 @@ const components: MDXComponents = {
   RelatedArticles,
   TopPicks,
   VetNotice,
-  WaterCalculator,
 };
 
 export function useMDXComponents(): MDXComponents {
