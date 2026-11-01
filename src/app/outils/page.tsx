@@ -19,7 +19,8 @@ export default function Page() {
       titre="Outils"
       intro="Des calculateurs simples et gratuits, pour répondre en quelques secondes aux questions du quotidien. Ils donnent des repères, pas un diagnostic."
       articles={articlesDeRubrique("outils")}
-      photo={PHOTOS.chatBol}
+      photo={PHOTOS.chatTigreBolEau}
+      outils
     />
   );
 }

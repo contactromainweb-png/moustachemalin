@@ -19,7 +19,7 @@ export default function Page() {
       titre="Fontaines"
       intro="Beaucoup de chats préfèrent l'eau qui coule. De quoi choisir une fontaine silencieuse, facile à nettoyer et adaptée à votre logement."
       articles={articlesDeRubrique("fontaines")}
-      photo={PHOTOS.chatRobinet}
+      photo={PHOTOS.chatRobinetExterieur}
     />
   );
 }

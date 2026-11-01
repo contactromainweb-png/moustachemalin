@@ -368,13 +368,13 @@
     "resolutionSource": "3885x2585"
   },
   {
-    "fichier": "public/media/kira/kira-portrait.jpg",
+    "fichier": "public/media/kira/kira-tete-yeux-bleus.jpg",
     "auteur": "Romain",
     "source": "Photo personnelle",
     "url": "",
     "licence": "Tous droits réservés",
-    "resolutionSource": "800x800",
-    "description": "Kira, la chatte de Romain"
+    "resolutionSource": "1854x1854 (recadrage 900x900 sur la tête)",
+    "description": "Kira, la chatte de Romain, en gros plan sur la tête"
   },
   {
     "fichier": "public/media/kira/kira-joue-plumeau.jpg",

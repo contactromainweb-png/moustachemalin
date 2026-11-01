@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PROFILS } from "@/lib/accueil";
 import { MUR, MUR_CENTRE, PHOTOS } from "@/lib/medias";
 import { appareilsCompares } from "@/lib/rubriques";
 
@@ -24,11 +25,21 @@ function srcsetVignette(src: string, largeur: number) {
   return largeurs.map((w) => `${adresse(src, w)} ${w}w`).join(", ");
 }
 
+// Aucune vignette ne reprend une photo déjà montrée sur l'accueil (une même image jamais deux fois par page, contrôlé
+// au build) : les photos du mur prises par « Selon mon chat » sont retirées, et le mur est complété par des photos
+// qui n'illustrent aucun article (celles des textes de rubriques, et deux photos d'ambiance).
+const PRISES = new Set(PROFILS.filter((p) => p.visible).map((p) => p.photo.src));
 const VIGNETTES = [
-  ...MUR,
-  ...[PHOTOS.chatSoleil, PHOTOS.chatChaise, PHOTOS.chatBol, PHOTOS.chatonsArbre, PHOTOS.chatRobinet].map(
-    ({ src, width, height }) => ({ src, width, height }),
-  ),
+  ...MUR.filter((p) => !PRISES.has(p.src)),
+  ...[
+    PHOTOS.chatsPasserelles,
+    PHOTOS.chatSoleil,
+    PHOTOS.chatCanapeLumineux,
+    PHOTOS.chatRouxBassine,
+    PHOTOS.chatTigreCroquettes,
+    PHOTOS.chatArbrePlateforme,
+    PHOTOS.chatonBolEau,
+  ].map(({ src, width, height }) => ({ src, width, height })),
 ].slice(0, 34);
 
 export function Mur() {

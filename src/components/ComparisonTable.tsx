@@ -1,4 +1,4 @@
-import { AffiliateButton } from "@/components/AffiliateButton";
+import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { getProduct, specLabel } from "@/lib/products";
 import { espacesFines } from "@/lib/typo";
@@ -67,6 +67,7 @@ export function ComparisonTable({ asins, columns }: { asins: string[]; columns: 
               ))}
             </dl>
             <AffiliateButton asin={p.asin} emplacement="tableau" exemple={p.exemple} className="mt-5 w-full" />
+            {p.exemple ? null : <LienAvisAmazon asin={p.asin} className="mt-1 text-small" />}
           </li>
         ))}
       </ul>

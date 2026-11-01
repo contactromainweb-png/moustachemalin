@@ -32,7 +32,11 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
         <Signature date={fm.updatedAt} className="rise mt-6" />
         {image ? (
           // Grande photo d'en-tête, aussi sur téléphone : demandée en priorité, c'est le plus grand élément affiché.
-          <figure className="rise mt-10 lg:mt-14" style={{ "--i": 2 } as React.CSSProperties}>
+          // Page d'outil : pas de photo sur téléphone, pour que le calculateur soit visible dès le premier écran.
+          <figure
+            className={`rise mt-10 lg:mt-14 ${fm.type === "outil" ? "max-lg:hidden" : ""}`}
+            style={{ "--i": 2 } as React.CSSProperties}
+          >
             <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-field sm:aspect-[16/9] lg:aspect-[21/9] lg:rounded-[2rem]">
               <Image
                 src={image.src}

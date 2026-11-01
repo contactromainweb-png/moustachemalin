@@ -144,7 +144,7 @@ export const PROFILS: Profil[] = [
     id: "boit-peu",
     mot: ["Il boit", "peu"],
     liens: [{ href: "/guides/mon-chat-ne-boit-pas/", label: "Mon chat ne boit pas : que faire" }],
-    photo: PHOTOS.chatBol,
+    photo: PHOTOS.chatGrisTasse,
     cadrage: "object-[50%_50%]",
     visible: true,
   },

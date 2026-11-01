@@ -1,4 +1,4 @@
-import { AffiliateButton } from "@/components/AffiliateButton";
+import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { getProduct } from "@/lib/products";
 import { espacesFines } from "@/lib/typo";
@@ -22,6 +22,7 @@ export function TopPicks({ picks }: { picks: Pick[] }) {
           </div>
           <div>
             <AffiliateButton emplacement="résumé" asin={premier.asin} exemple={premier.produit.exemple} />
+            {premier.produit.exemple ? null : <LienAvisAmazon asin={premier.asin} className="text-small" />}
             <a href={`#${premier.asin}`} className="mt-2 block w-fit py-2.5 underline underline-offset-4">
               Lire la fiche détaillée
             </a>
@@ -40,6 +41,7 @@ export function TopPicks({ picks }: { picks: Pick[] }) {
                   <a href={`#${pick.asin}`} className="inline-block py-2.5 underline underline-offset-4">
                     La fiche
                   </a>
+                  {pick.produit.exemple ? null : <LienAvisAmazon asin={pick.asin} className="basis-full text-small" />}
                 </div>
               </div>
             ))}

@@ -19,7 +19,7 @@ export default function Page() {
       titre="Litières"
       intro="Autonettoyante ou classique, ouverte ou fermée : de quoi choisir la litière qui convient à votre chat et à votre logement."
       articles={articlesDeRubrique("litieres")}
-      photo={PHOTOS.chatChaise}
+      photo={PHOTOS.appartementChatBlanc}
     />
   );
 }

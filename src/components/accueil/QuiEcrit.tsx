@@ -26,13 +26,13 @@ export function QuiEcrit() {
             </div>
             <div className="relative -ml-6 aspect-square w-28 shrink-0 overflow-hidden rounded-full bg-lavande ring-4 ring-field sm:w-40 lg:-ml-10 lg:w-[11rem]">
               <Image
-                src={PHOTOS.kiraAssise.src}
-                alt={PHOTOS.kiraAssise.alt}
+                src={PHOTOS.kiraTetePenchee.src}
+                alt={PHOTOS.kiraTetePenchee.alt}
                 fill
                 quality={80}
                 sizes="(min-width: 1024px) 14rem, (min-width: 640px) 12rem, 9rem"
                 className="scale-[1.25] object-cover"
-                style={{ objectPosition: PHOTOS.kiraAssise.position, transformOrigin: PHOTOS.kiraAssise.position }}
+                style={{ objectPosition: PHOTOS.kiraTetePenchee.position, transformOrigin: PHOTOS.kiraTetePenchee.position }}
               />
             </div>
           </div>

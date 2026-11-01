@@ -3,9 +3,11 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
+import { CartesOutils } from "@/components/Outils";
 import { StagePage, type StagePhoto } from "@/components/StagePage";
 import { TitreSerif } from "@/components/TitreSerif";
 import { LIBELLES_TYPE, type TypeArticle } from "@/lib/articles";
+import { attribuerPhotos, sources } from "@/lib/cartes";
 import { PHOTOS, type Photo } from "@/lib/medias";
 import { SITE } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
@@ -16,6 +18,7 @@ export type ArticleLien = {
   description: string;
   type: TypeArticle;
   photo?: keyof typeof PHOTOS;
+  photos?: (keyof typeof PHOTOS)[]; // toutes les photos de l'article, pour choisir celle de la carte (lib/cartes.ts)
   motSerif?: string;
   updatedAt?: string;
 };
@@ -32,6 +35,8 @@ type Props = {
   photo?: StagePhoto;
   // Petite photo d'ambiance posée avant les cartes (page /guides/ : Rebelle), en plus de la grande photo de la scène.
   vignette?: Photo;
+  // Page /outils/ : grandes cartes avec icône et bouton « Calculer maintenant », sans photo.
+  outils?: boolean;
 } & ({ articles: ArticleLien[]; groupes?: never } | { groupes: Groupe[]; articles?: never });
 
 // Titre de chaque groupe (page /guides/) : le mot du milieu en serif italique.
@@ -46,8 +51,10 @@ const TITRES_GROUPE: Record<TypeArticle, [string, string, string]> = {
 // italique), photo d'ambiance qui reste en place sur ordinateur. Apparitions légères en CSS seulement.
 // `groupes` au lieu d'`articles` : les cartes sont rangées par type d'article, un titre par groupe (page /guides/).
 // Fil d'Ariane au-dessus du titre ; schema ItemList avec tous les articles listés.
-export function RubriqueTemplate({ titre, intro, chemin, texte, articles, groupes, photo, vignette }: Props) {
+// Aucune carte ne reprend la photo de la page ni celle d'une autre carte (voir attribuerPhotos).
+export function RubriqueTemplate({ titre, intro, chemin, texte, articles, groupes, photo, vignette, outils }: Props) {
   const liste = groupes ? groupes.flatMap((g) => g.articles) : articles;
+  const prises = sources(photo, vignette);
   return (
     <StagePage
       title={titre}
@@ -76,16 +83,20 @@ export function RubriqueTemplate({ titre, intro, chemin, texte, articles, groupe
                 {avant} <span className="mot-serif">{mot}</span>
                 {apres}
               </h2>
-              <Cartes articles={g.articles} />
+              {g.type === "outil" ? (
+                <CartesOutils articles={g.articles} />
+              ) : (
+                <Cartes articles={attribuerPhotos(g.articles, prises)} />
+              )}
             </section>
           );
         })
       ) : (
         <>
           <h2 data-fond="page" className="font-display mb-8 text-head">
-            Nos <span className="mot-serif">articles</span>
+            Nos <span className="mot-serif">{outils ? "outils" : "articles"}</span>
           </h2>
-          <Cartes articles={articles} />
+          {outils ? <CartesOutils articles={articles} /> : <Cartes articles={attribuerPhotos(articles, prises)} />}
         </>
       )}
       {texte ? <div className="mt-24">{texte}</div> : null}

@@ -19,7 +19,7 @@ export default function Page() {
       titre="Repas"
       intro="Repas à heure fixe, portions réglées, absence d'un week-end : de quoi choisir le distributeur qui convient à votre chat et à votre rythme."
       articles={articlesDeRubrique("repas")}
-      photo={PHOTOS.chatGamelle}
+      photo={PHOTOS.chatAttendPorte}
     />
   );
 }
