@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 // Kira en grand (à droite sur ordinateur, juste après l'introduction sur téléphone), puis une carte par cousin :
-// photo, prénom, chez qui il vit, une phrase sur ce qu'on voit (données et règles : src/lib/bande.ts).
+// photo, prénom, chez qui il vit, une phrase de Romain sur son caractère (données et règles : src/lib/bande.ts).
 // Le texte sur Kira reprend celui de Romain (À propos, « Qui écrit ici ») : rien n'est inventé.
 export default function Page() {
   return (

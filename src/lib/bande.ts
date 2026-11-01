@@ -1,8 +1,9 @@
 import type { Photo } from "@/lib/medias";
 
 // Page /la-bande-de-kira/ : les chats de la famille de Romain (photos personnelles, publiées avec l'accord de leurs
-// familles). Charte (CLAUDE.md §11) : seule Kira a une voix ; les cousins ne « parlent » pas, et chaque phrase décrit
-// seulement ce qu'on voit sur la photo, sans habitude inventée. Jamais le prénom de la compagne, du père ni de la
+// familles). Charte (CLAUDE.md §11, « La bande de Kira ») : seule Kira a une voix ; les cousins ne « parlent » pas.
+// Chaque phrase visible est le texte exact de Romain, tiré de leurs traits réels, et jamais une copie de l'alt (qui,
+// lui, décrit la photo). Aucune habitude inventée. Jamais le prénom de la compagne, du père ni de la
 // sœur de Romain. Jamais de marque ni de modèle pour l'arbre à chat de Chichoune.
 export type Cousin = { prenom: string; chezQui: string; phrase: string; photo: Photo };
 
@@ -10,7 +11,7 @@ export const BANDE: Cousin[] = [
   {
     prenom: "Sucette",
     chezQui: "La chatte de la compagne de Romain",
-    phrase: "Une chatte tigrée qui avance dans l'herbe du jardin, au milieu des violettes.",
+    phrase: "Un fauteuil, une boule de poils, zéro bruit. Sucette dort, on chuchote.",
     photo: {
       src: "/media/famille/sucette-jardin-violettes.jpg",
       alt: "Sucette, la chatte tigrée de la compagne de Romain, dans l'herbe du jardin parmi les violettes",
@@ -23,7 +24,7 @@ export const BANDE: Cousin[] = [
   {
     prenom: "Black Pearl",
     chezQui: "Le chat de la compagne de Romain",
-    phrase: "Un chat noir qui traverse le jardin, la queue dressée.",
+    phrase: "Caressez Black Pearl, il vous rend la pareille, à coups de langue.",
     photo: {
       src: "/media/famille/black-pearl-jardin.jpg",
       alt: "Black Pearl, le chat noir de la compagne de Romain, qui traverse le jardin la queue dressée",
@@ -36,7 +37,7 @@ export const BANDE: Cousin[] = [
   {
     prenom: "Rebelle",
     chezQui: "La chatte du père de Romain",
-    phrase: "Une chatte rousse en pleine sieste, couchée sur une table.",
+    phrase: "Rebelle porte bien son nom : elle n'en fait qu'à sa tête, et si elle n'a pas envie, c'est non.",
     photo: {
       src: "/media/famille/rebelle-sieste.jpg",
       alt: "Rebelle, la chatte rousse du père de Romain, en pleine sieste sur une table",
@@ -49,7 +50,7 @@ export const BANDE: Cousin[] = [
   {
     prenom: "Imotep",
     chezQui: "Le chat de la sœur de Romain",
-    phrase: "Un chat tigré et blanc couché sur une chaise, qui regarde l'objectif.",
+    phrase: "Le chat du quartier. Un miaulement devant la porte, et tout le monde a compris : dehors !",
     photo: {
       src: "/media/famille/imotep-chaise.jpg",
       alt: "Imotep, le chat tigré et blanc de la sœur de Romain, couché sur une chaise",
@@ -62,7 +63,7 @@ export const BANDE: Cousin[] = [
   {
     prenom: "Chichoune",
     chezQui: "La chatte de la sœur de Romain",
-    phrase: "Une chatte tricolore installée dans la niche d'un arbre à chat, entre deux poteaux.",
+    phrase: "Câline et joueuse, Chichoune a trouvé le meilleur guichet à caresses : la table.",
     photo: {
       src: "/media/famille/chichoune-arbre-a-chat.jpg",
       alt: "Chichoune, la chatte tricolore de la sœur de Romain, dans la niche d'un arbre à chat",

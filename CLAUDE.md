@@ -213,3 +213,13 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - **Où Kira parle :** un encadré par article (composant `KiraNote`, placé après l'introduction), l'accueil (un encadré juste après les cartes « Mon problème, c'est… », texte de Romain), la page 404, les messages de confirmation (newsletter : `/lettre/merci/`, formulaire), la newsletter (signée « Romain et Kira »), les réseaux sociaux.
 - **Où Kira ne parle pas :** les comparatifs eux-mêmes (tableaux, fiches, avis), les encadrés de méthode, de santé ou d'affiliation, les mentions légales.
 - **Photo** : tant que Romain ne l'a pas fournie, un rond neutre la remplace. Pour l'ajouter : déposer la photo dans `public/media/` et renseigner `KIRA.photo` dans `src/lib/site.ts`.
+
+### La bande de Kira (les chats de la famille de Romain)
+- **Traits réels, donnés par Romain** (rien d'autre n'est inventé) :
+  - **Sucette** dort toujours roulée en boule sur le même fauteuil ; très discrète.
+  - **Black Pearl** lèche quand on le caresse.
+  - **Rebelle** est peu sociable et n'en fait qu'à sa tête.
+  - **Imotep** est « le chat du quartier » ; il miaule pour sortir.
+  - **Chichoune** est câline et joueuse ; elle monte sur la table pour réclamer des caresses.
+- Les cousins ne parlent pas : seule Kira a une voix. Leurs photos ne sont jamais présentées comme des photos de Kira.
+- **Une légende visible n'est jamais une copie du texte alternatif.** L'alt décrit la photo pour les lecteurs d'écran ; la légende dit autre chose (un trait réel ci-dessus, ou un conseil lié à l'article).
