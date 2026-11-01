@@ -1,15 +1,43 @@
-// Formulaire de contact (page /contact/), reçu par Netlify Forms : un simple formulaire HTML, sans JavaScript ni
-// cookie. Il est envoyé au fichier statique public/__forms.html, qui déclare le même formulaire « contact » pour la
-// détection de Netlify (le site passe par l'adaptateur Next.js : une page générée par Next ne peut pas recevoir
-// l'envoi). Netlify renvoie ensuite vers /contact/merci/. Anti-spam : filtre de Netlify + champ piège
-// « adresse-postale », caché aux visiteurs et rempli seulement par les robots. Pas de reCAPTCHA (cookies).
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { SITE } from "@/lib/site";
+
+// Formulaire de contact (page /contact/), reçu par Netlify Forms, sans cookie. Il est envoyé au fichier statique
+// public/__forms.html, qui déclare le même formulaire « contact » pour la détection de Netlify (le site passe par
+// l'adaptateur Next.js : une page générée par Next ne peut pas recevoir l'envoi). Netlify ne renvoie pas vers
+// /contact/merci/ dans ce cas : le formulaire est donc envoyé en arrière-plan, puis la page de remerciement s'ouvre.
+// Sans JavaScript, l'envoi fonctionne aussi, mais se termine sur la page de confirmation de Netlify.
+// Anti-spam : filtre de Netlify + champ piège « adresse-postale », caché aux visiteurs et rempli seulement par les
+// robots. Pas de reCAPTCHA (cookies).
 export const SUJETS = ["Question sur un produit", "Suggestion d'article", "Partenariat", "Autre"];
 
 const champ = "mt-2 block w-full rounded-[0.75rem] border-2 border-ink/25 bg-paper px-4 text-body focus:border-ink";
 
 export function ContactForm() {
+  const router = useRouter();
+  const [etat, setEtat] = useState<"pret" | "envoi" | "erreur">("pret");
+
+  async function envoyer(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setEtat("envoi");
+    try {
+      const donnees = new URLSearchParams(new FormData(e.currentTarget) as unknown as Record<string, string>);
+      const reponse = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: donnees.toString(),
+      });
+      if (!reponse.ok) throw new Error(String(reponse.status));
+      router.push("/contact/merci/");
+    } catch {
+      setEtat("erreur");
+    }
+  }
+
   return (
-    <form name="contact" method="POST" action="/__forms.html" className="space-y-6">
+    <form name="contact" method="POST" action="/__forms.html" onSubmit={envoyer} className="space-y-6">
       <input type="hidden" name="form-name" value="contact" />
       <p className="hidden">
         <label>
@@ -76,10 +104,17 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="inline-flex min-h-12 items-center rounded-full bg-accent px-7 font-semibold text-on-accent transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
+        disabled={etat === "envoi"}
+        className="inline-flex disabled:opacity-60 min-h-12 items-center rounded-full bg-accent px-7 font-semibold text-on-accent transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97]"
       >
-        Envoyer le message
+        {etat === "envoi" ? "Envoi en cours…" : "Envoyer le message"}
       </button>
+      {etat === "erreur" ? (
+        <p role="alert" className="font-medium">
+          Le message n&apos;est pas parti. Réessayez dans un instant, ou écrivez directement à
+          {SITE.email}.
+        </p>
+      ) : null}
     </form>
   );
 }
