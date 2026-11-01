@@ -53,6 +53,8 @@ const withMDX = createMDX({
       ["remark-mdx-frontmatter", { name: "frontmatter" }],
       // Espaces insécables avant « : ; ? ! » (plugin du projet, dossier plugins/).
       path.join(process.cwd(), "plugins/remark-espaces-fines.mjs"),
+      // Sommaire des articles de plus de 1 500 mots, avec une ancre par titre (plugin du projet).
+      path.join(process.cwd(), "plugins/remark-sommaire.mjs"),
     ],
   },
 });

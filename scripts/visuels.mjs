@@ -3,7 +3,8 @@
 //   du site + titre court, aux couleurs de Moustache Malin (crédits réunis sur la page /credits-photos/) ;
 // - le PDF de la checklist offerte (content/lead-magnet/checklist-accueillir-un-chat.pdf, pas dans public/ :
 //   il sera déposé chez l'outil de lettre d'information).
-// Lancement : node scripts/visuels.mjs
+// Lancement : node scripts/visuels.mjs (tout), ou node scripts/visuels.mjs <slug> <slug>… (seulement ces images
+// Pinterest, sans refaire le PDF).
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
@@ -57,10 +58,17 @@ const PINS = [
     haut: "Griffoir pour chat :", serif: "adieu le canapé", bas: "notre comparatif 2026" },
   { slug: "catit-pixi-avis", photo: "boire-chat-robinet-evier.jpg", credit: "Helena Jankovičová Kováčová, Pexels",
     cadrage: "55% 50%", haut: "Catit Pixi :", serif: "notre avis", bas: "face à la PETLIBRO Dockstream" },
+  { slug: "autonomie-distributeur-croquettes", photo: "articles/chat-gris-gamelle-croquettes.jpg", cadrage: "50% 50%",
+    haut: "Combien de jours", serif: "tient-il ?", bas: "le calculateur pour votre distributeur" },
+  { slug: "cout-litiere-autonettoyante", photo: "articles/litiere-chat-sort-du-bac.jpg", cadrage: "50% 50%",
+    haut: "Litière autonettoyante :", serif: "le vrai coût", bas: "sur 1 an et sur 3 ans" },
+  { slug: "combien-de-litieres", photo: "griffer-chats-passerelles.jpg", cadrage: "50% 50%",
+    haut: "Combien de", serif: "litières ?", bas: "un bac par chat, plus un" },
 ];
+const SEULS = process.argv.slice(2);
 
 fs.mkdirSync(path.join(RACINE, "public/media/pin"), { recursive: true });
-for (const pin of PINS) {
+for (const pin of PINS.filter((p) => !SEULS.length || SEULS.includes(p.slug))) {
   const photo = pathToFileURL(path.join(RACINE, "public/media", pin.photo)).href;
   const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8">${POLICES}<style>${STYLE}
     body { width:1000px; height:1500px; overflow:hidden; display:flex; flex-direction:column; background:var(--nuit); }
@@ -88,6 +96,10 @@ for (const pin of PINS) {
 }
 
 // --- PDF de la checklist ----------------------------------------------------------------------------------------
+if (SEULS.length) {
+  fs.rmSync(TEMP, { recursive: true, force: true });
+  process.exit(0);
+}
 const md = fs.readFileSync(path.join(RACINE, "content/lead-magnet/checklist-accueillir-un-chat.md"), "utf8").replace(/\r\n/g, "\n");
 const enLigne = (t) =>
   t

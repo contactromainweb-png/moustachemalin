@@ -23,6 +23,7 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
 
   return (
     <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10">
+      <div aria-hidden="true" className="barre-lecture" />
       <Breadcrumbs items={[rubriqueArticle(fm), { label: espacesFines(fm.title), href: chemin }]} />
 
       <header data-fond="page" className="mt-10 lg:mt-14">

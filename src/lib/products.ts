@@ -104,3 +104,10 @@ export function getProduct(asin: string): Product {
   if (!produit) throw new Error(`Produit introuvable pour l'ASIN ${asin} (content/products/)`);
   return produit;
 }
+
+// Tous les vrais produits d'une catégorie (sans les produits d'exemple), triés par nom.
+export function produitsDeCategorie(categorie: string): Product[] {
+  return [...tousLesProduits().values()]
+    .filter((p) => p.category === categorie && !p.exemple)
+    .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+}

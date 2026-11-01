@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Portrait } from "@/components/KiraNote";
+import { pageEnLigne } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
 
 // Petite galerie de Kira (page À propos) : photos personnelles de Romain, jamais en plein écran.
@@ -86,7 +88,8 @@ export function KiraGalerie() {
   );
 }
 
-// Juste après la galerie : « Les cousins de Kira », cinq petites photos côte à côte (elles défilent sur téléphone).
+// Juste après la galerie : « Les cousins de Kira », cinq petites photos côte à côte (elles défilent sur téléphone),
+// puis un lien vers la page de toute la bande.
 export function KiraCousins() {
   return (
     <section aria-labelledby="cousins-kira" className="reveal my-12 max-w-[44rem]">
@@ -105,6 +108,14 @@ export function KiraCousins() {
           </li>
         ))}
       </ul>
+      {pageEnLigne("/la-bande-de-kira/") ? (
+        <Link
+          href="/la-bande-de-kira/"
+          className="mt-4 inline-flex min-h-11 items-center font-medium underline decoration-accent decoration-2 underline-offset-[6px]"
+        >
+          Voir toute la bande →
+        </Link>
+      ) : null}
     </section>
   );
 }

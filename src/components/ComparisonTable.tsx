@@ -1,17 +1,30 @@
 import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
+import { FiltresTableau } from "@/components/FiltresTableau";
+import { filtresPour } from "@/lib/filtres";
 import { getProduct, specLabel } from "@/lib/products";
 import { espacesFines } from "@/lib/typo";
 
 // Tableau comparatif. Ordinateur : un vrai tableau, le bouton Amazon sous le nom du modèle (première colonne) :
 // il reste toujours entier et cliquable. Sous 1280 px (téléphone, tablette, petit portable) : une carte par produit.
 // `columns` = les clés de "specs" à comparer, dans l'ordre voulu. Le titre est écrit dans l'article.
-export function ComparisonTable({ asins, columns }: { asins: string[]; columns: string[] }) {
+// `filtres` : affiche les pastilles « Je cherche… » de la catégorie (règles : src/lib/filtres.ts).
+export function ComparisonTable({
+  asins,
+  columns,
+  filtres = false,
+}: {
+  asins: string[];
+  columns: string[];
+  filtres?: boolean;
+}) {
   const produits = asins.map(getProduct);
+  const pastilles = filtres ? filtresPour(produits) : [];
   const valeur = (specs: Record<string, string>, cle: string) => espacesFines(specs[cle] ?? "Non précisé");
 
   return (
     <section id="tableau-comparatif" aria-label="Tableau comparatif" className="reveal mb-14 mt-8">
+      {pastilles.length > 0 && <FiltresTableau filtres={pastilles} cible="tableau-comparatif" />}
       <div className="hidden overflow-x-auto xl:block">
         <table className="w-full border-collapse text-left">
           <caption className="sr-only">Comparaison des caractéristiques</caption>
@@ -29,7 +42,7 @@ export function ComparisonTable({ asins, columns }: { asins: string[]; columns: 
           </thead>
           <tbody>
             {produits.map((p) => (
-              <tr key={p.asin} className="align-top even:bg-field">
+              <tr key={p.asin} data-asin={p.asin} className="align-top even:bg-field">
                 <th scope="row" className="min-w-[11rem] px-4 py-4 font-semibold">
                   <a href={`#${p.asin}`} className="underline-offset-4 hover:underline">
                     {p.name}
@@ -56,7 +69,7 @@ export function ComparisonTable({ asins, columns }: { asins: string[]; columns: 
 
       <ul className="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 xl:hidden">
         {produits.map((p) => (
-          <li key={p.asin} className="bg-field px-5 py-6">
+          <li key={p.asin} data-asin={p.asin} className="bg-field px-5 py-6">
             <h3 className="text-lead font-semibold">{p.name}</h3>
             <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
               {columns.map((c) => (

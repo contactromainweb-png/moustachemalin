@@ -397,6 +397,27 @@ export const PHOTOS = {
     alt: "Un chaton tigré assis devant un bol d'eau en verre.",
     credit: "Photo : Zişan Özdemir, Pexels",
   },
+  chatRouxParquet: {
+    src: "/media/articles/chat-roux-assis-parquet-clair.jpg",
+    width: 1400,
+    height: 2100,
+    alt: "Un chat roux et blanc assis sur un parquet clair, dans un appartement lumineux.",
+    credit: "Photo : Lily Lili, Pexels",
+  },
+  chatTigreBolInox: {
+    src: "/media/articles/chat-tigre-boit-bol-inox.jpg",
+    width: 1400,
+    height: 2100,
+    alt: "Un chat tigré et blanc qui boit dans un bol en inox, au soleil.",
+    credit: "Photo : Linny (Frosty), Pexels",
+  },
+  chatRouxVerreEau: {
+    src: "/media/articles/chat-roux-boit-verre-eau.jpg",
+    width: 1400,
+    height: 2100,
+    alt: "Un chat roux qui boit dans un verre d'eau, dans la lumière d'une fenêtre.",
+    credit: "Photo : Liisbet Luup, Pexels",
+  },
 } satisfies Record<string, Photo>;
 
 // Scène 5 de l’accueil : le mur de photos (vignettes, petit côté 1 200 px) et sa photo centrale, plein écran au départ.
