@@ -8,12 +8,12 @@ import { espacesFines } from "@/lib/typo";
 export const metadata: Metadata = {
   title: "La bande de Kira : Kira et ses cousins",
   description:
-    "Kira, la chatte de Romain, et les chats de sa famille qui passent parfois une tête sur Moustache Malin : Sucette, Black Pearl, Rebelle, Imotep et Chichoune.",
+    "Kira, la chatte de Romain, et les chats de sa famille qui passent une tête sur Moustache Malin : Sucette, Black Pearl, Rebelle, Imotep et Chichoune.",
   alternates: { canonical: "/la-bande-de-kira/" },
 };
 
 // Kira en grand (à droite sur ordinateur, juste après l'introduction sur téléphone), puis une carte par cousin :
-// photo, prénom, chez qui il vit, une phrase sur ce qu'on voit (données et règles : src/lib/bande.ts).
+// photo, prénom, chez qui il vit, une phrase de Romain sur son caractère (données et règles : src/lib/bande.ts).
 // Le texte sur Kira reprend celui de Romain (À propos, « Qui écrit ici ») : rien n'est inventé.
 export default function Page() {
   return (

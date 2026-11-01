@@ -171,7 +171,7 @@ export const PHOTOS = {
     height: 2000,
     alt: "Black Pearl, le chat noir de la compagne de Romain, qui traverse le jardin",
     credit: "Photo : Romain, photo personnelle",
-    legende: "Black Pearl en pleine tournée du jardin.",
+    legende: "Black Pearl en tournée au jardin. Au retour, attention aux coups de langue.",
   },
   blackPearlProfil: {
     src: "/media/famille/black-pearl-profil.jpg",
@@ -201,7 +201,7 @@ export const PHOTOS = {
     height: 2208,
     alt: "Imotep, le chat de la sœur de Romain, installé sur son arbre à chat près d'une fenêtre",
     credit: "Photo : Romain, photo personnelle",
-    legende: "Imotep, le chat de ma sœur, installé près de la fenêtre, en poste d'observation.",
+    legende: "Imotep surveille son quartier depuis la fenêtre, en attendant qu'on lui ouvre la porte.",
   },
   chichouneGriffoir: {
     src: "/media/famille/chichoune-griffoir-carton.jpg",

@@ -23,11 +23,12 @@ const PRINCIPAUX = [
   "/griffer-grimper/arbre-a-chat/",
 ];
 
-// Les cartes ne reprennent aucune photo déjà montrée plus haut (premier écran, soucis, problèmes, profils) : un
+// Les cartes ne reprennent aucune photo déjà montrée plus haut (premier écran, particules, soucis, problèmes, profils) : un
 // article dont la photo d'en-tête y figure prend une autre de ses photos (lib/cartes.ts).
 const DEJA_SUR_LA_PAGE = () =>
   sources(
     PHOTOS.chatBlanc,
+    PHOTOS.chatFenetre,
     ...SOUCIS.map((s) => s.photo),
     ...PROBLEMES.map((p) => p.photo),
     ...PROFILS.filter((p) => p.visible).map((p) => p.photo),

@@ -193,7 +193,9 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - Chaque comparatif est revérifié une fois par mois (produits toujours en vente, références, caractéristiques). La date « Mis à jour le » ne change que si le contenu a réellement été vérifié ou modifié.
 
 ### Pinterest (préparation)
-- Chaque article a une image verticale 1000 × 1500 px (photo + titre court), déclarée dans le frontmatter (`pinImage`), servie dans les métadonnées pour le partage.
+- Chaque article en ligne (comparatif, avis, guide, outil) a une image verticale 1000 × 1500 px (photo d'en-tête + titre court + logo), **fabriquée automatiquement avant chaque build** par `scripts/pins.mjs` dans `public/pins/<slug>.jpg` (dossier non suivi par git, moins de 300 Ko par image). Rien à déclarer : le chemin se déduit du slug.
+- Champs facultatifs du frontmatter : `pinTitre` (titre court, sinon la partie du titre avant « : ») et `pinCadrage` (point de la photo gardé, ex. `"15% 50%"`, sinon la `position` de la photo).
+- L'image est servie par `<link rel="image_src">` et `data-pin-media` sur la photo d'en-tête, et dans le flux RSS (`enclosure` + `media:content`). `og:image` reste la photo d'en-tête horizontale.
 
 ### Textes à valider
 - Les passages marqués **[À VALIDER PAR ROMAIN]** ne sont jamais publiés tels quels : ils restent hors du site tant que Romain ne les a pas complétés.
@@ -211,3 +213,13 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - **Où Kira parle :** un encadré par article (composant `KiraNote`, placé après l'introduction), l'accueil (un encadré juste après les cartes « Mon problème, c'est… », texte de Romain), la page 404, les messages de confirmation (newsletter : `/lettre/merci/`, formulaire), la newsletter (signée « Romain et Kira »), les réseaux sociaux.
 - **Où Kira ne parle pas :** les comparatifs eux-mêmes (tableaux, fiches, avis), les encadrés de méthode, de santé ou d'affiliation, les mentions légales.
 - **Photo** : tant que Romain ne l'a pas fournie, un rond neutre la remplace. Pour l'ajouter : déposer la photo dans `public/media/` et renseigner `KIRA.photo` dans `src/lib/site.ts`.
+
+### La bande de Kira (les chats de la famille de Romain)
+- **Traits réels, donnés par Romain** (rien d'autre n'est inventé) :
+  - **Sucette** dort toujours roulée en boule sur le même fauteuil ; très discrète.
+  - **Black Pearl** lèche quand on le caresse.
+  - **Rebelle** est peu sociable et n'en fait qu'à sa tête.
+  - **Imotep** est « le chat du quartier » ; il miaule pour sortir.
+  - **Chichoune** est câline et joueuse ; elle monte sur la table pour réclamer des caresses.
+- Les cousins ne parlent pas : seule Kira a une voix. Leurs photos ne sont jamais présentées comme des photos de Kira.
+- **Une légende visible n'est jamais une copie du texte alternatif.** L'alt décrit la photo pour les lecteurs d'écran ; la légende dit autre chose (un trait réel ci-dessus, ou un conseil lié à l'article).

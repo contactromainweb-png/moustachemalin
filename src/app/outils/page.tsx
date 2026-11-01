@@ -7,7 +7,7 @@ import Texte from "../../../content/rubriques/outils.mdx";
 export const metadata: Metadata = {
   title: "Outils pratiques pour votre chat",
   description:
-    "Des calculateurs simples et gratuits pour répondre aux questions du quotidien : eau à boire, autonomie d'un distributeur, coût d'une litière, nombre de bacs.",
+    "Des calculateurs gratuits pour répondre aux questions du quotidien : eau à boire, autonomie d'un distributeur, coût d'une litière, nombre de bacs.",
   alternates: { canonical: "/outils/" },
 };
 
