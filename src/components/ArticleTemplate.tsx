@@ -5,7 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { TitreSerif } from "@/components/TitreSerif";
 import { PourAllerPlusLoin } from "@/components/PourAllerPlusLoin";
 import { Signature } from "@/components/Signature";
-import { cheminArticle, rubriqueArticle, type Frontmatter } from "@/lib/articles";
+import { cheminArticle, pinArticle, rubriqueArticle, type Frontmatter } from "@/lib/articles";
 import { IMAGE_PARTAGE, PHOTOS, type Photo } from "@/lib/medias";
 import { getProduct } from "@/lib/products";
 import { AUTEUR, LOGO, SITE } from "@/lib/site";
@@ -23,6 +23,9 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
 
   return (
     <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10">
+      <div aria-hidden="true" className="barre-lecture" />
+      {/* Pinterest : l'image verticale de l'article, invisible pour les lecteurs (og:image reste l'image large). */}
+      <link rel="image_src" href={new URL(pinArticle(fm), SITE.url).toString()} />
       <Breadcrumbs items={[rubriqueArticle(fm), { label: espacesFines(fm.title), href: chemin }]} />
 
       <header data-fond="page" className="mt-10 lg:mt-14">
@@ -43,6 +46,8 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
                 alt={image.alt}
                 fill
                 priority
+                data-pin-media={new URL(pinArticle(fm), SITE.url).toString()}
+                data-pin-description={fm.description}
                 quality={80}
                 sizes="(min-width: 90rem) 86rem, (min-width: 640px) calc(100vw - 4rem), calc(100vw - 2rem)"
                 className="object-cover"

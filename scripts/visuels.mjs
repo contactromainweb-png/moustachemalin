@@ -1,15 +1,12 @@
-// Fabrique les visuels hors site, avec Chrome sans fenêtre (installé sur l'ordinateur) :
-// - les images Pinterest 1000 × 1500 px de chaque article (public/media/pin/<slug>.jpg), photo déjà créditée
-//   du site + titre court, aux couleurs de Moustache Malin (crédits réunis sur la page /credits-photos/) ;
-// - le PDF de la checklist offerte (content/lead-magnet/checklist-accueillir-un-chat.pdf, pas dans public/ :
-//   il sera déposé chez l'outil de lettre d'information).
+// Fabrique le PDF de la checklist offerte avec Chrome sans fenêtre (installé sur l'ordinateur) :
+// content/lead-magnet/checklist-accueillir-un-chat.pdf, pas dans public/ : il sera déposé chez l'outil de lettre
+// d'information. Les images Pinterest sont fabriquées au build par scripts/pins.mjs.
 // Lancement : node scripts/visuels.mjs
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import sharp from "sharp";
 
 const RACINE = process.cwd();
 const CHROME = [
@@ -33,64 +30,6 @@ function chrome(args) {
   execFileSync(CHROME, ["--headless=new", "--hide-scrollbars", "--disable-gpu", "--virtual-time-budget=8000", ...args], {
     stdio: "ignore",
   });
-}
-
-// --- Images Pinterest -------------------------------------------------------------------------------------------
-const PINS = [
-  { slug: "litiere-autonettoyante", photo: "litieres-chat-chaise.jpg", cadrage: "50% 40%",
-    haut: "Litière", serif: "autonettoyante", bas: "notre comparatif 2026" },
-  { slug: "fontaine-a-eau-chat", photo: "boire-chat-robinet.jpg", cadrage: "40% 50%",
-    haut: "Fontaine à", serif: "eau", bas: "pour chat : notre comparatif" },
-  { slug: "mon-chat-ne-boit-pas", photo: "boire-chaton-bol.jpg", cadrage: "50% 50%",
-    haut: "Mon chat ne", serif: "boit pas", bas: "pourquoi, et comment l'aider" },
-  { slug: "combien-eau-chat", photo: "guide-chat-bol.jpg", cadrage: "50% 50%",
-    haut: "Combien d'eau", serif: "doit-il boire ?", bas: "le calculateur gratuit" },
-  { slug: "distributeur-croquettes-chat", photo: "repas-chat-gamelle.jpg", cadrage: "30% 50%",
-    haut: "Distributeur de", serif: "croquettes", bas: "pour chat : notre comparatif" },
-  { slug: "litiere-autonettoyante-danger", photo: "litieres-chat-meuble.jpg",
-    cadrage: "55% 50%", haut: "Litière autonettoyante :", serif: "dangereux ?", bas: "les vrais risques, les sécurités" },
-  { slug: "petkit-pura-max-2-avis", photo: "litieres-chat-fenetre.jpg", cadrage: "72% 50%",
-    haut: "PETKIT Pura Max 2 :", serif: "notre avis", bas: "face à la Neakasa M1 Lite" },
-  { slug: "arbre-a-chat", photo: "griffer-chat-arbre.jpg", credit: "Chen EdisoN, Pexels", cadrage: "38% 50%",
-    haut: "Arbre à chat :", serif: "lequel choisir ?", bas: "notre comparatif 2026" },
-  { slug: "griffoir-chat", photo: "griffer-chat-griffes.jpg", credit: "Fred AUGÉ, Pexels", cadrage: "62% 50%",
-    haut: "Griffoir pour chat :", serif: "adieu le canapé", bas: "notre comparatif 2026" },
-  { slug: "catit-pixi-avis", photo: "boire-chat-robinet-evier.jpg", credit: "Helena Jankovičová Kováčová, Pexels",
-    cadrage: "55% 50%", haut: "Catit Pixi :", serif: "notre avis", bas: "face à la PETLIBRO Dockstream" },
-  { slug: "chatiere", photo: "articles/sorties-chat-roux-porte.jpg", cadrage: "50% 55%",
-    haut: "Chatière :", serif: "laquelle choisir ?", bas: "notre comparatif 2026" },
-  { slug: "litiere-sent-mauvais", photo: "articles/chat-renifle-plante.jpg", cadrage: "62% 40%",
-    haut: "Litière qui sent", serif: "mauvais", bas: "les causes, les solutions" },
-  { slug: "chat-griffe-canape", photo: "articles/chat-griffe-canape.jpg", cadrage: "45% 50%",
-    haut: "Mon chat griffe le", serif: "canapé", bas: "pourquoi, et comment l'en détourner" },
-];
-
-fs.mkdirSync(path.join(RACINE, "public/media/pin"), { recursive: true });
-for (const pin of PINS) {
-  const photo = pathToFileURL(path.join(RACINE, "public/media", pin.photo)).href;
-  const html = `<!doctype html><html lang="fr"><head><meta charset="utf-8">${POLICES}<style>${STYLE}
-    body { width:1000px; height:1500px; overflow:hidden; display:flex; flex-direction:column; background:var(--nuit); }
-    .photo { flex:1; background:url("${photo}") ${pin.cadrage}/cover no-repeat; border-radius:0 0 64px 64px; }
-    .texte { padding:64px 72px 56px; color:var(--blanc); }
-    h1 { font-size:124px; }
-    h1 .serif { color:var(--orange); display:block; }
-    .bas { margin-top:28px; font-size:40px; }
-    .pied { margin-top:44px; display:flex; justify-content:space-between; align-items:baseline; font-size:22px; opacity:.8; }
-    .marque { font-size:34px; opacity:1; }
-  </style></head><body>
-    <div class="photo"></div>
-    <div class="texte">
-      <h1 class="titre">${pin.haut} <span class="serif">${pin.serif}</span></h1>
-      <p class="bas">${pin.bas}</p>
-      <div class="pied"><span class="titre marque">moustachemalin.fr</span></div>
-    </div>
-  </body></html>`;
-  const source = path.join(TEMP, `${pin.slug}.html`);
-  const png = path.join(TEMP, `${pin.slug}.png`);
-  fs.writeFileSync(source, html);
-  chrome(["--allow-file-access-from-files", "--window-size=1000,1500", `--screenshot=${png}`, pathToFileURL(source).href]);
-  await sharp(png).resize(1000, 1500).jpeg({ quality: 80, mozjpeg: true }).toFile(path.join(RACINE, `public/media/pin/${pin.slug}.jpg`));
-  console.log(`public/media/pin/${pin.slug}.jpg`);
 }
 
 // --- PDF de la checklist ----------------------------------------------------------------------------------------

@@ -10,7 +10,7 @@ export function Consommables({ asins }: { asins: string[] }) {
 
   return (
     <section aria-labelledby="consommables" className="reveal my-14">
-      <h2 id="consommables" className="font-display mb-6 text-head">
+      <h2 id="consommables" className="font-display mb-6 scroll-mt-20 text-head">
         Consommables à prévoir
       </h2>
       {aucun ? (

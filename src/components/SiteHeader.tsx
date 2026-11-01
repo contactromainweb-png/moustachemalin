@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { MenuTelephone } from "@/components/MenuTelephone";
-import { rubriquesEnLigne } from "@/lib/site";
+import { menuEnLigne } from "@/lib/site";
 
 const linkClass =
   "py-2 underline-offset-[6px] decoration-2 decoration-accent hover:underline transition-colors duration-200";
 
 // Bandeau bleu nuit de 4 rem (l'accueil retranche cette hauteur à son premier écran).
 export function SiteHeader() {
-  const rubriques = rubriquesEnLigne();
+  const rubriques = menuEnLigne(); // rubriques, puis « La bande de Kira »
 
   return (
     <header className="relative z-30 bg-nuit px-4 text-blanc sm:px-8">

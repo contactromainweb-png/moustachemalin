@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 // Encadrés de lecture, dans un article MDX : <Encadre type="retenir">…</Encadre> (ou "attention", "astuce").
 // Aussi enregistré sous le nom <Callout> (même composant). Le titre (« À retenir »…) est affiché par le composant.
 // Ils mettent en valeur une idée clé DÉJÀ écrite dans l'article (aucun contenu nouveau), 2 à 4 fois par article.
-// Jamais pour un conseil de soin (c'est le rôle de VetNotice) ni pour une phrase de Kira (KiraNote). Seule exception :
+// Jamais pour un conseil de santé (c'est le rôle de VetNotice) ni pour une phrase de Kira (KiraNote). Seule exception :
 // « attention » peut reprendre un signe d'urgence déjà écrit qui renvoie au vétérinaire (guide litière qui sent).
 const TYPES = {
   retenir: {
