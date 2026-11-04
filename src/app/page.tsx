@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 // transparence, lettre masquée tant qu'elle n'est pas branchée), légers et sans WebGL ; enfin la grande section de
 // fin. Tout le texte est dans le HTML ; défilement fluide, particules et animations s'ajoutent après l'affichage.
 // Téléphone et tablette (moins de 1024 px) : page resserrée. Les cartes « Mon problème » suivent le premier écran
-// et remplacent les petits soucis et « Selon mon chat » ; les articles passent en carrousel ; aucune section bloquée.
+// et remplacent les petits soucis et « Selon mon chat » ; les articles passent en rangée à faire glisser ; aucune section bloquée.
 // Le mot de Kira vient juste après ces cartes (après le premier écran sur ordinateur).
 export default function Home() {
   return (

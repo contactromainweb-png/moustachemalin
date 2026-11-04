@@ -4,70 +4,57 @@
 
 type Gsap = typeof import("gsap").gsap;
 
-// Scène 4 : la pelote tourne doucement, un peu plus vite quand on fait défiler ; les cartes entrent par le bas.
-export function pelote(gsap: Gsap) {
-  const section = document.querySelector<HTMLElement>("[data-pelote]");
-  if (!section) return () => {};
-  const canevas = section.querySelector<HTMLCanvasElement>("[data-pelote-canevas]")!;
+// Scène 4 : la petite pelote décorative tourne une seule fois, à son arrivée à l'écran, puis s'arrête. Rien n'est lié
+// au défilement. Le canevas n'est préparé qu'à ce moment-là.
+export function pelote() {
+  const decor = document.querySelector<HTMLElement>("[data-pelote-decor]");
+  const canevas = decor?.querySelector<HTMLCanvasElement>("[data-pelote-canevas]");
+  if (!decor || !canevas) return () => {};
+  const DUREE = 2400;
+  const INCLINAISON = 0.38;
   let rendu: ReturnType<typeof import("./pelote-webgl").creerPelote> = null;
-  let visible = false;
   let boucle = 0;
   let angle = 0;
-  let precedent = 0;
-  const etat = { progres: 0 };
+  let annule = false;
 
-  const image = (t: number) => {
-    const dt = precedent ? Math.min(0.05, (t - precedent) / 1000) : 0;
-    precedent = t;
-    angle += dt * 0.16;
-    rendu?.dessiner(angle + etat.progres * 1.4, 0.38 + etat.progres * 0.35);
-    if (visible) boucle = requestAnimationFrame(image);
+  // Un canevas redimensionné est effacé : on redessine la dernière image.
+  const auRedimensionnement = () => {
+    rendu?.redimensionner();
+    rendu?.dessiner(angle, INCLINAISON);
   };
 
   const observateur = new IntersectionObserver(
     async ([e]) => {
-      visible = e.isIntersecting;
-      if (!visible) {
-        cancelAnimationFrame(boucle);
-        precedent = 0;
-        return;
+      if (!e.isIntersecting) return;
+      observateur.disconnect();
+      const { creerPelote } = await import("./pelote-webgl");
+      if (annule) return;
+      try {
+        rendu = creerPelote(canevas, false);
+      } catch {
+        rendu = null;
       }
-      if (!rendu) {
-        const { creerPelote } = await import("./pelote-webgl");
-        try {
-          rendu = creerPelote(canevas, false);
-        } catch {
-          rendu = null;
-        }
-        if (!rendu) return;
-        canevas.style.opacity = "1";
-      }
-      cancelAnimationFrame(boucle);
+      if (!rendu) return;
+      canevas.style.opacity = "1";
+      window.addEventListener("resize", auRedimensionnement);
+      const depart = performance.now();
+      const image = (t: number) => {
+        const p = Math.min(1, (t - depart) / DUREE);
+        angle = (1 - (1 - p) ** 3) * Math.PI * 1.5;
+        rendu?.dessiner(angle, INCLINAISON);
+        if (p < 1) boucle = requestAnimationFrame(image);
+      };
       boucle = requestAnimationFrame(image);
     },
-    { rootMargin: "20% 0px" },
+    { threshold: 0.5 },
   );
-  observateur.observe(section);
-
-  gsap.to(etat, {
-    progres: 1,
-    ease: "none",
-    scrollTrigger: { trigger: section, start: "top bottom", end: "bottom top", scrub: true, onRefresh: () => rendu?.redimensionner() },
-  });
-  gsap.utils.toArray<HTMLElement>("[data-pelote-carte]", section).forEach((carte, i) => {
-    gsap.from(carte, {
-      y: 90,
-      rotate: i % 2 ? 2.5 : -2.5,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: { trigger: carte, start: "top 88%", toggleActions: "play none none reverse" },
-    });
-  });
+  observateur.observe(decor);
 
   return () => {
+    annule = true;
     observateur.disconnect();
     cancelAnimationFrame(boucle);
+    window.removeEventListener("resize", auRedimensionnement);
     rendu?.liberer();
     canevas.style.opacity = "";
   };
