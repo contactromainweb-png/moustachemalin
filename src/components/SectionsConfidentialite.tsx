@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { GOATCOUNTER, UMAMI_ID } from "@/lib/mesure";
+import { SITE } from "@/lib/site";
 
 // Sections de la page Confidentialité qui dépendent des outils réellement branchés (variables d'environnement) :
 // elles décrivent toujours ce qui tourne vraiment sur le site, ni plus ni moins.
@@ -50,17 +51,19 @@ export function MesureAudience() {
 export function LettreInformation() {
   if (!NEWSLETTER) return null;
   return (
-    <Section titre="La lettre d'information">
-      <p className={p}>
-        Si vous demandez la checklist, seule votre adresse e-mail est collectée, avec votre accord. Elle est enregistrée
-        chez Brevo (Sendinblue SAS, entreprise française), notre outil d&apos;envoi, uniquement pour vous envoyer la
-        checklist puis, au plus une fois par mois, les nouveaux comparatifs. La base légale de ce traitement est votre
-        consentement, donné en cochant la case du formulaire.
-      </p>
-      <p className={p}>
-        Chaque message contient un lien de désinscription en un clic. Votre adresse est supprimée dès votre
-        désinscription, et au plus tard trois ans après le dernier message ouvert.
-      </p>
+    <Section titre="Lettre d'information">
+      <ul className="reveal mb-5 max-w-[65ch] list-disc space-y-2 pl-5">
+        <li><strong className="font-semibold">Données collectées&nbsp;:</strong> votre adresse e-mail seulement.</li>
+        <li><strong className="font-semibold">Finalité&nbsp;:</strong> l&apos;envoi de la lettre et du cadeau.</li>
+        <li><strong className="font-semibold">Base légale&nbsp;:</strong> votre consentement.</li>
+        <li><strong className="font-semibold">Prestataire&nbsp;:</strong> Brevo (Sendinblue SAS, France), données hébergées dans l&apos;Union européenne.</li>
+        <li><strong className="font-semibold">Durée de conservation&nbsp;:</strong> jusqu&apos;à votre désinscription.</li>
+        <li>
+          <strong className="font-semibold">Désinscription&nbsp;:</strong> par le lien présent dans chaque e-mail, ou en écrivant à{" "}
+          <a href={`mailto:${SITE.email}`} className="underline decoration-2 underline-offset-4">{SITE.email}</a>.
+        </li>
+        <li><strong className="font-semibold">Droits d&apos;accès, de rectification et d&apos;effacement&nbsp;:</strong> à la même adresse.</li>
+      </ul>
     </Section>
   );
 }

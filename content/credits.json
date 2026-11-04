@@ -851,5 +851,21 @@
     "url": "https://www.pexels.com/photo/34418118/",
     "licence": "Licence Pexels",
     "resolutionSource": "6016x4016"
+  },
+  {
+    "fichier": "public/media/cadeaux/checklist-page-1.jpg",
+    "auteur": "Moustache Malin",
+    "source": "Aperçu de notre checklist PDF",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1192x1686"
+  },
+  {
+    "fichier": "public/media/cadeaux/checklist-page-2.jpg",
+    "auteur": "Moustache Malin",
+    "source": "Aperçu de notre checklist PDF",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1192x1686"
   }
 ]

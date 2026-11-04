@@ -48,6 +48,12 @@ export function satellitesDe(slug: string): ArticleLien[] {
     .map(lien);
 }
 
+// L'article a-t-il son propre bloc « À lire aussi » dans son MDX ? Le formulaire de la lettre se place alors juste avant.
+export function aBlocDeLiens(fm: Frontmatter) {
+  const fichier = path.join(process.cwd(), "content", fm.rubrique, `${fm.slug}.mdx`);
+  return fs.existsSync(fichier) && fs.readFileSync(fichier, "utf8").includes("<RelatedArticles");
+}
+
 // Voisins d'un comparatif (frontmatter `voisins`), dans l'ordre indiqué : seuls ceux en ligne sont renvoyés.
 export function voisinsDe(slug: string): ArticleLien[] {
   const tous = tousLesFrontmatters();

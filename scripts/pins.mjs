@@ -15,6 +15,7 @@ import { ImageResponse } from "next/og.js";
 import { createElement as h } from "react";
 import sharp from "sharp";
 import { parse } from "yaml";
+import { EPINGLES_BANDE } from "../src/lib/bande.ts";
 import { PHOTOS } from "../src/lib/medias.ts";
 
 const RACINE = process.cwd();
@@ -81,7 +82,19 @@ async function fond(photo, cadrage) {
   const [px, py] = (cadrage ?? photo.position ?? "50% 50%").split(" ").map((v) => parseFloat(v) / 100);
   const largeur = Math.min(w, Math.round((h * LARGEUR) / PHOTO));
   const hauteur = Math.min(h, Math.round((largeur * PHOTO) / LARGEUR));
-  if (largeur < LARGEUR) console.warn(`  attention : ${photo.src} n'a que ${largeur} px de large une fois recadrée`);
+  // Photo trop petite pour remplir la zone sans l'agrandir (Rebelle, 1341 × 746) : elle garde toute sa largeur, posée
+  // sur sa propre version floutée, jamais agrandie au-delà de sa taille d'origine.
+  if (largeur < LARGEUR) {
+    const nette = await sharp(fichier).resize({ width: LARGEUR }).toBuffer({ resolveWithObject: true });
+    const tampon = await sharp(fichier)
+      .resize(LARGEUR, PHOTO, { fit: "cover" })
+      .blur(30)
+      .modulate({ brightness: 0.75 })
+      .composite([{ input: nette.data, top: 0, left: 0 }])
+      .jpeg({ quality: 90 })
+      .toBuffer();
+    return `data:image/jpeg;base64,${tampon.toString("base64")}`;
+  }
   const tampon = await sharp(fichier)
     .extract({
       left: Math.round((w - largeur) * px),
@@ -95,16 +108,20 @@ async function fond(photo, cadrage) {
   return `data:image/jpeg;base64,${tampon.toString("base64")}`;
 }
 
-async function epingle(fm) {
+async function epingleArticle(fm) {
   const photo = PHOTOS[fm.photo];
   if (!photo) throw new Error(`${fm.slug} : pas de photo d'en-tête (champ photo du frontmatter)`);
   const [court, suite] = fm.pinTitre ? [fm.pinTitre, ""] : decouperTitre(fm.title);
+  return epingle({ slug: fm.slug, photo, cadrage: fm.pinCadrage, court, suite, motSerif: fm.motSerif });
+}
+
+async function epingle({ slug, photo, cadrage, court, suite, motSerif }) {
   const taille = court.length > 34 ? 92 : court.length > 22 ? 108 : 124;
 
   const page = h(
     "div",
     { style: { width: "100%", height: "100%", display: "flex", position: "relative", background: "#14213D" } },
-    h("img", { src: await fond(photo, fm.pinCadrage), width: LARGEUR, height: PHOTO, style: { position: "absolute", top: 0, left: 0 } }),
+    h("img", { src: await fond(photo, cadrage), width: LARGEUR, height: PHOTO, style: { position: "absolute", top: 0, left: 0 } }),
     h("div", {
       style: {
         position: "absolute",
@@ -133,7 +150,7 @@ async function epingle(fm) {
       h(
         "div",
         { style: { display: "flex", flexWrap: "wrap", fontSize: taille, lineHeight: 0.95, letterSpacing: "-0.035em" } },
-        ...titreEnMots(court, fm.motSerif).flatMap((m) =>
+        ...titreEnMots(court, motSerif).flatMap((m) =>
           m.texte
             .trim()
             .split(/\s+/)
@@ -161,20 +178,21 @@ async function epingle(fm) {
   );
 
   const png = Buffer.from(await new ImageResponse(page, { width: LARGEUR, height: HAUTEUR, fonts: POLICES }).arrayBuffer());
-  const cible = path.join(SORTIE, `${fm.slug}.jpg`);
+  const cible = path.join(SORTIE, `${slug}.jpg`);
   let qualite = 82;
   await sharp(png).jpeg({ quality: qualite, mozjpeg: true }).toFile(cible);
   while (fs.statSync(cible).size > POIDS_MAX && qualite > 60) {
     qualite -= 6;
     await sharp(png).jpeg({ quality: qualite, mozjpeg: true }).toFile(cible);
   }
-  return { slug: fm.slug, ko: Math.round(fs.statSync(cible).size / 1024), qualite };
+  return { slug, ko: Math.round(fs.statSync(cible).size / 1024), qualite };
 }
 
 fs.mkdirSync(SORTIE, { recursive: true });
 const articles = articlesAEpingler();
-for (const fm of articles) {
-  const { slug, ko, qualite } = await epingle(fm);
+const bande = EPINGLES_BANDE.map((e) => ({ slug: e.slug, photo: e.photo, court: e.titre, suite: e.texte, motSerif: e.motSerif }));
+for (const travail of [...articles.map((fm) => () => epingleArticle(fm)), ...bande.map((e) => () => epingle(e))]) {
+  const { slug, ko, qualite } = await travail();
   console.log(`public/pins/${slug}.jpg : ${ko} Ko (qualité ${qualite})`);
 }
-console.log(`Images Pinterest : ${articles.length} articles.`);
+console.log(`Images Pinterest : ${articles.length} articles, ${bande.length} pour « Kira et la bande ».`);

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { cheminArticle, pinArticle, type Frontmatter } from "@/lib/articles";
+import { CHEMIN_BANDE, DATE_BANDE, EPINGLES_BANDE } from "@/lib/bande";
 import { articlesDuFlux } from "@/lib/rubriques";
 import { SITE } from "@/lib/site";
 
@@ -56,39 +57,90 @@ export function articlesDeFlux(cle: CleFlux) {
   });
 }
 
-export function reponseFlux(cle: CleFlux) {
-  const flux = FLUX[cle];
-  const articles = articlesDeFlux(cle);
-  const items = articles
-    .map(({ fm, poids }) => {
-      const url = new URL(cheminArticle(fm), SITE.url).toString();
-      const image = new URL(pinArticle(fm), SITE.url).toString();
-      return `    <item>
-      <title>${echapper(fm.title)}</title>
-      <link>${url}</link>
-      <guid isPermaLink="true">${url}</guid>
-      <pubDate>${dateRss(publication(fm))}</pubDate>
-      <description>${echapper(fm.description)}</description>
-      <enclosure url="${image}" length="${poids}" type="image/jpeg" />
-      <media:content url="${image}" medium="image" type="image/jpeg" width="1000" height="1500" fileSize="${poids}">
-        <media:title>${echapper(fm.title)}</media:title>
-        <media:description>${echapper(fm.description)}</media:description>
+const element = (e: { titre: string; lien: string; guid: string; permalien: boolean; date: string; description: string; image: string; poids: number }) => `    <item>
+      <title>${echapper(e.titre)}</title>
+      <link>${e.lien}</link>
+      <guid isPermaLink="${e.permalien}">${e.guid}</guid>
+      <pubDate>${dateRss(e.date)}</pubDate>
+      <description>${echapper(e.description)}</description>
+      <enclosure url="${e.image}" length="${e.poids}" type="image/jpeg" />
+      <media:content url="${e.image}" medium="image" type="image/jpeg" width="1000" height="1500" fileSize="${e.poids}">
+        <media:title>${echapper(e.titre)}</media:title>
+        <media:description>${echapper(e.description)}</media:description>
       </media:content>
     </item>`;
-    })
-    .join("\n");
 
+function reponseXml(c: { titre: string; page: string; description: string; chemin: string; date?: string; items: string }) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>${echapper(`${SITE.name} : ${flux.titre}`)}</title>
-    <link>${SITE.url}${flux.page}</link>
-    <description>${echapper(`${flux.tableau} : les derniers comparatifs, avis et guides de ${SITE.name}.`)}</description>
+    <title>${echapper(c.titre)}</title>
+    <link>${SITE.url}${c.page}</link>
+    <description>${echapper(c.description)}</description>
     <language>fr-FR</language>
-    <atom:link href="${SITE.url}${cheminFlux(cle)}" rel="self" type="application/rss+xml" />
-${articles[0] ? `    <lastBuildDate>${dateRss(publication(articles[0].fm))}</lastBuildDate>\n` : ""}${items}
+    <atom:link href="${SITE.url}${c.chemin}" rel="self" type="application/rss+xml" />
+${c.date ? `    <lastBuildDate>${dateRss(c.date)}</lastBuildDate>\n` : ""}${c.items}
   </channel>
 </rss>
 `;
   return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8" } });
+}
+
+export function reponseFlux(cle: CleFlux) {
+  const flux = FLUX[cle];
+  const articles = articlesDeFlux(cle);
+  return reponseXml({
+    titre: `${SITE.name} : ${flux.titre}`,
+    page: flux.page,
+    description: `${flux.tableau} : les derniers comparatifs, avis et guides de ${SITE.name}.`,
+    chemin: cheminFlux(cle),
+    date: articles[0] ? publication(articles[0].fm) : undefined,
+    items: articles
+      .map(({ fm, poids }) => {
+        const lien = new URL(cheminArticle(fm), SITE.url).toString();
+        return element({
+          titre: fm.title,
+          lien,
+          guid: lien,
+          permalien: true,
+          date: publication(fm),
+          description: fm.description,
+          image: new URL(pinArticle(fm), SITE.url).toString(),
+          poids,
+        });
+      })
+      .join("\n"),
+  });
+}
+
+// Tableau « Kira et la bande » (/kira/feed.xml) : une épingle par chat, toutes vers la même page ; le guid (non
+// permanent) reste propre à chaque épingle.
+export const CHEMIN_FLUX_KIRA = "/kira/feed.xml";
+
+export function fluxKiraDansHead() {
+  return { "application/rss+xml": [{ url: CHEMIN_FLUX_KIRA, title: `${SITE.name} : Kira et la bande` }] };
+}
+
+export function reponseFluxKira() {
+  const lien = new URL(CHEMIN_BANDE, SITE.url).toString();
+  return reponseXml({
+    titre: `${SITE.name} : Kira et la bande`,
+    page: CHEMIN_BANDE,
+    description: `Kira et la bande : la chatte de Romain et les chats de sa famille, sur ${SITE.name}.`,
+    chemin: CHEMIN_FLUX_KIRA,
+    date: DATE_BANDE,
+    items: EPINGLES_BANDE.map((e) => {
+      const pin = `/pins/${e.slug}.jpg`;
+      return element({
+        titre: e.titreFlux,
+        lien,
+        guid: `${lien}#${e.slug}`,
+        permalien: false,
+        date: DATE_BANDE,
+        description: e.texte,
+        image: new URL(pin, SITE.url).toString(),
+        poids: fs.statSync(path.join(process.cwd(), "public", pin)).size,
+      });
+    }).join("\n"),
+  });
 }

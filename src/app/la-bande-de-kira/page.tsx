@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { StagePage } from "@/components/StagePage";
 import { BANDE } from "@/lib/bande";
+import { fluxKiraDansHead } from "@/lib/flux";
 import { PHOTOS } from "@/lib/medias";
 import { espacesFines } from "@/lib/typo";
 
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   title: "La bande de Kira : Kira et ses cousins",
   description:
     "Kira, la chatte de Romain, et les chats de sa famille qui passent une tête sur Moustache Malin : Sucette, Black Pearl, Rebelle, Imotep et Chichoune.",
-  alternates: { canonical: "/la-bande-de-kira/" },
+  alternates: { canonical: "/la-bande-de-kira/", types: fluxKiraDansHead() },
 };
 
 // Kira en grand (à droite sur ordinateur, juste après l'introduction sur téléphone), puis une carte par cousin :

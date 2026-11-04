@@ -228,5 +228,6 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 ## 11 bis. Flux RSS par rubrique (Pinterest)
 - Chaque nouveau contenu doit avoir son image `/pins/<slug>.jpg` et apparaître dans le flux RSS de sa rubrique (correspondance rubrique → flux → tableau Pinterest : Litières → Litières pour chat ; Fontaines → Fontaines à eau pour chat ; Repas → Distributeurs de croquettes pour chat ; Griffer-grimper → Arbres à chat et griffoirs ; Guides, Outils, Sorties → Conseils pour chat).
 - Les flux : `/litieres/feed.xml`, `/fontaines/feed.xml`, `/repas/feed.xml`, `/griffer-grimper/feed.xml`, `/conseils/feed.xml` (Guides, Outils, Sorties). `/feed.xml` reste le flux général de tout le site.
+- Tableau « Kira et la bande » : `/kira/feed.xml`, une image `/pins/` pour la page `/la-bande-de-kira/`, une pour Kira et une par cousin (`EPINGLES_BANDE`, `src/lib/bande.ts`). Chaque élément renvoie vers `/la-bande-de-kira/`.
 - Générés au build par `src/lib/flux.ts` (RSS 2.0, UTF-8) : titre, URL canonique (link et guid), date de publication (`publishedAt`, sinon `updatedAt`), meta description, image en `enclosure` et `media:content`. Un contenu sans image `/pins/` en est écarté, avec un avertissement au build qui nomme la page.
 - Chaque page de rubrique annonce son flux dans le `<head>` (`<link rel="alternate" type="application/rss+xml">`).

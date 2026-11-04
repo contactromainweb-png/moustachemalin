@@ -92,6 +92,7 @@ export function menuEnLigne() {
 export const PAGES_INFO = [
   { href: "/a-propos/", label: "À propos" },
   { href: "/la-bande-de-kira/", label: "La bande de Kira" },
+  { href: "/checklist-arrivee-chat/", label: "La checklist à imprimer" },
   { href: "/methode/", label: "Notre méthode" },
   { href: "/affiliation/", label: "Affiliation" },
   { href: "/mentions-legales/", label: "Mentions légales" },

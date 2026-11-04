@@ -74,3 +74,37 @@ export const BANDE: Cousin[] = [
     },
   },
 ];
+
+// Tableau Pinterest « Kira et la bande » : une image verticale pour la page, une pour Kira, une par cousin
+// (scripts/pins.mjs, public/pins/<slug>.jpg), réunies dans /kira/feed.xml (src/lib/flux.ts). Chaque élément du flux
+// renvoie vers /la-bande-de-kira/. Photos déjà publiées sur le site, textes de Romain.
+export const CHEMIN_BANDE = "/la-bande-de-kira/";
+export const DATE_BANDE = "2026-11-04";
+export type EpingleBande = { slug: string; titreFlux: string; titre: string; motSerif: string; texte: string; photo: Pick<Photo, "src" | "position"> };
+
+export const EPINGLES_BANDE: EpingleBande[] = [
+  {
+    slug: "la-bande-de-kira",
+    titreFlux: "La bande de Kira : Kira et ses cousins",
+    titre: "La bande de Kira",
+    motSerif: "Kira",
+    texte: "Kira, ma chatte, et les chats de ma famille, qui passent parfois une tête sur le site.",
+    photo: { src: "/media/kira/kira-assise-yeux-bleus.jpg", position: "50% 40%" },
+  },
+  {
+    slug: "bande-kira",
+    titreFlux: "Kira, la chatte de la bande",
+    titre: "Kira",
+    motSerif: "Kira",
+    texte: "Un peu plus d'un an, fofolle, joueuse comme un petit chien, et fan de l'eau qui coule du robinet.",
+    photo: { src: "/media/kira/kira-tete-penchee.jpg", position: "50% 40%" },
+  },
+  ...BANDE.map((c) => ({
+    slug: `bande-${c.prenom.toLowerCase().replace(/\s+/g, "-")}`,
+    titreFlux: `${c.prenom}, de la bande de Kira`,
+    titre: c.prenom,
+    motSerif: c.prenom,
+    texte: c.phrase,
+    photo: c.photo,
+  })),
+];

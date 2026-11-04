@@ -43,8 +43,8 @@ export default function Home() {
       <Comparaison />
       <SelonMonChat />
       <DerniersArticles />
-      <QuiEcrit />
       <Lettre />
+      <QuiEcrit />
       <Fin />
     </>
   );
