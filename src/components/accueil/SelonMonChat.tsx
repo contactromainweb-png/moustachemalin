@@ -4,8 +4,8 @@ import { PROFILS } from "@/lib/accueil";
 import { pageEnLigne } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
 
-// Bloc A, « Selon mon chat » : quatre profils en cartes photo, chacun mène aux pages qui lui répondent.
-// Les profils masqués (chaton, chat âgé) attendent leur article ; un lien vers une page absente disparaît.
+// Bloc A, « Selon mon chat » : cinq profils en cartes photo, chacun mène aux pages qui lui répondent.
+// Le profil masqué (chat âgé) attend son article ; un lien vers une page absente disparaît.
 // Une carte à lien unique est cliquable en entier (le lien s'étend sur la carte).
 // Ordinateur seulement : sous 1024 px, les cartes « Mon problème » (Problemes) la remplacent.
 export function SelonMonChat() {
@@ -24,16 +24,16 @@ export function SelonMonChat() {
           Chaque chat a sa façon de vivre. Choisissez la vôtre, on vous montre par où commencer.
         </p>
 
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 xl:grid-cols-5">
           {profils.map((p) => (
             <li key={p.id} className="reveal group relative isolate overflow-hidden rounded-[2rem] bg-nuit text-blanc">
-              <div className="relative aspect-[4/5]">
+              <div className="relative aspect-[4/5] xl:aspect-[3/5]">
                 <Image
                   src={p.photo.src}
                   alt={p.photo.alt}
                   fill
                   quality={80}
-                  sizes="(min-width: 1024px) 22vw, (min-width: 640px) 46vw, 92vw"
+                  sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
                   className={`object-cover transition-transform duration-700 ease-[var(--ease-out)] [@media(hover:hover)]:group-hover:scale-[1.04] ${p.cadrage}`}
                 />
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-nuit via-nuit/45 to-transparent" />
@@ -45,7 +45,7 @@ export function SelonMonChat() {
                 style={{ backgroundColor: "transparent" }}
                 className="absolute inset-x-0 bottom-0 p-5 sm:p-6"
               >
-                <h3 className="font-display text-[clamp(2rem,1.5rem+1.6vw,2.75rem)]">
+                <h3 className="font-display text-[clamp(1.75rem,0.6rem+1.6vw,2.75rem)]">
                   {p.mot[0]} <span className="mot-serif">{p.mot[1]}</span>
                 </h3>
                 <ul className="mt-3">

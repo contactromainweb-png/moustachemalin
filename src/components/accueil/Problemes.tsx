@@ -3,8 +3,8 @@ import Link from "next/link";
 import { PROBLEMES } from "@/lib/accueil";
 import { pageEnLigne } from "@/lib/site";
 
-// Téléphone et tablette (masqué dès 1024 px) : juste après le premier écran, des cartes photo compactes en
-// grille à 2 colonnes (une dernière carte seule prend toute la largeur), chacune mène droit à l'article qui répond au souci. Une carte dont la page n'existe pas disparaît.
+// Téléphone et tablette (masqué dès 1024 px) : juste après le premier écran, six cartes photo compactes en
+// grille 2 × 3, chacune mène droit à l'article qui répond au souci. Une carte dont la page n'existe pas disparaît.
 export function Problemes() {
   const problemes = PROBLEMES.filter((p) => pageEnLigne(p.href));
   if (problemes.length === 0) return null;
@@ -15,21 +15,19 @@ export function Problemes() {
         Mon <span className="mot-serif">problème</span>, c&apos;est…
       </h2>
       <ul className="mt-6 grid grid-cols-2 gap-3">
-        {problemes.map((p, i) => {
-          const large = problemes.length % 2 === 1 && i === problemes.length - 1;
-          return (
-          <li key={p.id} data-apparait className={large ? "col-span-2" : undefined} style={{ "--i": i } as React.CSSProperties}>
+        {problemes.map((p, i) => (
+          <li key={p.id} data-apparait style={{ "--i": i } as React.CSSProperties}>
             <Link
               href={p.href}
               data-sur-photo
-              className={`group relative isolate flex flex-col justify-end overflow-hidden rounded-[1.5rem] bg-nuit p-4 text-blanc transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] sm:p-6 ${large ? "aspect-[2/1] sm:aspect-[3/1]" : "aspect-square sm:aspect-[3/2]"}`}
+              className="group relative isolate flex aspect-square flex-col justify-end overflow-hidden rounded-[1.5rem] bg-nuit p-4 text-blanc transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] sm:aspect-[3/2] sm:p-6"
             >
               <Image
                 src={p.photo.src}
                 alt={p.photo.alt}
                 fill
                 quality={80}
-                sizes={large ? "(min-width: 640px) 90vw, 92vw" : "(min-width: 640px) 45vw, 46vw"}
+                sizes="(min-width: 640px) 45vw, 46vw"
                 className={`-z-10 object-cover ${p.cadrage}`}
               />
               <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-nuit via-nuit/50 to-transparent" />
@@ -47,8 +45,7 @@ export function Problemes() {
               </Link>
             ) : null}
           </li>
-          );
-        })}
+        ))}
       </ul>
     </section>
   );

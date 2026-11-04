@@ -68,7 +68,7 @@ export const SOUCIS: Souci[] = [
 ];
 
 // Cartes « Mon problème, c'est… » : téléphone et tablette seulement, juste après le premier écran. Elles reprennent
-// en cinq cartes les soucis et les profils de chat, deux sections réservées à l'ordinateur. `guide` : lien texte
+// en six cartes les soucis et les profils de chat, deux sections réservées à l'ordinateur. `guide` : lien texte
 // sous la carte, vers le guide qui répond au même souci.
 export type Probleme = {
   id: string;
@@ -118,10 +118,17 @@ export const PROBLEMES: Probleme[] = [
     photo: PHOTOS.chatonRouxBalle,
     cadrage: "object-[50%_55%]",
   },
+  {
+    id: "plusieurs-chats",
+    titre: "J'ai plusieurs chats",
+    href: "/outils/combien-de-litieres/",
+    photo: PHOTOS.sucetteBlackPearlSieste,
+    cadrage: "object-[50%_55%]",
+  },
 ];
 
 // Bloc « Selon mon chat » : un profil de chat, sa photo et les pages qui lui répondent.
-// `visible: false` = profil prêt mais masqué, en attendant l'article qui lui correspond (chaton, chat âgé).
+// `visible: false` = profil prêt mais masqué, en attendant l'article qui lui correspond (chat âgé).
 export type Profil = {
   id: string;
   mot: [string, string]; // premier mot en grotesque, second en serif italique
@@ -155,6 +162,7 @@ export const PROFILS: Profil[] = [
     id: "week-end",
     mot: ["Je pars le", "week-end"],
     liens: [
+      { href: "/guides/partir-en-week-end-chat/", label: "La liste pour partir serein" },
       { href: "/litieres/litiere-autonettoyante/", label: "Une litière qui se vide seule" },
       { href: "/repas/distributeur-croquettes-chat/", label: "Un distributeur de croquettes" },
     ],
@@ -173,10 +181,10 @@ export const PROFILS: Profil[] = [
   {
     id: "chaton",
     mot: ["Un", "chaton"],
-    liens: [],
+    liens: [{ href: "/guides/arrivee-chat-chaton-liste/", label: "La liste pour bien l'accueillir" }],
     photo: mur(18),
     cadrage: "object-[50%_50%]",
-    visible: false,
+    visible: true,
   },
   {
     id: "chat-age",
