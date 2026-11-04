@@ -819,5 +819,37 @@
     "url": "https://www.pexels.com/photo/40061374/",
     "licence": "Licence Pexels",
     "resolutionSource": "4000x6000"
+  },
+  {
+    "fichier": "public/media/articles/chat-dort-lit-orange.jpg",
+    "auteur": "Anete Lusina",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/17243052/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6048x4024"
+  },
+  {
+    "fichier": "public/media/articles/chat-tigre-derriere-fenetre.jpg",
+    "auteur": "Claudio Mota",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/10145106/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5184x3456"
+  },
+  {
+    "fichier": "public/media/articles/chaton-roux-tapis-regard.jpg",
+    "auteur": "Dmytro Koplyk",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/39705295/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5638x3759"
+  },
+  {
+    "fichier": "public/media/articles/chaton-roux-joue-balle.jpg",
+    "auteur": "大 董",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/34418118/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6016x4016"
   }
 ]

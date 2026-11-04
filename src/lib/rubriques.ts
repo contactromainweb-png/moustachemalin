@@ -76,10 +76,18 @@ export function tousLesArticles(): ArticleLien[] {
 // Page /guides/ : tous les articles en ligne qui ne sont pas des comparatifs, regroupés selon le `type` de leur
 // frontmatter (un nouveau guide, avis ou outil y apparaît de lui-même, quelle que soit sa rubrique), puis tous les
 // comparatifs, rubrique par rubrique. Un groupe vide n'est pas renvoyé.
+// Le guide « Arrivée d'un chat » passe en tête : c'est la porte d'entrée vers tous les comparatifs.
+const GUIDE_EN_TETE = "/guides/arrivee-chat-chaton-liste/";
+
 export function articlesParType() {
   const articles = tousLesArticles();
   const groupes: { type: TypeArticle; articles: ArticleLien[] }[] = [
-    { type: "guide", articles: articles.filter((a) => a.type === "guide") },
+    {
+      type: "guide",
+      articles: articles
+        .filter((a) => a.type === "guide")
+        .sort((a, b) => Number(b.href === GUIDE_EN_TETE) - Number(a.href === GUIDE_EN_TETE)),
+    },
     { type: "avis", articles: articles.filter((a) => a.type === "avis") },
     { type: "outil", articles: articles.filter((a) => a.type === "outil") },
     { type: "comparatif", articles: articles.filter((a) => a.type === "comparatif") },

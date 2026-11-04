@@ -48,7 +48,7 @@ export function Mouvement() {
         heros(gsap);
         finitions.push(desintegration(gsap));
         if (section) finitions.push(soucis(gsap, lenis, section));
-        finitions.push(pelote(gsap), mur(gsap), fin(gsap));
+        finitions.push(pelote(), mur(gsap), fin(gsap));
         ScrollTrigger.refresh();
       }, document.querySelector("main") ?? undefined);
 

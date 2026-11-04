@@ -3,8 +3,8 @@ import Link from "next/link";
 import { PROBLEMES } from "@/lib/accueil";
 import { pageEnLigne } from "@/lib/site";
 
-// Téléphone et tablette (masqué dès 1024 px) : juste après le premier écran, quatre cartes photo compactes en
-// grille 2 × 2, chacune mène droit à l'article qui répond au souci. Une carte dont la page n'existe pas disparaît.
+// Téléphone et tablette (masqué dès 1024 px) : juste après le premier écran, six cartes photo compactes en
+// grille 2 × 3, chacune mène droit à l'article qui répond au souci. Une carte dont la page n'existe pas disparaît.
 export function Problemes() {
   const problemes = PROBLEMES.filter((p) => pageEnLigne(p.href));
   if (problemes.length === 0) return null;
