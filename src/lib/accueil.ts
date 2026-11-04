@@ -68,7 +68,7 @@ export const SOUCIS: Souci[] = [
 ];
 
 // Cartes « Mon problème, c'est… » : téléphone et tablette seulement, juste après le premier écran. Elles reprennent
-// en quatre cartes les soucis et les profils de chat, deux sections réservées à l'ordinateur. `guide` : lien texte
+// en cinq cartes les soucis et les profils de chat, deux sections réservées à l'ordinateur. `guide` : lien texte
 // sous la carte, vers le guide qui répond au même souci.
 export type Probleme = {
   id: string;
@@ -97,8 +97,9 @@ export const PROBLEMES: Probleme[] = [
   },
   {
     id: "week-end",
-    titre: "Je pars le week-end",
-    href: "/repas/distributeur-croquettes-chat/",
+    titre: "Je pars en week-end",
+    href: "/guides/partir-en-week-end-chat/",
+    guide: { href: "/repas/distributeur-croquettes-chat/", label: "Le comparatif des distributeurs" },
     photo: PHOTOS.chatGamelle,
     cadrage: "object-[50%_50%]",
   },
@@ -109,6 +110,13 @@ export const PROBLEMES: Probleme[] = [
     guide: { href: "/griffer-grimper/chat-griffe-canape/", label: "Le guide « canapé griffé »" },
     photo: PHOTOS.chatGriffes,
     cadrage: "object-[50%_40%]",
+  },
+  {
+    id: "accueil-chat",
+    titre: "J'accueille un chat",
+    href: "/guides/arrivee-chat-chaton-liste/",
+    photo: PHOTOS.chatonRouxBalle,
+    cadrage: "object-[50%_55%]",
   },
 ];
 
