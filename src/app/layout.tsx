@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { GOATCOUNTER, UMAMI_ID } from "@/lib/mesure";
-import { AUTEUR, LOGO, SITE } from "@/lib/site";
+import { AUTEUR, LOGO, RESEAUX, SITE } from "@/lib/site";
 import "./globals.css";
 
 // Polices Google, hébergées par le site lui-même (aucune requête vers Google).
@@ -91,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 email: SITE.email,
                 logo: { "@type": "ImageObject", url: `${SITE.url}${LOGO.src}`, width: LOGO.width, height: LOGO.height },
                 founder: { "@id": `${SITE.url}${AUTEUR.page}#auteur` },
+                sameAs: RESEAUX.map((r) => r.url),
               },
               {
                 "@type": "Person",

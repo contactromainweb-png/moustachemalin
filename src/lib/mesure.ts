@@ -12,7 +12,7 @@ export const MESURE_ACTIVE = Boolean(UMAMI_ID || GOATCOUNTER);
 
 // Où se trouvait le lien cliqué : résumé (TopPicks), tableau (ComparisonTable), fiche (ProductCard), encadré (ProductBox),
 // avis (lien « Lire les avis clients sur Amazon » sous une fiche).
-export type Emplacement = "résumé" | "tableau" | "fiche" | "encadré" | "avis";
+export type Emplacement = "résumé" | "tableau" | "fiche" | "encadré" | "notre-choix" | "avis";
 
 type FenetreMesure = Window & {
   umami?: { track: (nom: string, donnees: Record<string, string>) => void };

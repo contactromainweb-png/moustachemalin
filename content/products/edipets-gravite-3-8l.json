@@ -8,7 +8,9 @@
     "capacite": "3,8 L au total, 2 unités (croquettes + eau)",
     "fonctionnement": "Par gravité, sans électricité",
     "programmation": "Aucune",
-    "materiau": "Plastique alimentaire"
+    "materiau": "Plastique alimentaire",
+    "repas": "En libre-service (par gravité)",
+    "alimentation": "Aucune (par gravité)"
   },
   "pour": "Une absence courte, pour un chat qui ne se goinfre pas.",
   "pros": [
@@ -23,5 +25,5 @@
   ],
   "entretien": "Laver régulièrement les deux réservoirs, surtout celui de l'eau.",
   "consommables": [],
-  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 29/10/2026"
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 29/10/2026 ; complété : repas et alimentation : déduits de la même fiche (« par gravité, sans électricité »)"
 }

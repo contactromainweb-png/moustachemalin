@@ -11,7 +11,8 @@
     "debit": "2 modes (fontaine ou source)",
     "pompe": "Pompe sans fil (sans câble dans l'eau)",
     "bruit": "23 dB annoncés",
-    "securite": "Arrêt automatique"
+    "securite": "Arrêt automatique",
+    "alimentation": "Secteur (seule la pompe est sans fil)"
   },
   "pour": "Une chambre ou un studio où le moindre bruit compte.",
   "pros": [
@@ -27,5 +28,5 @@
   "consommables": [
     "Filtres PETLIBRO Dockstream"
   ],
-  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026 ; complété : alimentation : fiche produit Amazon.fr (informations fabricant), consultée le 01/11/2026"
 }

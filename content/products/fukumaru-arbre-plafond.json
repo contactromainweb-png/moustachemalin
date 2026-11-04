@@ -10,7 +10,8 @@
     "fixation": "Support de plafond à 3 tiges filetées",
     "griffoirs": "Poteaux entièrement recouverts de jute",
     "materiaux": "Contreplaqué de bouleau",
-    "encombrement": "Vertical, très faible emprise au sol"
+    "encombrement": "Vertical, très faible emprise au sol",
+    "couchages": "Hamac"
   },
   "pour": "Les petits appartements : il exploite la hauteur sous plafond plutôt que la surface au sol.",
   "pros": [
@@ -25,5 +26,5 @@
   ],
   "entretien": "Vérifier régulièrement le serrage du support de plafond.",
   "consommables": [],
-  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 30/10/2026"
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 30/10/2026 ; complété : couchages : titre de la fiche produit Amazon.fr (informations fabricant), consultée le 01/11/2026"
 }

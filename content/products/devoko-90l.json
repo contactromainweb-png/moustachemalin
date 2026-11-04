@@ -11,7 +11,8 @@
     "capteurs": "Radar de mouvement, infrarouges, radar biologique",
     "modes": "Auto, programmé, manuel",
     "wifi": "2,4 GHz",
-    "application": "Oui"
+    "application": "Oui",
+    "bacDechets": "8,5 L (10 à 14 jours pour un chat annoncés)"
   },
   "pour": "Un compromis fermé et spacieux, moins cher que les PETKIT.",
   "pros": [
@@ -28,5 +29,5 @@
     "Sacs pour bac à déchets",
     "Litière agglomérante"
   ],
-  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026 ; complété : bac à déchets : fiche produit Amazon.fr (informations fabricant), consultée le 01/11/2026"
 }
