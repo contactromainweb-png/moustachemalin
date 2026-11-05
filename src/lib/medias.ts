@@ -169,7 +169,7 @@ export const PHOTOS = {
     src: "/media/famille/black-pearl-jardin.jpg",
     width: 1500,
     height: 2000,
-    alt: "Black Pearl, le chat noir de la compagne de Romain, qui traverse le jardin",
+    alt: "Black Pearl, la chatte noire de la compagne de Romain, qui traverse le jardin",
     credit: "Photo : Romain, photo personnelle",
     legende: "Black Pearl en tournée au jardin. Au retour, attention aux coups de langue.",
   },
@@ -177,7 +177,7 @@ export const PHOTOS = {
     src: "/media/famille/black-pearl-profil.jpg",
     width: 1500,
     height: 2000,
-    alt: "Black Pearl assis dans l'herbe, attentif",
+    alt: "Black Pearl assise dans l'herbe, attentive",
     credit: "Photo : Romain, photo personnelle",
   },
   sucetteBlackPearlSieste: {

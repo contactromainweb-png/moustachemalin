@@ -41,7 +41,7 @@ export const COUSINS: PhotoGalerie[] = [
   },
   {
     src: "/media/famille/black-pearl-portrait.jpg",
-    alt: "Black Pearl, le chat noir de la compagne de Romain, assis dans l'herbe",
+    alt: "Black Pearl, la chatte noire de la compagne de Romain, assise dans l'herbe",
     width: 1500,
     height: 2000,
     legende: "Black Pearl",
@@ -98,7 +98,7 @@ export function KiraCousins() {
       </h2>
       <p className="mt-2 max-w-[60ch]">
         {espacesFines(
-          "Kira n'est pas la seule à poser pour le site : Sucette et Black Pearl, les chats de ma compagne, Rebelle, la chatte de mon père, et Imotep et Chichoune, les chats de ma sœur, passent parfois une tête.",
+          "Kira n'est pas la seule à poser pour le site : Sucette et Black Pearl, les chattes de ma compagne, Rebelle, la chatte de mon père, et Imotep et Chichoune, les chats de ma sœur, passent parfois une tête.",
         )}
       </p>
       <ul className="-mx-4 mt-5 flex [contain:inline-size] snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-5 sm:overflow-visible sm:px-0 sm:pb-0">

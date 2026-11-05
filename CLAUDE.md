@@ -218,7 +218,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 ### La bande de Kira (les chats de la famille de Romain)
 - **Traits réels, donnés par Romain** (rien d'autre n'est inventé) :
   - **Sucette** dort toujours roulée en boule sur le même fauteuil ; très discrète.
-  - **Black Pearl** lèche quand on le caresse.
+  - **Black Pearl** (une femelle) lèche quand on la caresse.
   - **Rebelle** est peu sociable et n'en fait qu'à sa tête.
   - **Imotep** est « le chat du quartier » ; il miaule pour sortir.
   - **Chichoune** est câline et joueuse ; elle monte sur la table pour réclamer des caresses.

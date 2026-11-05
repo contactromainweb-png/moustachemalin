@@ -23,11 +23,11 @@ export const BANDE: Cousin[] = [
   },
   {
     prenom: "Black Pearl",
-    chezQui: "Le chat de la compagne de Romain",
-    phrase: "Caressez Black Pearl, il vous rend la pareille, à coups de langue.",
+    chezQui: "La chatte de la compagne de Romain",
+    phrase: "Caressez Black Pearl, elle vous rend la pareille, à coups de langue.",
     photo: {
       src: "/media/famille/black-pearl-jardin.jpg",
-      alt: "Black Pearl, le chat noir de la compagne de Romain, qui traverse le jardin la queue dressée",
+      alt: "Black Pearl, la chatte noire de la compagne de Romain, qui traverse le jardin la queue dressée",
       width: 1500,
       height: 2000,
       credit: "Photo : Romain, photo personnelle",
