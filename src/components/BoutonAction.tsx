@@ -19,7 +19,25 @@ function Fleche() {
   );
 }
 
-export function BoutonAction({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
+// `fichier` : lien de téléchargement (un PDF de public/, par exemple), hors de la navigation du site.
+export function BoutonAction({
+  href,
+  children,
+  className = "",
+  fichier = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+  fichier?: boolean;
+}) {
+  if (fichier)
+    return (
+      <a href={href} download className={`group ${CLASSES} ${className}`}>
+        <span>{children}</span>
+        <Fleche />
+      </a>
+    );
   return (
     <Link href={href} className={`group ${CLASSES} ${className}`}>
       <span>{children}</span>

@@ -86,7 +86,13 @@ const components: MDXComponents = {
   ProductBox,
   ProductCard,
   ProsCons,
-  RelatedArticles,
+  // Le formulaire de la lettre vient juste avant le bloc de liens (voir ArticleTemplate pour les articles sans ce bloc).
+  RelatedArticles: (props: Parameters<typeof RelatedArticles>[0]) => (
+    <>
+      <NewsletterForm />
+      <RelatedArticles {...props} />
+    </>
+  ),
   TopPicks,
   VetNotice,
 };

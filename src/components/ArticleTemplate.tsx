@@ -3,11 +3,13 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import Image from "next/image";
 import { JsonLd } from "@/components/JsonLd";
 import { TitreSerif } from "@/components/TitreSerif";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { PourAllerPlusLoin } from "@/components/PourAllerPlusLoin";
 import { Signature } from "@/components/Signature";
 import { cheminArticle, pinArticle, rubriqueArticle, type Frontmatter } from "@/lib/articles";
 import { IMAGE_PARTAGE, PHOTOS, type Photo } from "@/lib/medias";
 import { getProduct } from "@/lib/products";
+import { aBlocDeLiens } from "@/lib/rubriques";
 import { AUTEUR, LOGO, SITE } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
 
@@ -60,6 +62,7 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
 
       <div className="mt-10 max-w-[64rem] lg:mt-14">
         {children}
+        {aBlocDeLiens(fm) ? null : <NewsletterForm />}
         {fm.type === "comparatif" ? <PourAllerPlusLoin slug={fm.slug} /> : null}
       </div>
 

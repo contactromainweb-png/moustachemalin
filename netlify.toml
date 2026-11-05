@@ -24,3 +24,9 @@
   to = "https://moustachemalin.fr/:splat"
   status = 301
   force = true
+
+# Cadeau de la newsletter : le PDF ne doit pas apparaitre dans Google.
+[[headers]]
+  for = "/cadeaux/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

@@ -504,7 +504,7 @@
     "url": "",
     "licence": "Tous droits réservés",
     "resolutionSource": "1500x2000",
-    "description": "Black Pearl, le chat noir de la compagne de Romain, qui traverse le jardin"
+    "description": "Black Pearl, la chatte noire de la copine de Romain, qui traverse le jardin"
   },
   {
     "fichier": "public/media/famille/black-pearl-profil.jpg",
@@ -513,7 +513,7 @@
     "url": "",
     "licence": "Tous droits réservés",
     "resolutionSource": "1500x2000",
-    "description": "Black Pearl, le chat noir de la compagne de Romain, assis dans l'herbe"
+    "description": "Black Pearl, la chatte noire de la copine de Romain, assise dans l'herbe"
   },
   {
     "fichier": "public/media/famille/chichoune-arbre-a-chat.jpg",
@@ -851,5 +851,21 @@
     "url": "https://www.pexels.com/photo/34418118/",
     "licence": "Licence Pexels",
     "resolutionSource": "6016x4016"
+  },
+  {
+    "fichier": "public/media/cadeaux/checklist-page-1.jpg",
+    "auteur": "Moustache Malin",
+    "source": "Aperçu de notre checklist PDF",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1192x1686"
+  },
+  {
+    "fichier": "public/media/cadeaux/checklist-page-2.jpg",
+    "auteur": "Moustache Malin",
+    "source": "Aperçu de notre checklist PDF",
+    "url": "",
+    "licence": "Tous droits réservés",
+    "resolutionSource": "1192x1686"
   }
 ]
