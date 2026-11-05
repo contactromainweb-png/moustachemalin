@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 // liste de ce qu'on vérifie (sans blocage) ; puis les blocs de confiance (selon mon chat, derniers articles, qui écrit ici,
 // transparence, lettre masquée tant qu'elle n'est pas branchée), légers et sans WebGL ; enfin la grande section de
 // fin. Tout le texte est dans le HTML ; défilement fluide, particules et animations s'ajoutent après l'affichage.
+// Ordinateur : seul le premier écran retient le défilement ; les particules durent 1 écran, sans rien retenir.
 // Téléphone et tablette (moins de 1024 px) : page resserrée. Les cartes « Mon problème » suivent le premier écran
 // et remplacent les petits soucis et « Selon mon chat » ; les articles passent en rangée à faire glisser ; aucune section bloquée.
 // Le mot de Kira vient juste après ces cartes (après le premier écran sur ordinateur).

@@ -174,18 +174,21 @@ body {
   }
 }
 
-/* Accueil sur téléphone et tablette (data-apparitions, posé sur <html> par Mouvement) : chaque bloc apparaît une
-   seule fois en arrivant à l'écran, fondu et léger glissement, sans rien bloquer. Les blocs déjà visibles au chargement
-   sont marqués data-vu d'emblée : rien ne disparaît sous les yeux. Avec « animations réduites », rien ne bouge. */
+/* Accueil (data-apparitions, posé sur <html> par Mouvement) : chaque bloc apparaît une seule fois en arrivant à
+   l'écran, fondu et léger glissement, sans rien bloquer. Valeur « partout » : téléphone et tablette, toute la page.
+   Valeur « ordinateur » : petits soucis, pelote et mur seulement. Les blocs déjà visibles au chargement sont marqués
+   data-vu d'emblée : rien ne disparaît sous les yeux. Avec « animations réduites », rien ne bouge. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-apparitions] [data-apparait] {
+  [data-apparitions="partout"] [data-apparait],
+  [data-apparitions="ordinateur"] :is([data-soucis], [data-pelote], [data-mur]) [data-apparait] {
     animation: none;
     transition:
       opacity 350ms var(--ease-out),
       transform 350ms var(--ease-out);
     transition-delay: calc(var(--i, 0) * 60ms);
   }
-  [data-apparitions] [data-apparait]:not([data-vu]) {
+  [data-apparitions="partout"] [data-apparait]:not([data-vu]),
+  [data-apparitions="ordinateur"] :is([data-soucis], [data-pelote], [data-mur]) [data-apparait]:not([data-vu]) {
     opacity: 0;
     transform: translateY(16px);
   }
@@ -205,31 +208,17 @@ body {
 }
 
 
-/* Accueil, « petits soucis » épinglés : seule l'étape affichée reçoit les clics.
-   Les autres restent dans la page (lecteurs d'écran, clavier) ; un focus y ramène le défilement. */
-[data-epingle] [data-souci]:not([data-actif]) [data-souci-texte] {
-  pointer-events: none;
-}
-
-/* Accueil, « petits soucis » : chaque souci a son aplat de couleur (couleurs fixes, aussi en mode sombre).
-   En liste simple (sans animation), chaque étape est un panneau de sa couleur ; épinglée, c’est la section
-   entière qui prend la couleur de l’étape affichée, avec un fondu. Contrastes vérifiés : bleu nuit sur orange 6,1:1,
+/* Accueil, « petits soucis » : chaque souci est un panneau de sa couleur (couleurs fixes, aussi en mode sombre). Contrastes vérifiés : bleu nuit sur orange 6,1:1,
    sur lavande 7,4:1 ; blanc cassé sur bleu nuit 15:1, orange sur bleu nuit 6,1:1. */
 [data-fond] {
   background-color: var(--f-fond);
   color: var(--f-encre);
-}
-[data-soucis][data-fond] {
-  transition:
-    background-color 700ms var(--ease-in-out),
-    color 700ms var(--ease-in-out);
 }
 [data-fond="orange"] {
   --f-fond: #ff7a1a;
   --f-encre: #14213d;
   --f-doux: #14213d;
   --f-serif: #14213d;
-  --f-jauge: #14213d;
   --f-souligne: #14213d;
   --cta-fond: #14213d;
   --cta-texte: #faf7f2;
@@ -241,7 +230,6 @@ body {
   --f-encre: #14213d;
   --f-doux: #14213d;
   --f-serif: #14213d;
-  --f-jauge: #14213d;
   --f-souligne: #14213d;
   --cta-fond: #14213d;
   --cta-texte: #faf7f2;
@@ -253,7 +241,6 @@ body {
   --f-encre: #faf7f2;
   --f-doux: rgb(250 247 242 / 0.82);
   --f-serif: #ff7a1a;
-  --f-jauge: #ff7a1a;
   --f-souligne: #ff7a1a;
   /* Pas de surlignage sur bleu nuit, même posé dans une section claire (cartes photo de l'accueil). */
   --f-surligne: transparent;
@@ -263,7 +250,6 @@ body {
   --f-encre: #14213d;
   --f-doux: #5d5750;
   --f-serif: #14213d;
-  --f-jauge: #ff7a1a;
   --f-souligne: #ff7a1a;
   --f-surligne: #b9a6ff;
 }
@@ -313,11 +299,6 @@ body {
 [data-fond="nuit"] :focus-visible {
   outline-color: var(--accent);
 }
-/* Épinglée : les étapes sont transparentes, la couleur vient de la section. */
-[data-epingle] [data-souci] {
-  background-color: transparent;
-}
-
 /* Premier écran sur ordinateur à écran Retina : le gros plan de départ ne dépasse jamais la définition de la photo
    (5165 px de large). Plus l'écran est large, moins on agrandit au départ, pour que la photo soit nette dès le début. */
 @media (min-width: 1615px) and (min-resolution: 2dppx) {

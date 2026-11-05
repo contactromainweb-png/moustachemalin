@@ -200,7 +200,7 @@ Dans le code, les variables `caramel`, `caramel-field` et `on-caramel` sont des 
 
 - **Conteneur :** 90rem au maximum, centré, marges de 16 px sur téléphone puis 32 px dès 640 px.
 - **En-tête :** bandeau bleu nuit de 64 px (l'accueil retranche cette hauteur à son premier écran).
-- **Accueil :** sept scènes plein écran (gros plan, désintégration en particules, petits soucis épinglés aux fonds changeants, pelote et cartes en verre dépoli, mur de photos, comparaison qui se construit), puis les blocs de confiance et une grande section de fin bleu nuit à bord supérieur arrondi.
+- **Accueil :** des scènes qui s'enchaînent (gros plan, désintégration en particules, petits soucis en panneaux colorés, pelote et comparatifs en verre dépoli, mur de photos et compteur, ce qu'on vérifie), seul le premier écran retenant le défilement sur ordinateur, puis les blocs de confiance et une grande section de fin bleu nuit à bord supérieur arrondi.
 - **Pages institutionnelles et rubriques (`StagePage`) :** sur ordinateur, colonne de lecture à gauche (11 fr) et photo arrondie qui reste en place à droite (9 fr). Sur téléphone, titre puis texte puis photo, pour que le titre reste l'élément LCP ; un portrait vient juste après l'introduction.
 - **Articles :** fil d'Ariane, titre avec mot en serif, date, photo d'en-tête arrondie, puis « En bref », le mot de Kira et le corps limité à 44rem.
 - **Rythme :** blocs empilés séparés de 12 px ; marge interne de 20 px (téléphone) et 32 px (ordinateur) ; pied de page détaché de 128 à 176 px, collé quand la page finit sur un aplat plein.
