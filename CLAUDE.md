@@ -222,6 +222,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
   - **Rebelle** est peu sociable et n'en fait qu'à sa tête.
   - **Imotep** est « le chat du quartier » ; il miaule pour sortir.
   - **Chichoune** est câline et joueuse ; elle monte sur la table pour réclamer des caresses.
+- **Vocabulaire de Romain :** dans le texte visible, il parle en « je » : « ma copine » (jamais « compagne »), « mon père », « ma sœur ». Les textes alternatifs restent à la 3e personne (« la copine de Romain »).
 - Les cousins ne parlent pas : seule Kira a une voix. Leurs photos ne sont jamais présentées comme des photos de Kira.
 - **Une légende visible n'est jamais une copie du texte alternatif.** L'alt décrit la photo pour les lecteurs d'écran ; la légende dit autre chose (un trait réel ci-dessus, ou un conseil lié à l'article).
 
