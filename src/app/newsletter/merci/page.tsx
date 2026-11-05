@@ -24,7 +24,7 @@ export default function Page() {
       </BoutonAction>
       <div className="mt-12">
         <KiraNote>
-          <p>{espacesFines("Moi, j'ai coché la case jouets en premier.")}</p>
+          <p>{espacesFines("Moi, mes jouets, je les rapporte comme un chien. Prévoyez-en plusieurs !")}</p>
         </KiraNote>
       </div>
       <h2 className="font-display text-head">

@@ -57,7 +57,7 @@ export function LettreInformation() {
         <li><strong className="font-semibold">Finalité&nbsp;:</strong> l&apos;envoi de la lettre et du cadeau.</li>
         <li><strong className="font-semibold">Base légale&nbsp;:</strong> votre consentement.</li>
         <li><strong className="font-semibold">Prestataire&nbsp;:</strong> Brevo (Sendinblue SAS, France), données hébergées dans l&apos;Union européenne.</li>
-        <li><strong className="font-semibold">Durée de conservation&nbsp;:</strong> jusqu&apos;à votre désinscription.</li>
+        <li><strong className="font-semibold">Durée de conservation&nbsp;:</strong> jusqu&apos;à votre désinscription, et au plus tard 3&nbsp;ans après votre dernier contact avec nous (dernier e-mail ouvert ou cliqué).</li>
         <li>
           <strong className="font-semibold">Désinscription&nbsp;:</strong> par le lien présent dans chaque e-mail, ou en écrivant à{" "}
           <a href={`mailto:${SITE.email}`} className="underline decoration-2 underline-offset-4">{SITE.email}</a>.

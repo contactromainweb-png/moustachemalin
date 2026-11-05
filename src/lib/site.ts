@@ -6,7 +6,7 @@ export const SITE = {
   name: "Moustache Malin",
   url: "https://moustachemalin.fr",
   tagline: "Le bon équipement pour un chat heureux, sans se tromper.",
-  email: "contact@moustachemalin.fr", // confirmée par Romain le 30/10/2026 (boîte à créer au branchement du domaine)
+  email: "contact@moustachemalin.fr", // confirmée par Romain le 30/10/2026, redirigée vers la Gmail de Romain
 };
 
 // Comptes du site sur les réseaux : liens du pied de page et `sameAs` du schema Organization. TikTok reste masqué tant

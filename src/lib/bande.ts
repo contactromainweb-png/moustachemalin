@@ -76,11 +76,15 @@ export const BANDE: Cousin[] = [
 ];
 
 // Tableau Pinterest « Kira et la bande » : une image verticale pour la page, une pour Kira, une par cousin
-// (scripts/pins.mjs, public/pins/<slug>.jpg), réunies dans /kira/feed.xml (src/lib/flux.ts). Chaque élément du flux
-// renvoie vers /la-bande-de-kira/. Photos déjà publiées sur le site, textes de Romain.
+// (scripts/pins.mjs, public/pins/<slug>.jpg), réunies dans /kira/feed.xml (src/lib/flux.ts). L'épingle de la page renvoie
+// vers /la-bande-de-kira/, celle de chaque chat vers son ancre (#kira, #sucette…). Photos déjà publiées, textes de Romain.
 export const CHEMIN_BANDE = "/la-bande-de-kira/";
 export const DATE_BANDE = "2026-11-04";
-export type EpingleBande = { slug: string; titreFlux: string; titre: string; motSerif: string; texte: string; photo: Pick<Photo, "src" | "position"> };
+
+// Ancre de la carte d'un chat sur la page (« Black Pearl » → « black-pearl ») : id de la carte et lien de son épingle.
+export const ancreCousin = (prenom: string) => prenom.toLowerCase().replace(/\s+/g, "-");
+
+export type EpingleBande = { slug: string; ancre?: string; titreFlux: string; titre: string; motSerif: string; texte: string; photo: Pick<Photo, "src" | "position"> };
 
 export const EPINGLES_BANDE: EpingleBande[] = [
   {
@@ -93,6 +97,7 @@ export const EPINGLES_BANDE: EpingleBande[] = [
   },
   {
     slug: "bande-kira",
+    ancre: "kira",
     titreFlux: "Kira, la chatte de la bande",
     titre: "Kira",
     motSerif: "Kira",
@@ -100,7 +105,8 @@ export const EPINGLES_BANDE: EpingleBande[] = [
     photo: { src: "/media/kira/kira-tete-penchee.jpg", position: "50% 40%" },
   },
   ...BANDE.map((c) => ({
-    slug: `bande-${c.prenom.toLowerCase().replace(/\s+/g, "-")}`,
+    slug: `bande-${ancreCousin(c.prenom)}`,
+    ancre: ancreCousin(c.prenom),
     titreFlux: `${c.prenom}, de la bande de Kira`,
     titre: c.prenom,
     motSerif: c.prenom,

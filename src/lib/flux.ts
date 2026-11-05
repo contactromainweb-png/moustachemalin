@@ -57,10 +57,10 @@ export function articlesDeFlux(cle: CleFlux) {
   });
 }
 
-const element = (e: { titre: string; lien: string; guid: string; permalien: boolean; date: string; description: string; image: string; poids: number }) => `    <item>
+const element = (e: { titre: string; lien: string; date: string; description: string; image: string; poids: number }) => `    <item>
       <title>${echapper(e.titre)}</title>
       <link>${e.lien}</link>
-      <guid isPermaLink="${e.permalien}">${e.guid}</guid>
+      <guid isPermaLink="true">${e.lien}</guid>
       <pubDate>${dateRss(e.date)}</pubDate>
       <description>${echapper(e.description)}</description>
       <enclosure url="${e.image}" length="${e.poids}" type="image/jpeg" />
@@ -101,8 +101,6 @@ export function reponseFlux(cle: CleFlux) {
         return element({
           titre: fm.title,
           lien,
-          guid: lien,
-          permalien: true,
           date: publication(fm),
           description: fm.description,
           image: new URL(pinArticle(fm), SITE.url).toString(),
@@ -113,8 +111,8 @@ export function reponseFlux(cle: CleFlux) {
   });
 }
 
-// Tableau « Kira et la bande » (/kira/feed.xml) : une épingle par chat, toutes vers la même page ; le guid (non
-// permanent) reste propre à chaque épingle.
+// Tableau « Kira et la bande » (/kira/feed.xml) : un lien unique par épingle, la page elle-même puis l'ancre de chaque
+// chat sur cette page (#kira, #sucette…).
 export const CHEMIN_FLUX_KIRA = "/kira/feed.xml";
 
 export function fluxKiraDansHead() {
@@ -122,7 +120,6 @@ export function fluxKiraDansHead() {
 }
 
 export function reponseFluxKira() {
-  const lien = new URL(CHEMIN_BANDE, SITE.url).toString();
   return reponseXml({
     titre: `${SITE.name} : Kira et la bande`,
     page: CHEMIN_BANDE,
@@ -133,9 +130,7 @@ export function reponseFluxKira() {
       const pin = `/pins/${e.slug}.jpg`;
       return element({
         titre: e.titreFlux,
-        lien,
-        guid: `${lien}#${e.slug}`,
-        permalien: false,
+        lien: new URL(`${CHEMIN_BANDE}${e.ancre ? `#${e.ancre}` : ""}`, SITE.url).toString(),
         date: DATE_BANDE,
         description: e.texte,
         image: new URL(pin, SITE.url).toString(),

@@ -22,7 +22,7 @@ export function KiraNote({ children }: { children: ReactNode }) {
   );
 }
 
-// prioritaire : portrait affiché dès le premier écran (confirmation de la lettre), demandé tout de suite.
+// prioritaire : portrait affiché dès le premier écran (confirmation du contact), demandé tout de suite.
 export function Portrait({ taille = "size-14 sm:size-16", prioritaire = false }: { taille?: string; prioritaire?: boolean }) {
   if (KIRA.photo) {
     return (

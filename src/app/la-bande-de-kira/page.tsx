@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { StagePage } from "@/components/StagePage";
-import { BANDE } from "@/lib/bande";
+import { ancreCousin, BANDE } from "@/lib/bande";
 import { fluxKiraDansHead } from "@/lib/flux";
 import { PHOTOS } from "@/lib/medias";
 import { espacesFines } from "@/lib/typo";
@@ -26,7 +26,7 @@ export default function Page() {
       photo={PHOTOS.kiraAssise}
       portrait
     >
-      <h2 className="font-display text-head">Kira</h2>
+      <h2 id="kira" className="font-display scroll-mt-8 text-head">Kira</h2>
       <p className="mt-4 max-w-[60ch] text-lead">
         {espacesFines(
           "Kira, c'est ma chatte : un peu plus d'un an, fofolle, joueuse comme un petit chien, et fan de l'eau qui coule du robinet. C'est la seule de la bande qui a son mot à dire sur le site.",
@@ -38,7 +38,7 @@ export default function Page() {
       </h2>
       <ul className="mt-8 grid gap-6 sm:grid-cols-2">
         {BANDE.map((c) => (
-          <li key={c.prenom} className="reveal overflow-hidden rounded-[1.5rem] bg-field">
+          <li key={c.prenom} id={ancreCousin(c.prenom)} className="reveal scroll-mt-8 overflow-hidden rounded-[1.5rem] bg-field">
             <div className="relative aspect-[4/3]">
               <Image
                 src={c.photo.src}
