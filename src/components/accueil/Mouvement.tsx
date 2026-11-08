@@ -1,26 +1,26 @@
 "use client";
 
 import { useLayoutEffect } from "react";
-import { SOUCIS } from "@/lib/accueil";
 import { apresAffichage, estOrdinateur, peutAnimer } from "@/lib/capacites";
-import { fin, mur, pelote } from "./scenes";
+import { fin, pelote } from "./scenes";
 
 type Lenis = { scrollTo: (cible: number, options?: { immediate?: boolean }) => void };
 
 // Mouvements de l'accueil ; rien avec « animations réduites » ou en économie de données.
-// Ordinateur à souris (≥ 1024 px) : défilement fluide (Lenis) et scènes liées au défilement (GSAP ScrollTrigger),
-// chargés une fois la page affichée ; sans eux, tout est déjà à sa place.
+// Ordinateur à souris (≥ 1024 px) : défilement fluide (Lenis), premier écran épinglé et particules liées au défilement
+// (GSAP ScrollTrigger), chargés une fois la page affichée ; sans eux, tout est déjà à sa place. Seul le premier écran
+// retient le défilement. Petits soucis, pelote et mur défilent normalement et apparaissent une seule fois (voir apparitions).
 // Téléphone, tablette, écran tactile : défilement natif, aucune section bloquée, ni Lenis ni GSAP. Chaque bloc
 // apparaît une seule fois en arrivant à l'écran et le compteur monte quand il apparaît (voir apparitions).
 // Aucun aimantage (snap) : la page ne bouge jamais d'elle-même, seul le visiteur fait défiler.
 // Changement de page : tout est défait dans le nettoyage d'un effet de mise en page (useLayoutEffect), qui s'exécute
 // pendant la mise à jour du DOM et non après. Mouvement est placé en tête de l'accueil : React le démonte avant les
-// sections, donc les épinglages sont retirés (pin-spacer défaits) avant que React ne retire ces sections.
-// Chaque élément épinglé est en plus l'unique enfant d'un conteneur dédié (voir HeroAccueil, Soucis, etc.).
+// sections, donc l'épinglage est retiré (pin-spacer défait) avant que React ne retire ces sections.
+// L'élément épinglé est en plus l'unique enfant d'un conteneur dédié (voir HeroAccueil).
 export function Mouvement() {
   useLayoutEffect(() => {
     if (!peutAnimer()) return;
-    if (!estOrdinateur()) return apparitions();
+    if (!estOrdinateur()) return apparitions("partout");
     let nettoyer = () => {};
     let annule = false;
 
@@ -41,19 +41,17 @@ export function Mouvement() {
       gsap.ticker.lagSmoothing(0);
       (window as Window & { mmLenis?: Lenis }).mmLenis = lenis;
 
-      const section = document.querySelector<HTMLElement>("[data-soucis]");
       // Tout ce que GSAP crée ici (tweens, timelines, ScrollTrigger, épinglages) est enregistré dans ce contexte,
       // limité à <main>, et défait d'un coup par ctx.revert().
       const ctx = gsap.context(() => {
         heros(gsap);
         finitions.push(desintegration(gsap));
-        if (section) finitions.push(soucis(gsap, lenis, section));
-        finitions.push(pelote(), mur(gsap), fin(gsap));
+        finitions.push(pelote(), fin(gsap), apparitions("ordinateur"));
         ScrollTrigger.refresh();
       }, document.querySelector("main") ?? undefined);
 
       nettoyer = () => {
-        // Les épinglages d'abord : chaque élément revient à sa place dans le DOM que React connaît.
+        // L'épinglage d'abord : l'élément revient à sa place dans le DOM que React connaît.
         ctx.revert();
         finitions.forEach((f) => f());
         ScrollTrigger.getAll().forEach((t) => t.kill());
@@ -76,10 +74,18 @@ export function Mouvement() {
   return null;
 }
 
-// Téléphone et tablette : fondu et léger glissement de chaque bloc à son entrée dans l'écran, une seule fois
-// (transition CSS, voir [data-apparitions] dans globals.css), puis le compteur du mur qui monte jusqu'au vrai chiffre.
-function apparitions() {
-  const blocs = Array.from(document.querySelectorAll<HTMLElement>("main [data-apparait], main .reveal"));
+// Fondu et léger glissement de chaque bloc à son entrée dans l'écran, une seule fois (transition CSS, voir
+// [data-apparitions] dans globals.css), puis le compteur du mur qui monte jusqu'au vrai chiffre.
+// « partout » (téléphone, tablette) : tous les blocs de la page.
+// « ordinateur » : seulement les petits soucis, la pelote et le mur ; les autres blocs gardent leur entrée en CSS (.reveal).
+function apparitions(portee: "partout" | "ordinateur") {
+  const blocs = Array.from(
+    document.querySelectorAll<HTMLElement>(
+      portee === "partout"
+        ? "main [data-apparait], main .reveal"
+        : "main :is([data-soucis], [data-pelote], [data-mur]) [data-apparait]",
+    ),
+  );
   const compteur = document.querySelector<HTMLElement>("[data-mur-compteur]");
   const total = Number(compteur?.textContent) || 0;
   const hauteur = window.innerHeight;
@@ -91,7 +97,7 @@ function apparitions() {
     el.setAttribute("data-apparait", "");
     if (dejaVisible(el)) el.setAttribute("data-vu", "");
   });
-  document.documentElement.setAttribute("data-apparitions", "");
+  document.documentElement.setAttribute("data-apparitions", portee);
 
   const observateur = new IntersectionObserver(
     (entrees) => {
@@ -105,10 +111,12 @@ function apparitions() {
   );
   blocs.filter((el) => !el.hasAttribute("data-vu")).forEach((el) => observateur.observe(el));
 
-  // Compteur : 0 tant qu'il n'est pas arrivé, puis il monte en 1,2 s (ralenti à la fin).
+  // Compteur : 0 tant qu'il n'est pas arrivé, puis il monte en 1,2 s (ralenti à la fin). Sur ordinateur, où le chiffre
+  // est immense, il part de la première valeur à autant de chiffres (10 pour 36) : sa largeur ne change pas, rien ne bouge.
+  const depart = portee === "ordinateur" ? 10 ** (String(total).length - 1) : 0;
   let observateurCompteur: IntersectionObserver | null = null;
   if (compteur && total > 0 && !dejaVisible(compteur)) {
-    compteur.textContent = "0";
+    compteur.textContent = String(depart);
     observateurCompteur = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting) return;
@@ -116,7 +124,7 @@ function apparitions() {
         const debut = performance.now();
         const pas = (t: number) => {
           const p = Math.min(1, (t - debut) / 1200);
-          compteur.textContent = String(Math.round(total * (1 - (1 - p) ** 3)));
+          compteur.textContent = String(Math.round(depart + (total - depart) * (1 - (1 - p) ** 3)));
           if (p < 1) animation = requestAnimationFrame(pas);
         };
         animation = requestAnimationFrame(pas);
@@ -166,7 +174,8 @@ function heros(gsap: Gsap) {
 }
 
 // Scène 2 : la phrase s'écrit mot par mot en sortant d'un flou, pendant que la photo se désintègre en particules
-// et se reforme en une autre. Le WebGL n'est préparé qu'à l'approche de la section.
+// et se reforme en une autre. Rien n'est épinglé : l'effet suit le défilement sur 1 écran exactement, à partir du moment
+// où le haut de la section arrive aux trois quarts de l'écran. Le WebGL n'est préparé qu'à l'approche de la section.
 function desintegration(gsap: Gsap) {
   const scene = document.querySelector<HTMLElement>("[data-desint-scene]");
   if (!scene) return () => {};
@@ -208,9 +217,8 @@ function desintegration(gsap: Gsap) {
     defaults: { ease: "none" },
     scrollTrigger: {
       trigger: scene,
-      start: "top top",
-      end: "+=160%",
-      pin: true,
+      start: "top 75%",
+      end: "+=100%",
       scrub: 0.6,
       onRefresh: () => particules?.redimensionner(),
     },
@@ -244,116 +252,4 @@ function desintegration(gsap: Gsap) {
     imageB.style.opacity = "";
     canevas.style.opacity = "";
   };
-}
-
-// Scène 3 : les petits soucis, une étape par écran.
-function soucis(gsap: Gsap, lenis: Lenis, section: HTMLElement) {
-  section.setAttribute("data-epingle", "");
-  const etapes = gsap.utils.toArray<HTMLElement>("[data-souci]", section);
-  const n = etapes.length;
-  const textes = etapes.map((e) =>
-    e.querySelectorAll<HTMLElement>("[data-souci-texte], [data-souci-geant]"),
-  );
-  const cadres = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-cadre]")!);
-  const images = cadres.map((c) => c.querySelector<HTMLImageElement>("img")!);
-  const jauges = gsap.utils.toArray<HTMLElement>("[data-jauge]", section);
-
-  // La photo de l'étape affichée passe au-dessus des suivantes : elle se décompose et révèle celle d'en dessous.
-  // Les photos sont au milieu (z 10+), les textes devant (z 20), le mot géant tout devant (z 30).
-  const photos = etapes.map((e) => e.querySelector<HTMLElement>("[data-souci-photo]")!);
-  photos.forEach((p, i) => (p.style.zIndex = String(10 + n - i)));
-  const mosaiques = cadres.slice(0, -1).map((c, i) => mosaique(c, images[i]));
-
-  const entree = 40;
-  const sortie = -32;
-  const flou = (px: number) => `blur(${px}px)`;
-
-  gsap.set(textes.slice(1), { opacity: 0, y: entree, filter: flou(6) });
-  gsap.set(images.slice(1), { scale: 1.12 });
-  gsap.set(jauges[0], { scaleX: 1 });
-
-  const marquerActive = (i: number) => {
-    etapes.forEach((e, k) => e.toggleAttribute("data-actif", k === i));
-    section.dataset.fond = SOUCIS[i].fond;
-  };
-  marquerActive(0);
-
-  // Une étape par unité de temps ; une demi-unité de plus à la fin, pour lire la dernière étape.
-  const queue = 0.5;
-  const tl = gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: `+=${(n - 1 + queue) * 100}%`,
-      pin: true,
-      scrub: 0.6,
-      onUpdate: (st) => marquerActive(gsap.utils.clamp(0, n - 1, Math.round(st.progress * (n - 1 + queue)))),
-    },
-  });
-  for (let i = 1; i < n; i++) {
-    const debut = i - 1;
-    // Fondu enchaîné : le texte sortant s'efface pendant que le suivant arrive ; ils se croisent, jamais d'écran vide.
-    tl.to(textes[i - 1], { opacity: 0, y: sortie, filter: flou(4), duration: 0.55, ease: "power2.inOut" }, debut + 0.05)
-      .to(textes[i], { opacity: 1, y: 0, filter: flou(0), duration: 0.6, ease: "power3.out" }, debut + 0.3)
-      // La photo d'origine reste sous la mosaïque un court instant après le départ : à l'arrêt, aucun joint entre les carrés ne se voit.
-      .set(images[i - 1], { opacity: 0 }, debut + 0.1)
-      // La photo se décompose en carrés qui disparaissent au hasard ; la suivante recule légèrement dessous.
-      .to(
-        mosaiques[i - 1],
-        { scale: 0, opacity: 0, duration: 0.45, ease: "power2.in", stagger: { amount: 0.45, from: "random" } },
-        debut,
-      )
-      .to(images[i], { scale: 1, duration: 0.95, ease: "power2.out" }, debut)
-      .to(jauges[i], { scaleX: 1, duration: 0.85, ease: "power2.inOut" }, debut);
-  }
-  // La timeline dure exactement n − 1 + queue : l'étape i est entièrement en place à la position de défilement i.
-  tl.to({}, { duration: queue }, n - 1);
-  // Au clavier, un lien d'une étape cachée qui reçoit le focus ramène le défilement à son étape
-  // (seulement au clavier : un clic ne fait jamais bouger la page).
-  etapes.forEach((e, i) =>
-    e.addEventListener("focusin", (ev) => {
-      const st = tl.scrollTrigger;
-      if (!st || e.hasAttribute("data-actif") || !(ev.target as HTMLElement).matches(":focus-visible")) return;
-      lenis.scrollTo(st.start + ((st.end - st.start) * i) / (n - 1 + queue), { immediate: true });
-    }),
-  );
-
-  return () => {
-    section.removeAttribute("data-epingle");
-    delete section.dataset.fond;
-    etapes.forEach((e) => e.removeAttribute("data-actif"));
-    photos.forEach((p) => (p.style.zIndex = ""));
-    document.querySelectorAll("[data-mosaique]").forEach((m) => m.remove());
-    images.forEach((img) => (img.style.opacity = ""));
-  };
-}
-
-// Recouvre une photo d'une grille de carrés qui en montrent chacun un morceau (même recadrage que la photo),
-// puis cache la photo d'origine. Renvoie les carrés, à animer : 8 de large.
-function mosaique(cadre: HTMLElement, image: HTMLImageElement) {
-  const boite = cadre.getBoundingClientRect();
-  const colonnes = 8;
-  const rangees = Math.max(4, Math.round((colonnes * boite.height) / boite.width));
-  const grille = document.createElement("div");
-  grille.dataset.mosaique = "";
-  grille.setAttribute("aria-hidden", "true");
-  grille.style.cssText = `position:absolute;inset:0;display:grid;grid-template-columns:repeat(${colonnes},1fr);grid-template-rows:repeat(${rangees},1fr)`;
-  const carres: HTMLElement[] = [];
-  for (let r = 0; r < rangees; r++) {
-    for (let c = 0; c < colonnes; c++) {
-      const carre = document.createElement("div");
-      // Légèrement agrandis (1,2 %) : les carrés se chevauchent et aucun joint ne se voit entre eux.
-      carre.style.cssText = "position:relative;overflow:hidden;transform:scale(1.012)";
-      const morceau = image.cloneNode() as HTMLImageElement;
-      // Même srcset et même sizes que la photo : le navigateur reprend le fichier déjà chargé.
-      morceau.alt = "";
-      morceau.style.cssText = `position:absolute;max-width:none;width:${colonnes * 100}%;height:${rangees * 100}%;left:${-c * 100}%;top:${-r * 100}%`;
-      carre.appendChild(morceau);
-      grille.appendChild(carre);
-      carres.push(carre);
-    }
-  }
-  cadre.appendChild(grille);
-  return carres;
 }

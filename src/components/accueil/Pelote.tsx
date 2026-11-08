@@ -10,8 +10,9 @@ import { tousLesArticles } from "@/lib/rubriques";
 import { RangeeCartes } from "./RangeeCartes";
 
 // Scène 4, sur fond bleu nuit. La page avance toujours : aucun décor collant, aucun épinglage.
-// Ordinateur (≥ 1024 px) : toutes les cartes d'articles en grille de 3 colonnes ; en haut à droite, une petite pelote
-// décorative (canevas WebGL, voir pelote-webgl.ts) qui tourne une seule fois à son arrivée à l'écran, puis s'arrête.
+// Ordinateur (≥ 1024 px) : les comparatifs seulement (ni guides, ni avis, ni outils : ils restent sur /guides/), en grille
+// de 3 colonnes, qui apparaissent à leur arrivée à l'écran (data-apparait, voir Mouvement) ; en haut à droite, une petite
+// pelote décorative (canevas WebGL, voir pelote-webgl.ts) qui tourne une seule fois à son arrivée à l'écran, puis s'arrête.
 // Sans JavaScript ou avec « animations réduites » : le halo orange seul, immobile.
 // Téléphone et tablette (moins de 1024 px) : pas de pelote, seulement le halo ; les quatre comparatifs principaux en
 // rangée à faire glisser (CSS scroll-snap, flèches du clavier), la carte suivante dépasse pour montrer qu'on peut glisser.
@@ -39,6 +40,7 @@ export function Pelote() {
   const articles = attribuerPhotos(tousLesArticles(), DEJA_SUR_LA_PAGE());
   if (articles.length === 0) return null;
   const principaux = PRINCIPAUX.map((href) => articles.find((a) => a.href === href)).filter((a) => a !== undefined);
+  const comparatifs = articles.filter((a) => a.type === "comparatif");
 
   return (
     <section data-pelote data-fond="nuit" aria-labelledby="titre-dossiers" className="relative overflow-clip">
@@ -83,7 +85,7 @@ export function Pelote() {
                           <h3 className="font-display text-[1.625rem]">
                             <TitreSerif titre={a.titre.replace(/ : .*$/, "")} mot={a.motSerif} />
                           </h3>
-                          <p className="mt-auto inline-flex items-center gap-2 pt-4 font-medium text-accent">
+                          <p className="mt-auto inline-flex items-center gap-2 pt-4 font-medium text-accent-nuit">
                             {LIBELLES_TYPE[a.type].lire}
                             <span aria-hidden="true">→</span>
                           </p>
@@ -98,10 +100,10 @@ export function Pelote() {
         ) : null}
 
         <ul className="relative mt-16 grid grid-cols-3 gap-6 max-lg:hidden lg:mt-20">
-          {articles.map((a) => {
+          {comparatifs.map((a, i) => {
             const photo = a.photo ? PHOTOS[a.photo] : undefined;
             return (
-              <li key={a.href}>
+              <li key={a.href} data-apparait style={{ "--i": i % 3 } as React.CSSProperties}>
                 <Link
                   href={a.href}
                   className="group flex h-full flex-col rounded-[2rem] bg-[rgb(185_166_255/0.16)] p-2 ring-1 ring-white/15 transition-transform duration-200 ease-[var(--ease-out)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:active:scale-100"
@@ -126,7 +128,7 @@ export function Pelote() {
                       <TitreSerif titre={a.titre} mot={a.motSerif} />
                     </h3>
                     <p className="mt-3 text-[var(--f-doux)]">{a.description}</p>
-                    <p className="mt-auto inline-flex items-center gap-2 pt-5 font-medium text-accent">
+                    <p className="mt-auto inline-flex items-center gap-2 pt-5 font-medium text-accent-nuit">
                       {LIBELLES_TYPE[a.type].lire}
                       <span
                         aria-hidden="true"

@@ -1,4 +1,4 @@
-// Scènes 4, 5 et 7 de l'accueil sur ordinateur : animations liées au défilement (GSAP ScrollTrigger), appelées par Mouvement.
+// Scènes 4 et 7 de l'accueil sur ordinateur, appelées par Mouvement.
 // Chaque fonction renvoie de quoi tout défaire. Sans elles (pas de JavaScript, « animations réduites »),
 // les sections sont déjà complètes et immobiles.
 
@@ -57,73 +57,6 @@ export function pelote() {
     window.removeEventListener("resize", auRedimensionnement);
     rendu?.liberer();
     canevas.style.opacity = "";
-  };
-}
-
-// Scène 5 : la photo du centre, plein écran, recule jusqu'à sa case ; les autres vignettes arrivent autour
-// (du centre vers les bords) ; puis le voile bleu nuit tombe et le compteur monte jusqu'au vrai chiffre.
-export function mur(gsap: Gsap) {
-  const scene = document.querySelector<HTMLElement>("[data-mur-scene]");
-  if (!scene) return () => {};
-  const centre = scene.querySelector<HTMLElement>("[data-mur-centre]")!;
-  const vignettes = gsap.utils
-    .toArray<HTMLElement>("[data-mur-vignette]", scene)
-    .filter((v) => v.offsetParent !== null);
-  const fond = scene.querySelector<HTMLElement>("[data-mur-fond]")!;
-  const compteur = scene.querySelector<HTMLElement>("[data-mur-compteur]")!;
-  const legendes = scene.querySelectorAll<HTMLElement>("[data-mur-legende]");
-  const total = Number(compteur.textContent) || 0;
-  const valeur = { n: 0 };
-
-  // Échelle qui fait couvrir tout l'écran à la case du centre (tailles sans transformation : offsetWidth/Height).
-  const couvrir = () => Math.max(scene.clientWidth / centre.offsetWidth, scene.clientHeight / centre.offsetHeight) * 1.02;
-  // Distance de chaque vignette au centre de l'écran (en px), pour les faire venir du centre vers les bords.
-  const ecart = (v: HTMLElement) => {
-    const b = v.getBoundingClientRect();
-    const s = scene.getBoundingClientRect();
-    return { x: b.left + b.width / 2 - (s.left + s.width / 2), y: b.top + b.height / 2 - (s.top + s.height / 2) };
-  };
-  const distances = vignettes.map((v) => Math.hypot(ecart(v).x, ecart(v).y));
-  const loin = Math.max(...distances, 1);
-
-  const tl = gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: {
-      trigger: scene,
-      start: "top top",
-      end: "+=190%",
-      pin: true,
-      scrub: 0.6,
-      invalidateOnRefresh: true,
-    },
-  });
-  tl.fromTo(centre, { scaleX: couvrir, scaleY: couvrir }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: "power2.inOut" }, 0);
-  vignettes.forEach((v, i) => {
-    tl.fromTo(
-      v,
-      { opacity: 0, scale: 1.2, x: () => ecart(v).x * 0.3, y: () => ecart(v).y * 0.3 },
-      { opacity: 1, scale: 1, x: 0, y: 0, duration: 0.32, ease: "power2.out" },
-      0.1 + (distances[i] / loin) * 0.22,
-    );
-  });
-  tl.fromTo(fond, { opacity: 0 }, { opacity: 1, duration: 0.14 }, 0.66)
-    .fromTo(
-      valeur,
-      { n: 0 },
-      {
-        n: total,
-        duration: 0.2,
-        ease: "power1.out",
-        onUpdate: () => (compteur.textContent = String(Math.round(valeur.n))),
-      },
-      0.7,
-    )
-    .fromTo(compteur, { opacity: 0, yPercent: 12 }, { opacity: 1, yPercent: 0, duration: 0.12, ease: "power2.out" }, 0.68)
-    .fromTo(legendes, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.12, stagger: 0.04, ease: "power2.out" }, 0.78)
-    .to({}, { duration: 0.1 });
-
-  return () => {
-    compteur.textContent = String(total);
   };
 }
 
