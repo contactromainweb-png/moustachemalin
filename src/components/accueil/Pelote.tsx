@@ -85,7 +85,7 @@ export function Pelote() {
                           <h3 className="font-display text-[1.625rem]">
                             <TitreSerif titre={a.titre.replace(/ : .*$/, "")} mot={a.motSerif} />
                           </h3>
-                          <p className="mt-auto inline-flex items-center gap-2 pt-4 font-medium text-accent">
+                          <p className="mt-auto inline-flex items-center gap-2 pt-4 font-medium text-accent-nuit">
                             {LIBELLES_TYPE[a.type].lire}
                             <span aria-hidden="true">→</span>
                           </p>
@@ -128,7 +128,7 @@ export function Pelote() {
                       <TitreSerif titre={a.titre} mot={a.motSerif} />
                     </h3>
                     <p className="mt-3 text-[var(--f-doux)]">{a.description}</p>
-                    <p className="mt-auto inline-flex items-center gap-2 pt-5 font-medium text-accent">
+                    <p className="mt-auto inline-flex items-center gap-2 pt-5 font-medium text-accent-nuit">
                       {LIBELLES_TYPE[a.type].lire}
                       <span
                         aria-hidden="true"
