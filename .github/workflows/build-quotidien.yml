@@ -1,0 +1,60 @@
+# Build quotidien du site (CLAUDE.md §11 ter) : le site est statique, donc les épingles fraîches datées du jour
+# n'entrent dans les flux de rubrique qu'au build suivant. Chaque jour vers 6 h (heure de Paris), cette action regarde
+# si au moins une épingle a `publication` égale à la date du jour à Paris ; si oui, elle appelle le crochet de build
+# Netlify, rangé dans le secret NETLIFY_BUILD_HOOK (jamais en clair dans le dépôt). Sinon, aucun build : aucun crédit
+# Netlify dépensé.
+# GitHub ne connaît que l'heure UTC : l'action se lance à 4 h et à 5 h UTC, et ne continue qu'à celle qui tombe à 6 h
+# à Paris (5 h UTC en hiver, 4 h UTC en été). GitHub peut retarder une action programmée de quelques minutes.
+# Lancement à la main (onglet Actions → « Build quotidien » → Run workflow) : le crochet est appelé sans condition.
+name: Build quotidien
+
+on:
+  schedule:
+    - cron: "0 4,5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  crochet-netlify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Vérifier l'heure à Paris
+        id: heure
+        if: github.event_name == 'schedule'
+        run: |
+          heure=$(TZ=Europe/Paris date +%H)
+          if [ "$heure" = "06" ]; then echo "continuer=oui" >> "$GITHUB_OUTPUT"; else echo "Il est ${heure} h à Paris : rien à faire à ce passage."; fi
+
+      - name: Récupérer les articles
+        if: github.event_name == 'schedule' && steps.heure.outputs.continuer == 'oui'
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: content
+
+      - name: Chercher les épingles du jour
+        id: epingles
+        if: github.event_name == 'schedule' && steps.heure.outputs.continuer == 'oui'
+        run: |
+          jour=$(TZ=Europe/Paris date +%F)
+          nombre=$(grep -rhE "^ {4}publication: \"?${jour}\"?\s*$" content --include='*.mdx' | wc -l)
+          if [ "$nombre" -gt 0 ]; then
+            echo "${nombre} épingle(s) datée(s) du ${jour} : build demandé."
+            echo "build=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "Aucune épingle aujourd'hui (${jour}) : pas de build."
+          fi
+
+      - name: Appeler le crochet de build Netlify
+        if: github.event_name == 'workflow_dispatch' || steps.epingles.outputs.build == 'oui'
+        env:
+          CROCHET: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$CROCHET" ]; then
+            echo "::error::Secret NETLIFY_BUILD_HOOK absent (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          curl --fail --silent --show-error -X POST -d '{}' "${CROCHET}?trigger_title=Build+quotidien+des+epingles"
+          echo "Build Netlify demandé ($(TZ=Europe/Paris date '+%d/%m/%Y %H:%M') à Paris)."

@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
   env: {
     BUILD_YEAR: String(new Date().getFullYear()),
     PAGES_EN_LIGNE: pagesEnLigne().join(","),
+    // Date du build à Paris (AAAA-MM-JJ) : les épingles fraîches datées de ce jour ou avant entrent dans les flux
+    // (src/lib/epingles.ts). EPINGLES_AUJOURDHUI=AAAA-MM-JJ npm run build simule une autre date.
+    EPINGLES_AUJOURDHUI:
+      process.env.EPINGLES_AUJOURDHUI ??
+      new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date()),
   },
   partialPrefetching: true,
   // Photos servies en AVIF (le plus léger), sinon WebP, à la taille de l'écran.

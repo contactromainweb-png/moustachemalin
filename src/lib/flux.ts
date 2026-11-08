@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { cheminArticle, pinArticle, type Frontmatter } from "@/lib/articles";
 import { CHEMIN_BANDE, DATE_BANDE, EPINGLES_BANDE } from "@/lib/bande";
+import { epinglesDe, estPubliee } from "@/lib/epingles";
 import { articlesDuFlux } from "@/lib/rubriques";
 import { SITE } from "@/lib/site";
 
@@ -38,7 +39,11 @@ export function fluxDansHead(cle: CleFlux) {
 const echapper = (texte: string) =>
   texte.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-const dateRss = (jour: string) => new Date(`${jour}T08:00:00Z`).toUTCString();
+// Articles et flux Kira : 8 h UTC. Épingles fraîches : 3 h UTC (HEURE_EPINGLES), avant le build de 6 h à Paris été comme
+// hiver, pour qu'une épingle ne soit jamais datée dans le futur quand Pinterest lit le flux.
+const HEURE_ARTICLES = "08:00:00";
+const HEURE_EPINGLES = "03:00:00";
+const dateRss = (jour: string, heure = HEURE_ARTICLES) => new Date(`${jour}T${heure}Z`).toUTCString();
 const publication = (fm: Frontmatter) => fm.publishedAt ?? fm.updatedAt;
 
 // Les articles d'un flux (du plus récemment publié au plus ancien) avec le poids de leur image /pins/ ; ceux sans
@@ -57,11 +62,11 @@ export function articlesDeFlux(cle: CleFlux) {
   });
 }
 
-const element = (e: { titre: string; lien: string; date: string; description: string; image: string; poids: number }) => `    <item>
+const element = (e: { titre: string; lien: string; date: string; heure?: string; description: string; image: string; poids: number }) => `    <item>
       <title>${echapper(e.titre)}</title>
       <link>${e.lien}</link>
       <guid isPermaLink="true">${e.lien}</guid>
-      <pubDate>${dateRss(e.date)}</pubDate>
+      <pubDate>${dateRss(e.date, e.heure)}</pubDate>
       <description>${echapper(e.description)}</description>
       <enclosure url="${e.image}" length="${e.poids}" type="image/jpeg" />
       <media:content url="${e.image}" medium="image" type="image/jpeg" width="1000" height="1500" fileSize="${e.poids}">
@@ -70,7 +75,7 @@ const element = (e: { titre: string; lien: string; date: string; description: st
       </media:content>
     </item>`;
 
-function reponseXml(c: { titre: string; page: string; description: string; chemin: string; date?: string; items: string }) {
+function reponseXml(c: { titre: string; page: string; description: string; chemin: string; date?: string; heure?: string; items: string }) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
@@ -79,35 +84,64 @@ function reponseXml(c: { titre: string; page: string; description: string; chemi
     <description>${echapper(c.description)}</description>
     <language>fr-FR</language>
     <atom:link href="${SITE.url}${c.chemin}" rel="self" type="application/rss+xml" />
-${c.date ? `    <lastBuildDate>${dateRss(c.date)}</lastBuildDate>\n` : ""}${c.items}
+${c.date ? `    <lastBuildDate>${dateRss(c.date, c.heure)}</lastBuildDate>\n` : ""}${c.items}
   </channel>
 </rss>
 `;
   return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8" } });
 }
 
+// Rubrique → flux (et tableau Pinterest) qui la publie.
+export function cleFluxDe(rubrique: string): CleFlux | undefined {
+  return (Object.keys(FLUX) as CleFlux[]).find((cle) => FLUX[cle].rubriques.includes(rubrique));
+}
+
+// Épingles fraîches d'un flux dont la date est passée (src/lib/epingles.ts) ; une image manquante est signalée.
+function epinglesDeFlux(cle: CleFlux) {
+  return articlesDuFlux()
+    .filter((fm) => FLUX[cle].rubriques.includes(fm.rubrique))
+    .flatMap(epinglesDe)
+    .filter(estPubliee)
+    .flatMap((e) => {
+      const fichier = path.join(process.cwd(), "public", e.image);
+      if (!fs.existsSync(fichier)) {
+        console.warn(`⚠ Flux ${cheminFlux(cle)} : épingle ${e.lien} écartée, pas d'image ${e.image}`);
+        return [];
+      }
+      return [{ e, poids: fs.statSync(fichier).size }];
+    });
+}
+
 export function reponseFlux(cle: CleFlux) {
   const flux = FLUX[cle];
-  const articles = articlesDeFlux(cle);
+  const elements: Parameters<typeof element>[0][] = [
+    ...articlesDeFlux(cle).map(({ fm, poids }) => ({
+      titre: fm.title,
+      lien: new URL(cheminArticle(fm), SITE.url).toString(),
+      date: publication(fm),
+      heure: HEURE_ARTICLES,
+      description: fm.description,
+      image: new URL(pinArticle(fm), SITE.url).toString(),
+      poids,
+    })),
+    ...epinglesDeFlux(cle).map(({ e, poids }) => ({
+      titre: e.titre,
+      lien: new URL(e.lien, SITE.url).toString(),
+      date: e.publication,
+      heure: HEURE_EPINGLES,
+      description: e.description,
+      image: new URL(e.image, SITE.url).toString(),
+      poids,
+    })),
+  ].sort((a, b) => `${b.date}T${b.heure ?? HEURE_ARTICLES}`.localeCompare(`${a.date}T${a.heure ?? HEURE_ARTICLES}`));
   return reponseXml({
     titre: `${SITE.name} : ${flux.titre}`,
     page: flux.page,
     description: `${flux.tableau} : les derniers comparatifs, avis et guides de ${SITE.name}.`,
     chemin: cheminFlux(cle),
-    date: articles[0] ? publication(articles[0].fm) : undefined,
-    items: articles
-      .map(({ fm, poids }) => {
-        const lien = new URL(cheminArticle(fm), SITE.url).toString();
-        return element({
-          titre: fm.title,
-          lien,
-          date: publication(fm),
-          description: fm.description,
-          image: new URL(pinArticle(fm), SITE.url).toString(),
-          poids,
-        });
-      })
-      .join("\n"),
+    date: elements[0]?.date,
+    heure: elements[0]?.heure,
+    items: elements.map(element).join("\n"),
   });
 }
 
