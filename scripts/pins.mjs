@@ -265,16 +265,32 @@ async function recadrage(photo, cadrage, largeurZone, hauteurZone) {
   return `data:image/jpeg;base64,${tampon.toString("base64")}`;
 }
 
+// Jamais de chiffre seul en début ou en fin de ligne : espace insécable entre un nombre et le mot qui le suit
+// (« 3 repères », « 8 kg », « 2,4 GHz »), entre un nombre final et le mot d'avant, et dans « Pura Max 2 ».
+// Les textes sont ensuite découpés aux seules espaces ordinaires.
+const INSECABLE = " ";
+function insecables(texte) {
+  return texte
+    .replace(/Pura Max 2/g, `Pura${INSECABLE}Max${INSECABLE}2`)
+    // Après une espace ordinaire seulement : le « 2 » de « Pura Max 2 » ne s'accroche pas au mot suivant.
+    .replace(/(^| )(\d[\d,.]*) (?=\S)/g, `$1$2${INSECABLE}`)
+    .replace(/ (\d[\d,.]*)(?=(\s?[?!:;])?$)/, `${INSECABLE}$1`);
+}
+
 // L'accroche, mot par mot (le `motSerif` en serif italique orange). Une ponctuation détachée (« ? », « : ») reste
 // collée au mot d'avant, pour ne jamais se retrouver seule en début de ligne.
 function accrocheEnMots(accroche, motSerif, taille, couleur, couleurSerif) {
   const mots = [];
-  for (const m of titreEnMots(accroche, motSerif))
-    for (const mot of m.texte.trim().split(/\s+/)) {
+  for (const m of titreEnMots(insecables(accroche), motSerif && insecables(motSerif)))
+    for (const mot of m.texte.trim().split(/ +/)) {
       // « ? », « ! », « : », « ; » prennent une espace insécable avant (typographie française) ; « , » et « . » se collent.
       if (!/[\p{L}\p{N}]/u.test(mot) && mots.length) mots[mots.length - 1].texte += /^[,.…]/.test(mot) ? mot : ` ${mot}`;
       else mots.push({ texte: mot, serif: m.serif });
     }
+  // Un mot d'une ou deux lettres (« la », « de », « à ») reste avec le mot qui le suit (même style), jamais seul en fin de ligne.
+  for (let i = mots.length - 2; i >= 0; i--)
+    if (mots[i].serif === mots[i + 1].serif && mots[i].texte.replace(/[^\p{L}]/gu, "").length <= 2 && !/\d/.test(mots[i].texte))
+      mots.splice(i, 2, { texte: `${mots[i].texte} ${mots[i + 1].texte}`, serif: mots[i].serif });
   // Pas de mot seul sur la dernière ligne : les deux derniers mots (même style) restent ensemble.
   const [avant, dernier] = mots.slice(-2);
   if (dernier && avant.serif === dernier.serif && avant.texte.length + dernier.texte.length <= 16) mots.splice(-2, 2, { texte: `${avant.texte} ${dernier.texte}`, serif: avant.serif });
@@ -283,9 +299,10 @@ function accrocheEnMots(accroche, motSerif, taille, couleur, couleurSerif) {
       "span",
       {
         style: m.serif
-          ? { fontFamily: "Instrument Serif", fontSize: taille * 1.12, color: couleurSerif, letterSpacing: "-0.01em", marginRight: "0.24em" }
-          : { fontFamily: "Bricolage Grotesque", color: couleur, marginRight: "0.24em" },
+          ? { fontFamily: "Instrument Serif", fontSize: taille * 1.12, color: couleurSerif, letterSpacing: "-0.01em", marginRight: "0.24em", whiteSpace: "nowrap" }
+          : { fontFamily: "Bricolage Grotesque", color: couleur, marginRight: "0.24em", whiteSpace: "nowrap" },
       },
+      // Chaque bloc ne se coupe jamais à l'intérieur (ni aux espaces insécables, ni au trait d'union de « convient-elle »).
       m.texte,
     ),
   );
@@ -418,7 +435,7 @@ async function epingleRetenir(fm, e) {
             },
             String(i + 1),
           ),
-          h("div", { style: { display: "flex", fontFamily: "DM Sans", fontSize: 58, lineHeight: 1.12 } }, point.replace(/ ([^ ]{1,8})$/," $1")),
+          h("div", { style: { display: "flex", fontFamily: "DM Sans", fontSize: 58, lineHeight: 1.12 } }, insecables(point).replace(/ ([^ ]{1,8})$/," $1")),
         ),
       ),
     ),
