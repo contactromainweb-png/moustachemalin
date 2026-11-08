@@ -1,0 +1,36 @@
+# Build quotidien du site (CLAUDE.md §11 ter) : le site est statique, donc les épingles fraîches datées du jour
+# n'entrent dans les flux de rubrique qu'au build suivant. Cette action appelle chaque jour vers 6 h (heure de Paris)
+# le crochet de build Netlify, rangé dans le secret NETLIFY_BUILD_HOOK (jamais en clair dans le dépôt).
+# GitHub ne connaît que l'heure UTC : l'action se lance à 4 h et à 5 h UTC, et ne continue qu'à celle qui tombe à 6 h
+# à Paris (5 h UTC en hiver, 4 h UTC en été). GitHub peut retarder une action programmée de quelques minutes.
+# Lancement à la main : onglet Actions du dépôt → « Build quotidien » → Run workflow.
+name: Build quotidien
+
+on:
+  schedule:
+    - cron: "0 4,5 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  crochet-netlify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Appeler le crochet de build Netlify
+        env:
+          CROCHET: ${{ secrets.NETLIFY_BUILD_HOOK }}
+          EVENEMENT: ${{ github.event_name }}
+        run: |
+          heure=$(TZ=Europe/Paris date +%H)
+          if [ "$EVENEMENT" = "schedule" ] && [ "$heure" != "06" ]; then
+            echo "Il est ${heure} h à Paris : rien à faire à ce passage."
+            exit 0
+          fi
+          if [ -z "$CROCHET" ]; then
+            echo "::error::Secret NETLIFY_BUILD_HOOK absent (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+          curl --fail --silent --show-error -X POST -d '{}' "${CROCHET}?trigger_title=Build+quotidien+des+epingles"
+          echo "Build Netlify demandé ($(TZ=Europe/Paris date '+%d/%m/%Y %H:%M') à Paris)."

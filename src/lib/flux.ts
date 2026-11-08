@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { cheminArticle, pinArticle, type Frontmatter } from "@/lib/articles";
 import { CHEMIN_BANDE, DATE_BANDE, EPINGLES_BANDE } from "@/lib/bande";
+import { epinglesDe, estPubliee } from "@/lib/epingles";
 import { articlesDuFlux } from "@/lib/rubriques";
 import { SITE } from "@/lib/site";
 
@@ -86,28 +87,54 @@ ${c.date ? `    <lastBuildDate>${dateRss(c.date)}</lastBuildDate>\n` : ""}${c.it
   return new Response(xml, { headers: { "Content-Type": "application/rss+xml; charset=utf-8" } });
 }
 
+// Rubrique → flux (et tableau Pinterest) qui la publie.
+export function cleFluxDe(rubrique: string): CleFlux | undefined {
+  return (Object.keys(FLUX) as CleFlux[]).find((cle) => FLUX[cle].rubriques.includes(rubrique));
+}
+
+// Épingles fraîches d'un flux dont la date est passée (src/lib/epingles.ts) ; une image manquante est signalée.
+function epinglesDeFlux(cle: CleFlux) {
+  return articlesDuFlux()
+    .filter((fm) => FLUX[cle].rubriques.includes(fm.rubrique))
+    .flatMap(epinglesDe)
+    .filter(estPubliee)
+    .flatMap((e) => {
+      const fichier = path.join(process.cwd(), "public", e.image);
+      if (!fs.existsSync(fichier)) {
+        console.warn(`⚠ Flux ${cheminFlux(cle)} : épingle ${e.lien} écartée, pas d'image ${e.image}`);
+        return [];
+      }
+      return [{ e, poids: fs.statSync(fichier).size }];
+    });
+}
+
 export function reponseFlux(cle: CleFlux) {
   const flux = FLUX[cle];
-  const articles = articlesDeFlux(cle);
+  const elements = [
+    ...articlesDeFlux(cle).map(({ fm, poids }) => ({
+      titre: fm.title,
+      lien: new URL(cheminArticle(fm), SITE.url).toString(),
+      date: publication(fm),
+      description: fm.description,
+      image: new URL(pinArticle(fm), SITE.url).toString(),
+      poids,
+    })),
+    ...epinglesDeFlux(cle).map(({ e, poids }) => ({
+      titre: e.titre,
+      lien: new URL(e.lien, SITE.url).toString(),
+      date: e.publication,
+      description: e.description,
+      image: new URL(e.image, SITE.url).toString(),
+      poids,
+    })),
+  ].sort((a, b) => b.date.localeCompare(a.date));
   return reponseXml({
     titre: `${SITE.name} : ${flux.titre}`,
     page: flux.page,
     description: `${flux.tableau} : les derniers comparatifs, avis et guides de ${SITE.name}.`,
     chemin: cheminFlux(cle),
-    date: articles[0] ? publication(articles[0].fm) : undefined,
-    items: articles
-      .map(({ fm, poids }) => {
-        const lien = new URL(cheminArticle(fm), SITE.url).toString();
-        return element({
-          titre: fm.title,
-          lien,
-          date: publication(fm),
-          description: fm.description,
-          image: new URL(pinArticle(fm), SITE.url).toString(),
-          poids,
-        });
-      })
-      .join("\n"),
+    date: elements[0]?.date,
+    items: elements.map(element).join("\n"),
   });
 }
 

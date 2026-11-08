@@ -29,6 +29,7 @@ export type Frontmatter = {
   // dans « Pour aller plus loin » (4 liens au plus) ; jamais le comparatif litières par défaut
   pinTitre?: string; // titre court de l'image Pinterest, sinon la partie du titre avant « : » (scripts/pins.mjs)
   pinCadrage?: string; // point de la photo gardé dans l'image Pinterest (ex. "62% 50%"), sinon sa position
+  epingles?: EpingleFraiche[]; // 2 épingles Pinterest de plus, publiées à leur date dans le flux de la rubrique (src/lib/epingles.ts)
   updatedAt: string; // AAAA-MM-JJ
   publishedAt?: string; // AAAA-MM-JJ, sinon updatedAt
   products?: string[]; // ASIN classés, pour le schema ItemList des comparatifs
@@ -37,6 +38,22 @@ export type Frontmatter = {
   secondaryKeywords?: string[];
   relatedComparatif?: string;
   showcase3d?: string; // vitrine 3D prévue plus tard (étape 8)
+};
+
+// Épingle « fraîche » (CLAUDE.md §11 ter) : image /pins/<slug>-<variante>.jpg fabriquée par scripts/pins.mjs,
+// qui vérifie aussi toutes les règles (nombre de mots, photos, titres) et fait échouer le build sinon.
+export type EpingleFraiche = {
+  variante: "question" | "retenir"; // A : grande photo + question ; B : fond crème ou lavande, petite photo, 3 points
+  accroche: string; // 12 mots au plus
+  motSerif?: string; // mot de l'accroche en serif italique orange
+  points?: string[]; // variante « retenir » : 3 points de 6 mots au plus
+  fond?: "creme" | "lavande"; // variante « retenir »
+  photo: keyof typeof PHOTOS; // déjà créditée, jamais la photo d'en-tête de l'article
+  cadrage?: string; // ex. "50% 40%"
+  ancre: string; // id qui existe sur la page de l'article (contrôlé après le build)
+  publication: string; // AAAA-MM-JJ, calculée par scripts/calendrier-epingles.mjs
+  titre: string; // titre de l'élément du flux
+  description: string; // 2 phrases au plus
 };
 
 export function cheminArticle(fm: Frontmatter) {
