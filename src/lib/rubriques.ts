@@ -61,6 +61,20 @@ export function voisinsDe(slug: string): ArticleLien[] {
   return voisins.flatMap((v) => tous.filter((fm) => fm.slug === v)).map(lien);
 }
 
+// Liens choisis à la main pour « Pour aller plus loin » (frontmatter `plusLoin` du comparatif), dans l'ordre indiqué.
+// undefined = pas de liste : le bloc garde ses satellites puis ses voisins. Un slug inconnu ou hors ligne fait échouer
+// le build (faute de frappe dans la liste).
+export function plusLoinDe(slug: string): ArticleLien[] | undefined {
+  const tous = tousLesFrontmatters();
+  const liste = tous.find((fm) => fm.slug === slug)?.plusLoin;
+  if (!liste) return undefined;
+  return liste.map((s) => {
+    const fm = tous.find((f) => f.slug === s);
+    if (!fm) throw new Error(`« plusLoin » de ${slug} : l'article « ${s} » n'existe pas ou n'est pas en ligne`);
+    return lien(fm);
+  });
+}
+
 // Les articles les plus récemment mis à jour (accueil, « Derniers articles et mises à jour »).
 export function derniersArticles(nombre: number): ArticleLien[] {
   return tousLesFrontmatters()
@@ -95,6 +109,7 @@ export function articlesParType() {
         .sort((a, b) => Number(b.href === GUIDE_EN_TETE) - Number(a.href === GUIDE_EN_TETE)),
     },
     { type: "avis", articles: articles.filter((a) => a.type === "avis") },
+    { type: "duel", articles: articles.filter((a) => a.type === "duel") },
     { type: "outil", articles: articles.filter((a) => a.type === "outil") },
     { type: "comparatif", articles: articles.filter((a) => a.type === "comparatif") },
   ];

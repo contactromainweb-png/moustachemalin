@@ -9,12 +9,14 @@
     "type": "Ouverte",
     "chambreLitiere": "7,17 L",
     "bacDechets": "11 L (jusqu'à 14 jours annoncés)",
-    "poidsChat": "Jusqu'à 15 kg",
+    "poidsChat": "1 à 15 kg (mode chaton en dessous de 1 kg)",
+    "hauteurEntree": "Environ 35 cm du sol",
+    "litiere": "Agglomérante (minérale à grains conseillée)",
     "capteurs": "6 infrarouges + 4 de poids",
     "modes": "Auto, manuel, minuteur, vidage",
     "bruit": "≤ 50 dB annoncés",
     "application": "Oui (passages, poids, niveau de litière)",
-    "garantie": "2 ans"
+    "garantie": "2 ans selon Neakasa"
   },
   "pour": "Les foyers à plusieurs chats, les gros chats et les chats méfiants qui refusent les toilettes fermées.",
   "pros": [
@@ -26,12 +28,14 @@
   ],
   "cons": [
     "Ouvert : plus de projections possibles qu'un modèle fermé (accessoires anti-projection vendus à part)",
-    "Encombrant"
+    "Encombrant",
+    "Entrée à environ 35 cm du sol (marchepied vendu à part)",
+    "Litière agglomérante obligatoire : ni papier ni granulés de bois"
   ],
   "entretien": "Changer le sac du bac à déchets toutes les une à deux semaines selon le nombre de chats.",
   "consommables": [
     "Sacs à déchets Neakasa",
-    "Litière agglomérante (bentonite) conseillée"
+    "Litière agglomérante minérale à grains (bentonite)"
   ],
-  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 26/10/2026"
+  "source": "Fiche produit Amazon.fr et site neakasa.com (informations fabricant), consultés le 14/11/2026"
 }

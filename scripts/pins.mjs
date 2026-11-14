@@ -25,7 +25,7 @@ const LARGEUR = 1000;
 const HAUTEUR = 1500;
 const PHOTO = 1060; // hauteur de la photo, en haut ; le texte est dessous, sur le bleu nuit
 const FONDU = 300; // hauteur du dégradé qui fond le bas de la photo dans le bleu nuit
-const TYPES = new Set(["comparatif", "avis", "guide", "outil"]);
+const TYPES = new Set(["comparatif", "avis", "duel", "guide", "outil"]);
 const POIDS_MAX = 300 * 1024;
 
 const lirePolice = (nom) => fs.readFileSync(path.join(RACINE, "src/app/polices/og", nom));

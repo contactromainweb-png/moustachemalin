@@ -508,6 +508,66 @@ export const PHOTOS = {
     alt: "Un chat roux qui boit dans un verre d'eau, dans la lumière d'une fenêtre.",
     credit: "Photo : Liisbet Luup, Pexels",
   },
+  // Pack de nuit 5 (duel PETKIT ou Neakasa, avis Neakasa M1 Lite) : en-têtes 3 840 px, photos moyennes et d'épingles
+  // en petit côté 1 400 px. Aucun bac à litière ni produit de marque visible.
+  maineCoonFenetre: {
+    src: "/media/litieres-maine-coon-fenetre.jpg",
+    width: 3840,
+    height: 2563,
+    alt: "Un grand chat roux à poils longs, de type Maine Coon, assis sur le rebord d'une fenêtre ouverte, qui regarde dehors.",
+    credit: "Photo : 大 董, Pexels",
+    position: "70% 40%",
+  },
+  maineCoonChaiseJaune: {
+    src: "/media/litieres-maine-coon-chaise-jaune.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Un chat roux à poils longs, de type Maine Coon, accoudé au dossier d'une chaise jaune, dans une pièce blanche.",
+    credit: "Photo : Thirdman, Pexels",
+    position: "65% 40%",
+  },
+  maineCoonRouxBlanc: {
+    src: "/media/articles/maine-coon-roux-allonge.jpg",
+    width: 2100,
+    height: 1400,
+    alt: "Un chat roux tigré à poils longs, allongé sur un tissu blanc, qui regarde l'objectif.",
+    credit: "Photo : Aleksandra Pękala, Pexels",
+  },
+  maineCoonRideau: {
+    src: "/media/articles/maine-coon-rideau-bleu.jpg",
+    width: 2097,
+    height: 1400,
+    alt: "Un chat roux à poils longs qui passe prudemment la tête entre deux rideaux bleus.",
+    credit: "Photo : Aleksey Zemlyanoy, Pexels",
+  },
+  chatTigreRenifle: {
+    src: "/media/articles/chat-tigre-renifle-sol.jpg",
+    width: 2100,
+    height: 1400,
+    alt: "Un chat tigré et blanc qui renifle le sol avec prudence, à côté d'une plante verte.",
+    credit: "Photo : Ec lipse, Pexels",
+  },
+  maineCoonRouxSalon: {
+    src: "/media/articles/maine-coon-roux-salon.jpg",
+    width: 2100,
+    height: 1400,
+    alt: "Un chat roux à poils longs, de type Maine Coon, installé sur un plaid moelleux clair, dans un salon.",
+    credit: "Photo : Valeria Boltneva, Pexels",
+  },
+  chatGrisMarche: {
+    src: "/media/articles/chat-gris-poils-longs-marche.jpg",
+    width: 2100,
+    height: 1400,
+    alt: "Un chat gris et blanc à poils longs allongé sur une marche en bois clair, qui regarde de côté.",
+    credit: "Photo : Bri Schneiter, Pexels",
+  },
+  chatBlancCanape: {
+    src: "/media/articles/chat-blanc-yeux-bleus-canape.jpg",
+    width: 2104,
+    height: 1400,
+    alt: "Un chat blanc aux yeux bleus et au masque brun, couché sur l'accoudoir d'un canapé gris clair.",
+    credit: "Photo : Lara, Pexels",
+  },
 } satisfies Record<string, Photo>;
 
 // Scène 5 de l’accueil : le mur de photos (vignettes, petit côté 1 200 px) et sa photo centrale, plein écran au départ.
