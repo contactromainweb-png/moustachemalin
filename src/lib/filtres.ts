@@ -77,6 +77,27 @@ const FILTRES: Record<string, Filtre[]> = {
       retient: (p) => contient(p.specs.alimentation, "batterie"),
     },
   ],
+  "litiere-chat": [
+    petitBudget,
+    {
+      id: "agglomerante",
+      label: "Agglomérante",
+      critere: "Une litière qui forme des blocs : on retire l'urine chaque jour, sans tout changer.",
+      retient: (p) => commence(p.specs.type, "Agglomérante"),
+    },
+    {
+      id: "vegetale",
+      label: "Végétale",
+      critere: "Une litière d'origine végétale (bois, tofu), plus légère et souvent compostable.",
+      retient: (p) => commence(p.specs.origine, "Végétale"),
+    },
+    {
+      id: "sans-parfum",
+      label: "Sans parfum",
+      critere: "Une litière sans parfum ajouté, celle que préfèrent la plupart des chats.",
+      retient: (p) => commence(p.specs.parfum, "Sans"),
+    },
+  ],
   "distributeur-croquettes-chat": [
     {
       id: "camera",

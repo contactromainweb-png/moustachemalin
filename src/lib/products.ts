@@ -74,6 +74,12 @@ export const SPEC_LABELS: Record<string, string> = {
   bonus: "En plus",
   tailles: "Tailles",
   reversible: "Réversible",
+  // Litières classiques
+  origine: "Origine",
+  parfum: "Parfum",
+  sac: "Sac",
+  duree: "Durée annoncée",
+  elimination: "Où la jeter",
 };
 
 export function specLabel(cle: string) {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { pageEnLigne, SITE } from "@/lib/site";
+import { nomsInsecables } from "@/lib/typo";
 
 export type Crumb = { label: string; href: string };
 
@@ -16,13 +17,13 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
           return (
             <li key={c.href} className="flex min-h-11 items-center gap-x-2">
               {derniere ? (
-                <span aria-current="page">{c.label}</span>
+                <span aria-current="page">{nomsInsecables(c.label)}</span>
               ) : pageEnLigne(c.href) ? (
                 <Link href={c.href} className="inline-block py-2.5 underline-offset-4 hover:text-ink hover:underline">
-                  {c.label}
+                  {nomsInsecables(c.label)}
                 </Link>
               ) : (
-                <span>{c.label}</span>
+                <span>{nomsInsecables(c.label)}</span>
               )}
               {derniere ? null : <span aria-hidden="true">/</span>}
             </li>

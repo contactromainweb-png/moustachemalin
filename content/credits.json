@@ -931,5 +931,37 @@
     "url": "https://www.pexels.com/photo/white-cat-on-a-sofa-19468852/",
     "licence": "Licence Pexels",
     "resolutionSource": "5830x3879"
+  },
+  {
+    "fichier": "public/media/litieres-chat-bac-chaton.jpg",
+    "auteur": "Nadiye Odabaşı",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/a-mother-and-child-orange-tabby-cats-13705506/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "4000x6000"
+  },
+  {
+    "fichier": "public/media/articles/pattes-chat-roux-parquet.jpg",
+    "auteur": "cottonbro studio",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/orange-tabby-cat-lying-on-brown-wooden-floor-6853523/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6240x4160"
+  },
+  {
+    "fichier": "public/media/articles/chat-curieux-coin-blanc.jpg",
+    "auteur": "Johnny Song",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/adorable-british-shorthair-cat-in-a-room-31964899/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "4000x6000"
+  },
+  {
+    "fichier": "public/media/articles/chat-tigre-allonge-soleil.jpg",
+    "auteur": "Lê Đức Khánh",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/relaxed-tabby-cat-lounging-indoors-40500305/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6000x4000"
   }
 ]

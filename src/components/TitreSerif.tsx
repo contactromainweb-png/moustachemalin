@@ -1,9 +1,10 @@
-import { espacesFines } from "@/lib/typo";
+import { espacesFines, nomsInsecables } from "@/lib/typo";
 
 // Titre dont un mot passe en serif italique (classe .mot-serif) : « Litière *autonettoyante* : notre comparatif ».
 // Le mot est cherché tel quel dans le titre ; s'il n'y est pas, le titre reste entièrement en grotesque.
-export function TitreSerif({ titre, mot }: { titre: string; mot?: string }) {
-  const texte = espacesFines(titre);
+export function TitreSerif({ titre, mot: motBrut }: { titre: string; mot?: string }) {
+  const texte = nomsInsecables(espacesFines(titre));
+  const mot = motBrut && nomsInsecables(motBrut);
   const i = mot ? texte.indexOf(mot) : -1;
   if (!mot || i < 0) return <>{texte}</>;
   // La ponctuation qui suit le mot (« : », « ? »…) reste collée à lui, sans passer seule à la ligne.

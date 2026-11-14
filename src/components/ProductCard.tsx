@@ -3,7 +3,7 @@ import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { AmazonLivePrice } from "@/components/AmazonLivePrice";
 import { ProductVisual } from "@/components/ProductVisual";
 import { ProsCons } from "@/components/ProsCons";
-import { getProduct } from "@/lib/products";
+import { getProduct, specLabel } from "@/lib/products";
 import { espacesFines } from "@/lib/typo";
 
 // Fiche détaillée d'un produit, appelée par son ASIN : <ProductCard asin="B0..." />
@@ -37,14 +37,23 @@ export function ProductCard({ asin }: { asin: string }) {
           <p className="font-semibold">Entretien</p>
           <p className="mt-2">{espacesFines(p.entretien)}</p>
         </div>
-        <div>
-          <p className="font-semibold">Consommables à racheter</p>
-          <ul className="mt-2 space-y-1">
-            {p.consommables.map((c) => (
-              <li key={c}>{espacesFines(c)}</li>
-            ))}
-          </ul>
-        </div>
+        {/* Une litière est elle-même le consommable : pas de bloc « Consommables » pour cette catégorie. */}
+        {p.category === "litiere-chat" ? null : (
+          <div>
+            <p className="font-semibold">Consommables à racheter</p>
+            <ul className="mt-2 space-y-1">
+              {p.consommables.map((c) => (
+                <li key={c}>{espacesFines(c)}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {p.specs.duree ? (
+          <div>
+            <p className="font-semibold">{specLabel("duree")}</p>
+            <p className="mt-2">{espacesFines(p.specs.duree)}</p>
+          </div>
+        ) : null}
       </div>
       <p className="mt-3 text-small text-ink-soft">Source&#8239;: {espacesFines(p.source)}</p>
     </section>

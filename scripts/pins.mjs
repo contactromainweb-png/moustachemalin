@@ -274,8 +274,13 @@ function insecables(texte) {
     .replace(/Pura Max 2/g, `Pura${INSECABLE}Max${INSECABLE}2`)
     // Après une espace ordinaire seulement : le « 2 » de « Pura Max 2 » ne s'accroche pas au mot suivant.
     .replace(/(^| )(\d[\d,.]*) (?=\S)/g, `$1$2${INSECABLE}`)
-    .replace(/ (\d[\d,.]*)(?=(\s?[?!:;])?$)/, `${INSECABLE}$1`);
+    .replace(/ (\d[\d,.]*)(?=(\s?[?!:;])?$)/, `${INSECABLE}$1`)
+    // Un petit mot (« à », « la », « de »…) ne reste jamais seul en fin de ligne : il s'accroche au mot qui le suit.
+    // Le regard en arrière laisse enchaîner plusieurs petits mots (« à la maison » → « à la maison » insécable).
+    .replace(PETITS_MOTS, `$1${INSECABLE}`);
 }
+
+const PETITS_MOTS = /(?<=^|[\s («])(à|au|aux|de|du|des|la|le|les|l'|un|une|en|et|ou|sa|son|ses|sur|par) (?=\S)/giu;
 
 // L'accroche, mot par mot (le `motSerif` en serif italique orange). Une ponctuation détachée (« ? », « : ») reste
 // collée au mot d'avant, pour ne jamais se retrouver seule en début de ligne.
@@ -294,7 +299,7 @@ function accrocheEnMots(accroche, motSerif, taille, couleur, couleurSerif) {
   // Pas de mot seul sur la dernière ligne : les deux derniers mots (même style) restent ensemble.
   const [avant, dernier] = mots.slice(-2);
   if (dernier && avant.serif === dernier.serif && avant.texte.length + dernier.texte.length <= 16) mots.splice(-2, 2, { texte: `${avant.texte} ${dernier.texte}`, serif: avant.serif });
-  return mots.map((m) =>
+  const bloc = (m) =>
     h(
       "span",
       {
@@ -304,8 +309,18 @@ function accrocheEnMots(accroche, motSerif, taille, couleur, couleurSerif) {
       },
       // Chaque bloc ne se coupe jamais à l'intérieur (ni aux espaces insécables, ni au trait d'union de « convient-elle »).
       m.texte,
-    ),
-  );
+    );
+  // Un bloc qui finit par un petit mot (« sur le ») et précède un bloc d'un autre style (« canapé » en serif) :
+  // les deux restent sur la même ligne, pour que « le » ne finisse jamais seul une ligne.
+  const resultat = [];
+  for (let i = 0; i < mots.length; i++) {
+    const finPetitMot = /(?:^|[\s ])(?:à|au|aux|de|du|des|la|le|les|un|une|en|et|ou|sa|son|ses|sur|par)$/iu.test(mots[i].texte);
+    if (finPetitMot && mots[i + 1] && mots[i + 1].serif !== mots[i].serif) {
+      resultat.push(h("span", { style: { display: "flex", whiteSpace: "nowrap" } }, bloc(mots[i]), bloc(mots[i + 1])));
+      i++;
+    } else resultat.push(bloc(mots[i]));
+  }
+  return resultat;
 }
 
 const pied = (couleur) =>
