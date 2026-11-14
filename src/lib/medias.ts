@@ -568,6 +568,37 @@ export const PHOTOS = {
     alt: "Un chat blanc aux yeux bleus et au masque brun, couché sur l'accoudoir d'un canapé gris clair.",
     credit: "Photo : Lara, Pexels",
   },
+  // Pack de nuit 6 (comparatif des litières pour chat) : en-tête 3 840 px, photos moyennes et d'épingles en petit
+  // côté 1 400 px. Aucun sac ni aucune marque de litière visible ; le bac de l'en-tête est un bac neutre sans marque.
+  chatBacLitiere: {
+    src: "/media/litieres-chat-bac-chaton.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Un chat roux et blanc qui sort d'un bac à litière gris posé contre un mur blanc, face à un chaton roux.",
+    credit: "Photo : Nadiye Odabaşı, Pexels",
+    position: "55% 40%",
+  },
+  pattesChatParquet: {
+    src: "/media/articles/pattes-chat-roux-parquet.jpg",
+    width: 2100,
+    height: 1400,
+    alt: "Gros plan sur les pattes avant d'un chat roux, allongé sur un parquet en bois.",
+    credit: "Photo : cottonbro studio, Pexels",
+  },
+  chatCurieuxCoin: {
+    src: "/media/articles/chat-curieux-coin-blanc.jpg",
+    width: 1400,
+    height: 2100,
+    alt: "Un chaton crème aux grands yeux qui passe prudemment l'angle d'un meuble blanc, sur un sol carrelé clair.",
+    credit: "Photo : Johnny Song, Pexels",
+  },
+  chatDetenduSol: {
+    src: "/media/articles/chat-tigre-allonge-soleil.jpg",
+    width: 2100,
+    height: 1400,
+    alt: "Un chat tigré allongé sur un sol clair et brillant, au soleil, devant une porte ouverte.",
+    credit: "Photo : Lê Đức Khánh, Pexels",
+  },
 } satisfies Record<string, Photo>;
 
 // Scène 5 de l’accueil : le mur de photos (vignettes, petit côté 1 200 px) et sa photo centrale, plein écran au départ.
