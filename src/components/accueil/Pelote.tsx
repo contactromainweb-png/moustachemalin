@@ -102,25 +102,32 @@ export function Pelote() {
         <ul className="relative mt-16 grid grid-cols-3 gap-6 max-lg:hidden lg:mt-20">
           {comparatifs.map((a, i) => {
             const photo = a.photo ? PHOTOS[a.photo] : undefined;
+            // Carte seule sur la dernière ligne : elle prend toute la largeur (photo sur deux colonnes, texte sur la 3e).
+            const large = i === comparatifs.length - 1 && comparatifs.length % 3 === 1;
             return (
-              <li key={a.href} data-apparait style={{ "--i": i % 3 } as React.CSSProperties}>
+              <li
+                key={a.href}
+                data-apparait
+                className={large ? "col-span-3" : undefined}
+                style={{ "--i": i % 3 } as React.CSSProperties}
+              >
                 <Link
                   href={a.href}
-                  className="group flex h-full flex-col rounded-[2rem] bg-[rgb(185_166_255/0.16)] p-2 ring-1 ring-white/15 transition-transform duration-200 ease-[var(--ease-out)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:active:scale-100"
+                  className={`group h-full ${large ? "grid grid-cols-3 gap-x-6" : "flex flex-col"} rounded-[2rem] bg-[rgb(185_166_255/0.16)] p-2 ring-1 ring-white/15 transition-transform duration-200 ease-[var(--ease-out)] active:scale-[0.99] motion-reduce:transition-none motion-reduce:active:scale-100`}
                 >
                   {photo ? (
-                    <div className="relative aspect-[3/2] overflow-hidden rounded-[1.5rem]">
+                    <div className={`relative overflow-hidden rounded-[1.5rem] ${large ? "col-span-2 aspect-[2/1]" : "aspect-[3/2]"}`}>
                       <Image
                         src={photo.src}
                         alt={photo.alt}
                         fill
-                        sizes="(min-width: 1440px) 28rem, 30vw"
+                        sizes={large ? "(min-width: 1440px) 58rem, 62vw" : "(min-width: 1440px) 28rem, 30vw"}
                         quality={80}
                         className="object-cover transition-transform duration-700 ease-[var(--ease-out)] motion-reduce:transition-none motion-safe:[@media(hover:hover)]:group-hover:scale-[1.03]"
                       />
                     </div>
                   ) : null}
-                  <div className="flex flex-1 flex-col px-4 pb-6 pt-5">
+                  <div className={`flex flex-1 flex-col px-4 pb-6 ${large ? "pt-6" : "pt-5"}`}>
                     <p className="text-small font-medium text-lavande">
                       {LIBELLES_TYPE[a.type].nom}
                     </p>
