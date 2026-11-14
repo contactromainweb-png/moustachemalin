@@ -2,10 +2,12 @@
 // Lit les pages HTML produites dans .next/server/app et échoue si un même titre H2 apparaît deux fois sur une
 // page (ex. « À lire aussi » écrit dans l'article ET affiché par le composant RelatedArticles), si un titre (H1 à H6)
 // répète son propre texte (ex. une copie pour lecteurs d'écran + une copie visible), si une page affiche à la fois
-// « À lire aussi » et « Pour aller plus loin », ou si une page avis dit « ce comparatif repose sur ». Signale aussi,
+// « À lire aussi » et « Pour aller plus loin », si une page avis dit « ce comparatif repose sur », ou si un article
+// `type: avis` ou `type: duel` n'a pas sa note de méthode (<MethodNote avis /> ou <MethodNote duel />). Signale aussi,
 // sans bloquer, les titres et descriptions trop longs.
 import fs from "node:fs";
 import path from "node:path";
+import { parse } from "yaml";
 
 const RACINE = path.join(process.cwd(), ".next", "server", "app");
 
@@ -70,9 +72,21 @@ for (const f of fichiersHtml(RACINE)) {
     longs.push(`${url} : description de ${[...texte(description)].length} caractères`);
 }
 
+// Note de méthode propre au type d'article, vérifiée dans le MDX (content/**/*.mdx).
+const METHODE = { avis: "<MethodNote avis />", duel: "<MethodNote duel />" };
+const CONTENU = path.join(process.cwd(), "content");
+for (const fichier of fs.readdirSync(CONTENU, { recursive: true })) {
+  if (!fichier.endsWith(".mdx")) continue;
+  const source = fs.readFileSync(path.join(CONTENU, fichier), "utf8");
+  const fm = parse(source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? "") ?? {};
+  const attendu = METHODE[fm.type];
+  if (attendu && !source.includes(attendu))
+    erreurs.push(`content/${fichier.replaceAll(path.sep, "/")} : page ${fm.type}, il manque ${attendu}`);
+}
+
 console.log(`Contrôle des titres : ${lues} pages lues.`);
 if (longs.length) console.log(`À raccourcir (titre ≤ 60, description ≤ 155) :\n  ${longs.join("\n  ")}`);
 if (doublons.length) console.error(`Titres H2 en double sur une même page :\n  ${doublons.join("\n  ")}`);
 if (erreurs.length) console.error(`À corriger :\n  ${erreurs.join("\n  ")}`);
 if (doublons.length || erreurs.length) process.exit(1);
-console.log("Aucun titre H2 en double ni titre répété ; un seul bloc de liens en bas ; méthode des avis correcte.\n");
+console.log("Aucun titre H2 en double ni titre répété ; un seul bloc de liens en bas ; méthode des avis et des duels correcte.\n");

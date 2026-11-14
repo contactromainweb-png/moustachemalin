@@ -867,5 +867,69 @@
     "url": "",
     "licence": "Tous droits réservés",
     "resolutionSource": "1192x1686"
+  },
+  {
+    "fichier": "public/media/litieres-maine-coon-fenetre.jpg",
+    "auteur": "大 董",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/ginger-maine-coon-cat-looking-out-window-in-summer-38793399/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6016x4016"
+  },
+  {
+    "fichier": "public/media/litieres-maine-coon-chaise-jaune.jpg",
+    "auteur": "Thirdman",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/orange-cat-on-a-yellow-chair-8942614/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5140x3427"
+  },
+  {
+    "fichier": "public/media/articles/maine-coon-roux-allonge.jpg",
+    "auteur": "Aleksandra Pękala",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/orange-tabby-cat-in-close-up-photography-14064874/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6000x4000"
+  },
+  {
+    "fichier": "public/media/articles/maine-coon-rideau-bleu.jpg",
+    "auteur": "Aleksey Zemlyanoy",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/cats-head-peeking-from-between-the-curtains-10817533/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6016x4016"
+  },
+  {
+    "fichier": "public/media/articles/chat-tigre-renifle-sol.jpg",
+    "auteur": "Ec lipse",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/tabby-cat-sniffing-ground-next-to-plant-33908535/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6207x4138"
+  },
+  {
+    "fichier": "public/media/articles/maine-coon-roux-salon.jpg",
+    "auteur": "Valeria Boltneva",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/photo-of-an-orange-cat-9443842/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5899x3933"
+  },
+  {
+    "fichier": "public/media/articles/chat-gris-poils-longs-marche.jpg",
+    "auteur": "Bri Schneiter",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/cute-cat-lying-on-step-15498843/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "6000x4000"
+  },
+  {
+    "fichier": "public/media/articles/chat-blanc-yeux-bleus-canape.jpg",
+    "auteur": "Lara",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/white-cat-on-a-sofa-19468852/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5830x3879"
   }
 ]

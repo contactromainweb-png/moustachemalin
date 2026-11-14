@@ -1,5 +1,8 @@
 // Calendrier des épingles fraîches (CLAUDE.md §11 ter) : réécrit le champ `publication` de chaque épingle de la liste
 // `epingles:` des articles en ligne, à partir d'une date de départ (le lendemain de la fusion).
+// - une épingle datée AVANT le départ est déjà sur Pinterest : elle n'est jamais modifiée et ne compte pas dans le
+//   nouveau calendrier ; seules les épingles à venir (datées à partir du départ) et les nouvelles (publication: "")
+//   sont reprogrammées ;
 // - 2 épingles un jour, 1 le lendemain, et ainsi de suite (36 épingles → 24 jours) ;
 // - les comparatifs d'abord, puis les avis, guides et outils ;
 // - jamais deux épingles de suite pour le même tableau Pinterest quand c'est possible, en puisant d'abord dans le
@@ -20,7 +23,7 @@ const TABLEAUX = {
   outils: "Conseils pour chat",
   sorties: "Conseils pour chat",
 };
-const ORDRE_TYPES = ["comparatif", "avis", "guide", "outil"];
+const ORDRE_TYPES = ["comparatif", "duel", "avis", "guide", "outil"];
 
 const articles = [];
 for (const fichier of fs.readdirSync(path.join(RACINE, "content"), { recursive: true })) {
@@ -43,12 +46,13 @@ const debut = process.argv[2];
 if (!debut) {
   const toutes = articles.flatMap(({ fm }) => fm.epingles.map((e) => ({ fm, e })));
   toutes.sort((a, b) => a.e.publication.localeCompare(b.e.publication));
-  for (const { fm, e } of toutes) console.log(`${e.publication}  ${TABLEAUX[fm.rubrique].padEnd(38)} ${fm.slug} (${e.variante})`);
+  for (const { fm, e } of toutes)
+    console.log(`${e.publication || "(sans date)"}  ${TABLEAUX[fm.rubrique].padEnd(38)} ${fm.slug} (${e.variante})`);
   process.exit(0);
 }
 if (!/^\d{4}-\d{2}-\d{2}$/.test(debut)) throw new Error("Date de départ attendue au format AAAA-MM-JJ");
 
-const reste = articles.flatMap(({ fm, chemin }) =>
+const toutes = articles.flatMap(({ fm, chemin }) =>
   fm.epingles.map((e, i) => ({
     fm,
     chemin,
@@ -56,8 +60,12 @@ const reste = articles.flatMap(({ fm, chemin }) =>
     variante: e.variante,
     tableau: TABLEAUX[fm.rubrique],
     groupe: fm.type === "comparatif" ? 0 : 1,
+    date: e.publication ? String(e.publication) : "",
   })),
 );
+// Déjà publiées (date antérieure au départ) : gardées telles quelles.
+const gardees = toutes.filter((p) => p.date && p.date < debut).sort((a, b) => a.date.localeCompare(b.date));
+const reste = toutes.filter((p) => !gardees.includes(p));
 const suite = [];
 const enReserve = (tableau, groupe) => reste.filter((p) => p.tableau === tableau && p.groupe === groupe).length;
 while (reste.length) {
@@ -96,17 +104,19 @@ for (const p of suite) {
   }
 }
 
-// Réécriture : la n-ième ligne `publication:` de la liste `epingles:` de chaque fichier.
+// Réécriture : la n-ième ligne `publication:` de la liste `epingles:` de chaque fichier (les gardées reprennent leur date).
 for (const { chemin } of articles) {
-  const dates = suite.filter((p) => p.chemin === chemin).sort((a, b) => a.i - b.i).map((p) => p.date);
+  const dates = toutes.filter((p) => p.chemin === chemin).sort((a, b) => a.i - b.i).map((p) => p.date);
   let source = fs.readFileSync(chemin, "utf8");
   const debutListe = source.indexOf("\nepingles:");
   let k = 0;
   const avant = source.slice(0, debutListe);
-  const apres = source.slice(debutListe).replace(/^( {4}publication: )"?[\d-]+"?$/gm, (ligne, prefixe) => `${prefixe}"${dates[k++] ?? ligne}"`);
+  const apres = source.slice(debutListe).replace(/^( {4}publication: )"?[\d-]*"?$/gm, (ligne, prefixe) => `${prefixe}"${dates[k++] ?? ligne}"`);
   source = avant + apres;
   if (k !== dates.length) throw new Error(`${chemin} : ${dates.length} dates attendues, ${k} lignes publication trouvées`);
   fs.writeFileSync(chemin, source);
 }
-for (const p of suite) console.log(`${p.date}  ${p.tableau.padEnd(38)} ${p.fm.slug} (${p.variante})`);
-console.log(`${suite.length} épingles, du ${suite[0]?.date} au ${suite.at(-1)?.date}.`);
+console.log(`Gardées (déjà publiées, avant le ${debut}) : ${gardees.length}`);
+for (const p of gardees) console.log(`  ${p.date}  ${p.tableau.padEnd(38)} ${p.fm.slug} (${p.variante})`);
+console.log(`Reprogrammées : ${suite.length}, du ${suite[0]?.date} au ${suite.at(-1)?.date}`);
+for (const p of suite) console.log(`  ${p.date}  ${p.tableau.padEnd(38)} ${p.fm.slug} (${p.variante})`);

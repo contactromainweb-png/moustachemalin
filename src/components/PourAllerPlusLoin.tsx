@@ -1,13 +1,15 @@
 import { RelatedArticles } from "@/components/RelatedArticles";
-import { satellitesDe, voisinsDe } from "@/lib/rubriques";
+import { plusLoinDe, satellitesDe, voisinsDe } from "@/lib/rubriques";
 
 // Fin d'un comparatif pilier : ses satellites (articles dont le frontmatter indique `pilier: <slug>`), puis ses
 // voisins (frontmatter `voisins` du comparatif). 4 liens au plus : au-delà, le build échoue.
+// Avec `plusLoin:` dans le frontmatter du comparatif : exactement ces liens, dans cet ordre (les satellites laissés
+// de côté doivent alors être reliés dans le corps du comparatif : scripts/controle-liens.mjs le vérifie).
 // Masquée tant qu'il n'y a aucun lien.
 const MAXIMUM = 4;
 
 export function PourAllerPlusLoin({ slug }: { slug: string }) {
-  const liens = [...satellitesDe(slug), ...voisinsDe(slug)].filter(
+  const liens = (plusLoinDe(slug) ?? [...satellitesDe(slug), ...voisinsDe(slug)]).filter(
     (l, i, tous) => tous.findIndex((m) => m.href === l.href) === i,
   );
   if (liens.length > MAXIMUM)

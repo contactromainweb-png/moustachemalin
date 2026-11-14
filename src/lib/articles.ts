@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import { IMAGE_PARTAGE, PHOTOS } from "@/lib/medias";
 import { RUBRIQUES } from "@/lib/site";
 
-export type TypeArticle = "comparatif" | "guide" | "avis" | "outil";
+export type TypeArticle = "comparatif" | "guide" | "avis" | "duel" | "outil";
 
 // Libellés affichés sur les cartes et les liens, selon le type d'article.
 export const LIBELLES_TYPE: Record<TypeArticle, { nom: string; lire: string }> = {
   comparatif: { nom: "Comparatif", lire: "Lire le comparatif" },
   guide: { nom: "Guide", lire: "Lire le guide" },
   avis: { nom: "Avis", lire: "Lire l'avis" },
+  duel: { nom: "Duel", lire: "Lire le duel" },
   outil: { nom: "Outil", lire: "Utiliser l'outil" },
 };
 
@@ -27,6 +28,8 @@ export type Frontmatter = {
   autresPiliers?: string[]; // autres comparatifs dont l'article est aussi un satellite (« Pour aller plus loin »)
   voisins?: string[]; // comparatif : slugs d'articles voisins (même rubrique ou proche) ajoutés après ses satellites
   // dans « Pour aller plus loin » (4 liens au plus) ; jamais le comparatif litières par défaut
+  plusLoin?: string[]; // comparatif : les liens exacts de « Pour aller plus loin », dans cet ordre (4 au plus) ; chaque
+  // satellite absent de la liste doit avoir un lien dans le corps du comparatif (vérifié par scripts/controle-liens.mjs)
   pinTitre?: string; // titre court de l'image Pinterest, sinon la partie du titre avant « : » (scripts/pins.mjs)
   pinCadrage?: string; // point de la photo gardé dans l'image Pinterest (ex. "62% 50%"), sinon sa position
   epingles?: EpingleFraiche[]; // 2 épingles Pinterest de plus, publiées à leur date dans le flux de la rubrique (src/lib/epingles.ts)

@@ -43,6 +43,7 @@ type Props = {
 const TITRES_GROUPE: Record<TypeArticle, [string, string, string]> = {
   guide: ["Nos", "guides", ""],
   avis: ["Nos", "avis", " détaillés"],
+  duel: ["Nos", "duels", " pour trancher"],
   outil: ["Nos", "outils", ""],
   comparatif: ["Nos", "comparatifs", ""],
 };
@@ -91,13 +92,15 @@ export function RubriqueTemplate({ titre, intro, chemin, texte, articles, groupe
             </section>
           );
         })
-      ) : (
+      ) : outils ? (
         <>
           <h2 data-fond="page" className="font-display mb-8 text-head">
-            Nos <span className="mot-serif">{outils ? "outils" : "articles"}</span>
+            Nos <span className="mot-serif">outils</span>
           </h2>
-          {outils ? <CartesOutils articles={articles} /> : <Cartes articles={attribuerPhotos(articles, prises)} />}
+          <CartesOutils articles={articles} />
         </>
+      ) : (
+        <CartesRubrique articles={attribuerPhotos(articles, prises)} />
       )}
       {texte ? <div className="mt-24">{texte}</div> : null}
       <JsonLd
@@ -115,6 +118,31 @@ export function RubriqueTemplate({ titre, intro, chemin, texte, articles, groupe
         }}
       />
     </StagePage>
+  );
+}
+
+// Page de rubrique : « Nos articles », puis les duels à part (« Nos duels pour trancher »), comme sur /guides/.
+// Les photos sont attribuées sur l'ensemble avant le partage : aucune carte ne répète celle d'une autre.
+function CartesRubrique({ articles }: { articles: ArticleLien[] }) {
+  const duels = articles.filter((a) => a.type === "duel");
+  const autres = articles.filter((a) => a.type !== "duel");
+  const [avant, mot, apres] = TITRES_GROUPE.duel;
+  return (
+    <>
+      <h2 data-fond="page" className="font-display mb-8 text-head">
+        Nos <span className="mot-serif">articles</span>
+      </h2>
+      <Cartes articles={autres} />
+      {duels.length > 0 ? (
+        <section aria-labelledby="groupe-duel" className="mt-20">
+          <h2 id="groupe-duel" data-fond="page" className="font-display mb-8 text-head">
+            {avant} <span className="mot-serif">{mot}</span>
+            {apres}
+          </h2>
+          <Cartes articles={duels} />
+        </section>
+      ) : null}
+    </>
   );
 }
 
