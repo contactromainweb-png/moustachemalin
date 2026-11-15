@@ -9,7 +9,7 @@ export function TitreSerif({ titre, mot: motBrut }: { titre: string; mot?: strin
   if (!mot || i < 0) return <>{texte}</>;
   // La ponctuation qui suit le mot (« : », « ? »…) reste collée à lui sans nowrap : l'espace qui la précède est
   // insécable (espacesFines) et le navigateur ne coupe jamais juste avant une ponctuation. Sans nowrap, un mot trop
-  // long pour l'écran (texte agrandi à 200 %) passe à la ligne au lieu de déborder (overflow-wrap de .font-display).
+  // long pour l'écran (texte agrandi à 200 %) passe à la ligne au lieu de déborder (overflow-wrap: anywhere du body, globals.css).
   return (
     <>
       {texte.slice(0, i)}

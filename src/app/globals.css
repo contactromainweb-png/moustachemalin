@@ -102,6 +102,14 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: var(--text-body);
   line-height: 1.55;
+  /* Texte agrandi à 200 % sur téléphone : un mot plus large que sa colonne (« autonettoyante » en titre, une
+     adresse e-mail) passe à la ligne au lieu de faire déborder la page. Sans effet quand le mot tient. */
+  overflow-wrap: anywhere;
+}
+
+/* Les tableaux gardent leurs mots entiers : ils défilent à l'horizontale dans leur cadre. */
+table {
+  overflow-wrap: normal;
 }
 
 ::selection {
@@ -127,8 +135,6 @@ body {
   letter-spacing: -0.035em;
   line-height: 0.92;
   text-wrap: balance;
-  /* Texte agrandi à 200 % sur téléphone : un mot plus large que l'écran passe à la ligne au lieu de déborder. */
-  overflow-wrap: break-word;
 }
 
 /* Mot mis en valeur dans un titre : serif italique fine au milieu de la grotesque grasse. */

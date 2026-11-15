@@ -24,7 +24,7 @@ export function CalculLitieres() {
           <p id={`${id}-label`} className="font-medium">
             Nombre de chats
           </p>
-          <div role="group" aria-labelledby={`${id}-label`} className="mt-3 flex items-center gap-5">
+          <div role="group" aria-labelledby={`${id}-label`} className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-3">
             <button
               type="button"
               aria-label="Un chat de moins"

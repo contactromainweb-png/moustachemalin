@@ -23,7 +23,7 @@ export function Fin() {
           <h2
             id="titre-fin"
             data-apparait
-            className="font-display text-[clamp(4rem,1rem+11vw,15rem)] lg:whitespace-nowrap"
+            className="font-display text-[clamp(64px,16px+11vw,15rem)] lg:whitespace-nowrap"
           >
             <span data-fin-mot className="inline-block" style={{ textShadow: RELIEF_TITRE.moustache }}>
               Moustache

@@ -12,7 +12,7 @@ export function SiteHeader() {
 
   return (
     <header className="relative z-30 bg-nuit px-4 text-blanc sm:px-8">
-      <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-6">
+      <div className="mx-auto flex min-h-16 max-w-[90rem] flex-wrap items-center justify-between gap-x-6">
         <Logo fond="sombre" taille="entete" />
 
         {rubriques.length > 0 ? (

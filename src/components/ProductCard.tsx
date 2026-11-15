@@ -14,7 +14,7 @@ export function ProductCard({ asin }: { asin: string }) {
   const p = getProduct(asin);
   return (
     <section id={p.asin} aria-label={`Fiche : ${p.name}`} className="reveal mb-10 mt-6 scroll-mt-8">
-      <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10">
         <ProductVisual nom={nomsInsecables(p.name)} marque={p.brand} />
         <div className="flex flex-col justify-between gap-6">
           <p>
