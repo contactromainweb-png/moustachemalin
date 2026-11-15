@@ -77,7 +77,7 @@ export function SiteFooter() {
           <MotMalin relief={RELIEF_TITRE.malin} />
         </p>
         <p className="mt-6 text-small text-ink-soft">
-          © {process.env.BUILD_YEAR} {SITE.name} · <a href={`mailto:${SITE.email}`} className="underline underline-offset-4">{SITE.email}</a> ·{" "}
+          © {process.env.BUILD_YEAR} {SITE.name} · <Link href="/contact/" className="underline underline-offset-4">Contact</Link> ·{" "}
           <Link href="/credits-photos/" className="underline underline-offset-4">
             Crédits photos
           </Link>
