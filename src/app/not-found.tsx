@@ -50,6 +50,7 @@ export default function NotFound() {
           <li key={l.href}>
             <Link
               href={l.href}
+              prefetch={l.href === "/" ? false : undefined}
               className="inline-flex min-h-12 items-center bg-caramel-field px-6 text-on-caramel transition-transform hover:-translate-y-0.5 active:translate-y-0"
             >
               {espacesFines(l.label)}

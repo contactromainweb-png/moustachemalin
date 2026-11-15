@@ -38,7 +38,9 @@ const TYPES = {
 export function Encadre({ type, children }: { type: keyof typeof TYPES; children: ReactNode }) {
   const t = TYPES[type];
   return (
-    <aside className={`reveal my-10 flex gap-4 rounded-[1.5rem] px-5 py-6 sm:px-7 ${t.fond}`}>
+    // Liens à la couleur du texte : en thème clair c'est le même bleu nuit ; en mode sombre, l'orange clair des liens
+    // n'atteignait que 3,6:1 sur la lavande.
+    <aside className={`reveal my-10 flex gap-4 rounded-[1.5rem] px-5 py-6 sm:px-7 [&_a]:text-ink ${t.fond}`}>
       <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blanc text-nuit">
         <svg
           viewBox="0 0 24 24"

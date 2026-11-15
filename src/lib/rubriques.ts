@@ -141,6 +141,18 @@ function frontmattersEnLigne(rubrique: string): Frontmatter[] {
       return fm;
     })
     .filter((fm) => !fm.noindex && pageEnLigne(cheminArticle(fm)))
+    .map((fm) => {
+      // Date de mise en ligne obligatoire sur chaque article en ligne (datePublished, flux RSS, plan du site) : la date
+      // du commit qui a ajouté le fichier, `git log --diff-filter=A --follow --format=%as -- <fichier>`.
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(fm.publishedAt ?? ""))
+        throw new Error(`publishedAt manquant ou mal écrit (AAAA-MM-JJ) dans content/${rubrique}/${fm.slug}.mdx`);
+      // Un article n'est jamais mis à jour avant d'être publié (sinon dateModified < datePublished pour Google).
+      if (fm.publishedAt! > fm.updatedAt)
+        throw new Error(
+          `publishedAt (${fm.publishedAt}) postérieur à updatedAt (${fm.updatedAt}) dans content/${rubrique}/${fm.slug}.mdx`,
+        );
+      return fm;
+    })
     .sort((a, b) =>
       a.type === b.type ? b.updatedAt.localeCompare(a.updatedAt) : a.type === "comparatif" ? -1 : 1,
     );

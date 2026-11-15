@@ -19,7 +19,9 @@ const TAILLES = {
 export function Logo({ fond, taille }: Props) {
   const t = TAILLES[taille];
   return (
-    <Link href="/" aria-label="Moustache Malin, accueil" className="flex items-center gap-2.5 py-2">
+    // prefetch={false} : précharger l'accueil depuis chaque page téléchargeait aussi la photo de son premier écran
+    // (36 Ko en priorité haute), en concurrence avec la photo de la page affichée (audit de novembre 2026, pack A).
+    <Link href="/" prefetch={false} aria-label="Moustache Malin, accueil" className="flex items-center gap-2.5 py-2">
       <Symbole fond={fond} className={`${t.symbole} w-auto shrink-0`} />
       <span aria-hidden="true" className={`${t.texte} whitespace-nowrap leading-none`}>
         <span

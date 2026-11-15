@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <div className="mx-auto max-w-[90rem] px-4 pb-24 pt-16 sm:px-8 sm:pt-28">
       <h1 className="font-display max-w-[16ch] text-display">
-        Bienvenue dans la <span className="mot-serif">bande</span>&nbsp;!
+        Bienvenue dans la <span className="mot-colle"><span className="mot-serif">bande</span>&nbsp;!</span>
       </h1>
       <BoutonAction href="/cadeaux/checklist-arrivee-chat.pdf" fichier className="mt-10">
         Télécharger la checklist (PDF)

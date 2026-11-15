@@ -36,7 +36,8 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
         </h1>
         <Signature date={fm.updatedAt} className="rise mt-6" />
         {image ? (
-          // Grande photo d'en-tête, aussi sur téléphone : demandée en priorité, c'est le plus grand élément affiché.
+          // Grande photo d'en-tête, aussi sur téléphone : demandée en priorité, c'est le plus grand élément affiché
+          // (sauf sur les outils, voir plus bas).
           // Page d'outil : pas de photo sur téléphone, pour que le calculateur soit visible dès le premier écran.
           <figure
             className={`rise mt-10 lg:mt-14 ${fm.type === "outil" ? "max-lg:hidden" : ""}`}
@@ -47,7 +48,8 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
                 src={image.src}
                 alt={image.alt}
                 fill
-                priority
+                // Outil : la photo est masquée sur téléphone ; en chargement différé, le téléphone ne la télécharge pas.
+                {...(fm.type === "outil" ? { loading: "lazy" as const } : { priority: true })}
                 data-pin-media={new URL(pinArticle(fm), SITE.url).toString()}
                 data-pin-description={fm.description}
                 quality={80}

@@ -19,7 +19,8 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
               {derniere ? (
                 <span aria-current="page">{nomsInsecables(c.label)}</span>
               ) : pageEnLigne(c.href) ? (
-                <Link href={c.href} className="inline-block py-2.5 underline-offset-4 hover:text-ink hover:underline">
+                // Lien « Accueil » sans préchargement : il téléchargerait la photo du premier écran de l'accueil (voir Logo).
+                <Link href={c.href} prefetch={c.href === "/" ? false : undefined} className="inline-block py-2.5 underline-offset-4 hover:text-ink hover:underline">
                   {nomsInsecables(c.label)}
                 </Link>
               ) : (

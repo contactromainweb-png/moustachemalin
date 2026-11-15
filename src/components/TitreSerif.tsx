@@ -7,13 +7,23 @@ export function TitreSerif({ titre, mot: motBrut }: { titre: string; mot?: strin
   const mot = motBrut && nomsInsecables(motBrut);
   const i = mot ? texte.indexOf(mot) : -1;
   if (!mot || i < 0) return <>{texte}</>;
-  // La ponctuation qui suit le mot (« : », « ? »…) reste collée à lui, sans passer seule à la ligne.
+  // La ponctuation qui suit le mot (« : », « ? »…) reste collée à lui : les deux forment un bloc (.mot-colle,
+  // globals.css) qui passe à la ligne d'un seul tenant, et ne se coupe à l'intérieur que s'il est plus large que
+  // sa colonne (texte agrandi à 200 %), au lieu de déborder.
   const suite = texte.slice(i + mot.length);
-  const colle = /^[\u00a0\u202f]?[:;?!,.]/.exec(suite)?.[0] ?? "";
+  const colle = /^[  ]?[:;?!,.…]/.exec(suite)?.[0] ?? "";
+  if (!colle)
+    return (
+      <>
+        {texte.slice(0, i)}
+        <span className="mot-serif">{mot}</span>
+        {suite}
+      </>
+    );
   return (
     <>
       {texte.slice(0, i)}
-      <span className="whitespace-nowrap">
+      <span className="mot-colle">
         <span className="mot-serif">{mot}</span>
         {colle}
       </span>

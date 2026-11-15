@@ -29,8 +29,8 @@ export function Portrait({ taille = "size-14 sm:size-16", prioritaire = false }:
       <Image
         src={KIRA.photo}
         alt="Kira, la chatte de Romain"
-        width={192}
-        height={192}
+        width={128}
+        height={128}
         quality={80}
         priority={prioritaire}
         className={`${taille} shrink-0 rounded-full object-cover`}

@@ -75,7 +75,7 @@ export function StagePage({ title, lead, updated, photo, stageWord, portrait = f
           ) : (
             <p
               aria-hidden="true"
-              className="font-display absolute bottom-6 left-6 right-6 text-[clamp(4rem,9vw,9rem)] text-nuit"
+              className="font-display absolute bottom-6 left-6 right-6 text-[clamp(64px,9vw,9rem)] text-nuit [overflow-wrap:normal]"
             >
               {stageWord}
             </p>

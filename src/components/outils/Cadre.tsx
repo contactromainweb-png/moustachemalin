@@ -19,7 +19,7 @@ export function Cadre({
   return (
     <section
       aria-labelledby={`${id}-titre`}
-      className="my-12 grid gap-8 rounded-[1.5rem] bg-field p-5 sm:p-8 lg:grid-cols-[1fr_minmax(18rem,24rem)] lg:gap-12"
+      className="my-12 grid grid-cols-[minmax(0,1fr)] gap-8 rounded-[1.5rem] bg-field p-5 sm:p-8 lg:grid-cols-[1fr_minmax(18rem,24rem)] lg:gap-12"
     >
       <form onSubmit={(e) => e.preventDefault()} className="space-y-7">
         <h2 id={`${id}-titre`} className="font-display text-head">

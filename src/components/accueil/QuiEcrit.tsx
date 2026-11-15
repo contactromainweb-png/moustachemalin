@@ -13,7 +13,7 @@ export function QuiEcrit() {
         <div className="mx-auto grid max-w-[90rem] items-center gap-10 rounded-[2rem] bg-field p-6 sm:p-10 lg:grid-cols-12 lg:gap-16 lg:p-16">
           {/* Portraits ronds : Romain, cadré sur le visage, et Kira à côté, un peu plus petite, qui le chevauche. */}
           <div className="reveal flex items-end lg:col-span-4">
-            <div className="relative aspect-square w-36 shrink-0 overflow-hidden rounded-full bg-lavande sm:w-52 lg:w-[16rem]">
+            <div className="relative aspect-square w-[min(9rem,42vw)] shrink-0 overflow-hidden rounded-full bg-lavande sm:w-52 lg:w-[16rem]">
               <Image
                 src={PHOTOS.romain.src}
                 alt={PHOTOS.romain.alt}
@@ -24,7 +24,7 @@ export function QuiEcrit() {
                 style={{ objectPosition: PHOTOS.romain.position }}
               />
             </div>
-            <div className="relative -ml-6 aspect-square w-28 shrink-0 overflow-hidden rounded-full bg-lavande ring-4 ring-field sm:w-40 lg:-ml-10 lg:w-[11rem]">
+            <div className="relative -ml-6 aspect-square w-[min(7rem,33vw)] shrink-0 overflow-hidden rounded-full bg-lavande ring-4 ring-field sm:w-40 lg:-ml-10 lg:w-[11rem]">
               <Image
                 src={PHOTOS.kiraTetePenchee.src}
                 alt={PHOTOS.kiraTetePenchee.alt}

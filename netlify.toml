@@ -30,3 +30,6 @@
   for = "/cadeaux/*"
   [headers.values]
     X-Robots-Tag = "noindex"
+
+# Les en-têtes de sécurité (CSP, Referrer-Policy, Permissions-Policy, X-Frame-Options) sont dans next.config.ts :
+# les [[headers]] de ce fichier ne s'appliquent pas aux pages servies par Next.js sur Netlify.

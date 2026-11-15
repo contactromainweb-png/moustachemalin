@@ -71,7 +71,7 @@ export function SiteFooter() {
         {/* Le nom revient en grand pour fermer la page (sauf sur l'accueil : sa dernière section le montre déjà). */}
         <p
           aria-hidden="true"
-          className="font-display mt-20 text-[clamp(3.5rem,13.5vw,13rem)] text-caramel [main:has([data-fin-pleine])+footer_&]:hidden"
+          className="font-display mt-20 text-[clamp(56px,13.5vw,13rem)] text-caramel [main:has([data-fin-pleine])+footer_&]:hidden"
         >
           <span style={{ textShadow: RELIEF_TITRE.moustache }}>Moustache</span>{" "}
           <MotMalin relief={RELIEF_TITRE.malin} />
