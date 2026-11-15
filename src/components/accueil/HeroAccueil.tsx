@@ -1,8 +1,10 @@
 import { getImageProps } from "next/image";
+import { preload } from "react-dom";
 import { BoutonAction } from "@/components/BoutonAction";
 import { PHOTOS } from "@/lib/medias";
 
 const ORDINATEUR = "(min-width: 1024px)";
+const TELEPHONE = "(max-width: 1023.98px)";
 
 // Téléphone : la photo est encodée à l'avance en AVIF (scripts/photo-premier-ecran.mjs, mêmes largeurs), bien plus
 // légère que celle du service d'images à finesse égale : c'est l'élément le plus grand du premier écran (LCP).
@@ -30,11 +32,22 @@ export function HeroAccueil() {
     quality: 80,
     sizes: "160vw",
   });
-  // Pas de préchargement (preload) de cette photo : React l'envoie aussi dans le préchargement de l'accueil que
-  // Next.js fait depuis toutes les autres pages (lien du logo), et la photo y était téléchargée en priorité haute
-  // (36 Ko sur un téléphone), en concurrence avec la photo de la page affichée (audit de novembre 2026, pack A).
-  // Sur l'accueil, l'<img> ci-dessous est tout en haut du HTML, en eager et fetchPriority high : le navigateur la
-  // demande dès qu'il la lit.
+  preload("/media/premier-ecran/chat-blanc-960.avif", {
+    as: "image",
+    type: "image/avif",
+    imageSrcSet: srcSetTelephone("avif"),
+    imageSizes: TAILLE_TELEPHONE,
+    fetchPriority: "high",
+    media: TELEPHONE,
+  });
+  preload(ordinateur.src, {
+    as: "image",
+    imageSrcSet: ordinateur.srcSet,
+    imageSizes: ordinateur.sizes,
+    fetchPriority: "high",
+    media: ORDINATEUR,
+  });
+
   let i = 0;
   return (
     // Conteneur dédié : la section est épinglée sur ordinateur (GSAP l'enveloppe d'un pin-spacer), et React ne gère
