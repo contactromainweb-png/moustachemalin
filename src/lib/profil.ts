@@ -67,6 +67,13 @@ function instantane(): ProfilChat | null {
   return dernierProfil;
 }
 
+// Le profil enregistré (ou gardé en mémoire si le stockage est refusé), lu avec la même lecture prudente.
+// Utilisé par le carnet (src/lib/carnet.ts) : sans profil, le carnet n'écrit rien.
+export function profilActuel(): ProfilChat | null {
+  if (typeof window === "undefined") return null;
+  return instantane();
+}
+
 function abonner(rappel: () => void) {
   const surStockage = (e: StorageEvent) => {
     if (e.key === null || e.key === CLE) rappel();
