@@ -91,7 +91,7 @@ const components: MDXComponents = {
   // Le formulaire de la lettre vient juste avant le bloc de liens (voir ArticleTemplate pour les articles sans ce bloc).
   RelatedArticles: (props: Parameters<typeof RelatedArticles>[0]) => (
     <>
-      <NewsletterForm />
+      <NewsletterForm id="lettre" />
       <RelatedArticles {...props} />
     </>
   ),

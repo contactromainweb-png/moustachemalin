@@ -62,9 +62,10 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
         ) : null}
       </header>
 
-      <div className="mt-10 max-w-[64rem] lg:mt-14">
+      {/* corps-article : colonne de texte ; à partir de 1280 px, elle se resserre pour laisser la place au sommaire collant. */}
+      <div className="corps-article mt-10 max-w-[64rem] lg:mt-14">
         {children}
-        {aBlocDeLiens(fm) ? null : <NewsletterForm />}
+        {aBlocDeLiens(fm) ? null : <NewsletterForm id="lettre" />}
         {fm.type === "comparatif" ? <PourAllerPlusLoin slug={fm.slug} /> : null}
       </div>
 

@@ -10,12 +10,22 @@ export const TITRE_LETTRE = "Recevez la checklist de l'arrivée d'un chat";
 export const TEXTE_LETTRE =
   "La liste complète, à imprimer : démarches, équipement, premiers jours. Puis nos nouveaux guides et comparatifs, une à deux fois par mois. Désinscription en un clic.";
 
-export function NewsletterForm({ titre = TITRE_LETTRE, variante = "bloc" }: { titre?: string; variante?: "bloc" | "avant" }) {
+// `id` : ancre du formulaire (« lettre » en bas des articles, visée par le lien du sommaire collant).
+export function NewsletterForm({
+  titre = TITRE_LETTRE,
+  variante = "bloc",
+  id,
+}: {
+  titre?: string;
+  variante?: "bloc" | "avant";
+  id?: string;
+}) {
   if (!ACTION_LETTRE) return null;
   return (
     <section
+      id={id}
       aria-label={espacesFines(titre)}
-      className={`reveal my-14 rounded-[1.5rem] px-5 py-8 sm:px-8 ${variante === "avant" ? "bg-lavande text-nuit sm:py-10" : "bg-field"}`}
+      className={`reveal my-14 scroll-mt-24 rounded-[1.5rem] px-5 py-8 sm:px-8 ${variante === "avant" ? "bg-lavande text-nuit sm:py-10" : "bg-field"}`}
     >
       <h2 className="font-display text-head">{espacesFines(titre)}</h2>
       <p className="mb-6 mt-3 max-w-[58ch]">{espacesFines(TEXTE_LETTRE)}</p>

@@ -451,3 +451,11 @@ dl {
 .bande :is(.border-ink\/15, .border-ink\/25):not(:hover, :focus, :disabled) {
   border-color: color-mix(in srgb, var(--ink) 55%, transparent);
 }
+
+/* Sommaire collant à droite (pack 8a), à partir de 1280 px et seulement si l'article a un sommaire : la colonne de
+   texte laisse 20 rem à droite (17 rem de sommaire + 3 rem d'écart), où le <nav> flotte (voir Sommaire.tsx). */
+@media (min-width: 80rem) {
+  .corps-article:has(> nav[aria-label="Sommaire"]) {
+    max-width: min(64rem, calc(100% - 20rem));
+  }
+}

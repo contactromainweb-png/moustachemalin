@@ -55,7 +55,13 @@ export function Sommaire({ titres: json }: { titres: string }) {
   );
 
   return (
-    <nav aria-label="Sommaire" className="my-10 max-lg:sticky max-lg:top-0 max-lg:z-20 max-lg:-mx-4 max-lg:sm:-mx-8">
+    // À partir de 1280 px (xl) : le même <nav> passe dans la marge de droite, restée vide, en colonne collante. Il flotte
+    // à droite avec une marge négative égale à sa largeur + l'écart : il ne pousse pas le texte, et la colonne de texte
+    // se resserre d'autant (.corps-article dans globals.css). Un seul sommaire dans le HTML, aucun décalage au chargement.
+    <nav
+      aria-label="Sommaire"
+      className="my-10 max-lg:sticky max-lg:top-0 max-lg:z-20 max-lg:-mx-4 max-lg:sm:-mx-8 xl:sticky xl:top-24 xl:z-10 xl:float-right xl:my-0 xl:-mr-[20rem] xl:w-[17rem]"
+    >
       <details
         ref={details}
         className="group border-b border-ink/15 bg-paper/95 px-4 backdrop-blur-sm sm:px-8 lg:hidden"
@@ -79,10 +85,19 @@ export function Sommaire({ titres: json }: { titres: string }) {
         <div className="max-h-[65svh] overflow-y-auto pb-4">{liste(true)}</div>
       </details>
 
-      <div className="rounded-[1.5rem] border border-ink/15 px-6 py-6 max-lg:hidden">
-        <p className="mb-3 font-semibold">Sommaire</p>
+      <div className="rounded-[1.5rem] border border-ink/15 px-6 py-6 max-lg:hidden xl:max-h-[calc(100svh-9rem)] xl:overflow-y-auto xl:border-ink/55 xl:bg-paper xl:px-4 xl:py-5">
+        <p className="mb-3 font-semibold xl:px-3">Sommaire</p>
         {liste(false)}
       </div>
+      {/* Colonne collante seulement : un lien discret vers le formulaire de la lettre, en bas de l'article. */}
+      {process.env.NEXT_PUBLIC_NEWSLETTER_URL ? (
+        <a
+          href="#lettre"
+          className="mt-4 hidden px-4 text-small text-ink-soft underline decoration-accent decoration-2 underline-offset-4 transition-colors duration-150 hover:text-ink xl:inline-block"
+        >
+          Recevoir la lettre
+        </a>
+      ) : null}
     </nav>
   );
 }
