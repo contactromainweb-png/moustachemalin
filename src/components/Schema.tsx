@@ -117,7 +117,7 @@ const SCHEMAS: Record<string, Def> = {
   },
   "ou-placer-bac": {
     titre: "Où placer le bac à litière",
-    desc: "Plan d'une pièce : le bac dans un coin calme et aéré, sous la fenêtre, loin des gamelles ; un bac dans un placard fermé est barré.",
+    desc: "Plan d'une pièce : le bac dans un coin calme et aéré, loin des gamelles ; un bac dans un placard fermé est barré.",
     legende: "Un endroit calme et aéré, loin des gamelles, mais pas enfermé dans un placard où l'air ne circule pas.",
     hauteur: 250,
     dessin: (
