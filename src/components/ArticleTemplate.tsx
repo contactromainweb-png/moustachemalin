@@ -25,7 +25,7 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
   const image: Photo | undefined = photo ?? (fm.photo ? PHOTOS[fm.photo] : undefined);
 
   return (
-    <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10" data-type-article={fm.type}>
+    <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10" data-type-article={fm.type} data-rubrique={fm.rubrique}>
       <div aria-hidden="true" className="barre-lecture" />
       {/* Pinterest : l'image verticale de l'article, invisible pour les lecteurs (og:image reste l'image large). */}
       <link rel="image_src" href={new URL(pinArticle(fm), SITE.url).toString()} />

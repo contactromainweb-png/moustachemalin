@@ -6,6 +6,7 @@ import { AffiliateButton } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { BulleKira } from "@/components/BulleKira";
 import { CarteProfil } from "@/components/CarteProfil";
+import { ajouter, majCarnet } from "@/lib/carnet";
 import { avecPrenom, useMonte, useProfil, type ProfilChat } from "@/lib/profil";
 import type { Morceau, QuizCalcule } from "@/lib/quiz";
 import { espacesFines, nomsInsecables } from "@/lib/typo";
@@ -222,6 +223,8 @@ function Resultat({
 
   useEffect(() => {
     (window as Fenetre).umami?.track("quiz-termine", { categorie: quiz.categorie });
+    // Carnet (pack 8b) : la catégorie du quiz terminé, seulement s'il y a un profil (jamais vers Umami).
+    majCarnet((c) => ({ ...c, quiz: ajouter(c.quiz, quiz.categorie) }));
     return () => marquer([], null);
   }, [quiz.categorie]);
 

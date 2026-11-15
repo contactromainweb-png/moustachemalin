@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { BulleKira } from "@/components/BulleKira";
 import { CarteProfil } from "@/components/CarteProfil";
+import { ajouter, majCarnet } from "@/lib/carnet";
 import { avecPrenom, useMonte, useProfil, type ProfilChat } from "@/lib/profil";
 import type { Morceau } from "@/lib/quiz";
 import { TESTS_GUIDES, type BlocResultat } from "@/lib/tests-guides";
@@ -76,6 +77,7 @@ function Test({ id }: { id: string }) {
     if (coches.size === 0 || mesure.current) return;
     mesure.current = true;
     (window as Fenetre).umami?.track("test-guide", { guide: config.slug });
+    majCarnet((c) => ({ ...c, tests: ajouter(c.tests, config.slug) })); // carnet (pack 8b), seulement avec profil
   }, [coches, config.slug]);
 
   const basculer = (caseId: string) =>
