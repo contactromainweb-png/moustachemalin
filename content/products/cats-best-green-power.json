@@ -10,7 +10,9 @@
     "origine": "Végétale",
     "matiere": "Fibres végétales (bois), grain extra fin",
     "parfum": "Sans parfum",
-    "sac": "8 L, 2,9 kg"
+    "sac": "8 L, 2,9 kg",
+    "duree": "Jusqu'à 25 jours avant de vider tout le bac, en complétant chaque semaine (fabricant)",
+    "elimination": "Ordures ménagères, poubelle verte ou compost pour plantes d'ornement ; toilettes en petite quantité, jamais tout le bac (fabricant)"
   },
   "pour": "Ceux qui veulent une litière végétale, fine et sans parfum.",
   "pros": [
@@ -20,10 +22,9 @@
     "Sans parfum"
   ],
   "cons": [
-    "Petit sac de 8 L",
-    "La fiche ne précise ni la durée d'un sac ni où jeter la litière"
+    "Petit sac de 8 L"
   ],
   "entretien": "Retirer les blocs et les selles chaque jour, compléter avec de la litière propre.",
   "consommables": [],
-  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 15/11/2026"
+  "source": "Fiche produit Amazon.fr (informations fabricant), consultée le 15/11/2026 ; complété : durée et élimination : page « Cat's Best Sensitive » du fabricant, https://www.catsbest.fr/produit/cats-best-sensitive/, consultée le 15/11/2026 (la fiche Amazon.fr de la Green Power la présente elle-même comme « Cat's Best Sensitive »)"
 }
