@@ -13,6 +13,7 @@ import { Problemes } from "@/components/accueil/Problemes";
 import { QuiEcrit } from "@/components/accueil/QuiEcrit";
 import { SelonMonChat } from "@/components/accueil/SelonMonChat";
 import { Soucis } from "@/components/accueil/Soucis";
+import { TonChat } from "@/components/accueil/TonChat";
 
 export const metadata: Metadata = {
   description:
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 // Ordinateur : seul le premier écran retient le défilement ; les particules durent 1 écran, sans rien retenir.
 // Téléphone et tablette (moins de 1024 px) : page resserrée. Les cartes « Mon problème » suivent le premier écran
 // et remplacent les petits soucis et « Selon mon chat » ; les articles passent en rangée à faire glisser ; aucune section bloquée.
-// Le mot de Kira vient juste après ces cartes (après le premier écran sur ordinateur).
+// Le mot de Kira vient juste après ces cartes (après le premier écran sur ordinateur), puis la carte « Ton chat ».
 export default function Home() {
   return (
     <>
@@ -37,6 +38,7 @@ export default function Home() {
       <HeroAccueil />
       <Problemes />
       <MotDeKira />
+      <TonChat />
       <Desintegration />
       <Soucis />
       <Pelote />

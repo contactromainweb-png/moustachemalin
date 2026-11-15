@@ -51,7 +51,8 @@ export const LEGAL = {
     site: "https://www.netlify.com",
   },
   miseAJour: "1er novembre 2026", // pages Méthode et Affiliation
-  miseAJourMentions: "1er novembre 2026", // pages Mentions légales et Confidentialité
+  miseAJourMentions: "1er novembre 2026", // page Mentions légales
+  miseAJourConfidentialite: "15 novembre 2026", // page Confidentialité (section « Le profil de ton chat »)
 };
 
 export const AMAZON_DISCLOSURE =

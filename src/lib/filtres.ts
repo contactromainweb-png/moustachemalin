@@ -120,6 +120,14 @@ const FILTRES: Record<string, Filtre[]> = {
   ],
 };
 
+// La règle d'un filtre, pour la réutiliser ailleurs (quiz des comparatifs, src/lib/quiz.ts) sans la recopier.
+// Un filtre inconnu fait échouer le build.
+export function regleFiltre(categorie: string, id: string): (p: Product) => boolean {
+  const filtre = FILTRES[categorie]?.find((f) => f.id === id);
+  if (!filtre) throw new Error(`Filtre « ${id} » introuvable pour la catégorie ${categorie} (src/lib/filtres.ts)`);
+  return filtre.retient;
+}
+
 // Les filtres d'un tableau : ceux de la catégorie de ses produits, avec les ASIN retenus par chacun.
 export function filtresPour(produits: Product[]): FiltreCalcule[] {
   const categorie = produits[0]?.category;

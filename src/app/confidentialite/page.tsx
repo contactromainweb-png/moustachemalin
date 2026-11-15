@@ -14,7 +14,7 @@ export default function Page() {
     <DocPage
       title="Confidentialité"
       lead="Aucun cookie, aucun compte, aucune publicité. Le détail ci-dessous."
-      updated={LEGAL.miseAJourMentions}>
+      updated={LEGAL.miseAJourConfidentialite}>
       <Contenu />
     </DocPage>
   );

@@ -1,6 +1,7 @@
 import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { AmazonLivePrice } from "@/components/AmazonLivePrice";
+import { PictosProduit } from "@/components/PictosProduit";
 import { ProductVisual } from "@/components/ProductVisual";
 import { ProsCons } from "@/components/ProsCons";
 import { getProduct, specLabel } from "@/lib/products";
@@ -27,6 +28,9 @@ export function ProductCard({ asin }: { asin: string }) {
           </div>
         </div>
       </div>
+
+      {/* Litières : pastilles et barre de repère tirées des specs (aucune photo sur les fiches). */}
+      <PictosProduit p={p} />
 
       <div className="mt-8">
         <ProsCons pros={p.pros} cons={p.cons} />
