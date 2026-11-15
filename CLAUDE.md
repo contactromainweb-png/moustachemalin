@@ -248,6 +248,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - Le flux `/kira/feed.xml` et les épingles d'origine ne sont pas concernés.
 
 ## 11 quater. Habillage des articles
+- La commission n'est jamais un critère de sélection ni de classement.
 - **Fiches produits** : `IllustrationAppareil` (SVG inline au trait, choisi d'après la catégorie et les specs) à la place du visuel vide. Générique : aucune forme de marque, aucun logo, aucun texte de marque dans le dessin ; légende « Illustration, pas une photo du produit ». Format 4:3, 2 Ko au plus par variante. Produit d'exemple ou catégorie inconnue : la patte du site.
 - **Pictogrammes** (`PictosProduit`) sur toutes les catégories : seulement des mots tirés des specs, une spec absente n'affiche rien. Bruit toujours sur une échelle de 20 à 60 dB.
 - **Bandes** : au build, `plugins/remark-bandes.mjs` met chaque section `##` d'un article (comparatif, guide, avis, duel, outil) dans une `<Bande>` pleine largeur, fonds a / b alternés, c (lavande) pour « Comment choisir… ». Ce qui précède le premier `##` reste sans bande ; les ancres ne bougent pas. Dans une bande b ou c, `--field` est redéfini pour que les blocs restent visibles. Aucune animation sur les fonds. Jamais dans les pages légales, `/methode/`, `/affiliation/` ni les rubriques.
