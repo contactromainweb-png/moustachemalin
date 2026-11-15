@@ -2,7 +2,7 @@ import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { AmazonLivePrice } from "@/components/AmazonLivePrice";
 import { PictosProduit } from "@/components/PictosProduit";
-import { ProductVisual } from "@/components/ProductVisual";
+import { IllustrationAppareil } from "@/components/IllustrationAppareil";
 import { ProsCons } from "@/components/ProsCons";
 import { getProduct, specLabel } from "@/lib/products";
 import { espacesFines, nomsInsecables } from "@/lib/typo";
@@ -15,7 +15,7 @@ export function ProductCard({ asin }: { asin: string }) {
   return (
     <section id={p.asin} aria-label={`Fiche : ${p.name}`} className="reveal mb-10 mt-6 scroll-mt-8">
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10">
-        <ProductVisual nom={nomsInsecables(p.name)} marque={p.brand} />
+        <IllustrationAppareil p={p} nom={nomsInsecables(p.name)} marque={p.brand} />
         <div className="flex flex-col justify-between gap-6">
           <p>
             <strong className="font-semibold">Pour qui&#8239;:</strong> {espacesFines(p.pour)}
@@ -29,7 +29,7 @@ export function ProductCard({ asin }: { asin: string }) {
         </div>
       </div>
 
-      {/* Litières : pastilles et barre de repère tirées des specs (aucune photo sur les fiches). */}
+      {/* Pastilles et barre de repère tirées des specs, toutes catégories (aucune photo sur les fiches). */}
       <PictosProduit p={p} />
 
       <div className="mt-8">

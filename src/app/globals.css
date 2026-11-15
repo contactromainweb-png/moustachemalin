@@ -415,3 +415,8 @@ dl {
   font-size: 0.9375rem;
   font-weight: 600;
 }
+
+/* Illustrations génériques des fiches produits (IllustrationAppareil) : trait de 2 px quelle que soit la taille affichée. */
+.illustration * {
+  vector-effect: non-scaling-stroke;
+}
