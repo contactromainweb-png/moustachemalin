@@ -8,6 +8,8 @@ import { appareilsCompares } from "@/lib/rubriques";
 // Ordinateur : mur de 7 × 5, exactement 1 écran de haut ; téléphone : 5 × 5. La photo du centre est placée d'office au
 // milieu de la grille. Aucun épinglage : le chiffre monte et la légende apparaît à l'arrivée à l'écran (voir Mouvement).
 // Sans JavaScript ou avec « animations réduites » : tout est déjà en place, immobile.
+// Chaque photo a son texte alternatif (ce qu'on voit, sans prénom), lu par les moteurs d'images ; la grille reste
+// aria-hidden : les lecteurs d'écran passent directement au compteur, sans 35 descriptions avant le titre.
 // Téléphone et tablette : section moins haute.
 
 // Les vignettes ont toutes le format 4:5 ; une photo paysage est rognée sur les côtés, donc affichée plus large que
@@ -40,7 +42,7 @@ const VIGNETTES = [
     PHOTOS.chatTigreCroquettes,
     PHOTOS.chatArbrePlateforme,
     PHOTOS.chatonBolEau,
-  ].map(({ src, width, height }) => ({ src, width, height })),
+  ].map(({ src, width, height, alt }) => ({ src, width, height, alt })),
 ].slice(0, 34);
 
 export function Mur() {
@@ -59,7 +61,7 @@ export function Mur() {
           >
             <Image
               src={MUR_CENTRE.src}
-              alt=""
+              alt={MUR_CENTRE.alt}
               fill
               sizes="(min-width: 1024px) 19vw, (max-aspect-ratio: 4/5) 175vw, 100vw"
               quality={80}
@@ -76,7 +78,7 @@ export function Mur() {
                 src={adresse(p.src, 640)}
                 srcSet={srcsetVignette(p.src, p.width)}
                 sizes={taillesVignette(p.width, p.height)}
-                alt=""
+                alt={p.alt}
                 loading="lazy"
                 decoding="async"
                 className="absolute inset-0 h-full w-full object-cover"

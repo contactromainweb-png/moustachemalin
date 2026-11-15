@@ -49,7 +49,10 @@ const QUIZ: Record<string, Quiz> = {
           { label: "À la poubelle, peu importe", retient: null },
           {
             label: "Au compost ou aux toilettes",
-            retient: (p) => commence(p.specs.origine, "Végétale") || contient(p.specs.elimination, "compost"),
+            // Seulement ce que dit la fiche (champ elimination) : une litière végétale ne se composte pas forcément.
+            retient: (p) =>
+              contient(p.specs.elimination, "compost") ||
+              (contient(p.specs.elimination, "toilettes") && !contient(p.specs.elimination, "pas dans les toilettes")),
             pourquoi: "Se composte ou se jette aux toilettes (selon le fabricant)",
           },
         ],

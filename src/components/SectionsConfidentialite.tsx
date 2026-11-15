@@ -35,7 +35,35 @@ export function MesureAudience() {
             sur un bouton ou un lien vers Amazon, la page, le produit et son emplacement. Ces chiffres nous disent quels
             comparatifs sont utiles. Hébergement&nbsp;: {outil.hebergement}.
           </p>
-          {UMAMI_ID ? <p className={p}>Ces statistiques sont conservées 6&nbsp;mois.</p> : null}
+          {UMAMI_ID ? (
+            <>
+              {/* Liste à tenir à jour avec chaque umami.track() du code (mesure.ts, CarteProfil, QuizJeu, TestGuide). */}
+              <p className={p}>Voici tous les événements envoyés à Umami, avec leurs données, et rien d&apos;autre&nbsp;:</p>
+              <ul className="reveal mb-5 max-w-[65ch] list-disc space-y-2 pl-5">
+                <li>
+                  <strong className="font-semibold">clic-amazon</strong>, quand vous cliquez sur un bouton ou un lien vers
+                  Amazon&nbsp;: la page, le code du produit (ASIN) et l&apos;emplacement du bouton (résumé, tableau, fiche,
+                  quiz…).
+                </li>
+                <li>
+                  <strong className="font-semibold">profil-cree</strong>, quand vous créez le profil de votre chat&nbsp;:
+                  seulement le fait qu&apos;un profil a été créé, sans aucune donnée.
+                </li>
+                <li>
+                  <strong className="font-semibold">quiz-termine</strong>, quand vous arrivez au résultat du quiz d&apos;un
+                  comparatif&nbsp;: la catégorie du quiz (par exemple «&nbsp;litiere-chat&nbsp;»), sans vos réponses.
+                </li>
+                <li>
+                  <strong className="font-semibold">test-guide</strong>, au premier résultat du test d&apos;un guide&nbsp;: le
+                  guide concerné (par exemple «&nbsp;mon-chat-ne-boit-pas&nbsp;»), sans les cases cochées.
+                </li>
+              </ul>
+              <p className={p}>
+                Le prénom de votre chat n&apos;est jamais envoyé, ni à Umami ni à personne&nbsp;: il reste dans votre
+                navigateur. Ces statistiques sont conservées 6&nbsp;mois.
+              </p>
+            </>
+          ) : null}
           <p className={p}>Aucune donnée n&apos;est vendue ni partagée à des fins publicitaires.</p>
         </>
       ) : (

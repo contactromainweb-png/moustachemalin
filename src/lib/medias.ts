@@ -636,7 +636,7 @@ export const MUR_CENTRE: Photo = {
   credit: "Helena Jankovičová Kováčová, Pexels",
 };
 
-// Mur de photos de l’accueil : vignettes décoratives sur la page (alt vide), décrites ici pour la page des crédits.
+// Mur de photos de l’accueil : chaque description sert de texte alternatif sur l’accueil et sur la page des crédits.
 export const MUR: Photo[] = [
   { src: "/media/mur/chatte-blanche-tachetee-couchee.jpg", alt: "Une chatte blanche aux taches rousses et grises, couchée, qui regarde au loin.", width: 1800, height: 1200, credit: "Pixabay, Pexels" },
   { src: "/media/mur/chaton-tigre-gris-tete-penchee.jpg", alt: "Un chaton tigré gris qui penche la tête au bord d'un coussin.", width: 1200, height: 1226, credit: "Charles Pragnell, Pexels" },

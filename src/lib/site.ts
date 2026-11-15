@@ -35,9 +35,9 @@ export const KIRA: { photo: string | null } = {
 
 // Mentions légales. SIRET et adresse : fiche officielle du SIREN 944 980 580 (recherche-entreprises.api.gouv.fr),
 // validés par Romain le 30/10/2026, sans le numéro d'appartement ; à changer après sa modification de micro-entreprise.
-// Pas de numéro de téléphone (aucun fourni par Romain : ligne retirée).
-// Hébergeur : adresse et contact vérifiés le 30 octobre 2026 sur netlify.com (politique de confidentialité et
-// conditions d'utilisation) ; Netlify ne publie pas de numéro de téléphone.
+// Pas de numéro de téléphone pour l'éditeur (décision de Romain, 15/11/2026).
+// Hébergeur : adresse et contact revérifiés le 15 novembre 2026 sur netlify.com (conditions d'utilisation, mises à jour
+// le 14/10/2026, et politique de confidentialité, mise à jour le 04/11/2026) ; aucune page de netlify.com ne publie de téléphone.
 export const LEGAL = {
   editeur: "Romain Cahagne",
   statut: "entrepreneur individuel (micro-entreprise)",
@@ -51,7 +51,7 @@ export const LEGAL = {
     site: "https://www.netlify.com",
   },
   miseAJour: "1er novembre 2026", // pages Méthode et Affiliation
-  miseAJourMentions: "1er novembre 2026", // page Mentions légales
+  miseAJourMentions: "15 novembre 2026", // page Mentions légales
   miseAJourConfidentialite: "15 novembre 2026", // page Confidentialité (section « Le profil de ton chat »)
 };
 
