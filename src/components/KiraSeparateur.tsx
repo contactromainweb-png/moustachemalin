@@ -7,7 +7,16 @@ export function KiraSeparateur() {
     <div aria-hidden="true" className="flex items-center gap-5 py-6">
       <span className="h-px flex-1 bg-ink/20" />
       {/* eslint-disable-next-line @next/next/no-img-element -- petit SVG statique, pas de redimensionnement utile */}
-      <img src="/kira/kira-assise.svg" alt="" width={56} height={56} loading="lazy" decoding="async" className="size-14" />
+      <img
+        src="/kira/kira-assise.svg"
+        alt=""
+        data-decor="kira-separateur"
+        width={56}
+        height={56}
+        loading="lazy"
+        decoding="async"
+        className="size-14"
+      />
       <span className="h-px flex-1 bg-ink/20" />
     </div>
   );
