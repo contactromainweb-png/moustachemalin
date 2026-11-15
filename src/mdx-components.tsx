@@ -14,6 +14,7 @@ import { ComparisonTable } from "@/components/ComparisonTable";
 import { FAQ } from "@/components/FAQ";
 import { KiraCousins, KiraGalerie } from "@/components/KiraGalerie";
 import { KiraNote } from "@/components/KiraNote";
+import { KiraSeparateur } from "@/components/KiraSeparateur";
 import { MethodNote } from "@/components/MethodNote";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { NotreChoix } from "@/components/NotreChoix";
@@ -83,6 +84,7 @@ const components: MDXComponents = {
   KiraCousins,
   KiraGalerie,
   KiraNote,
+  KiraSeparateur,
   MethodNote,
   NewsletterForm,
   NotreChoix,

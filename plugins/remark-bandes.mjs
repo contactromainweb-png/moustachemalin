@@ -57,6 +57,57 @@ export default function remarkBandes() {
         children: enfants,
       };
     });
-    arbre.children = [...avant, ...noeuds, ...apres];
+    arbre.children = [...avant, ...intercaler(noeuds, kiraSeparateurs(bandes)), ...apres];
   };
+}
+
+// Petites Kira séparatrices (KiraSeparateur) : 2 au plus par article, entre deux bandes, de préférence après la 2e
+// et la 4e. Jamais à côté d'un Mot de Kira, d'un encadré santé, d'une fiche ou d'un encadré produit, d'un bouton ou
+// d'une mention Amazon, du tableau comparatif, d'un quiz ou d'un test : Kira ne doit jamais avoir l'air de
+// recommander un produit. On regarde le dernier bloc de la bande d'avant et le premier bloc (après le titre) de la
+// bande d'après ; un emplacement interdit passe au suivant, et deux Kira ne se suivent jamais.
+const INTERDITS = new Set([
+  "KiraNote", "VetNotice", "ProductCard", "ProductBox", "NotreChoix", "AffiliateButton", "AmazonDisclosure",
+  "TopPicks", "ComparisonTable", "TableauDuel", "QuizComparatif", "TestGuide", "Consommables", "ListeSignes",
+]);
+const ELOGES = new Set(["ce-que-nous-aimons"]);
+const SEPARATEURS_MAX = 2;
+const PREFERES = [2, 4];
+
+function interdit(n) {
+  if (!n) return true;
+  if (n.type === "table") return true;
+  if ((n.type === "mdxJsxFlowElement" || n.type === "mdxJsxTextElement") && INTERDITS.has(n.name)) return true;
+  return (n.children ?? []).some(interdit);
+}
+
+function kiraSeparateurs(bandes) {
+  // Emplacement k : entre la bande k et la bande k + 1 (numérotées à partir de 1).
+  const permis = (k) => {
+    if (k < 1 || k >= bandes.length) return false;
+    // Par prudence, toute la bande d'avant (une fiche suivie d'un seul paragraphe resterait « à côté »), et les deux
+    // premiers blocs de la bande d'après (son titre, ou le bloc à titre FAQ / Consommables, compris).
+    const avant = bandes[k - 1];
+    const apres = bandes[k].slice(0, 3);
+    // Les points forts d'un avis (« Ce que nous aimons ») parlent d'un seul produit : pas de Kira juste après.
+    if (ELOGES.has(ancreDe(avant[0]))) return false;
+    return !avant.some(interdit) && !apres.some(interdit);
+  };
+  const choisis = [];
+  for (const prefere of PREFERES) {
+    for (let k = prefere; k < bandes.length && choisis.length < SEPARATEURS_MAX; k++) {
+      if (choisis.some((c) => Math.abs(c - k) < 2)) continue;
+      if (permis(k)) {
+        choisis.push(k);
+        break;
+      }
+    }
+  }
+  return choisis.sort((a, b) => a - b);
+}
+
+function intercaler(noeuds, emplacements) {
+  return noeuds.flatMap((n, i) =>
+    emplacements.includes(i + 1) ? [n, { type: "mdxJsxFlowElement", name: "KiraSeparateur", attributes: [], children: [] }] : [n],
+  );
 }
