@@ -159,6 +159,13 @@ dl {
   font-stretch: normal;
   letter-spacing: -0.01em;
 }
+/* Le mot en serif et la ponctuation qui le suit (TitreSerif) : un seul bloc, qui passe à la ligne entier (la
+   ponctuation ne commence jamais une ligne). Plus large que sa colonne (texte à 200 %), il se coupe à l'intérieur
+   (overflow-wrap du body) au lieu de déborder. */
+.mot-colle {
+  display: inline-block;
+  max-width: 100%;
+}
 
 /* Titre du premier écran : chaque mot sort d’un flou, l’un après l’autre (CSS seul, dès l’affichage). */
 .mot-entree {

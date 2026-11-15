@@ -7,14 +7,27 @@ export function TitreSerif({ titre, mot: motBrut }: { titre: string; mot?: strin
   const mot = motBrut && nomsInsecables(motBrut);
   const i = mot ? texte.indexOf(mot) : -1;
   if (!mot || i < 0) return <>{texte}</>;
-  // La ponctuation qui suit le mot (« : », « ? »…) reste collée à lui sans nowrap : l'espace qui la précède est
-  // insécable (espacesFines) et le navigateur ne coupe jamais juste avant une ponctuation. Sans nowrap, un mot trop
-  // long pour l'écran (texte agrandi à 200 %) passe à la ligne au lieu de déborder (overflow-wrap: anywhere du body, globals.css).
+  // La ponctuation qui suit le mot (« : », « ? »…) reste collée à lui : les deux forment un bloc (.mot-colle,
+  // globals.css) qui passe à la ligne d'un seul tenant, et ne se coupe à l'intérieur que s'il est plus large que
+  // sa colonne (texte agrandi à 200 %), au lieu de déborder.
+  const suite = texte.slice(i + mot.length);
+  const colle = /^[  ]?[:;?!,.…]/.exec(suite)?.[0] ?? "";
+  if (!colle)
+    return (
+      <>
+        {texte.slice(0, i)}
+        <span className="mot-serif">{mot}</span>
+        {suite}
+      </>
+    );
   return (
     <>
       {texte.slice(0, i)}
-      <span className="mot-serif">{mot}</span>
-      {texte.slice(i + mot.length)}
+      <span className="mot-colle">
+        <span className="mot-serif">{mot}</span>
+        {colle}
+      </span>
+      {suite.slice(colle.length)}
     </>
   );
 }

@@ -12,7 +12,7 @@ export function Problemes() {
   return (
     <section data-fond="page" aria-labelledby="titre-problemes" className="px-4 pb-2 pt-12 sm:px-8 lg:hidden">
       <h2 id="titre-problemes" data-apparait className="font-display text-head">
-        Mon <span className="mot-serif">problème</span>, c&apos;est…
+        Mon <span className="mot-colle"><span className="mot-serif">problème</span>,</span> c&apos;est…
       </h2>
       <ul className="mt-6 grid grid-cols-2 gap-3">
         {problemes.map((p, i) => (

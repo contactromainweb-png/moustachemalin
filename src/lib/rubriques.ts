@@ -146,6 +146,11 @@ function frontmattersEnLigne(rubrique: string): Frontmatter[] {
       // du commit qui a ajouté le fichier, `git log --diff-filter=A --follow --format=%as -- <fichier>`.
       if (!/^\d{4}-\d{2}-\d{2}$/.test(fm.publishedAt ?? ""))
         throw new Error(`publishedAt manquant ou mal écrit (AAAA-MM-JJ) dans content/${rubrique}/${fm.slug}.mdx`);
+      // Un article n'est jamais mis à jour avant d'être publié (sinon dateModified < datePublished pour Google).
+      if (fm.publishedAt! > fm.updatedAt)
+        throw new Error(
+          `publishedAt (${fm.publishedAt}) postérieur à updatedAt (${fm.updatedAt}) dans content/${rubrique}/${fm.slug}.mdx`,
+        );
       return fm;
     })
     .sort((a, b) =>
