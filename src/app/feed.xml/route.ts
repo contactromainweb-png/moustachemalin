@@ -27,7 +27,7 @@ export function GET() {
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <description>${echapper(fm.description)}</description>
-      <pubDate>${dateRss(fm.updatedAt)}</pubDate>
+      <pubDate>${dateRss(fm.publishedAt ?? fm.updatedAt)}</pubDate>
       <enclosure url="${image}" length="${poids}" type="image/jpeg" />
       <media:content url="${image}" medium="image" type="image/jpeg" width="1000" height="1500" fileSize="${poids}">
         <media:title>${echapper(fm.title)}</media:title>

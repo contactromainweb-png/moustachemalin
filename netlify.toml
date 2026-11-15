@@ -30,3 +30,18 @@
   for = "/cadeaux/*"
   [headers.values]
     X-Robots-Tag = "noindex"
+
+# En-têtes de sécurité, sur toutes les pages et tous les fichiers (audit de novembre 2026, pack A).
+# CSP : tout vient du site lui-même, sauf
+#   - Umami (statistiques sans cookie) : le script sur cloud.umami.is, les envois sur gateway.umami.is ;
+#   - Brevo (lettre) : le formulaire est envoyé en fetch puis, sans JavaScript, en POST classique vers *.sibforms.com.
+# 'unsafe-inline' (scripts et styles) : Next.js écrit ses données de page dans de petits scripts en ligne, et les
+# composants des attributs style ; un site statique ne peut pas leur donner de nonce.
+# Pages encadrées interdites partout (X-Frame-Options DENY et frame-ancestors 'none').
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cloud.umami.is; connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev https://*.sibforms.com; img-src 'self' data: blob:; font-src 'self'; style-src 'self' 'unsafe-inline'; media-src 'self'; worker-src 'self' blob:; form-action 'self' https://*.sibforms.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+    X-Frame-Options = "DENY"

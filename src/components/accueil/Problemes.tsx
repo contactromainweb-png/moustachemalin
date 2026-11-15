@@ -27,7 +27,7 @@ export function Problemes() {
                 alt={p.photo.alt}
                 fill
                 quality={80}
-                sizes="(min-width: 640px) 45vw, 46vw"
+                sizes="(min-width: 640px) calc(50vw - 2.4rem), calc(50vw - 1.4rem)"
                 className={`-z-10 object-cover ${p.cadrage}`}
               />
               <span aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-nuit via-nuit/50 to-transparent" />

@@ -226,7 +226,7 @@ export function PictosProduit({ p }: { p: Product }) {
       {liste.length ? (
         <ul aria-label="En un coup d'œil" className="flex flex-wrap gap-2">
           {liste.map((x) => (
-            <li key={x.mot} className="flex min-h-10 items-center gap-2 rounded-full bg-field px-3.5 text-small font-medium text-nuit">
+            <li key={x.mot} className="flex min-h-10 items-center gap-2 rounded-full bg-field px-3.5 text-small font-medium text-ink">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"

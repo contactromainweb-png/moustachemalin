@@ -34,7 +34,7 @@ export type Frontmatter = {
   pinCadrage?: string; // point de la photo gardé dans l'image Pinterest (ex. "62% 50%"), sinon sa position
   epingles?: EpingleFraiche[]; // 2 épingles Pinterest de plus, publiées à leur date dans le flux de la rubrique (src/lib/epingles.ts)
   updatedAt: string; // AAAA-MM-JJ
-  publishedAt?: string; // AAAA-MM-JJ, sinon updatedAt
+  publishedAt?: string; // AAAA-MM-JJ, date du commit qui a ajouté le fichier ; obligatoire hors pages d'exemple (src/lib/rubriques.ts)
   products?: string[]; // ASIN classés, pour le schema ItemList des comparatifs
   noindex?: boolean; // true = page cachée aux moteurs (pages d'exemple)
   mainKeyword?: string;

@@ -127,6 +127,8 @@ body {
   letter-spacing: -0.035em;
   line-height: 0.92;
   text-wrap: balance;
+  /* Texte agrandi à 200 % sur téléphone : un mot plus large que l'écran passe à la ligne au lieu de déborder. */
+  overflow-wrap: break-word;
 }
 
 /* Mot mis en valeur dans un titre : serif italique fine au milieu de la grotesque grasse. */
@@ -157,6 +159,9 @@ body {
   }
 }
 
+/* En-tête des pages (titre H1, chapeau, signature, photo d'en-tête) : glissement seul, sans fondu. Ces éléments
+   peuvent être le plus grand élément du premier écran (LCP) : partir de opacity: 0 retardait l'affichage mesuré par
+   Google de 1,4 à 1,8 s (audit de novembre 2026). Avec « animations réduites », rien ne bouge. */
 @media (prefers-reduced-motion: no-preference) {
   .rise {
     animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -199,7 +204,6 @@ body {
 
 @keyframes rise {
   from {
-    opacity: 0;
     transform: translateY(24px);
   }
 }

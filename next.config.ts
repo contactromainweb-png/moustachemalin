@@ -18,6 +18,8 @@ function pagesEnLigne(dossier = "src/app", url = "/"): string[] {
 const nextConfig: NextConfig = {
   cacheComponents: true,
   trailingSlash: true,
+  // Pas d'en-tête X-Powered-By: Next.js (inutile de dire aux robots ce qui fait tourner le site).
+  poweredByHeader: false,
   // Année affichée dans le footer, figée à chaque construction du site.
   env: {
     BUILD_YEAR: String(new Date().getFullYear()),
