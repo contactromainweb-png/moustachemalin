@@ -5,7 +5,7 @@ import { PictosProduit } from "@/components/PictosProduit";
 import { ProductVisual } from "@/components/ProductVisual";
 import { ProsCons } from "@/components/ProsCons";
 import { getProduct, specLabel } from "@/lib/products";
-import { espacesFines } from "@/lib/typo";
+import { espacesFines, nomsInsecables } from "@/lib/typo";
 
 // Fiche détaillée d'un produit, appelée par son ASIN : <ProductCard asin="B0..." />
 // Le titre (### Nom : rôle) est écrit dans l'article, juste au-dessus. Les intitulés de la fiche (points forts,
@@ -15,7 +15,7 @@ export function ProductCard({ asin }: { asin: string }) {
   return (
     <section id={p.asin} aria-label={`Fiche : ${p.name}`} className="reveal mb-10 mt-6 scroll-mt-8">
       <div className="grid gap-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10">
-        <ProductVisual nom={p.name} marque={p.brand} />
+        <ProductVisual nom={nomsInsecables(p.name)} marque={p.brand} />
         <div className="flex flex-col justify-between gap-6">
           <p>
             <strong className="font-semibold">Pour qui&#8239;:</strong> {espacesFines(p.pour)}

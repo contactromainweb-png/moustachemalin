@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { useId, useState, type FormEvent } from "react";
 import { BulleKira } from "@/components/BulleKira";
+import { KiraDessin } from "@/components/KiraDessin";
 import { enregistrerProfil, oublierProfil, PRENOM_MAX, useProfil, type ProfilChat } from "@/lib/profil";
 
 // La carte « Ton chat » (pack de nuit 7) : sans profil, Kira se présente et le formulaire suit ; juste après la
 // création, Kira dit bonjour au chat ; ensuite, une ligne compacte « Le profil de … · Modifier · Oublier ».
-// Le prénom n'est jamais envoyé nulle part (ni à Umami ni ailleurs) : l'événement « profil-cree » ne porte aucune donnée.
+// Le prénom n'est jamais envoyé nulle part (ni à Umami ni ailleurs) : l'événement « profil-cree », envoyé après
+// l'enregistrement, ne porte aucune donnée.
 // Le champ du prénom n'a pas d'attribut name : même sans JavaScript, il ne pourrait pas partir dans une adresse.
+type Fenetre = Window & { umami?: { track: (nom: string, donnees: Record<string, string>) => void } };
 type Choix = { valeur: string; label: string };
 const AGES: Choix[] = [
   { valeur: "chaton", label: "Chaton" },
@@ -26,68 +29,83 @@ const DEHORS: Choix[] = [
 
 const lien = "font-medium underline decoration-accent decoration-2 underline-offset-4 hover:text-ink-soft";
 
-export function CarteProfil({ className = "", onCree }: { className?: string; onCree?: () => void }) {
+// `large` (accueil) : sur ordinateur, deux colonnes, Kira en grand (160 px) et sa bulle à gauche, le formulaire à
+// droite ; sur téléphone, la même carte qu'ailleurs, avec Kira à 96 px.
+export function CarteProfil({ className = "", large = false }: { className?: string; large?: boolean }) {
   const profil = useProfil();
   const [edition, setEdition] = useState(false);
   const [cree, setCree] = useState(false);
   const [oubli, setOubli] = useState(false);
 
-  if (!profil || edition) {
-    return (
-      <div className={className}>
-        <Formulaire
-          profil={edition ? profil : null}
-          onFini={() => {
-            setEdition(false);
-            setCree(true);
-            onCree?.();
+  const texteBulle = !profil ? (
+    <p>
+      Salut, moi c&apos;est Kira. Je rapporte mes jouets comme un chien et je bois au robinet. Et toi, ton chat, il
+      s&apos;appelle comment&#8239;?
+    </p>
+  ) : cree && !edition ? (
+    <p>
+      Enchantée, {profil.prenom}&#8239;! <Suite profil={profil} />
+    </p>
+  ) : null;
+
+  const kira = texteBulle ? (
+    <BulleKira vivante variante={large ? "accueil" : "ligne"} className="mb-6 lg:mb-0">
+      {texteBulle}
+    </BulleKira>
+  ) : large ? (
+    <div className="hidden lg:block">
+      <KiraDessin taille={160} className="size-40" />
+    </div>
+  ) : null;
+
+  const contenu =
+    !profil || edition ? (
+      <Formulaire
+        profil={edition ? profil : null}
+        onFini={() => {
+          setEdition(false);
+          setCree(true);
+        }}
+        onAnnuler={edition ? () => setEdition(false) : undefined}
+      />
+    ) : oubli ? (
+      <p role="group" aria-label="Oublier le profil" className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <span>Oublier le profil de {profil.prenom}&#8239;?</span>
+        <button
+          type="button"
+          className="min-h-11 rounded-full bg-nuit px-4 font-medium text-blanc"
+          onClick={() => {
+            oublierProfil();
+            setOubli(false);
+            setCree(false);
           }}
-          onAnnuler={edition ? () => setEdition(false) : undefined}
-        />
-      </div>
+        >
+          Oui, oublier
+        </button>
+        <button type="button" className={`min-h-11 ${lien}`} onClick={() => setOubli(false)}>
+          Non, le garder
+        </button>
+      </p>
+    ) : (
+      <p className="flex flex-wrap items-center gap-x-2">
+        <span className="font-medium">Le profil de {profil.prenom}</span>
+        <span aria-hidden="true">·</span>
+        <button type="button" className={`min-h-11 ${lien}`} onClick={() => setEdition(true)}>
+          Modifier
+        </button>
+        <span aria-hidden="true">·</span>
+        <button type="button" className={`min-h-11 ${lien}`} onClick={() => setOubli(true)}>
+          Oublier
+        </button>
+      </p>
     );
-  }
 
   return (
-    <div className={className}>
-      {cree ? (
-        <BulleKira vivante className="mb-4">
-          <p>
-            Enchantée, {profil.prenom}&#8239;! <Suite profil={profil} />
-          </p>
-        </BulleKira>
-      ) : null}
-      {oubli ? (
-        <p role="group" aria-label="Oublier le profil" className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <span>Oublier le profil de {profil.prenom}&#8239;?</span>
-          <button
-            type="button"
-            className="min-h-11 rounded-full bg-nuit px-4 font-medium text-blanc"
-            onClick={() => {
-              oublierProfil();
-              setOubli(false);
-              setCree(false);
-            }}
-          >
-            Oui, oublier
-          </button>
-          <button type="button" className={`min-h-11 ${lien}`} onClick={() => setOubli(false)}>
-            Non, le garder
-          </button>
-        </p>
-      ) : (
-        <p className="flex flex-wrap items-center gap-x-2">
-          <span className="font-medium">Le profil de {profil.prenom}</span>
-          <span aria-hidden="true">·</span>
-          <button type="button" className={`min-h-11 ${lien}`} onClick={() => setEdition(true)}>
-            Modifier
-          </button>
-          <span aria-hidden="true">·</span>
-          <button type="button" className={`min-h-11 ${lien}`} onClick={() => setOubli(true)}>
-            Oublier
-          </button>
-        </p>
-      )}
+    <div
+      className={`${className} ${large ? "lg:grid lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start lg:gap-14" : ""}`}
+    >
+      {kira}
+      <div className="min-w-0">{contenu}</div>
     </div>
   );
 }
@@ -133,25 +151,20 @@ function Formulaire({
     if (!prenom.trim()) return setErreur("Donne-lui un prénom d'abord.");
     if (!age || !nbChats || !dehors) return setErreur("Réponds aux 3 questions.");
     setErreur("");
-    enregistrerProfil({
+    const stocke = enregistrerProfil({
       prenom,
       age: age as ProfilChat["age"],
       nbChats: nbChats as ProfilChat["nbChats"],
       dehors: dehors as ProfilChat["dehors"],
     });
+    // Statistiques : « profil-cree » seulement à la création, et seulement si le profil est vraiment enregistré
+    // (stockage du navigateur accepté). Aucune donnée n'accompagne l'événement, jamais le prénom.
+    if (!profil && stocke) (window as Fenetre).umami?.track("profil-cree", {});
     onFini();
   };
 
   return (
     <>
-      {profil ? null : (
-        <BulleKira className="mb-6">
-          <p>
-            Salut, moi c&apos;est Kira. Je rapporte mes jouets comme un chien et je bois au robinet. Et toi, ton chat, il
-            s&apos;appelle comment&#8239;?
-          </p>
-        </BulleKira>
-      )}
       <form onSubmit={valider} noValidate className="space-y-5">
         <div>
           <label htmlFor={`${id}-prenom`} className="mb-2 block font-semibold">
@@ -177,7 +190,6 @@ function Formulaire({
           <div className="flex flex-wrap items-center gap-4">
             <button
               type="submit"
-              data-umami-event="profil-cree"
               className="min-h-12 rounded-full bg-accent px-6 font-semibold text-on-accent transition-transform duration-150 ease-[var(--ease-out)] active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100"
             >
               {profil ? "Enregistrer" : "Créer son profil"}

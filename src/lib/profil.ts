@@ -84,17 +84,21 @@ export function useProfil(): ProfilChat | null {
   return useSyncExternalStore(abonner, instantane, () => null);
 }
 
-export function enregistrerProfil(profil: Omit<ProfilChat, "version" | "prenom"> & { prenom: string }) {
+// Renvoie true si le profil est bien enregistré dans le navigateur, false s'il ne tient qu'en mémoire.
+export function enregistrerProfil(profil: Omit<ProfilChat, "version" | "prenom"> & { prenom: string }): boolean {
   const complet: ProfilChat = { ...profil, prenom: nettoyerPrenom(profil.prenom), version: 1 };
   const brut = JSON.stringify(complet);
   try {
     window.localStorage.setItem(CLE, brut);
     memoire = null;
+    window.dispatchEvent(new Event(EVENEMENT));
+    return true;
   } catch {
     // Stockage refusé : on garde le profil en mémoire pour cette page.
     memoire = brut;
+    window.dispatchEvent(new Event(EVENEMENT));
+    return false;
   }
-  window.dispatchEvent(new Event(EVENEMENT));
 }
 
 export function oublierProfil() {

@@ -8,13 +8,16 @@ import { BulleKira } from "@/components/BulleKira";
 import { CarteProfil } from "@/components/CarteProfil";
 import { avecPrenom, useMonte, useProfil, type ProfilChat } from "@/lib/profil";
 import type { Morceau, QuizCalcule } from "@/lib/quiz";
-import { espacesFines } from "@/lib/typo";
+import { espacesFines, nomsInsecables } from "@/lib/typo";
 
 // Le quiz d'un comparatif (données calculées au build par QuizComparatif). Une question à la fois, en pastilles,
 // avec une barre de progression et un retour à la question précédente. Résultat : les 2 meilleurs scores (à égalité,
 // l'ordre du tableau décide), chacun avec ses raisons, le lien vers sa fiche et le bouton Amazon habituel.
 // Sans JavaScript, rien ne s'affiche (data-avec-js) ; avec JavaScript, le quiz n'est rendu qu'après l'hydratation,
 // dans un emplacement de hauteur réservée : la page ne saute pas.
+// Ce que dit Kira quand le résultat s'affiche (texte validé par Romain) ; « Recommencer » ramène le texte de départ.
+const TROUVAILLES = "Voilà mes trouvailles pour {prenom} ! Clique sur « Montrer dans le tableau » pour les retrouver.";
+
 type Fenetre = Window & { umami?: { track: (nom: string, donnees: Record<string, string>) => void } };
 
 const correspond = (si: Partial<ProfilChat> | undefined, profil: ProfilChat | null) =>
@@ -40,6 +43,7 @@ function Jeu({ quiz }: { quiz: QuizCalcule }) {
   const [reponses, setReponses] = useState<(number | undefined)[]>([]);
   const [etape, setEtape] = useState(0);
   const [carte, setCarte] = useState(false);
+  const [resultats, setResultats] = useState(0); // fait cligner Kira à chaque résultat
   const titreQuestion = useRef<HTMLParagraphElement>(null);
   const titreResultat = useRef<HTMLParagraphElement>(null);
   const aBouge = useRef(false);
@@ -65,12 +69,13 @@ function Jeu({ quiz }: { quiz: QuizCalcule }) {
     suivantes[etape] = k;
     setReponses(suivantes);
     setEtape(etape + 1);
+    if (etape + 1 >= total) setResultats((n) => n + 1);
   };
 
   return (
     <>
-      <BulleKira className="mb-5">
-        <p>{espacesFines(quiz.kira)}</p>
+      <BulleKira vivante clinSignal={resultats} className="mb-5">
+        <p>{espacesFines(fini ? avecPrenom(TROUVAILLES, prenom) : quiz.kira)}</p>
       </BulleKira>
 
       {profil ? null : (
@@ -99,9 +104,9 @@ function Jeu({ quiz }: { quiz: QuizCalcule }) {
               <span className="sr-only">Question </span>
               {etape + 1}/{total}
             </span>
-            <span aria-hidden="true" className="h-2 flex-1 overflow-hidden rounded-full bg-white/80">
+            <span aria-hidden="true" className="h-2 flex-1 overflow-hidden rounded-full bg-white/20">
               <span
-                className="block h-full rounded-full bg-nuit transition-[width] duration-300 ease-[var(--ease-out)] motion-reduce:transition-none"
+                className="block h-full rounded-full bg-accent transition-[width] duration-300 ease-[var(--ease-out)] motion-reduce:transition-none"
                 style={{ width: `${((etape + 1) / total) * 100}%` }}
               />
             </span>
@@ -236,7 +241,7 @@ function Resultat({
         {classement.map((p) => (
           <li key={p.asin} className="flex flex-col rounded-[1.25rem] border-[1.5px] border-nuit/15 bg-white px-5 py-5 text-nuit">
             {p.badge ? <p className="mb-1 text-small font-semibold text-[#6a4fd8]">{p.badge}</p> : null}
-            <p className="text-lead font-semibold">{p.name}</p>
+            <p className="text-lead font-semibold">{nomsInsecables(p.name)}</p>
             <p className="mt-3 font-medium">Pourquoi</p>
             <ul className="mt-1 list-disc space-y-1 pl-5 marker:text-accent">
               {p.raisons.map((r) => (

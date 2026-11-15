@@ -9,7 +9,9 @@ import { useEffect, useRef, useState } from "react";
 // balancement ni clin automatique ; le clin au clic reste.
 let pageDuClinAuto: string | null = null;
 
-export function KiraDessin({ taille = 96, className = "" }: { taille?: number; className?: string }) {
+// `clinSignal` : chaque nouvelle valeur (non nulle) fait cligner Kira, par exemple à l'affichage du résultat d'un quiz
+// (pas avec « animations réduites »).
+export function KiraDessin({ taille = 96, className = "", clinSignal = 0 }: { taille?: number; className?: string; clinSignal?: number }) {
   const [clin, setClin] = useState(false);
   const minuteur = useRef<number | undefined>(undefined);
   const ref = useRef<SVGSVGElement>(null);
@@ -19,6 +21,15 @@ export function KiraDessin({ taille = 96, className = "" }: { taille?: number; c
     setClin(true);
     minuteur.current = window.setTimeout(() => setClin(false), 700);
   };
+
+  useEffect(() => {
+    if (!clinSignal || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    window.clearTimeout(minuteur.current);
+    minuteur.current = window.setTimeout(() => {
+      setClin(true);
+      minuteur.current = window.setTimeout(() => setClin(false), 700);
+    }, 150);
+  }, [clinSignal]);
 
   useEffect(() => {
     const el = ref.current;

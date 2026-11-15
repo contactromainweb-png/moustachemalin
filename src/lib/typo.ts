@@ -11,11 +11,12 @@ export function espacesFines(texte: string) {
 // - les noms connus du site restent entiers ;
 // - un nombre court (1 ou 2 chiffres) qui suit un mot à majuscule (« Max 2 », « Pixi 2 ») s'accroche à ce mot.
 // Seule l'espace AVANT le nombre devient insécable : « 6 litières » peut toujours se couper après le « 6 ».
+// Unités : un nombre et son unité (L, kg, cm, dB, %, mois, jours) ne se séparent jamais (« 8,4 L », « 15 jours »).
 const INSECABLE = " ";
 const NOMS_CONNUS = ["Pura Max 2", "M1 Lite", "Max Pro 2"];
 
 export function nomsInsecables(texte: string) {
-  let t = texte;
+  let t = texte.replace(/(\d) (L|kg|cm|dB|%|mois|jours)(?=$|[^\p{L}\p{N}])/gu, `$1${INSECABLE}$2`);
   for (const nom of NOMS_CONNUS) t = t.replaceAll(nom, nom.replaceAll(" ", INSECABLE));
   return t.replace(
     /(\p{Lu}[\p{L}\p{N}-]*) (\d{1,2})(?=$|[\s  ?!:;,.)»])/gu,

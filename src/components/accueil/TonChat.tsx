@@ -35,8 +35,8 @@ export function TonChat() {
         <h2 id="titre-ton-chat" className="font-display mb-6 text-head lg:mb-8">
           Ton chat, <span className="mot-serif">ton site</span>
         </h2>
-        <div className="max-w-[44rem] rounded-[1.75rem] bg-kira px-4 py-6 sm:px-8 sm:py-8">
-          <CarteProfil />
+        <div className="max-w-[44rem] rounded-[1.75rem] bg-kira px-4 py-6 sm:px-8 sm:py-8 lg:max-w-none lg:px-12 lg:py-12">
+          <CarteProfil large />
         </div>
       </div>
     </section>
