@@ -55,7 +55,7 @@ test("bornes : sans doublon, 100 slugs lus au plus, valeurs d'outils courtes", (
     equipement: ["litiere", "litiere", "eau"],
     lus: [...lus, "article-5"],
     listes: { "partir-en-week-end": ["eau", "eau", "bac"] },
-    outils: { chats: 11, poids: "4,5 kg et des poussières", contenance: "3", ration: 60, modele: "pas un asin", alimentation: "120/40" },
+    outils: { chats: 11, poids: "4,5 kg et des poussières", contenance: "3", ration: 60 as unknown as string, modele: "pas un asin", alimentation: "120/40" },
   });
   assert.deepEqual(c.equipement, ["litiere", "eau"]);
   assert.equal(c.lus.length, LUS_MAX);
