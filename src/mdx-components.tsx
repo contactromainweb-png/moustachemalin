@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { AffiliateButton } from "@/components/AffiliateButton";
+import { Bande } from "@/components/Bande";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { CalloutLink } from "@/components/CalloutLink";
 import { Encadre } from "@/components/Encadre";
@@ -64,6 +65,7 @@ const components: MDXComponents = {
   hr: () => <div aria-hidden="true" className="h-12" />,
   em: (props) => <em className="text-ink-soft" {...props} />,
   AffiliateButton,
+  Bande,
   // Placée seule dans un article : un peu d'air avant le texte qui suit.
   AmazonDisclosure: (props: { className?: string }) => <AmazonDisclosure className="mb-10" {...props} />,
   Callout: Encadre,
