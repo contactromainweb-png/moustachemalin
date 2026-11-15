@@ -21,6 +21,7 @@ import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { ProsCons } from "@/components/ProsCons";
 import { RelatedArticles } from "@/components/RelatedArticles";
+import { Schema } from "@/components/Schema";
 import { TopPicks } from "@/components/TopPicks";
 import { VetNotice } from "@/components/VetNotice";
 import { pageEnLigne } from "@/lib/site";
@@ -95,6 +96,7 @@ const components: MDXComponents = {
       <RelatedArticles {...props} />
     </>
   ),
+  Schema,
   TopPicks,
   VetNotice,
 };
