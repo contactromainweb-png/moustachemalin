@@ -22,7 +22,7 @@ export default function Page() {
         {espacesFines("Message bien reçu. Mon humain vous répond dès qu'il a fini de me lancer mes jouets.")}
       </p>
       <p className="mt-6 text-ink-soft">Kira</p>
-      <Link
+      <Link prefetch={false}
         href="/"
         className="mt-10 inline-flex min-h-12 items-center bg-caramel-field px-6 text-on-caramel transition-transform hover:-translate-y-0.5 active:translate-y-0"
       >
