@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useId, useState, type FormEvent } from "react";
 import { BulleKira } from "@/components/BulleKira";
 import { KiraDessin } from "@/components/KiraDessin";
+import { oublierCarnet } from "@/lib/carnet";
 import { enregistrerProfil, oublierProfil, PRENOM_MAX, useProfil, type ProfilChat } from "@/lib/profil";
 
 // La carte « Ton chat » (pack de nuit 7) : sans profil, Kira se présente et le formulaire suit ; juste après la
@@ -70,12 +71,13 @@ export function CarteProfil({ className = "", large = false }: { className?: str
       />
     ) : oubli ? (
       <p role="group" aria-label="Oublier le profil" className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <span>Oublier le profil de {profil.prenom}&#8239;?</span>
+        <span>Oublier le profil et le carnet de {profil.prenom}&#8239;?</span>
         <button
           type="button"
           className="min-h-11 rounded-full bg-nuit px-4 font-medium text-blanc"
           onClick={() => {
             oublierProfil();
+            oublierCarnet();
             setOubli(false);
             setCree(false);
           }}
@@ -89,6 +91,10 @@ export function CarteProfil({ className = "", large = false }: { className?: str
     ) : (
       <p className="flex flex-wrap items-center gap-x-2">
         <span className="font-medium">Le profil de {profil.prenom}</span>
+        <span aria-hidden="true">·</span>
+        <Link href="/carnet/" className={`flex min-h-11 items-center ${lien}`}>
+          Son carnet
+        </Link>
         <span aria-hidden="true">·</span>
         <button type="button" className={`min-h-11 ${lien}`} onClick={() => setEdition(true)}>
           Modifier
@@ -204,7 +210,8 @@ function Formulaire({
             {erreur}
           </p>
           <p className="text-small text-ink-soft">
-            Ça reste dans ton navigateur&#8239;: pas de compte, pas de cookie.{" "}
+            Ça reste dans ton navigateur&#8239;: pas de compte, pas de cookie. Le site s&apos;en sert aussi pour tenir son
+            carnet.{" "}
             <Link href="/confidentialite/#profil-du-chat" className={lien}>
               En savoir plus
             </Link>
