@@ -37,7 +37,7 @@ export function MesureAudience() {
           </p>
           {UMAMI_ID ? (
             <>
-              {/* Liste à tenir à jour avec chaque umami.track() du code (mesure.ts, CarteProfil, QuizJeu, TestGuide). */}
+              {/* Liste à tenir à jour avec chaque umami.track() du code (mesure.ts, CarteProfil, QuizJeu, TestGuide, FinDeLecture). */}
               <p className={p}>Voici tous les événements envoyés à Umami, avec leurs données, et rien d&apos;autre&nbsp;:</p>
               <ul className="reveal mb-5 max-w-[65ch] list-disc space-y-2 pl-5">
                 <li>
@@ -56,6 +56,10 @@ export function MesureAudience() {
                 <li>
                   <strong className="font-semibold">test-guide</strong>, au premier résultat du test d&apos;un guide&nbsp;: le
                   guide concerné (par exemple «&nbsp;mon-chat-ne-boit-pas&nbsp;»), sans les cases cochées.
+                </li>
+                <li>
+                  <strong className="font-semibold">fin-de-lecture</strong>, quand vous arrivez en bas d&apos;un
+                  article&nbsp;: la page et le type d&apos;article.
                 </li>
               </ul>
               <p className={p}>

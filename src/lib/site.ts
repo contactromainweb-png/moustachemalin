@@ -52,7 +52,7 @@ export const LEGAL = {
   },
   miseAJour: "1er novembre 2026", // pages Méthode et Affiliation
   miseAJourMentions: "15 novembre 2026", // page Mentions légales
-  miseAJourConfidentialite: "15 novembre 2026", // page Confidentialité (section « Le profil de ton chat »)
+  miseAJourConfidentialite: "15 novembre 2026", // page Confidentialité (événement « fin-de-lecture » ajouté, pack 8a)
 };
 
 export const AMAZON_DISCLOSURE =

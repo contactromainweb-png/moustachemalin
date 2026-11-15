@@ -21,6 +21,7 @@ import { NotreChoix } from "@/components/NotreChoix";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { ProsCons } from "@/components/ProsCons";
+import { FinDeLecture } from "@/components/FinDeLecture";
 import { RelatedArticles } from "@/components/RelatedArticles";
 import { Schema } from "@/components/Schema";
 import { TopPicks } from "@/components/TopPicks";
@@ -96,6 +97,7 @@ const components: MDXComponents = {
   // Le formulaire de la lettre vient juste avant le bloc de liens (voir ArticleTemplate pour les articles sans ce bloc).
   RelatedArticles: (props: Parameters<typeof RelatedArticles>[0]) => (
     <>
+      <FinDeLecture />
       <NewsletterForm id="lettre" />
       <RelatedArticles {...props} />
     </>

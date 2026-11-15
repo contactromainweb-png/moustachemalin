@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import Image from "next/image";
 import { JsonLd } from "@/components/JsonLd";
 import { TitreSerif } from "@/components/TitreSerif";
+import { FinDeLecture } from "@/components/FinDeLecture";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { PourAllerPlusLoin } from "@/components/PourAllerPlusLoin";
 import { Signature } from "@/components/Signature";
@@ -24,7 +25,7 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
   const image: Photo | undefined = photo ?? (fm.photo ? PHOTOS[fm.photo] : undefined);
 
   return (
-    <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10">
+    <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10" data-type-article={fm.type}>
       <div aria-hidden="true" className="barre-lecture" />
       {/* Pinterest : l'image verticale de l'article, invisible pour les lecteurs (og:image reste l'image large). */}
       <link rel="image_src" href={new URL(pinArticle(fm), SITE.url).toString()} />
@@ -65,7 +66,12 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
       {/* corps-article : colonne de texte ; à partir de 1280 px, elle se resserre pour laisser la place au sommaire collant. */}
       <div className="corps-article mt-10 max-w-[64rem] lg:mt-14">
         {children}
-        {aBlocDeLiens(fm) ? null : <NewsletterForm id="lettre" />}
+        {aBlocDeLiens(fm) ? null : (
+          <>
+            <FinDeLecture />
+            <NewsletterForm id="lettre" />
+          </>
+        )}
         {fm.type === "comparatif" ? <PourAllerPlusLoin slug={fm.slug} /> : null}
       </div>
 
