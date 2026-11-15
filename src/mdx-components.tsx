@@ -9,7 +9,7 @@ import { EncadreOutil } from "@/components/Outils";
 import { Sommaire } from "@/components/Sommaire";
 import { EnBref } from "@/components/EnBref";
 import { Consommables } from "@/components/Consommables";
-import { PhotoMdx, PhotoMoyenne } from "@/components/Figure";
+import { PhotoDuo, PhotoLarge, PhotoMdx, PhotoMoyenne } from "@/components/Figure";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { FAQ } from "@/components/FAQ";
 import { KiraCousins, KiraGalerie } from "@/components/KiraGalerie";
@@ -78,6 +78,8 @@ const components: MDXComponents = {
   EnBref,
   Photo: PhotoMdx,
   PhotoMoyenne,
+  PhotoLarge,
+  PhotoDuo,
   ComparisonTable,
   Consommables,
   FAQ,

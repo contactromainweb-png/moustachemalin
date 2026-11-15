@@ -27,12 +27,17 @@ function lien(fm: Frontmatter): ArticleLien {
 }
 
 // Toutes les photos d'un article, dans l'ordre : photo d'en-tête puis photos du texte (<PhotoMoyenne nom="…">,
-// <Photo nom="…">). Les cartes s'en servent pour ne pas répéter une image déjà sur la page (src/lib/cartes.ts).
+// <PhotoLarge nom="…">, <Photo nom="…">, <PhotoDuo noms={["…", "…"]}>). Les cartes s'en servent pour ne pas répéter une image déjà sur la page (src/lib/cartes.ts).
 // Les photos de la famille de Romain (Kira et ses cousins) n'illustrent jamais une carte d'article.
 const PHOTOS_ARTICLE = new WeakMap<Frontmatter, (keyof typeof PHOTOS)[]>();
 const FAMILLE = /^(kira|sucette|blackPearl|rebelle|imotep|chichoune|romain)/;
 function photosDe(fm: Frontmatter, source: string): (keyof typeof PHOTOS)[] {
-  const noms = [fm.photo, ...[...source.matchAll(/<(?:PhotoMoyenne|Photo)\s+nom="([A-Za-z]+)"/g)].map((m) => m[1])];
+  const noms = [
+    fm.photo,
+    ...[
+      ...source.matchAll(/<(?:PhotoMoyenne|PhotoLarge|Photo)\s+nom="([A-Za-z]+)"|<PhotoDuo\s+noms=\{\["([A-Za-z]+)",\s*"([A-Za-z]+)"\]\}/g),
+    ].flatMap((m) => (m[1] ? [m[1]] : [m[2], m[3]])),
+  ];
   return [...new Set(noms)].filter((n): n is keyof typeof PHOTOS => !!n && n in PHOTOS && !FAMILLE.test(n));
 }
 
