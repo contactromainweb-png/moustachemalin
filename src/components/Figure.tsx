@@ -59,6 +59,65 @@ export function PhotoMoyenne({ nom }: { nom: keyof typeof PHOTOS }) {
   );
 }
 
+const photoDe = (nom: keyof typeof PHOTOS): Photo => {
+  const photo: Photo = PHOTOS[nom];
+  if (!photo) throw new Error(`Photo inconnue dans PHOTOS (src/lib/medias.ts) : ${nom}`);
+  return photo;
+};
+
+// Dans un article MDX : <PhotoLarge nom="chatRouxLitLarge" /> : toute la largeur de la colonne (64 rem), format
+// 21:9. Une par article au plus. Dimensions fixées, chargée à l'approche.
+export function PhotoLarge({ nom }: { nom: keyof typeof PHOTOS }) {
+  const photo = photoDe(nom);
+  return (
+    <figure className="reveal my-14 max-w-[64rem]">
+      <Image
+        src={photo.src}
+        width={photo.width}
+        height={photo.height}
+        alt={photo.alt}
+        sizes="(min-width: 1088px) 64rem, calc(100vw - 2rem)"
+        loading="lazy"
+        quality={80}
+        className="aspect-[21/9] w-full rounded-[1.25rem] bg-field object-cover"
+        style={photo.position ? { objectPosition: photo.position } : undefined}
+      />
+      {photo.legende ? (
+        <figcaption className="mt-3 text-small text-ink-soft">{espacesFines(photo.legende)}</figcaption>
+      ) : null}
+    </figure>
+  );
+}
+
+// Dans un article MDX : <PhotoDuo noms={["chatA", "chatB"]} legende="…" /> : deux photos côte à côte, 3:4 chacune,
+// empilées sur téléphone. Légende facultative, commune aux deux (jamais une copie des textes alternatifs).
+export function PhotoDuo({ noms, legende }: { noms: [keyof typeof PHOTOS, keyof typeof PHOTOS]; legende?: string }) {
+  return (
+    <figure className="reveal my-12 max-w-[44rem]">
+      <div className="grid gap-4 sm:grid-cols-2">
+        {noms.map((nom) => {
+          const photo = photoDe(nom);
+          return (
+            <Image
+              key={nom}
+              src={photo.src}
+              width={photo.width}
+              height={photo.height}
+              alt={photo.alt}
+              sizes="(min-width: 640px) 22rem, calc(100vw - 2rem)"
+              loading="lazy"
+              quality={80}
+              className="aspect-[3/4] w-full rounded-[1.25rem] bg-field object-cover"
+              style={photo.position ? { objectPosition: photo.position } : undefined}
+            />
+          );
+        })}
+      </div>
+      {legende ? <figcaption className="mt-3 text-small text-ink-soft">{espacesFines(legende)}</figcaption> : null}
+    </figure>
+  );
+}
+
 // Dans un article MDX : <Photo nom="chatBol" />
 export function PhotoMdx({ nom }: { nom: keyof typeof PHOTOS }) {
   const photo = PHOTOS[nom];

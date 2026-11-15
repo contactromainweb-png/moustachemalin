@@ -30,7 +30,7 @@
 - Uniquement des sources libres pour usage commercial : **Pexels, Unsplash, Pixabay**.
 - Chaque média utilisé est listé dans `content/credits.json` (fichier, auteur, source, URL, licence).
 - Pas de visuel montrant un produit de marque identifiable pour illustrer un autre produit.
-- Style recherché : **photos et vidéos réelles, vivantes, chaleureuses** (chats qui jouent, boivent, sautent). Pas d'illustrations dessinées.
+- Style recherché : **photos et vidéos réelles, vivantes, chaleureuses**. Les photos restent les héroïnes. Trois exceptions dessinées, et seulement celles-là : la Kira dessinée (§11), les **illustrations génériques d'appareils** dans les fiches produits et les **schémas explicatifs** (§11 quater). Aucune d'elles ne reproduit un produit de marque reconnaissable ni n'est présentée comme une photo.
 - **Niveau luxe, net partout** (tout le site : accueil, rubriques, articles, guides) :
   - Toujours télécharger la **taille originale** (« Original » sur Pexels, « Full size » sur Unsplash), jamais les aperçus. Privilégier Unsplash et Pexels.
   - **Photos : 3 000 px de large minimum à la source** (4 000 px et plus pour le plein écran et les gros plans). **Vidéos : 4K à la source** si possible, 1920 px minimum.
@@ -246,3 +246,14 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - `pubDate` des épingles fraîches : 3 h UTC le jour de `publication` (avant le build de 6 h à Paris, été comme hiver), pour ne jamais être dans le futur quand Pinterest lit le flux. Les articles et le flux Kira restent à 8 h UTC. Date du build : `EPINGLES_AUJOURDHUI`, calculée dans `next.config.ts` (on peut la forcer pour un essai : `EPINGLES_AUJOURDHUI=2026-12-01 npm run build`).
 - Planche de contrôle : `/exemples/epingles/` (noindex, hors plan du site).
 - Le flux `/kira/feed.xml` et les épingles d'origine ne sont pas concernés.
+
+## 11 quater. Habillage des articles
+- La commission n'est jamais un critère de sélection ni de classement.
+- **Fiches produits** : `IllustrationAppareil` (SVG inline au trait, choisi d'après la catégorie et les specs) à la place du visuel vide. Générique : aucune forme de marque, aucun logo, aucun texte de marque dans le dessin ; légende « Illustration, pas une photo du produit ». Format 4:3, 2 Ko au plus par variante. Produit d'exemple ou catégorie inconnue : la patte du site.
+- **Pictogrammes** (`PictosProduit`) sur toutes les catégories : seulement des mots tirés des specs, une spec absente n'affiche rien. Bruit toujours sur une échelle de 20 à 60 dB.
+- **Bandes** : au build, `plugins/remark-bandes.mjs` met chaque section `##` d'un article (comparatif, guide, avis, duel, outil) dans une `<Bande>` pleine largeur, fonds a / b alternés, c (lavande) pour « Comment choisir… ». Ce qui précède le premier `##` reste sans bande ; les ancres ne bougent pas. Dans une bande b ou c, `--field` est redéfini pour que les blocs restent visibles. Aucune animation sur les fonds. Jamais dans les pages légales, `/methode/`, `/affiliation/` ni les rubriques.
+- **Sommaire** : à partir de 1280 px, colonne collante à droite (un seul `<nav aria-label="Sommaire">` par page), avec un lien « Recevoir la lettre » vers `#lettre`. En dessous de 1280 px : inchangé.
+- **Schémas** (`Schema`) : uniquement à partir de phrases déjà présentes dans l'article, aucun chiffre ni règle en plus. Mots en vrai texte SVG, `<title>` et `<desc>`, 6 Ko au plus, clair et sombre. Fontaine générique ; chat en silhouette simple, jamais Kira.
+- **Kira séparatrice** (`KiraSeparateur`, décorative, 56 px) : 2 au plus par article, entre deux bandes, jamais à côté d'un `KiraNote`, d'un `VetNotice`, d'une fiche ou d'un encadré produit, d'un bouton Amazon, du tableau comparatif, d'un quiz ou d'un test.
+- **Photos du corps** : 3 à 5 par article (sans la photo d'en-tête), une toutes les 2 ou 3 sections, en lien avec la section. Jamais à côté d'un schéma, test, quiz ou tableau ; jamais deux fois la même sur une page. Formats `Photo`, `PhotoMoyenne`, `PhotoLarge` (21:9, 1 par article au plus) et `PhotoDuo` (2 × 3:4). Toujours en chargement différé, jamais dans le premier écran.
+- **Fin de lecture** : `FinDeLecture` envoie une fois par page l'événement Umami `fin-de-lecture` (page et type d'article seulement), listé sur `/confidentialite/`.

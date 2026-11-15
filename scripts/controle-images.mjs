@@ -57,7 +57,9 @@ function images(html) {
     const herite = pile.findLast((e) => e.appareil)?.appareil ?? null;
     const ici = appareil(balise) ?? herite;
     if (tag === "img") {
-      const src = origine(balise);
+      // La petite Kira séparatrice (KiraSeparateur, pack 8a) est un ornement répété exprès (2 au plus par article) :
+      // elle ne compte pas comme une photo en double.
+      const src = /\sdata-decor="kira-separateur"/.test(balise) ? null : origine(balise);
       if (src) trouvees.push({ src, appareil: ici });
     }
     if (!VIDES.has(tag) && !balise.endsWith("/>")) pile.push({ tag, appareil: ici });

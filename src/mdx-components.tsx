@@ -1,6 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import { AffiliateButton } from "@/components/AffiliateButton";
+import { Bande } from "@/components/Bande";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { CalloutLink } from "@/components/CalloutLink";
 import { Encadre } from "@/components/Encadre";
@@ -8,18 +9,21 @@ import { EncadreOutil } from "@/components/Outils";
 import { Sommaire } from "@/components/Sommaire";
 import { EnBref } from "@/components/EnBref";
 import { Consommables } from "@/components/Consommables";
-import { PhotoMdx, PhotoMoyenne } from "@/components/Figure";
+import { PhotoDuo, PhotoLarge, PhotoMdx, PhotoMoyenne } from "@/components/Figure";
 import { ComparisonTable } from "@/components/ComparisonTable";
 import { FAQ } from "@/components/FAQ";
 import { KiraCousins, KiraGalerie } from "@/components/KiraGalerie";
 import { KiraNote } from "@/components/KiraNote";
+import { KiraSeparateur } from "@/components/KiraSeparateur";
 import { MethodNote } from "@/components/MethodNote";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { NotreChoix } from "@/components/NotreChoix";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { ProsCons } from "@/components/ProsCons";
+import { FinDeLecture } from "@/components/FinDeLecture";
 import { RelatedArticles } from "@/components/RelatedArticles";
+import { Schema } from "@/components/Schema";
 import { TopPicks } from "@/components/TopPicks";
 import { VetNotice } from "@/components/VetNotice";
 import { pageEnLigne } from "@/lib/site";
@@ -64,6 +68,7 @@ const components: MDXComponents = {
   hr: () => <div aria-hidden="true" className="h-12" />,
   em: (props) => <em className="text-ink-soft" {...props} />,
   AffiliateButton,
+  Bande,
   // Placée seule dans un article : un peu d'air avant le texte qui suit.
   AmazonDisclosure: (props: { className?: string }) => <AmazonDisclosure className="mb-10" {...props} />,
   Callout: Encadre,
@@ -74,12 +79,15 @@ const components: MDXComponents = {
   EnBref,
   Photo: PhotoMdx,
   PhotoMoyenne,
+  PhotoLarge,
+  PhotoDuo,
   ComparisonTable,
   Consommables,
   FAQ,
   KiraCousins,
   KiraGalerie,
   KiraNote,
+  KiraSeparateur,
   MethodNote,
   NewsletterForm,
   NotreChoix,
@@ -89,10 +97,12 @@ const components: MDXComponents = {
   // Le formulaire de la lettre vient juste avant le bloc de liens (voir ArticleTemplate pour les articles sans ce bloc).
   RelatedArticles: (props: Parameters<typeof RelatedArticles>[0]) => (
     <>
-      <NewsletterForm />
+      <FinDeLecture />
+      <NewsletterForm id="lettre" />
       <RelatedArticles {...props} />
     </>
   ),
+  Schema,
   TopPicks,
   VetNotice,
 };

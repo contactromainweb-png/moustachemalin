@@ -30,6 +30,10 @@
   --surligne: #b9a6ff;
   /* Encadré « Le mot de Kira » : lavande claire en clair, bleu nuit en sombre. */
   --kira-fond: #ece6ff;
+  /* Bandes des articles (Bande) : a = fond de la page, b = crème plus soutenue, c = lavande (« Comment choisir… »). */
+  --bande-a: transparent;
+  --bande-b: #f3eee6;
+  --bande-c: #efeaff;
 }
 
 /* Couleurs fixes, identiques en mode clair et sombre : en-tête, grandes sections bleu nuit,
@@ -56,6 +60,8 @@
     --on-accent: #14213d;
     --surligne: rgb(185 166 255 / 0.32);
     --kira-fond: #1d2d4f;
+    --bande-b: #14203a;
+    --bande-c: #1d2d4f;
   }
 }
 
@@ -414,4 +420,42 @@ dl {
   padding: 0.125rem 0.625rem;
   font-size: 0.9375rem;
   font-weight: 600;
+}
+
+/* Illustrations génériques des fiches produits (IllustrationAppareil) : trait de 2 px quelle que soit la taille affichée. */
+.illustration * {
+  vector-effect: non-scaling-stroke;
+}
+
+/* Bandes des articles (Bande, placées par plugins/remark-bandes.mjs) : le fond s'étend sur toute la largeur de
+   l'écran par une ombre pleine, coupée en haut et en bas (pas de défilement horizontal), le texte garde sa colonne.
+   Dans une bande b ou c, les blocs à fond bg-field (fiches, encadrés, tableau) prennent le fond de la page pour rester
+   visibles. Aucune animation sur les fonds. */
+.bande {
+  --bande-fond: var(--bande-a);
+  padding-block: clamp(4rem, 3rem + 3vw, 6rem);
+  background: var(--bande-fond);
+  box-shadow: 0 0 0 100vmax var(--bande-fond);
+  clip-path: inset(0 -100vmax);
+}
+.bande[data-bande="b"] {
+  --bande-fond: var(--bande-b);
+  --field: var(--paper);
+}
+.bande[data-bande="c"] {
+  --bande-fond: var(--bande-c);
+  --field: var(--paper);
+}
+/* Bords des cartes et des champs dans les bandes : au moins 3:1 sur chaque fond (encre à 55 % : 3,6:1 au plus bas,
+   mesuré en clair sur la lavande). Le survol et le focus gardent leur bord plein. */
+.bande :is(.border-ink\/15, .border-ink\/25):not(:hover, :focus, :disabled) {
+  border-color: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+
+/* Sommaire collant à droite (pack 8a), à partir de 1280 px et seulement si l'article a un sommaire : la colonne de
+   texte laisse 20 rem à droite (17 rem de sommaire + 3 rem d'écart), où le <nav> flotte (voir Sommaire.tsx). */
+@media (min-width: 80rem) {
+  .corps-article:has(> nav[aria-label="Sommaire"]) {
+    max-width: min(64rem, calc(100% - 20rem));
+  }
 }

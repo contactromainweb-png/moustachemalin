@@ -1,15 +1,11 @@
 import type { ReactNode } from "react";
-import { nombres } from "@/lib/filtres";
+import { pictosProduit, type Barre, type Icone } from "@/lib/pictos";
 import type { Product } from "@/lib/products";
 
-// Fiches plus visuelles (pack de nuit 7), pour les litières seulement : une rangée de pastilles (icône + mot court)
-// tirées des specs, puis une barre de repère (poids pour 10 L, ou bruit annoncé). Icônes maison en SVG inline,
-// trait de 1,75 px, currentColor. Une spec absente n'affiche rien. Aucune photo ici : on ne montre pas le produit.
-export const CATEGORIES_PICTOS = ["litiere-chat", "litiere-autonettoyante"];
-
-type Picto = { icone: ReactNode; mot: string };
-
-const I = {
+// Fiches plus visuelles (pack de nuit 7, étendu à toutes les catégories au pack 8a) : une rangée de pastilles
+// (icône + mot court) tirées des specs, puis une barre de repère. Les règles sont dans src/lib/pictos.ts.
+// Icônes maison en SVG inline, 24 × 24, trait de 1,75 px, currentColor. Une spec absente n'affiche rien.
+const I: Record<Icone, ReactNode> = {
   agglo: (
     <>
       <circle cx="9" cy="14" r="4" />
@@ -112,120 +108,192 @@ const I = {
       <circle cx="12" cy="5.5" r="2.5" />
     </>
   ),
+  goutte: <path d="M12 3.5c3.5 4.5 6 7.5 6 10.5a6 6 0 0 1-12 0c0-3 2.5-6 6-10.5Z" />,
+  inox: (
+    <>
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <path d="M8 15l7-7M11 17l6-6" />
+    </>
+  ),
+  plastique: (
+    <>
+      <path d="M9 3h6v3l2 3v11H7V9l2-3Z" />
+      <path d="M7 13h10" />
+    </>
+  ),
+  sansFil: (
+    <>
+      <rect x="3.5" y="7.5" width="15" height="9" rx="2" />
+      <path d="M21 10.5v3M7 10.5v3M10.5 10.5v3" />
+    </>
+  ),
+  secteur: (
+    <>
+      <path d="M9 3v5M15 3v5" />
+      <path d="M6.5 8h11v3a5.5 5.5 0 0 1-11 0Z" />
+      <path d="M12 16.5V21" />
+    </>
+  ),
+  reserve: (
+    <>
+      <rect x="6" y="3" width="12" height="13" rx="2.5" />
+      <path d="M6 11h12M9 16v3h6v-3" />
+    </>
+  ),
+  repas: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" />
+    </>
+  ),
+  camera: (
+    <>
+      <path d="M4 8h3l1.5-2.5h7L17 8h3v11H4Z" />
+      <circle cx="12" cy="13" r="3.5" />
+    </>
+  ),
+  sansCourant: (
+    <>
+      <path d="M13 3 6 13h5l-1 8 7-10h-5Z" />
+      <path d="M4 4l16 16" />
+    </>
+  ),
+  bol: (
+    <>
+      <path d="M3.5 11h17a8.5 8.5 0 0 1-17 0Z" />
+      <path d="M8 8.5c1.5-1 6.5-1 8 0" />
+    </>
+  ),
+  hauteur: (
+    <>
+      <path d="M12 3v18M8.5 6.5 12 3l3.5 3.5M8.5 17.5 12 21l3.5-3.5" />
+    </>
+  ),
+  sol: (
+    <>
+      <path d="M3 15l6-6h12l-6 6Z" />
+      <path d="M3 19h12" />
+    </>
+  ),
+  plafond: (
+    <>
+      <path d="M3 4h18M12 4v16M8 20h8" />
+    </>
+  ),
+  ancre: (
+    <>
+      <path d="M12 3v15M5 12a7 7 0 0 0 14 0" />
+      <path d="M3 21h18" />
+    </>
+  ),
+  vertical: (
+    <>
+      <rect x="9" y="3" width="6" height="15" rx="1" />
+      <path d="M6 21h12M9 8h6M9 13h6" />
+    </>
+  ),
+  formeL: <path d="M6 3h4v13h10v4H6Z" />,
+  plat: (
+    <>
+      <path d="M3 14l4-4h14l-4 4Z" />
+      <path d="M3 14v4h14v-4M17 18l4-4v-4" />
+    </>
+  ),
+  tapis: (
+    <>
+      <path d="M3 17h12v-3H3Z" />
+      <circle cx="18" cy="14" r="3" />
+    </>
+  ),
+  sisal: (
+    <>
+      <path d="M5 6c4 2 10 2 14 0M5 12c4 2 10 2 14 0M5 18c4 2 10 2 14 0" />
+    </>
+  ),
+  carton: (
+    <>
+      <rect x="3.5" y="6" width="17" height="12" rx="1.5" />
+      <path d="M3.5 12c1.5-2 3-2 4.25 0s2.75 2 4.25 0 3-2 4.25 0 2.75 2 4.25 0" />
+    </>
+  ),
+  feutre: (
+    <>
+      <rect x="3.5" y="6" width="17" height="12" rx="1.5" />
+      <path d="M7 10h.01M12 10h.01M17 10h.01M9.5 14h.01M14.5 14h.01" />
+    </>
+  ),
+  reversible: (
+    <>
+      <path d="M4 9h13l-3-3M20 15H7l3 3" />
+    </>
+  ),
+  clapet: (
+    <>
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <path d="M8 8h8v8H8Z" />
+    </>
+  ),
+  puce: (
+    <>
+      <rect x="7" y="7" width="10" height="10" rx="1.5" />
+      <path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4" />
+    </>
+  ),
+  sansPile: (
+    <>
+      <rect x="7" y="5" width="10" height="16" rx="2" />
+      <path d="M10 3h4M4 4l16 16" />
+    </>
+  ),
+  piles: (
+    <>
+      <rect x="7" y="5" width="10" height="16" rx="2" />
+      <path d="M10 3h4M12 10v4M10 12h4" />
+    </>
+  ),
+  chats: (
+    <>
+      <path d="M5 20v-7l-1-6 4 3h4l4-3-1 6v7Z" />
+      <path d="M9 15h.01M13 15h.01" />
+    </>
+  ),
 };
 
-const commence = (t: string | undefined, d: string) => !!t && t.toLowerCase().startsWith(d.toLowerCase());
-const contient = (t: string | undefined, m: string) => !!t && t.toLowerCase().includes(m.toLowerCase());
-const fr = (n: number) => String(Math.round(n * 10) / 10).replace(".", ",");
-
-// Valeur minimale du poids accepté : « 1,5 à 8 kg » → 1,5 ; une phrase sans plage chiffrée en kg ne donne rien.
-function poidsMini(t: string | undefined) {
-  const m = t?.match(/(\d+(?:,\d+)?)\s*(?:à|-|–)\s*\d+(?:,\d+)?\s*kg/i) ?? t?.match(/dès\s*(\d+(?:,\d+)?)\s*kg/i);
-  return m ? Number(m[1].replace(",", ".")) : null;
-}
-
-const maxi = (t: string | undefined) => {
-  const n = nombres(t);
-  return n.length ? Math.max(...n) : null;
-};
-
-function pictos(p: Product): Picto[] {
-  const s = p.specs;
-  const liste: (Picto | null)[] = [];
-  if (p.category === "litiere-chat") {
-    liste.push(
-      commence(s.type, "Agglomérante")
-        ? { icone: I.agglo, mot: "Agglomérante" }
-        : commence(s.type, "Non agglomérante")
-          ? { icone: I.grains, mot: "Non agglomérante" }
-          : null,
-      commence(s.origine, "Végétale")
-        ? { icone: I.feuille, mot: "Végétale" }
-        : commence(s.origine, "Minérale")
-          ? { icone: I.pierre, mot: "Minérale" }
-          : null,
-      commence(s.parfum, "Sans") ? { icone: I.sansParfum, mot: "Sans parfum" } : null,
-      contient(s.matiere, "charbon actif") ? { icone: I.charbon, mot: "Charbon actif" } : null,
+function BarreRepere({ barre }: { barre: Barre }) {
+  if ("vide" in barre)
+    return (
+      <div>
+        <p className="text-small font-semibold">{barre.titre}</p>
+        <p className="mt-1 text-small text-ink-soft">{barre.vide}</p>
+      </div>
     );
-    const e = s.elimination;
-    if (contient(e, "compost")) liste.push({ icone: I.compost, mot: "Compost" });
-    if (contient(e, "toilettes") && !contient(e, "pas dans les toilettes")) liste.push({ icone: I.toilettes, mot: "Toilettes" });
-    if (contient(e, "poubelle") || contient(e, "ordures")) liste.push({ icone: I.poubelle, mot: "Poubelle" });
-  } else {
-    const bac = nombres(s.bacDechets?.split("(")[0])[0];
-    const db = maxi(s.bruit);
-    const kg = poidsMini(s.poidsChat);
-    liste.push(
-      commence(s.type, "Ouverte") ? { icone: I.ouverte, mot: "Ouverte" } : commence(s.type, "Fermée") ? { icone: I.fermee, mot: "Fermée" } : null,
-      commence(s.application, "Oui")
-        ? { icone: I.appli, mot: "Appli" }
-        : commence(s.application, "Non")
-          ? { icone: I.sansAppli, mot: "Sans appli" }
-          : null,
-      bac !== undefined ? { icone: I.bac, mot: `Bac ${fr(bac)} L` } : null,
-      db !== null ? { icone: I.bruit, mot: `${fr(db)} dB` } : null,
-      kg !== null ? { icone: I.poids, mot: `Dès ${fr(kg)} kg` } : null,
-    );
-  }
-  return liste.filter((x): x is Picto => x !== null);
-}
-
-// Poids d'un sac ramené à 10 L, lu dans « 10 L, 8,6 kg » ; null si le volume ou le poids manque.
-function poidsPour10L(sac: string | undefined) {
-  const l = sac?.match(/(\d+(?:,\d+)?)\s*L\b/);
-  const kg = sac?.match(/(\d+(?:,\d+)?)\s*kg/);
-  if (!l || !kg) return null;
-  const v = (Number(kg[1].replace(",", ".")) / Number(l[1].replace(",", "."))) * 10;
-  return { kg: v, environ: contient(sac, "environ") };
-}
-
-function Barre({ titre, part, legende, note }: { titre: string; part: number; legende: string; note?: string }) {
+  const debut = barre.debut * 100;
+  const largeur = Math.max(3, (barre.fin - barre.debut) * 100);
   return (
     <div className="max-w-[26rem]">
-      <p className="text-small font-semibold">{titre}</p>
-      <div aria-hidden="true" className="mt-2 h-3 overflow-hidden rounded-full bg-field">
-        <div className="h-full rounded-full bg-lavande" style={{ width: `${Math.max(3, Math.min(100, part * 100))}%` }} />
+      <p className="text-small font-semibold">{barre.titre}</p>
+      <div aria-hidden="true" className="relative mt-2 h-3 overflow-hidden rounded-full bg-field">
+        <div
+          className="absolute inset-y-0 rounded-full bg-lavande"
+          style={{ left: `${debut}%`, width: `${Math.min(100 - debut, largeur)}%` }}
+        />
       </div>
       <p className="mt-1.5 text-small">
-        {legende}
-        {note ? <span className="text-ink-soft"> · {note}</span> : null}
+        {barre.legende}
+        <span className="text-ink-soft"> · {barre.note}</span>
       </p>
     </div>
   );
 }
 
 export function PictosProduit({ p }: { p: Product }) {
-  if (!CATEGORIES_PICTOS.includes(p.category)) return null;
-  const liste = pictos(p);
-  let barre: ReactNode = null;
-  if (p.category === "litiere-chat") {
-    const poids = poidsPour10L(p.specs.sac);
-    barre = poids ? (
-      <Barre
-        titre="Poids pour 10 L"
-        part={poids.kg / 12}
-        legende={`${poids.environ ? "environ " : ""}${fr(poids.kg)} kg pour 10 L`}
-        note="échelle de 0 à 12 kg"
-      />
-    ) : (
-      <div>
-        <p className="text-small font-semibold">Poids pour 10 L</p>
-        <p className="mt-1 text-small text-ink-soft">poids non précisé</p>
-      </div>
-    );
-  } else {
-    const db = maxi(p.specs.bruit);
-    barre =
-      db !== null ? (
-        <Barre titre="Bruit annoncé" part={(db - 30) / 30} legende={`${fr(db)} dB au plus`} note="plus court = plus discret" />
-      ) : null;
-  }
-  if (!liste.length && !barre) return null;
+  const { pastilles, barre } = pictosProduit(p);
+  if (!pastilles.length && !barre) return null;
   return (
     <div className="mt-8 space-y-5">
-      {liste.length ? (
+      {pastilles.length ? (
         <ul aria-label="En un coup d'œil" className="flex flex-wrap gap-2">
-          {liste.map((x) => (
+          {pastilles.map((x) => (
             <li key={x.mot} className="flex min-h-10 items-center gap-2 rounded-full bg-field px-3.5 text-small font-medium text-ink">
               <svg
                 viewBox="0 0 24 24"
@@ -237,14 +305,14 @@ export function PictosProduit({ p }: { p: Product }) {
                 aria-hidden="true"
                 className="size-5 shrink-0"
               >
-                {x.icone}
+                {I[x.icone]}
               </svg>
               {x.mot}
             </li>
           ))}
         </ul>
       ) : null}
-      {barre}
+      {barre ? <BarreRepere barre={barre} /> : null}
     </div>
   );
 }

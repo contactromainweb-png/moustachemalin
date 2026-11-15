@@ -97,6 +97,8 @@ const withMDX = createMDX({
       path.join(process.cwd(), "plugins/remark-espaces-fines.mjs"),
       // Sommaire des articles de plus de 1 500 mots, avec une ancre par titre (plugin du projet).
       path.join(process.cwd(), "plugins/remark-sommaire.mjs"),
+      // Bandes de fond par section « ## » et Kira séparatrices (après le sommaire, qui pose les ancres).
+      path.join(process.cwd(), "plugins/remark-bandes.mjs"),
     ],
   },
 });
