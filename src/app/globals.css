@@ -338,3 +338,49 @@ body {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
+
+/* Kira dessinée (KiraDessin) : la queue se balance doucement, 3° au plus de part et d'autre, cycle de 3 s, depuis
+   sa base (190, 262 dans le dessin). Avec « animations réduites », rien ne bouge. */
+@media (prefers-reduced-motion: no-preference) {
+  .kira-dessin .kira-queue {
+    transform-box: view-box;
+    transform-origin: 190px 262px;
+    animation: kira-queue 3s ease-in-out infinite;
+  }
+}
+@keyframes kira-queue {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+/* Blocs interactifs (profil, quiz, tests) : ils n'existent qu'avec JavaScript. Sans lui, leur emplacement disparaît. */
+@media (scripting: none) {
+  [data-avec-js] {
+    display: none !important;
+  }
+}
+
+/* Quiz des comparatifs : les 2 modèles retenus, mis en valeur dans le tableau (liseré orange et étiquette
+   « Pour {prénom} », posée par QuizComparatif dans data-quiz-pour). Rien n'est caché. */
+#tableau-comparatif [data-asin][data-quiz-pour] {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+#tableau-comparatif li[data-quiz-pour]::before,
+#tableau-comparatif tr > th[data-quiz-pour]::before {
+  content: attr(data-quiz-pour);
+  display: block;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}

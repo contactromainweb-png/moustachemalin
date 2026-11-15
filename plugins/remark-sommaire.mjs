@@ -54,7 +54,6 @@ export default function remarkSommaire() {
     const yaml = arbre.children.find((n) => n.type === "yaml");
     const fm = yaml ? parse(yaml.value) : {};
     const total = mots(texte(arbre)) + motsDesProduits(fm.products);
-    if (total < SEUIL) return;
 
     const titres = [];
     const pris = new Set();
@@ -78,7 +77,9 @@ export default function remarkSommaire() {
       titres.push(entree);
       if (premier < 0) premier = i;
     });
-    if (titres.length < 3 || premier < 0) return;
+    // Tous les titres « ## » gardent leur ancre (les tests des guides y renvoient) ; le sommaire, lui, reste réservé
+    // aux longs articles.
+    if (total < SEUIL || titres.length < 3 || premier < 0) return;
 
     arbre.children.splice(premier, 0, {
       type: "mdxJsxFlowElement",

@@ -510,6 +510,32 @@ export const PHOTOS = {
   },
   // Pack de nuit 5 (duel PETKIT ou Neakasa, avis Neakasa M1 Lite) : en-têtes 3 840 px, photos moyennes et d'épingles
   // en petit côté 1 400 px. Aucun bac à litière ni produit de marque visible.
+  // Pack de nuit 7 : photos moyennes, petit côté 1 400 px. Aucune marque visible.
+  chatBengalRobinet: {
+    src: "/media/articles/chat-bengal-boit-robinet.jpg",
+    width: 2104,
+    height: 1400,
+    alt: "Un chat bengal tacheté, perché sur un lavabo blanc, qui boit l'eau qui coule du robinet.",
+    credit: "Photo : Helena Jankovičová Kováčová, Pexels",
+    legende: "Beaucoup de chats préfèrent l'eau qui coule : elle leur paraît plus fraîche.",
+  },
+  deuxChatsSalon: {
+    src: "/media/articles/deux-chats-salon-carrelage.jpg",
+    width: 1400,
+    height: 2097,
+    alt: "Deux chats roux et blanc assis sur le carrelage clair d'un salon, devant une bibliothèque.",
+    credit: "Photo : Jessika Arraes, Pexels",
+    position: "50% 65%",
+    legende: "Avec plusieurs chats, la règle souvent conseillée : un bac par chat, plus un.",
+  },
+  chatTricoloreCanape: {
+    src: "/media/articles/chat-tricolore-canape.jpg",
+    width: 1969,
+    height: 1400,
+    alt: "Un chat tricolore aux yeux verts, couché sur l'accoudoir d'un canapé bleu, contre un coussin jaune.",
+    credit: "Photo : Kayla Dahl Maclean, Pexels",
+    legende: "Les chats craintifs acceptent souvent mieux les modèles ouverts.",
+  },
   maineCoonFenetre: {
     src: "/media/litieres-maine-coon-fenetre.jpg",
     width: 3840,

@@ -1,7 +1,7 @@
 import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { getProduct } from "@/lib/products";
-import { espacesFines } from "@/lib/typo";
+import { espacesFines, nomsInsecables } from "@/lib/typo";
 
 type Pick = { asin: string; label: string };
 
@@ -17,7 +17,7 @@ export function TopPicks({ picks }: { picks: Pick[] }) {
         <div className="flex flex-col justify-between gap-8 bg-caramel-field px-5 py-8 text-on-caramel sm:px-8">
           <div>
             <h3 className="font-display text-head">{espacesFines(premier.label)}</h3>
-            <p className="mt-4 text-lead">{premier.produit.name}</p>
+            <p className="mt-4 text-lead">{nomsInsecables(premier.produit.name)}</p>
             <p className="mt-2 max-w-[48ch] opacity-90">{espacesFines(premier.produit.pour)}</p>
           </div>
           <div>
@@ -34,7 +34,7 @@ export function TopPicks({ picks }: { picks: Pick[] }) {
               <div key={pick.asin} className="flex flex-col justify-between gap-6 bg-field px-5 py-6 sm:px-8">
                 <div>
                   <h3 className="text-lead font-semibold">{espacesFines(pick.label)}</h3>
-                  <p className="mt-1">{pick.produit.name}</p>
+                  <p className="mt-1">{nomsInsecables(pick.produit.name)}</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                   <AffiliateButton emplacement="résumé" asin={pick.asin} exemple={pick.produit.exemple} />

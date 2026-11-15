@@ -3,7 +3,7 @@ import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { FiltresTableau } from "@/components/FiltresTableau";
 import { filtresPour } from "@/lib/filtres";
 import { getProduct, specLabel } from "@/lib/products";
-import { espacesFines } from "@/lib/typo";
+import { espacesFines, nomsInsecables } from "@/lib/typo";
 
 // Tableau comparatif. Ordinateur : un vrai tableau, le bouton Amazon sous le nom du modèle (première colonne) :
 // il reste toujours entier et cliquable. Sous 1280 px (téléphone, tablette, petit portable) : une carte par produit.
@@ -45,7 +45,7 @@ export function ComparisonTable({
               <tr key={p.asin} data-asin={p.asin} className="align-top even:bg-field">
                 <th scope="row" className="min-w-[11rem] px-4 py-4 font-semibold">
                   <a href={`#${p.asin}`} className="underline-offset-4 hover:underline">
-                    {p.name}
+                    {nomsInsecables(p.name)}
                   </a>
                   <div className="mt-3">
                     <AffiliateButton
@@ -71,7 +71,7 @@ export function ComparisonTable({
       <ul className="space-y-3 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 xl:hidden">
         {produits.map((p) => (
           <li key={p.asin} data-asin={p.asin} className="bg-field px-5 py-6">
-            <h3 className="text-lead font-semibold">{p.name}</h3>
+            <h3 className="text-lead font-semibold">{nomsInsecables(p.name)}</h3>
             <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
               {columns.map((c) => (
                 <div key={c} className="contents">

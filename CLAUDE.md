@@ -210,7 +210,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
   1. **Kira ne dit que des choses vraies sur elle.** On n'invente aucune habitude, aucun goût, aucune anecdote. Une nouvelle info sur Kira doit venir de Romain.
   2. **Kira ne donne jamais d'avis sur un produit qu'elle n'a pas utilisé.** Jamais « j'adore cette litière » ni « j'ai testé ». Si un jour Romain achète un produit et que Kira l'utilise vraiment, ce sera un vrai test, présenté comme tel.
   3. **Kira ne donne aucun conseil de santé.**
-  4. **Court** : 1 à 3 phrases maximum par encadré, un seul encadré par article.
+  4. **Court** : 1 à 3 phrases maximum par encadré, un seul encadré par article. Cette règle du « un seul Mot de Kira par article » vise le `KiraNote` (sa photo et ses vrais faits). La Kira dessinée des éléments interactifs (`BulleKira` : profil, quiz, tests) ne compte pas : elle peut apparaître une fois par élément interactif, avec les textes validés du pack de nuit 7.
   5. **Ton** : première personne, espiègle, un peu diva, tendre avec « son humain ». Pas de langage bébé, pas d'emojis.
   6. Signature visuelle : petite photo ronde de Kira (fournie par Romain) + « Le mot de Kira ».
 - **Où Kira parle :** un encadré par article (composant `KiraNote`, placé après l'introduction), l'accueil (un encadré juste après les cartes « Mon problème, c'est… », texte de Romain), la page 404, les messages de confirmation (newsletter : `/newsletter/merci/`, formulaire), la newsletter (signée « Romain et Kira »), les réseaux sociaux.

@@ -963,5 +963,29 @@
     "url": "https://www.pexels.com/photo/relaxed-tabby-cat-lounging-indoors-40500305/",
     "licence": "Licence Pexels",
     "resolutionSource": "6000x4000"
+  },
+  {
+    "fichier": "public/media/articles/chat-bengal-boit-robinet.jpg",
+    "auteur": "Helena Jankovičová Kováčová",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/cat-drinking-tap-water-from-faucet-16440316/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "4256x2832"
+  },
+  {
+    "fichier": "public/media/articles/deux-chats-salon-carrelage.jpg",
+    "auteur": "Jessika Arraes",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/two-cats-on-floor-in-room-16538965/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "3810x5707"
+  },
+  {
+    "fichier": "public/media/articles/chat-tricolore-canape.jpg",
+    "auteur": "Kayla Dahl Maclean",
+    "source": "Pexels",
+    "url": "https://www.pexels.com/photo/calico-cat-relaxing-on-modern-sofa-indoors-30239303/",
+    "licence": "Licence Pexels",
+    "resolutionSource": "5625x4000"
   }
 ]
