@@ -37,15 +37,15 @@ export function MethodSlip() {
         {ETAPES.map((etape) => (
           <section key={etape.titre} className="reveal mt-7 first:mt-0">
             <h3 className="font-semibold">{etape.titre}</h3>
-            <ul className="mt-2 space-y-2">
+            <ul className="@container mt-2 space-y-2">
               {etape.lignes.map(([quoi, source]) => (
                 <li key={quoi} className="flex items-baseline gap-2">
                   <span>{quoi}</span>
                   <span
                     aria-hidden="true"
-                    className="min-w-6 flex-1 translate-y-[-0.2em] self-end border-b-[3px] border-dotted border-ink-soft/50"
+                    className="min-w-[24px] flex-1 translate-y-[-0.2em] self-end border-b-[3px] border-dotted border-ink-soft/50"
                   />
-                  <span className="text-small text-ink-soft">{source}</span>
+                  <span className="text-small text-ink-soft [overflow-wrap:normal] @max-[11em]:[overflow-wrap:anywhere]">{source}</span>
                 </li>
               ))}
             </ul>

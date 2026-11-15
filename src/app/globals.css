@@ -112,6 +112,20 @@ table {
   overflow-wrap: normal;
 }
 
+/* Listes de caractéristiques (dl en grille) : « anywhere » changerait la largeur de leurs colonnes à taille normale.
+   Les mots n'y sont coupés que si la liste devient étroite par rapport à son texte (moins de 14 em), ce qui n'arrive
+   qu'avec le texte agrandi. */
+dl {
+  overflow-wrap: normal;
+  container-type: inline-size;
+}
+@container (max-width: 14em) {
+  dt,
+  dd {
+    overflow-wrap: anywhere;
+  }
+}
+
 ::selection {
   background: var(--accent);
   color: var(--on-accent);

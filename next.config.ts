@@ -15,11 +15,46 @@ function pagesEnLigne(dossier = "src/app", url = "/"): string[] {
   return pages;
 }
 
+// En-têtes de sécurité de toutes les pages (audit de novembre 2026, pack A). Ils sont ici et pas dans netlify.toml :
+// sur Netlify, les [[headers]] de netlify.toml ne s'appliquent qu'aux fichiers statiques, pas aux pages servies par
+// Next.js (vérifié sur l'aperçu de la PR 27).
+// CSP : tout vient du site lui-même, sauf
+//   - Umami (statistiques sans cookie) : le script sur cloud.umami.is, les envois sur gateway.umami.is ;
+//   - Brevo (lettre) : le formulaire est envoyé en fetch, ou sans JavaScript en POST classique, vers *.sibforms.com.
+// 'unsafe-inline' (scripts et styles) : Next.js écrit les données de page dans de petits scripts en ligne, et les
+// composants des attributs style ; des pages statiques ne peuvent pas recevoir de nonce.
+// Pages encadrées interdites partout : X-Frame-Options DENY et frame-ancestors 'none'.
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://cloud.umami.is",
+  "connect-src 'self' https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev https://*.sibforms.com",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  "style-src 'self' 'unsafe-inline'",
+  "media-src 'self'",
+  "worker-src 'self' blob:",
+  "form-action 'self' https://*.sibforms.com",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "object-src 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+const EN_TETES_SECURITE = [
+  { key: "Content-Security-Policy", value: CSP },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()" },
+  { key: "X-Frame-Options", value: "DENY" },
+];
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   trailingSlash: true,
   // Pas d'en-tête X-Powered-By: Next.js (inutile de dire aux robots ce qui fait tourner le site).
   poweredByHeader: false,
+  async headers() {
+    return [{ source: "/:path*", headers: EN_TETES_SECURITE }];
+  },
   // Année affichée dans le footer, figée à chaque construction du site.
   env: {
     BUILD_YEAR: String(new Date().getFullYear()),
