@@ -401,6 +401,12 @@ dl {
     display: none !important;
   }
 }
+/* L'inverse : ce qui ne sert que sans JavaScript (lien de repli du carnet, pack 8b). */
+@media (scripting: enabled) {
+  [data-sans-js] {
+    display: none !important;
+  }
+}
 
 /* Quiz des comparatifs : les 2 modèles retenus, mis en valeur dans le tableau (liseré orange et étiquette
    « Pour {prénom} », posée par QuizComparatif dans data-quiz-pour). Rien n'est caché. */

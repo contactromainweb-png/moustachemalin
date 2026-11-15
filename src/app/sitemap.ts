@@ -27,12 +27,13 @@ function datesConnues() {
 }
 
 // Plan du site pour Google : toutes les pages existantes (liste calculée au build dans next.config.ts),
-// sauf les pages d'exemple et les pages de confirmation (newsletter, contact), qui ne doivent pas être indexées.
+// sauf les pages d'exemple, les pages de confirmation (newsletter, contact) et le carnet du chat (/carnet/, propre
+// à chaque visiteur), qui ne doivent pas être indexées.
 export default function sitemap(): MetadataRoute.Sitemap {
   const dates = datesConnues();
   return (process.env.PAGES_EN_LIGNE ?? "")
     .split(",")
-    .filter((chemin) => chemin && !chemin.startsWith("/exemples/") && !chemin.startsWith("/newsletter/") && !chemin.endsWith("/merci/"))
+    .filter((chemin) => chemin && !chemin.startsWith("/exemples/") && !chemin.startsWith("/newsletter/") && !chemin.endsWith("/merci/") && chemin !== "/carnet/")
     .map((chemin) => {
       const jour = dates.get(chemin);
       return { url: new URL(chemin, SITE.url).toString(), ...(jour ? { lastModified: jour } : {}) };

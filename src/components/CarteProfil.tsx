@@ -32,7 +32,17 @@ const lien = "font-medium underline decoration-accent decoration-2 underline-off
 
 // `large` (accueil) : sur ordinateur, deux colonnes, Kira en grand (160 px) et sa bulle à gauche, le formulaire à
 // droite ; sur téléphone, la même carte qu'ailleurs, avec Kira à 96 px.
-export function CarteProfil({ className = "", large = false }: { className?: string; large?: boolean }) {
+// `surCarnet` (page /carnet/) : la page a déjà sa Kira, la carte n'en ajoute pas une deuxième une fois le profil
+// créé, et le lien « Son carnet » disparaît (on y est déjà).
+export function CarteProfil({
+  className = "",
+  large = false,
+  surCarnet = false,
+}: {
+  className?: string;
+  large?: boolean;
+  surCarnet?: boolean;
+}) {
   const profil = useProfil();
   const [edition, setEdition] = useState(false);
   const [cree, setCree] = useState(false);
@@ -43,7 +53,7 @@ export function CarteProfil({ className = "", large = false }: { className?: str
       Salut, moi c&apos;est Kira. Je rapporte mes jouets comme un chien et je bois au robinet. Et toi, ton chat, il
       s&apos;appelle comment&#8239;?
     </p>
-  ) : cree && !edition ? (
+  ) : cree && !edition && !surCarnet ? (
     <p>
       Enchantée, {profil.prenom}&#8239;! <Suite profil={profil} />
     </p>
@@ -91,10 +101,14 @@ export function CarteProfil({ className = "", large = false }: { className?: str
     ) : (
       <p className="flex flex-wrap items-center gap-x-2">
         <span className="font-medium">Le profil de {profil.prenom}</span>
-        <span aria-hidden="true">·</span>
-        <Link href="/carnet/" className={`flex min-h-11 items-center ${lien}`}>
-          Son carnet
-        </Link>
+        {surCarnet ? null : (
+          <>
+            <span aria-hidden="true">·</span>
+            <Link href="/carnet/" className={`flex min-h-11 items-center ${lien}`}>
+              Son carnet
+            </Link>
+          </>
+        )}
         <span aria-hidden="true">·</span>
         <button type="button" className={`min-h-11 ${lien}`} onClick={() => setEdition(true)}>
           Modifier
