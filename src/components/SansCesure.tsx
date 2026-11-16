@@ -1,11 +1,22 @@
 import { Children, Fragment, type ReactNode } from "react";
 
 // Noms de marques et de produits qui ne se coupent jamais avec un tiret, même quand la césure des titres s'active
-// (texte agrandi, globals.css). La césure ne touche que les mots de 10 lettres ou plus : seuls ces noms-là sont
+// (texte agrandi, globals.css). La césure ne touche que les mots de 9 lettres ou plus : seuls ces noms-là sont
 // listés (les plus courts, PETKIT, PETLIBRO, Neakasa, FUKUMARU…, sont déjà protégés par cette limite).
+// « Moustache » : le nom du site (Moustache Malin) ; « Chichoune » : un chat de la famille (la bande de Kira).
 // « Agglomérante » : dans le nom d'un produit (Ever Clean Extra Agglomérante).
-// scripts/controle-titres.mjs vérifie qu'aucun nom de produit de 10 lettres ou plus ne manque à cette liste.
-export const MARQUES_LONGUES = ["Agglomérante", "Dockstream", "Fantasreen"];
+// scripts/controle-titres.mjs vérifie qu'aucun nom de produit de 9 lettres ou plus ne manque à cette liste.
+export const MARQUES_LONGUES = [
+  "Agglomérante",
+  "Chichoune",
+  "Dockstream",
+  "Eversweet",
+  "Fantasreen",
+  "FEELNEEDY",
+  "Globlazer",
+  "Moustache",
+  "Vitakraft",
+];
 
 const MOTIF = new RegExp(`(${MARQUES_LONGUES.join("|")})`, "g");
 

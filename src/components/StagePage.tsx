@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { sansCesure } from "@/components/SansCesure";
 import type { Photo } from "@/lib/medias";
 import { espacesFines } from "@/lib/typo";
 
@@ -34,7 +35,7 @@ export function StagePage({ title, lead, updated, photo, stageWord, portrait = f
     >
       <div className={`${colonne} ${filAriane ? "pt-6 lg:pt-10" : "pt-10 lg:pt-20"} [grid-area:intro]`}>
         {filAriane ? <div className="mb-6 lg:mb-10">{filAriane}</div> : null}
-        <h1 className="font-display rise max-w-[14ch] text-display">{title}</h1>
+        <h1 className="font-display rise max-w-[14ch] text-display">{sansCesure(title)}</h1>
         <p className="rise mt-8 max-w-[38ch] text-lead" style={{ "--i": 1 } as React.CSSProperties}>
           {lead}
         </p>

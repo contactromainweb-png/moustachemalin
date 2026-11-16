@@ -84,16 +84,16 @@ for (const fichier of fs.readdirSync(CONTENU, { recursive: true })) {
     erreurs.push(`content/${fichier.replaceAll(path.sep, "/")} : page ${fm.type}, il manque ${attendu}`);
 }
 
-// Césure des titres (texte agrandi) : un mot de 10 lettres ou plus peut se couper avec un tiret. Les noms de produits
+// Césure des titres (texte agrandi) : un mot de 9 lettres ou plus peut se couper avec un tiret. Les noms de produits
 // et de marques de cette longueur doivent figurer dans MARQUES_LONGUES (src/components/SansCesure.tsx).
 const listeMarques = fs.readFileSync(path.join(process.cwd(), "src", "components", "SansCesure.tsx"), "utf8");
-const protegees = JSON.parse(listeMarques.match(/MARQUES_LONGUES = (\[[^\]]*\])/)[1]);
+const protegees = [...listeMarques.match(/MARQUES_LONGUES = \[([^\]]*)\]/)[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
 const PRODUITS = path.join(CONTENU, "products");
 for (const f of fs.readdirSync(PRODUITS).filter((f) => f.endsWith(".json"))) {
   const p = JSON.parse(fs.readFileSync(path.join(PRODUITS, f), "utf8"));
   for (const mot of `${p.brand ?? ""} ${p.name ?? ""}`.match(/\p{Lu}[\p{L}\p{N}]*/gu) ?? []) {
-    if (mot.replace(/\P{L}/gu, "").length >= 10 && !protegees.includes(mot))
-      erreurs.push(`${f} : « ${mot} » (10 lettres ou plus) manque à MARQUES_LONGUES dans src/components/SansCesure.tsx`);
+    if (mot.replace(/\P{L}/gu, "").length >= 9 && !protegees.includes(mot))
+      erreurs.push(`${f} : « ${mot} » (9 lettres ou plus) manque à MARQUES_LONGUES dans src/components/SansCesure.tsx`);
   }
 }
 
