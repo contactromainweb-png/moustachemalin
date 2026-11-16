@@ -204,7 +204,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - Les passages marqués **[À VALIDER PAR ROMAIN]** ne sont jamais publiés tels quels : ils restent hors du site tant que Romain ne les a pas complétés.
 
 ### La voix de Kira
-- **Qui est Kira.** La chatte de Romain : un peu plus d'un an, fofolle, très joueuse, « un vrai petit chien » qui rapporte ses jouets aux pieds de Romain. Elle adore boire l'eau qui coule du robinet. Elle passe un temps fou dans sa litière à tout recouvrir soigneusement. Romain lui rapporte un jouet à chaque course. Kira a eu un arbre à chat d’entrée de gamme, sur lequel elle joue avec les pompons.
+- **Qui est Kira.** La chatte de Romain : un peu plus d'un an, fofolle, très joueuse, « un vrai petit chien » qui rapporte ses jouets aux pieds de Romain. Elle adore boire l'eau qui coule du robinet. Elle passe un temps fou dans sa litière à tout recouvrir soigneusement. Romain lui rapporte un jouet à chaque course. Kira a eu un arbre à chat d’entrée de gamme, sur lequel elle joue avec les pompons. Kira ne sort pas : c'est une chatte d'intérieur.
 - **Son rôle.** Mascotte et personnalité du site. **Romain conseille, Kira donne le sourire.**
 - **Règles d'or**
   1. **Kira ne dit que des choses vraies sur elle.** On n'invente aucune habitude, aucun goût, aucune anecdote. Une nouvelle info sur Kira doit venir de Romain.
@@ -224,6 +224,7 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
   - **Rebelle** est peu sociable et n'en fait qu'à sa tête.
   - **Imotep** est « le chat du quartier » ; il miaule pour sortir.
   - **Chichoune** est câline et joueuse ; elle monte sur la table pour réclamer des caresses.
+  - Sucette, Black Pearl et Imotep sortent (fait donné par Romain le 15 nov.).
 - **Vocabulaire de Romain :** dans le texte visible, il parle en « je » : « ma copine » (jamais « compagne »), « mon père », « ma sœur ». Les textes alternatifs restent à la 3e personne (« la copine de Romain »).
 - Les cousins ne parlent pas : seule Kira a une voix. Leurs photos ne sont jamais présentées comme des photos de Kira.
 - **Une légende visible n'est jamais une copie du texte alternatif.** L'alt décrit la photo pour les lecteurs d'écran ; la légende dit autre chose (un trait réel ci-dessus, ou un conseil lié à l'article).
@@ -257,3 +258,11 @@ Travaille étape par étape. À la fin de chaque étape : lance le site en local
 - **Kira séparatrice** (`KiraSeparateur`, décorative, 56 px) : 2 au plus par article, entre deux bandes, jamais à côté d'un `KiraNote`, d'un `VetNotice`, d'une fiche ou d'un encadré produit, d'un bouton Amazon, du tableau comparatif, d'un quiz ou d'un test.
 - **Photos du corps** : 3 à 5 par article (sans la photo d'en-tête), une toutes les 2 ou 3 sections, en lien avec la section. Jamais à côté d'un schéma, test, quiz ou tableau ; jamais deux fois la même sur une page. Formats `Photo`, `PhotoMoyenne`, `PhotoLarge` (21:9, 1 par article au plus) et `PhotoDuo` (2 × 3:4). Toujours en chargement différé, jamais dans le premier écran.
 - **Fin de lecture** : `FinDeLecture` envoie une fois par page l'événement Umami `fin-de-lecture` (page et type d'article seulement), listé sur `/confidentialite/`.
+
+## 11 quinquies. Le carnet
+- **Stockage** : `src/lib/carnet.ts`, localStorage, clé `mm-carnet`, `version: 1`, même lecture prudente que le profil. **Rien n'est retenu sans profil** (`majCarnet` ne fait rien) et **rien ne part vers Umami** ni ailleurs. Jamais de prénom dans le carnet. « Oublier » et « Tout effacer » effacent le profil et le carnet.
+- **Contenu** : équipement coché, listes cochées (`listes[id]`), articles lus jusqu'au bout (`lus`, 100 au plus, via `FinDeLecture`), quiz et tests faits, valeurs retenues dans 3 outils (combien de litières, combien d'eau, autonomie du distributeur), visite de la bande.
+- **Jauge** : les 7 essentiels de la partie « L'équipement indispensable dès le premier jour » du guide arrivée, et rien d'autre. **Badges** calculés à partir du carnet (`src/lib/badges.ts`), jamais stockés.
+- **Listes à mémoire** : `ListeSignes memoire="…"`, chaque case a un `id` ; les `id` (et la prop `equipement`, qui relie des cases à la jauge) doivent être ceux de `src/lib/listes.ts`, sinon le build échoue. Le plan anti-griffes (`PlanGuide`) y est aussi.
+- **Page `/carnet/`** : noindex, hors plan du site, hors flux, sans épingle, **aucun lien Amazon** ; lien d'entrée dans le pied de page.
+- **Kira** : seulement les textes validés par Romain (pack 8b, partie 0).
