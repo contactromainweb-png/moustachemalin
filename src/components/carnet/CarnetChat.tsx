@@ -169,7 +169,7 @@ const cocher = (id: string, coche: boolean) => majCarnet((c) => ({ ...c, equipem
 function CaseLigne({ ligne, coche }: { ligne: Ligne; coche: boolean }) {
   const uid = useId();
   return (
-    <li className="flex flex-wrap items-center justify-between gap-x-4 rounded-xl bg-paper px-4 py-1.5">
+    <li className="flex flex-col rounded-xl bg-paper px-4 py-1.5 sm:flex-row sm:items-center sm:justify-between sm:gap-x-4">
       <label htmlFor={uid} className="flex min-h-11 cursor-pointer items-center gap-3">
         <input
           id={uid}
@@ -180,7 +180,7 @@ function CaseLigne({ ligne, coche }: { ligne: Ligne; coche: boolean }) {
         />
         <span>{espacesFines(ligne.label)}</span>
       </label>
-      <Link href={ligne.href} className={`flex min-h-11 items-center text-small ${lien}`}>
+      <Link href={ligne.href} className={`-mt-2 flex min-h-11 w-fit items-center pl-8 text-small sm:mt-0 sm:pl-0 ${lien}`}>
         {ligne.lien}
         <span className="sr-only"> : {ligne.label}</span>
       </Link>
@@ -311,7 +311,7 @@ function Listes({ carnet }: { carnet: Carnet }) {
       </h2>
       <ul className="space-y-2">
         {LISTES_MEMOIRE.map((l) => (
-          <li key={l.id} className="flex min-h-11 flex-wrap items-center gap-x-1 rounded-xl bg-paper px-4 py-2">
+          <li key={l.id} className="rounded-xl bg-paper px-4 py-3">
             <Link href={l.href} className={lien}>
               {espacesFines(l.titre)}
             </Link>

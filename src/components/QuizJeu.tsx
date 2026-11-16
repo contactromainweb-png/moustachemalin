@@ -30,7 +30,7 @@ export function QuizJeu({ quiz }: { quiz: QuizCalcule }) {
     <section
       data-avec-js
       aria-label="Quiz : les 2 modèles qui collent à ton chat"
-      className="my-12 min-h-[35rem] rounded-[1.5rem] bg-kira px-4 py-6 sm:min-h-[32rem] sm:px-8 sm:py-8 lg:min-h-[26rem]"
+      className="my-12 min-h-[38rem] rounded-[1.5rem] bg-kira px-4 py-6 sm:min-h-[32rem] sm:px-8 sm:py-8 lg:min-h-[26rem]"
     >
       {monte ? <Jeu quiz={quiz} /> : null}
     </section>

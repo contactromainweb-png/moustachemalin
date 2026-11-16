@@ -61,7 +61,8 @@ export function RetenirCarnet({
   }
 
   return (
-    <div aria-live="polite" className="mt-4 flex min-h-11 flex-wrap items-center gap-x-2 text-small">
+    // Pas d'aria-live ici : le panneau du résultat qui la contient est déjà annoncé.
+    <div className="mt-4 flex min-h-11 flex-wrap items-center gap-x-2 text-small">
       {contenu}
     </div>
   );
