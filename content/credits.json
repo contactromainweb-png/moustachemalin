@@ -1123,5 +1123,13 @@
     "url": "https://unsplash.com/photos/kyNDSArTzIY",
     "licence": "Licence Unsplash",
     "resolutionSource": "4000x3000"
+  },
+  {
+    "fichier": "public/media/articles/deux-chats-canape-clair.jpg",
+    "auteur": "Touhid Arastu",
+    "source": "Unsplash",
+    "url": "https://unsplash.com/photos/b6y73T2D68E",
+    "licence": "Licence Unsplash",
+    "resolutionSource": "4032x3024"
   }
 ]

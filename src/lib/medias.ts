@@ -708,10 +708,11 @@ export const PHOTOS = {
   },
   chatTrappeFenetre: {
     src: "/media/articles/chat-passe-tete-trappe-fenetre.jpg",
-    width: 2400,
-    height: 1600,
+    width: 3840,
+    height: 2560,
     alt: "Un chat tigré qui passe la tête par une petite trappe ouverte dans une vieille fenêtre en bois.",
     credit: "Photo : L, Unsplash",
+    position: "50% 55%",
   },
   chatRouxFenetreVille: {
     src: "/media/articles/chat-roux-fenetre-ville.jpg",
@@ -747,6 +748,14 @@ export const PHOTOS = {
     height: 1600,
     alt: "Un chat noir et blanc assis sur la marche devant une porte d'entrée rouge.",
     credit: "Photo : Nadia Hristova, Unsplash",
+  },
+  deuxChatsCanape: {
+    src: "/media/articles/deux-chats-canape-clair.jpg",
+    width: 3840,
+    height: 2880,
+    alt: "Deux chats persans, l'un gris, l'autre blanc, assis sur le dossier d'un canapé gris, près d'une fenêtre.",
+    credit: "Photo : Touhid Arastu, Unsplash",
+    position: "50% 20%",
   },
 } satisfies Record<string, Photo>;
 
