@@ -766,6 +766,14 @@ export const PHOTOS = {
     credit: "Photo : Chen EdisoN, Pexels",
     position: "50% 40%",
   },
+  chatPatteEau: {
+    src: "/media/articles/chat-patte-eau-robinet.jpg",
+    width: 3840,
+    height: 2555,
+    alt: "Un chat bengal tacheté, penché sur un lavabo blanc, qui tend la patte vers l'eau qui coule du robinet.",
+    credit: "Photo : Helena Jankovičová Kováčová, Pexels",
+    position: "50% 35%",
+  },
 } satisfies Record<string, Photo>;
 
 // Scène 5 de l’accueil : le mur de photos (vignettes, petit côté 1 200 px) et sa photo centrale, plein écran au départ.
