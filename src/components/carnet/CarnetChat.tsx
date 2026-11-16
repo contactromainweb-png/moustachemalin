@@ -322,7 +322,7 @@ function Listes({ carnet }: { carnet: Carnet }) {
                   {cochesDeListe(l, carnet).size} sur {l.cases.length}
                 </span>
               ) : (
-                "pas encore commencée"
+                "à commencer"
               )}
             </span>
           </li>

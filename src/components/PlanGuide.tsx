@@ -72,9 +72,11 @@ function Plan() {
       {espacesFines("Pose un griffoir juste à côté de la zone abîmée, pas dans une autre pièce.")}{" "}
       {choix === "debout" || choix === "deux" ? <>{espacesFines(DEBOUT)} </> : null}
       {choix === "plat" || choix === "deux" ? <>{espacesFines(PLAT)} </> : null}
+      Voir{" "}
       <Link href="/griffer-grimper/griffoir-chat/" className={lien}>
         notre comparatif des griffoirs
       </Link>
+      .
     </>,
     espacesFines("Vérifie qu'il ne bouge pas : un griffoir qui bouge est abandonné tout de suite."),
     espacesFines("Rends-le attirant : un peu d'herbe à chat, un jouet qu'on fait passer dessus."),
