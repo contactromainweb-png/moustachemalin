@@ -173,6 +173,28 @@ dl {
   max-width: 100%;
 }
 
+/* Césure des titres, seulement avec le texte agrandi : sous 18 em de large (288 px à taille normale, soit moins que le
+   plus petit téléphone visé, 320 px), un mot long se coupe avec un tiret (« auto-nettoyante ») plutôt que n'importe
+   où. Les em d'une requête média suivent la taille de texte choisie dans le navigateur, et un zoom à 200 % divise la
+   largeur par deux (390 px → 195 px) : la règle s'active alors, et jamais à taille normale. Seulement les mots de
+   10 lettres ou plus, avec au moins 4 lettres de chaque côté du tiret. overflow-wrap (body) reste le dernier
+   recours, pour qu'un mot ne déborde jamais. Les noms de marques longs restent entiers (.sans-cesure, SansCesure.tsx).
+   Seulement les vrais titres (h1 à h3) hors des liens : ni les cartes, ni les noms de produits, ni les résultats des
+   outils, ni le logo. */
+@media (max-width: 18em) {
+  .font-display:is(h1, h2, h3):not(a *) {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
+    -webkit-hyphenate-limit-before: 4;
+    -webkit-hyphenate-limit-after: 4;
+  }
+}
+.sans-cesure {
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}
+
 /* Titre du premier écran : chaque mot sort d’un flou, l’un après l’autre (CSS seul, dès l’affichage). */
 .mot-entree {
   display: inline-block;

@@ -1,4 +1,5 @@
 import { Children, isValidElement, type ReactElement, type ReactNode } from "react";
+import { sansCesure } from "@/components/SansCesure";
 
 // Composants propres aux pages « duel » (deux produits face à face), passés par la page à son contenu MDX
 // (<Contenu components={COMPOSANTS_DUEL} />) : rien ne change sur les autres articles.
@@ -113,7 +114,7 @@ function TitreAncre({ id, children, ...props }: AvecEnfants & { id?: string }) {
       className="reveal font-display mb-6 mt-20 max-w-[22ch] scroll-mt-20 text-head first:mt-0"
       {...props}
     >
-      {children}
+      {sansCesure(children)}
     </h2>
   );
 }

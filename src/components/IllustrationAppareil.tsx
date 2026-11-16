@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { LIBELLES, varianteIllustration, type Variante } from "@/lib/illustrations";
 import type { Product } from "@/lib/products";
+import { sansCesure } from "@/components/SansCesure";
 
 // Fiche produit : un dessin au trait GÉNÉRIQUE de l'appareil (pas une photo, aucune forme ni logo de marque), choisi
 // d'après la catégorie et les specs (src/lib/illustrations.ts). SVG inline, aucun JavaScript, aucune image externe.
@@ -222,7 +223,7 @@ export function IllustrationAppareil({ p, nom, marque }: { p: Product; nom: stri
         >
           {DESSINS[variante]}
         </svg>
-        <span className="mt-3 font-display text-[clamp(1.25rem,1.1rem+0.6vw,1.5rem)] leading-tight">{nom}</span>
+        <span className="mt-3 font-display text-[clamp(1.25rem,1.1rem+0.6vw,1.5rem)] leading-tight">{sansCesure(nom)}</span>
         <span className="mt-1 text-small text-ink-soft">{marque}</span>
       </div>
       <figcaption className="mt-2 text-small text-ink-soft">Illustration, pas une photo du produit</figcaption>
