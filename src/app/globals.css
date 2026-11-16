@@ -410,12 +410,12 @@ dl {
 
 /* Quiz des comparatifs : les 2 modèles retenus, mis en valeur dans le tableau (liseré orange et étiquette
    « Pour {prénom} », posée par QuizComparatif dans data-quiz-pour). Rien n'est caché. */
-#tableau-comparatif [data-asin][data-quiz-pour] {
+#tableau-comparatif-donnees [data-asin][data-quiz-pour] {
   outline: 3px solid var(--accent);
   outline-offset: -3px;
 }
-#tableau-comparatif li[data-quiz-pour]::before,
-#tableau-comparatif tr > th[data-quiz-pour]::before {
+#tableau-comparatif-donnees li[data-quiz-pour]::before,
+#tableau-comparatif-donnees tr > th[data-quiz-pour]::before {
   content: attr(data-quiz-pour);
   display: block;
   width: fit-content;

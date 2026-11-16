@@ -23,8 +23,8 @@ export function ComparisonTable({
   const valeur = (specs: Record<string, string>, cle: string) => espacesFines(specs[cle] ?? "Non précisé");
 
   return (
-    <section id="tableau-comparatif" aria-label="Tableau comparatif" className="reveal mb-14 mt-8">
-      {pastilles.length > 0 && <FiltresTableau filtres={pastilles} cible="tableau-comparatif" />}
+    <section id="tableau-comparatif-donnees" aria-label="Tableau comparatif" className="reveal mb-14 mt-8">
+      {pastilles.length > 0 && <FiltresTableau filtres={pastilles} cible="tableau-comparatif-donnees" />}
       <div className="hidden overflow-x-auto xl:block">
         <table className="w-full border-collapse text-left">
           <caption className="sr-only">Comparaison des caractéristiques</caption>
