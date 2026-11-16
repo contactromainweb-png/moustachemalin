@@ -708,10 +708,11 @@ export const PHOTOS = {
   },
   chatTrappeFenetre: {
     src: "/media/articles/chat-passe-tete-trappe-fenetre.jpg",
-    width: 2400,
-    height: 1600,
+    width: 3840,
+    height: 2560,
     alt: "Un chat tigré qui passe la tête par une petite trappe ouverte dans une vieille fenêtre en bois.",
     credit: "Photo : L, Unsplash",
+    position: "50% 55%",
   },
   chatRouxFenetreVille: {
     src: "/media/articles/chat-roux-fenetre-ville.jpg",
