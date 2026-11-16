@@ -748,6 +748,14 @@ export const PHOTOS = {
     alt: "Un chat noir et blanc assis sur la marche devant une porte d'entrée rouge.",
     credit: "Photo : Nadia Hristova, Unsplash",
   },
+  deuxChatsCanape: {
+    src: "/media/articles/deux-chats-canape-clair.jpg",
+    width: 3840,
+    height: 2880,
+    alt: "Deux chats persans, l'un gris, l'autre blanc, assis sur le dossier d'un canapé gris, près d'une fenêtre.",
+    credit: "Photo : Touhid Arastu, Unsplash",
+    position: "50% 20%",
+  },
 } satisfies Record<string, Photo>;
 
 // Scène 5 de l’accueil : le mur de photos (vignettes, petit côté 1 200 px) et sa photo centrale, plein écran au départ.
