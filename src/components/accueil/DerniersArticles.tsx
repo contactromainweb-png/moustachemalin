@@ -2,6 +2,7 @@ import Link from "next/link";
 import { formatDate } from "@/components/UpdatedDate";
 import { LIBELLES_TYPE } from "@/lib/articles";
 import { derniersArticles } from "@/lib/rubriques";
+import { sansCesure } from "@/components/SansCesure";
 import { espacesFines } from "@/lib/typo";
 
 // Bloc B : les trois articles mis à jour le plus récemment, avec leur date (lue dans le frontmatter `updatedAt`).
@@ -35,7 +36,7 @@ export function DerniersArticles() {
                     </>
                   ) : null}
                 </span>
-                <span className="font-display text-[clamp(1.5rem,1.2rem+1vw,2.125rem)]">{espacesFines(a.titre)}</span>
+                <span className="font-display text-[clamp(1.5rem,1.2rem+1vw,2.125rem)]">{sansCesure(espacesFines(a.titre))}</span>
                 <span
                   aria-hidden="true"
                   className="hidden size-11 items-center justify-center rounded-full bg-accent text-on-accent transition-transform duration-200 ease-[var(--ease-out)] sm:flex [@media(hover:hover)]:group-hover:translate-x-1"

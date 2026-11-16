@@ -4,6 +4,7 @@ import type { ArticleLien } from "@/components/RubriqueTemplate";
 import { TitreSerif } from "@/components/TitreSerif";
 import { pageEnLigne } from "@/lib/site";
 import { espacesFines } from "@/lib/typo";
+import { sansCesure } from "@/components/SansCesure";
 
 // Icône de chaque outil (slug de sa page), au trait, sur une grille de 24 px comme celles de l'accueil.
 const ICONES: Record<string, React.ReactNode> = {
@@ -103,7 +104,7 @@ export function EncadreOutil({ href, titre, texte, bouton }: { href: string; tit
         <IconeOutil slug={slugDe(href)} />
       </span>
       <div>
-        <p className="font-display text-[1.6rem] leading-tight">{espacesFines(titre)}</p>
+        <p className="font-display text-[1.6rem] leading-tight">{sansCesure(espacesFines(titre))}</p>
         <p className="mt-3 max-w-[52ch]">{espacesFines(texte)}</p>
         <Link href={href} className="group mt-6 inline-flex">
           <AspectBouton>{espacesFines(bouton)}</AspectBouton>

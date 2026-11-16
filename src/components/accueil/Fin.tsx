@@ -25,7 +25,7 @@ export function Fin() {
             data-apparait
             className="font-display text-[clamp(64px,16px+11vw,15rem)] lg:whitespace-nowrap"
           >
-            <span data-fin-mot className="inline-block" style={{ textShadow: RELIEF_TITRE.moustache }}>
+            <span data-fin-mot className="sans-cesure inline-block" style={{ textShadow: RELIEF_TITRE.moustache }}>
               Moustache
             </span>{" "}
             <span data-fin-mot className="mot-serif inline-block text-accent" style={{ textShadow: RELIEF_TITRE.malin }}>

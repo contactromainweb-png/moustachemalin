@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { sansCesure } from "@/components/SansCesure";
 import { StagePage } from "@/components/StagePage";
 import { VisiteBande } from "@/components/carnet/VisiteBande";
 import { ancreCousin, BANDE } from "@/lib/bande";
@@ -53,7 +54,7 @@ export default function Page() {
               />
             </div>
             <div className="px-5 pb-6 pt-5">
-              <h3 className="font-display text-[1.75rem] leading-tight">{c.prenom}</h3>
+              <h3 className="font-display text-[1.75rem] leading-tight">{sansCesure(c.prenom)}</h3>
               <p className="mt-1 text-small font-medium text-ink-soft">{c.chezQui}</p>
               <p className="mt-3">{espacesFines(c.phrase)}</p>
             </div>

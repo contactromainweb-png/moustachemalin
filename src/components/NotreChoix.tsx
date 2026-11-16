@@ -2,6 +2,7 @@ import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { getProduct } from "@/lib/products";
 import { espacesFines } from "@/lib/typo";
+import { sansCesure } from "@/components/SansCesure";
 
 // Encadré compact d'un guide problème (CLAUDE.md §5) : 1 ou 2 produits de son comparatif pilier, dans le style de
 // TopPicks, sur fond clair (il suit souvent un CalloutLink caramel). Nom, « Pour qui » (champ `pour` du JSON
@@ -20,7 +21,7 @@ export function NotreChoix({
   return (
     <section aria-label={espacesFines(titre)} className="reveal my-12">
       <div className="bg-field px-5 py-7 sm:px-8">
-        <p className="font-display text-head">{espacesFines(titre)}</p>
+        <p className="font-display text-head">{sansCesure(espacesFines(titre))}</p>
         <ul className={`mt-6 grid gap-6 ${produits.length > 1 ? "lg:grid-cols-2" : ""}`}>
           {produits.map(({ asin, produit }) => (
             <li key={asin} className="flex flex-col justify-between gap-5">

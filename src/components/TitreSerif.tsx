@@ -1,3 +1,4 @@
+import { sansCesure } from "@/components/SansCesure";
 import { espacesFines, nomsInsecables } from "@/lib/typo";
 
 // Titre dont un mot passe en serif italique (classe .mot-serif) : « Litière *autonettoyante* : notre comparatif ».
@@ -6,7 +7,7 @@ export function TitreSerif({ titre, mot: motBrut }: { titre: string; mot?: strin
   const texte = nomsInsecables(espacesFines(titre));
   const mot = motBrut && nomsInsecables(motBrut);
   const i = mot ? texte.indexOf(mot) : -1;
-  if (!mot || i < 0) return <>{texte}</>;
+  if (!mot || i < 0) return <>{sansCesure(texte)}</>;
   // La ponctuation qui suit le mot (« : », « ? »…) reste collée à lui : les deux forment un bloc (.mot-colle,
   // globals.css) qui passe à la ligne d'un seul tenant, et ne se coupe à l'intérieur que s'il est plus large que
   // sa colonne (texte agrandi à 200 %), au lieu de déborder.
@@ -15,19 +16,19 @@ export function TitreSerif({ titre, mot: motBrut }: { titre: string; mot?: strin
   if (!colle)
     return (
       <>
-        {texte.slice(0, i)}
-        <span className="mot-serif">{mot}</span>
-        {suite}
+        {sansCesure(texte.slice(0, i))}
+        <span className="mot-serif">{sansCesure(mot)}</span>
+        {sansCesure(suite)}
       </>
     );
   return (
     <>
-      {texte.slice(0, i)}
+      {sansCesure(texte.slice(0, i))}
       <span className="mot-colle">
-        <span className="mot-serif">{mot}</span>
+        <span className="mot-serif">{sansCesure(mot)}</span>
         {colle}
       </span>
-      {suite.slice(colle.length)}
+      {sansCesure(suite.slice(colle.length))}
     </>
   );
 }

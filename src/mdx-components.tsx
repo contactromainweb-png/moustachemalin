@@ -26,6 +26,7 @@ import { RelatedArticles } from "@/components/RelatedArticles";
 import { Schema } from "@/components/Schema";
 import { TopPicks } from "@/components/TopPicks";
 import { VetNotice } from "@/components/VetNotice";
+import { sansCesure } from "@/components/SansCesure";
 import { pageEnLigne } from "@/lib/site";
 
 // Mise en forme des textes écrits en MDX (dossier content/).
@@ -33,8 +34,10 @@ import { pageEnLigne } from "@/lib/site";
 // interactifs propres à une seule page (calculateurs, liste de signes) n'y sont pas : la page les passe elle-même
 // à son contenu (<Contenu components={{ … }} />), pour que leur JavaScript ne soit chargé que sur elle.
 const components: MDXComponents = {
-  h2: (props) => (
-    <h2 className="reveal font-display mb-6 mt-20 max-w-[22ch] scroll-mt-20 text-head first:mt-0" {...props} />
+  h2: ({ children, ...props }) => (
+    <h2 className="reveal font-display mb-6 mt-20 max-w-[22ch] scroll-mt-20 text-head first:mt-0" {...props}>
+      {sansCesure(children)}
+    </h2>
   ),
   h3: (props) => <h3 className="reveal mb-3 mt-10 scroll-mt-20 text-lead font-semibold" {...props} />,
   p: (props) => <p className="reveal mb-5 max-w-[65ch]" {...props} />,

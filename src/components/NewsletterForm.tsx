@@ -1,5 +1,6 @@
 import { FormulaireLettre } from "@/components/FormulaireLettre";
 import { espacesFines } from "@/lib/typo";
+import { sansCesure } from "@/components/SansCesure";
 
 // Inscription à la lettre et cadeau (checklist de l'arrivée d'un chat). Ne s'affiche que lorsque
 // NEXT_PUBLIC_NEWSLETTER_URL contient l'adresse d'envoi du formulaire hébergé par Brevo : variable vide, aucun
@@ -27,7 +28,7 @@ export function NewsletterForm({
       aria-label={espacesFines(titre)}
       className={`reveal my-14 scroll-mt-24 rounded-[1.5rem] px-5 py-8 sm:px-8 ${variante === "avant" ? "bg-lavande text-nuit sm:py-10" : "bg-field"}`}
     >
-      <h2 className="font-display text-head">{espacesFines(titre)}</h2>
+      <h2 className="font-display text-head">{sansCesure(espacesFines(titre))}</h2>
       <p className="mb-6 mt-3 max-w-[58ch]">{espacesFines(TEXTE_LETTRE)}</p>
       <FormulaireLettre action={ACTION_LETTRE} />
     </section>
