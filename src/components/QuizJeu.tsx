@@ -183,10 +183,10 @@ function Morceaux({ morceaux, prenom }: { morceaux: Morceau[]; prenom: string | 
 
 // Lignes et cartes du tableau mises en valeur (CSS : globals.css, data-quiz-pour). Rien n'est caché.
 function marquer(asins: string[], etiquette: string | null) {
-  document.querySelectorAll("#tableau-comparatif [data-quiz-pour]").forEach((el) => el.removeAttribute("data-quiz-pour"));
+  document.querySelectorAll("#tableau-comparatif-donnees [data-quiz-pour]").forEach((el) => el.removeAttribute("data-quiz-pour"));
   if (!etiquette) return;
   for (const asin of asins) {
-    document.querySelectorAll(`#tableau-comparatif [data-asin="${asin}"]`).forEach((el) => {
+    document.querySelectorAll(`#tableau-comparatif-donnees [data-asin="${asin}"]`).forEach((el) => {
       el.setAttribute("data-quiz-pour", etiquette);
       if (el.tagName === "TR") el.querySelector(":scope > th")?.setAttribute("data-quiz-pour", etiquette);
     });

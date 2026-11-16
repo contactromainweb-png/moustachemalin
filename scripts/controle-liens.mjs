@@ -80,6 +80,22 @@ if (nonRelies.length) {
   process.exit(1);
 }
 
+// Ids en double dans une même page : un id doit être unique (ancres, aria-labelledby, scripts). Les <script> sont
+// retirés avant la lecture, pour ne compter que les vraies balises.
+const doublons = [];
+for (const [url, html] of pages) {
+  const vus = new Map();
+  for (const [, id] of html.replace(/<script\b[\s\S]*?<\/script>/g, "").matchAll(/<[a-zA-Z][^>]*?\sid="([^"]+)"/g)) {
+    vus.set(id, (vus.get(id) ?? 0) + 1);
+  }
+  for (const [id, n] of vus) if (n > 1) doublons.push(`${url} : id « ${id} » ×${n}`);
+}
+if (doublons.length) {
+  console.error(`Ids en double :\n  ${doublons.join("\n  ")}`);
+  process.exit(1);
+}
+console.log("Aucun id en double.");
+
 if (casses.length) {
   console.error(`Liens internes cassés :\n  ${[...new Set(casses)].join("\n  ")}`);
   process.exit(1);
