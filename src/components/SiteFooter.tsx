@@ -78,6 +78,10 @@ export function SiteFooter() {
         </p>
         <p className="mt-6 text-small text-ink-soft">
           © {process.env.BUILD_YEAR} {SITE.name} · <Link href="/contact/" className="underline underline-offset-4">Contact</Link> ·{" "}
+          <Link href="/carnet/" className="underline underline-offset-4">
+            Le carnet de ton chat
+          </Link>{" "}
+          ·{" "}
           <Link href="/credits-photos/" className="underline underline-offset-4">
             Crédits photos
           </Link>

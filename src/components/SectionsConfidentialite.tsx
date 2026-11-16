@@ -37,7 +37,8 @@ export function MesureAudience() {
           </p>
           {UMAMI_ID ? (
             <>
-              {/* Liste à tenir à jour avec chaque umami.track() du code (mesure.ts, CarteProfil, QuizJeu, TestGuide, FinDeLecture). */}
+              {/* Liste à tenir à jour avec chaque umami.track() du code (mesure.ts, CarteProfil, QuizJeu, TestGuide, PlanGuide,
+                VraiFaux, FinDeLecture). Le carnet (src/lib/carnet.ts) n'envoie rien : section #carnet du MDX. */}
               <p className={p}>Voici tous les événements envoyés à Umami, avec leurs données, et rien d&apos;autre&nbsp;:</p>
               <ul className="reveal mb-5 max-w-[65ch] list-disc space-y-2 pl-5">
                 <li>

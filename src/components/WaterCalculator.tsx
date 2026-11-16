@@ -1,11 +1,15 @@
 "use client";
 
 import { useId, useState } from "react";
+import { RetenirCarnet } from "@/components/outils/RetenirCarnet";
+import { majCarnet, useCarnet } from "@/lib/carnet";
 import { eauABoire } from "@/lib/eau";
 
 // Calculateur « Combien d'eau doit boire mon chat ? » : poids, pâtée et croquettes du jour, résultat mis à jour
 // à chaque saisie, sans rechargement. Le calcul vit dans src/lib/eau.ts (testé). Sans JavaScript, la page affiche
 // le résultat pour un chat de 4 kg et le texte de l'article explique la règle.
+// Carnet (pack 8b) : poids et repas (« pâtée/croquettes » en grammes) retenus dans le carnet servent de valeurs de
+// départ, après l'hydratation ; sinon 4 kg, 0 et 0 comme avant.
 const lire = (valeur: string, min: number, max: number) => {
   const n = Number(valeur.replace(",", "."));
   return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : min;
@@ -15,12 +19,22 @@ const formatKg = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
 
 export function WaterCalculator() {
   const id = useId();
-  const [poids, setPoids] = useState("4");
-  const [patee, setPatee] = useState("0");
-  const [croquettes, setCroquettes] = useState("0");
+  const carnet = useCarnet();
+  const retenu = carnet?.outils;
+  const [repasRetenu = undefined, croquettesRetenues = undefined] = retenu?.alimentation?.split("/") ?? [];
+  const [saisiePoids, setPoids] = useState<string | null>(null);
+  const [saisiePatee, setPatee] = useState<string | null>(null);
+  const [saisieCroquettes, setCroquettes] = useState<string | null>(null);
+  const poids = saisiePoids ?? retenu?.poids?.replace(",", ".") ?? "4";
+  const patee = saisiePatee ?? repasRetenu ?? "0";
+  const croquettes = saisieCroquettes ?? croquettesRetenues ?? "0";
 
   const kg = lire(poids, 1, 12);
   const { min, max } = eauABoire({ poids: kg, patee: lire(patee, 0, 2000), croquettes: lire(croquettes, 0, 1000) });
+
+  const poidsTexte = formatKg.format(kg);
+  const alimentation = `${Math.round(lire(patee, 0, 2000))}/${Math.round(lire(croquettes, 0, 1000))}`;
+  const intact = saisiePoids === null && saisiePatee === null && saisieCroquettes === null;
 
   const champ = "min-h-12 w-full rounded-xl border-2 border-ink/25 bg-paper px-4 text-lead tabular-nums focus:border-ink";
 
@@ -117,6 +131,11 @@ export function WaterCalculator() {
           </>
         )}
         <p className="mt-6 text-small opacity-80">Estimation&nbsp;: les besoins varient selon l&apos;âge, l&apos;activité et la chaleur.</p>
+        <RetenirCarnet
+          repris={intact && !!(retenu?.poids || retenu?.alimentation)}
+          retenu={retenu?.poids === poidsTexte && retenu?.alimentation === alimentation}
+          onRetenir={() => majCarnet((c) => ({ ...c, outils: { ...c.outils, poids: poidsTexte, alimentation } }))}
+        />
       </div>
     </section>
   );

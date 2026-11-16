@@ -160,22 +160,24 @@ Ensuite, pour les questions du quotidien (un chat qui boit peu, un premier week-
 ## La liste à cocher
 
 <ListeSignes
+  memoire="arrivee-chat"
+  equipement={{ litiere: "litiere", gamelles: "eau", nourriture: "nourriture", griffoir: "griffoir", transport: "transport", couchage: "couchage", jouets: "jouets" }}
   legende="Cochez au fur et à mesure"
   unite="point"
   alerte={null}
   signes={[
-    { texte: "Certificat d'engagement signé au moins 7 jours avant (première adoption)" },
-    { texte: "Animal identifié (puce ou tatouage), documents de cession récupérés" },
-    { texte: "Rendez-vous chez le vétérinaire dans les premiers jours" },
-    { texte: "Bac à litière simple et litière qu'il connaît" },
-    { texte: "Gamelle de nourriture et gamelle d'eau séparées" },
-    { texte: "Même nourriture que chez le cédant pour commencer" },
-    { texte: "Griffoir stable près de son coin de repos" },
-    { texte: "Caisse de transport rigide" },
-    { texte: "Couchage et cachettes" },
-    { texte: "Quelques jouets, dont une canne à plumes" },
-    { texte: "Une pièce calme prête pour les premiers jours" },
-    { texte: "Fils, plantes toxiques et fenêtres sécurisés" },
+    { id: "certificat", texte: "Certificat d'engagement signé au moins 7 jours avant (première adoption)" },
+    { id: "identification", texte: "Animal identifié (puce ou tatouage), documents de cession récupérés" },
+    { id: "veterinaire", texte: "Rendez-vous chez le vétérinaire dans les premiers jours" },
+    { id: "litiere", texte: "Bac à litière simple et litière qu'il connaît" },
+    { id: "gamelles", texte: "Gamelle de nourriture et gamelle d'eau séparées" },
+    { id: "nourriture", texte: "Même nourriture que chez le cédant pour commencer" },
+    { id: "griffoir", texte: "Griffoir stable près de son coin de repos" },
+    { id: "transport", texte: "Caisse de transport rigide" },
+    { id: "couchage", texte: "Couchage et cachettes" },
+    { id: "jouets", texte: "Quelques jouets, dont une canne à plumes" },
+    { id: "piece-calme", texte: "Une pièce calme prête pour les premiers jours" },
+    { id: "securite", texte: "Fils, plantes toxiques et fenêtres sécurisés" },
   ]}
 />
 

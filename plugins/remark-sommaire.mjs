@@ -66,6 +66,13 @@ export default function remarkSommaire() {
         while (pris.has(id)) id += "-2";
         noeud.data = { ...noeud.data, hProperties: { ...noeud.data?.hProperties, id } };
         entree = { id, titre };
+      } else if (noeud.type === "heading" && noeud.depth === 3) {
+        // Les « ### » ont aussi une ancre (liens du carnet, du plan anti-griffes, du vrai ou faux), mais n'entrent
+        // pas dans le sommaire.
+        let id = ancre(texte(noeud).replace(/\s+/g, " ").trim());
+        while (pris.has(id)) id += "-2";
+        pris.add(id);
+        noeud.data = { ...noeud.data, hProperties: { ...noeud.data?.hProperties, id } };
       } else if (noeud.type === "mdxJsxFlowElement" && BLOCS[noeud.name]) {
         const attributs = Object.fromEntries(
           noeud.attributes.filter((a) => typeof a.value === "string").map((a) => [a.name, a.value]),

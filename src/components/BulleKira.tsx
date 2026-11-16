@@ -6,6 +6,7 @@ import { KiraDessin } from "@/components/KiraDessin";
 // variante « accueil » (carte « Ton chat ») : 96 px sur téléphone, bulle à droite ; sur ordinateur (≥ 1024 px),
 // Kira en grand (160 px) et la bulle en dessous, pointe vers le haut.
 // `vivante` : le texte change (profil, quiz), il est annoncé aux lecteurs d'écran (aria-live).
+// Texte agrandi (200 %) : la bulle garde au moins 10 rem de large et passe sous Kira si la place manque.
 // `clinSignal` : chaque nouvelle valeur fait cligner Kira. Kira ne dit que les textes validés (charte, CLAUDE.md § 11).
 export function BulleKira({
   children,
@@ -22,7 +23,7 @@ export function BulleKira({
 }) {
   const accueil = variante === "accueil";
   return (
-    <div className={`flex items-start gap-3 sm:gap-4 ${accueil ? "lg:flex-col lg:gap-5" : ""} ${className}`}>
+    <div className={`flex flex-wrap items-start gap-3 sm:gap-4 ${accueil ? "lg:flex-col lg:gap-5" : ""} ${className}`}>
       <KiraDessin
         taille={accueil ? 160 : 96}
         clinSignal={clinSignal}
@@ -30,7 +31,7 @@ export function BulleKira({
       />
       <div
         aria-live={vivante ? "polite" : undefined}
-        className={`relative mt-2 min-w-0 flex-1 rounded-[14px] border-[1.5px] border-nuit bg-white px-4 py-3 text-nuit sm:mt-3 sm:px-5 sm:py-4 ${accueil ? "lg:mt-0 lg:w-full lg:flex-none" : ""}`}
+        className={`relative mt-2 min-w-[10rem] flex-1 rounded-[14px] border-[1.5px] border-nuit bg-white px-4 py-3 text-nuit sm:mt-3 sm:px-5 sm:py-4 ${accueil ? "lg:mt-0 lg:w-full lg:flex-none" : ""}`}
       >
         <span
           aria-hidden="true"

@@ -36,7 +36,7 @@ const components: MDXComponents = {
   h2: (props) => (
     <h2 className="reveal font-display mb-6 mt-20 max-w-[22ch] scroll-mt-20 text-head first:mt-0" {...props} />
   ),
-  h3: (props) => <h3 className="reveal mb-3 mt-10 text-lead font-semibold" {...props} />,
+  h3: (props) => <h3 className="reveal mb-3 mt-10 scroll-mt-20 text-lead font-semibold" {...props} />,
   p: (props) => <p className="reveal mb-5 max-w-[65ch]" {...props} />,
   ul: (props) => <ul className="reveal mb-6 max-w-[65ch] list-disc space-y-2 pl-6 marker:text-caramel" {...props} />,
   ol: (props) => <ol className="reveal mb-6 max-w-[65ch] list-decimal space-y-2 pl-6 marker:text-caramel" {...props} />,

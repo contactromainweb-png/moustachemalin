@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { StagePage } from "@/components/StagePage";
+import { VisiteBande } from "@/components/carnet/VisiteBande";
 import { ancreCousin, BANDE } from "@/lib/bande";
 import { fluxKiraDansHead } from "@/lib/flux";
 import { PHOTOS } from "@/lib/medias";
@@ -26,6 +27,7 @@ export default function Page() {
       photo={PHOTOS.kiraAssise}
       portrait
     >
+      <VisiteBande />
       <h2 id="kira" className="font-display scroll-mt-8 text-head">Kira</h2>
       <p className="mt-4 max-w-[60ch] text-lead">
         {espacesFines(
