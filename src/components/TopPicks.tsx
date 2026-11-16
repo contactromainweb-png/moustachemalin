@@ -2,6 +2,7 @@ import { AffiliateButton, LienAvisAmazon } from "@/components/AffiliateButton";
 import { AmazonDisclosure } from "@/components/AmazonDisclosure";
 import { getProduct } from "@/lib/products";
 import { espacesFines, nomsInsecables } from "@/lib/typo";
+import { sansCesure } from "@/components/SansCesure";
 
 type Pick = { asin: string; label: string };
 
@@ -16,7 +17,7 @@ export function TopPicks({ picks }: { picks: Pick[] }) {
       <div className="grid gap-3 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <div className="flex flex-col justify-between gap-8 bg-caramel-field px-5 py-8 text-on-caramel sm:px-8">
           <div>
-            <h3 className="font-display text-head">{espacesFines(premier.label)}</h3>
+            <h3 className="font-display text-head">{sansCesure(espacesFines(premier.label))}</h3>
             <p className="mt-4 text-lead">{nomsInsecables(premier.produit.name)}</p>
             <p className="mt-2 max-w-[48ch] opacity-90">{espacesFines(premier.produit.pour)}</p>
           </div>

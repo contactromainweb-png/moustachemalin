@@ -6,6 +6,7 @@ import { BulleKira } from "@/components/BulleKira";
 import { ajouter, basculerDans, majCarnet, useCarnet } from "@/lib/carnet";
 import { avecPrenom, useMonte, useProfil } from "@/lib/profil";
 import { espacesFines } from "@/lib/typo";
+import { sansCesure } from "@/components/SansCesure";
 
 // Le plan anti-griffes du guide canapé (pack 8b) : une question (où griffe-t-il ?), puis 5 étapes à cocher, tirées
 // de l'article et rien de plus. Avec un profil, la réponse et les étapes cochées sont gardées dans le carnet
@@ -87,7 +88,7 @@ function Plan() {
   return (
     <>
       <h3 id="titre-plan-anti-griffes" className="font-display mb-5 text-[clamp(1.5rem,1.2rem+1.2vw,2.125rem)]">
-        {espacesFines(avecPrenom("Le plan anti-griffes de {prenom}", prenom))}
+        {sansCesure(espacesFines(avecPrenom("Le plan anti-griffes de {prenom}", prenom)))}
       </h3>
       <BulleKira className="mb-5">
         <p>{espacesFines(avecPrenom(KIRA, prenom))}</p>

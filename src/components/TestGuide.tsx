@@ -9,6 +9,7 @@ import { avecPrenom, useMonte, useProfil, type ProfilChat } from "@/lib/profil";
 import type { Morceau } from "@/lib/quiz";
 import { TESTS_GUIDES, type BlocResultat } from "@/lib/tests-guides";
 import { espacesFines } from "@/lib/typo";
+import { sansCesure } from "@/components/SansCesure";
 
 // Test d'un guide : <TestGuide id="mon-chat-ne-boit-pas" /> (configuration : src/lib/tests-guides.ts).
 // Des cases à cocher et un résultat recalculé à chaque case (aria-live). Rien n'est enregistré.
@@ -94,7 +95,7 @@ function Test({ id }: { id: string }) {
         id={`test-${id}`}
         className={`font-display mb-5 ${config.niveau === 2 ? "text-[clamp(1.75rem,1.2rem+2vw,2.75rem)]" : "text-[clamp(1.5rem,1.2rem+1.2vw,2.125rem)]"}`}
       >
-        {espacesFines(avecPrenom(config.titre, prenom))}
+        {sansCesure(espacesFines(avecPrenom(config.titre, prenom)))}
       </Titre>
       <BulleKira className="mb-5">
         <p>{espacesFines(avecPrenom(config.kira, prenom))}</p>

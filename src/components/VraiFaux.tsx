@@ -5,6 +5,7 @@ import { BulleKira } from "@/components/BulleKira";
 import { ajouter, majCarnet } from "@/lib/carnet";
 import { useMonte } from "@/lib/profil";
 import { espacesFines } from "@/lib/typo";
+import { sansCesure } from "@/components/SansCesure";
 
 // « Vrai ou faux ? » du guide « Litière autonettoyante : dangereuse ? » (pack 8b). Une affirmation à la fois, deux
 // boutons ; après la réponse, « Bien vu » ou « Raté », l'explication (tirée de l'article) et le lien vers la section.
@@ -125,7 +126,7 @@ function Jeu() {
   return (
     <>
       <h3 id="titre-vrai-faux" className="font-display mb-5 text-[clamp(1.5rem,1.2rem+1.2vw,2.125rem)]">
-        {espacesFines("Vrai ou faux ? Le test en 1 minute")}
+        {sansCesure(espacesFines("Vrai ou faux ? Le test en 1 minute"))}
       </h3>
       <BulleKira vivante clinSignal={fins} className="mb-5">
         <p>{espacesFines(fini ? KIRA_FIN.replace("{score}", String(score)) : KIRA_DEBUT)}</p>
