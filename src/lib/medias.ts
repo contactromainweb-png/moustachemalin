@@ -757,6 +757,15 @@ export const PHOTOS = {
     credit: "Photo : Touhid Arastu, Unsplash",
     position: "50% 20%",
   },
+  // Pack satellites 2 : photos d'en-tête des guides arbre à chat et fontaine. Aucune marque visible.
+  chatArbreSalon: {
+    src: "/media/articles/chat-arbre-fenetre.jpg",
+    width: 3840,
+    height: 2560,
+    alt: "Deux chats devon rex sur un arbre à chat devant une fenêtre ensoleillée : l'un se repose en haut, l'autre descend sur une plateforme en bois.",
+    credit: "Photo : Chen EdisoN, Pexels",
+    position: "50% 40%",
+  },
 } satisfies Record<string, Photo>;
 
 // Scène 5 de l’accueil : le mur de photos (vignettes, petit côté 1 200 px) et sa photo centrale, plein écran au départ.
