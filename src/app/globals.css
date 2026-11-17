@@ -490,6 +490,32 @@ dl {
   to { transform: scaleX(1); }
 }
 
+/* Barre moustache (pack 9) : les moustaches du logo (22 × 10 px, orange liseré bleu nuit, crème en sombre) roulent
+   au bout de la barre de lecture, avec la même timeline. Le conteneur fixe fait la largeur de la barre (sans la barre
+   de défilement) ; la moustache avance de 0 à 100cqw − 22 px, sans s'étirer. Comme la barre, elle reste avec
+   « animations réduites » : elle suit la lecture, ce n'est pas un effet. */
+.barre-lecture-moustache { display: none; }
+@supports (animation-timeline: scroll()) {
+  .barre-lecture-moustache {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 40;
+    height: 10px;
+    container-type: inline-size;
+    pointer-events: none;
+  }
+  .barre-lecture-moustache svg {
+    display: block;
+    animation: barre-moustache linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes barre-moustache {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100cqw - 22px)); }
+}
+
 /* Symbole du logo en SVG inline (SymboleLogo.tsx). Pied de page (fond « theme ») : moustaches bleu nuit et
    ombre au sol en clair ; moustaches crème, sans ombre, en mode sombre (comme public/brand/logo-mark-dark.svg). */
 .logo-moustaches-theme { stroke: #14213d; }
