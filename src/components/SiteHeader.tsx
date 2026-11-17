@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
-import { MenuTelephone } from "@/components/MenuTelephone";
+import { MenuTelephone } from "@/components/ClientCommun";
 import { menuEnLigne } from "@/lib/site";
 
 const linkClass =

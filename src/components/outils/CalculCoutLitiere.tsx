@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useId, useState } from "react";
 import { CHAMP, Cadre, Chiffre, Formule, formatEuros, nombre } from "@/components/outils/Cadre";
+import { NombreAnime } from "@/components/outils/NombreAnime";
 import { coutLitiere } from "@/lib/outils-calculs";
 
 // Calculateur « Coût réel d'une litière autonettoyante » (calcul : src/lib/outils-calculs.ts). Tous les champs
@@ -63,7 +64,9 @@ export function CalculCoutLitiere() {
       resultat={
         resultat ? (
           <>
-            <Chiffre intitule="Sur 3 ans">{formatEuros.format(resultat.troisAns)}</Chiffre>
+            <Chiffre intitule="Sur 3 ans">
+              <NombreAnime valeur={resultat.troisAns} format={formatEuros.format} />
+            </Chiffre>
             <dl className="mt-5 grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 tabular-nums">
               <dt className="opacity-80">Sur 1 an</dt>
               <dd className="font-semibold">{formatEuros.format(resultat.unAn)}</dd>

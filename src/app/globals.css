@@ -490,6 +490,75 @@ dl {
   to { transform: scaleX(1); }
 }
 
+/* Barre moustache (pack 9) : les moustaches du logo (22 × 10 px, orange liseré bleu nuit, crème en sombre) roulent
+   au bout de la barre de lecture, avec la même timeline. Le conteneur fixe fait la largeur de la barre (sans la barre
+   de défilement) ; la moustache avance de 0 à 100cqw − 22 px, sans s'étirer. Comme la barre, elle reste avec
+   « animations réduites » : elle suit la lecture, ce n'est pas un effet. */
+.barre-lecture-moustache { display: none; }
+@supports (animation-timeline: scroll()) {
+  .barre-lecture-moustache {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 40;
+    height: 10px;
+    container-type: inline-size;
+    pointer-events: none;
+  }
+  .barre-lecture-moustache svg {
+    display: block;
+    animation: barre-moustache linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes barre-moustache {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100cqw - 22px)); }
+}
+
+/* Symbole du logo en SVG inline (SymboleLogo.tsx). Pied de page (fond « theme ») : moustaches bleu nuit et
+   ombre au sol en clair ; moustaches crème, sans ombre, en mode sombre (comme public/brand/logo-mark-dark.svg). */
+.logo-moustaches-theme { stroke: #14213d; }
+.logo-oeil-ferme { opacity: 0; }
+@media (prefers-color-scheme: dark) {
+  .logo-moustaches-theme { stroke: #faf7f2; }
+  .logo-ombre { display: none; }
+}
+
+/* Clin d'œil du logo (pack 9), au survol et au focus clavier du lien, une fois par survol : l'œil bleu se ferme en
+   arc 180 ms, puis se rouvre ; les 6 moustaches frémissent (±4° autour de leur point d'attache, 2 allers-retours en
+   400 ms). Jamais au chargement. Avec « animations réduites » : rien. */
+@media (prefers-reduced-motion: no-preference) {
+  .logo-lien:is(:hover, :focus-visible) .logo-oeil-ouvert { animation: logo-oeil-ouvert 180ms steps(1, end); }
+  .logo-lien:is(:hover, :focus-visible) .logo-oeil-ferme { animation: logo-oeil-ferme 180ms steps(1, end); }
+  .logo-lien:is(:hover, :focus-visible) :is(.logo-moustaches-g, .logo-moustaches-d) {
+    animation: logo-moustaches 400ms ease-in-out;
+  }
+  .logo-moustaches-g,
+  .logo-moustaches-d { transform-box: view-box; }
+  .logo-moustaches-g { transform-origin: 62px 131px; }
+  .logo-moustaches-d { transform-origin: 138px 131px; --sens: -1; }
+}
+@keyframes logo-oeil-ouvert {
+  from, to { opacity: 0; }
+}
+@keyframes logo-oeil-ferme {
+  from, to { opacity: 1; }
+}
+@keyframes logo-moustaches {
+  0%, 100% { transform: rotate(0deg); }
+  12.5%, 62.5% { transform: rotate(calc(4deg * var(--sens, 1))); }
+  37.5%, 87.5% { transform: rotate(calc(-4deg * var(--sens, 1))); }
+}
+
+/* Bac ajouté dans « Combien de litières » (BacsLitiere, pack 9) : fondu + montée de 6 px, 200 ms. */
+@media (prefers-reduced-motion: no-preference) {
+  .bac-arrive { animation: bac-arrive 200ms var(--ease-out) both; }
+}
+@keyframes bac-arrive {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
 /* Kira dessinée (KiraDessin) : la queue se balance doucement, 3° au plus de part et d'autre, cycle de 3 s, depuis
    sa base (190, 262 dans le dessin). Avec « animations réduites », rien ne bouge. */
 @media (prefers-reduced-motion: no-preference) {

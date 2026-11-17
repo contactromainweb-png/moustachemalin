@@ -19,6 +19,11 @@ import { espacesFines } from "@/lib/typo";
 // La signature « Par Romain » et les données structurées Person relient l'article à son auteur. Pas de Three.js ici : les articles restent légers (cahier des charges, section 2).
 type Props = { frontmatter: Frontmatter; photo?: Photo; children: ReactNode };
 
+// Les 6 moustaches du logo (mêmes tracés que public/brand/logo-mark.svg), chaque côté rapproché de 30 unités du
+// centre pour tenir dans 22 × 10 px sans la tête.
+const MOUSTACHES =
+  "M92 122 L38 108 M92 131 L34 132 M92 140 L40 158 M108 122 L162 108 M108 131 L166 132 M108 140 L160 158";
+
 export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
   const chemin = cheminArticle(fm);
   const url = new URL(chemin, SITE.url).toString();
@@ -27,6 +32,15 @@ export function ArticleTemplate({ frontmatter: fm, photo, children }: Props) {
   return (
     <article className="mx-auto max-w-[90rem] px-4 pt-6 sm:px-8 lg:pt-10" data-type-article={fm.type} data-rubrique={fm.rubrique}>
       <div aria-hidden="true" className="barre-lecture" />
+      {/* Barre moustache (pack 9) : les 6 moustaches du logo roulent au bout de la barre de lecture (globals.css). */}
+      <div aria-hidden="true" className="barre-lecture-moustache">
+        <svg viewBox="22 96 156 72" width="22" height="10" focusable="false">
+          <g fill="none" strokeLinecap="round">
+            <path d={MOUSTACHES} stroke="var(--color-ink)" strokeWidth="20" />
+            <path d={MOUSTACHES} stroke="var(--color-accent)" strokeWidth="10" />
+          </g>
+        </svg>
+      </div>
       {/* Pinterest : l'image verticale de l'article, invisible pour les lecteurs (og:image reste l'image large). */}
       <link rel="image_src" href={new URL(pinArticle(fm), SITE.url).toString()} />
       <Breadcrumbs items={[rubriqueArticle(fm), { label: espacesFines(fm.title), href: chemin }]} />

@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { NombreAnime } from "@/components/outils/NombreAnime";
 import { RetenirCarnet } from "@/components/outils/RetenirCarnet";
 import { majCarnet, useCarnet } from "@/lib/carnet";
 import { eauABoire } from "@/lib/eau";
@@ -122,7 +123,15 @@ export function WaterCalculator() {
           <>
             <p className="text-small uppercase tracking-[0.12em] opacity-80">À boire chaque jour</p>
             <p className="mt-2 font-display text-[clamp(2.25rem,1.6rem+2.4vw,3.25rem)] leading-none tabular-nums">
-              {min === max ? `${max} ml` : `${min} à ${max} ml`}
+              {min === max ? (
+                <>
+                  <NombreAnime valeur={max} format={String} /> ml
+                </>
+              ) : (
+                <>
+                  <NombreAnime valeur={min} format={String} /> à <NombreAnime valeur={max} format={String} /> ml
+                </>
+              )}
             </p>
             <p className="mt-4">
               Environ {min === max ? max : `${min} à ${max}`} ml à boire par jour, au bol ou à la fontaine, en plus de

@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import { CHAMP, Cadre, Chiffre, Formule, formatNombre, nombre } from "@/components/outils/Cadre";
+import { NombreAnime } from "@/components/outils/NombreAnime";
 import { RetenirCarnet } from "@/components/outils/RetenirCarnet";
 import { majCarnet, useCarnet, type OutilsRetenus } from "@/lib/carnet";
 import { GRAMMES_PAR_LITRE, autonomieDistributeur } from "@/lib/outils-calculs";
@@ -121,9 +122,15 @@ export function CalculAutonomie({ distributeurs }: { distributeurs: Distributeur
           {resultat ? (
             <>
               <Chiffre intitule="Le réservoir tient environ">
-                {resultat.jours.min === resultat.jours.max
-                  ? `${resultat.jours.max} jour${resultat.jours.max > 1 ? "s" : ""}`
-                  : `${resultat.jours.min} à ${resultat.jours.max} jours`}
+                {resultat.jours.min === resultat.jours.max ? (
+                  <>
+                    <NombreAnime valeur={resultat.jours.max} /> jour{resultat.jours.max > 1 ? "s" : ""}
+                  </>
+                ) : (
+                  <>
+                    <NombreAnime valeur={resultat.jours.min} /> à <NombreAnime valeur={resultat.jours.max} /> jours
+                  </>
+                )}
               </Chiffre>
               <p className="mt-4">
                 Avec un réservoir plein, soit environ {formatNombre.format(resultat.grammes.min)} à{" "}
