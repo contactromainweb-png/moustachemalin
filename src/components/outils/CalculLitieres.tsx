@@ -1,7 +1,9 @@
 "use client";
 
 import { useId, useState } from "react";
+import { BacsLitiere } from "@/components/outils/BacsLitiere";
 import { Cadre, Chiffre, Formule } from "@/components/outils/Cadre";
+import { NombreAnime } from "@/components/outils/NombreAnime";
 import { RetenirCarnet } from "@/components/outils/RetenirCarnet";
 import { majCarnet, useCarnet } from "@/lib/carnet";
 import { nombreDeLitieres } from "@/lib/outils-calculs";
@@ -64,7 +66,10 @@ export function CalculLitieres() {
       }
       resultat={
         <>
-          <Chiffre intitule="Bacs à litière conseillés">{bacs}</Chiffre>
+          <Chiffre intitule="Bacs à litière conseillés">
+            <NombreAnime valeur={bacs} />
+          </Chiffre>
+          <BacsLitiere nombre={bacs} />
           <p className="mt-4">
             Pour {chats} chat{chats > 1 ? "s" : ""}, prévoyez {bacs} bacs, placés dans des endroits différents.
           </p>

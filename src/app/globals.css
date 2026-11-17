@@ -551,6 +551,14 @@ dl {
   37.5%, 87.5% { transform: rotate(calc(-4deg * var(--sens, 1))); }
 }
 
+/* Bac ajouté dans « Combien de litières » (BacsLitiere, pack 9) : fondu + montée de 6 px, 200 ms. */
+@media (prefers-reduced-motion: no-preference) {
+  .bac-arrive { animation: bac-arrive 200ms var(--ease-out) both; }
+}
+@keyframes bac-arrive {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
 /* Kira dessinée (KiraDessin) : la queue se balance doucement, 3° au plus de part et d'autre, cycle de 3 s, depuis
    sa base (190, 262 dans le dessin). Avec « animations réduites », rien ne bouge. */
 @media (prefers-reduced-motion: no-preference) {
