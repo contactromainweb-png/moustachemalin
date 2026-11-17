@@ -62,6 +62,8 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
     other: process.env.NEXT_PUBLIC_BING_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } : undefined,
   },
+  // Vérification du site par Impact (programmes d'affiliation des marques), sur toutes les pages.
+  other: { "impact-site-verification": "c0f0bd03-a930-4c19-a5bb-915f4f2c38ce" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
