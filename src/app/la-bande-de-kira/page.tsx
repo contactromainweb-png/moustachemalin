@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { sansCesure } from "@/components/SansCesure";
+import { JeuBalleDiffere } from "@/components/ClientCommun";
 import { StagePage } from "@/components/StagePage";
 import { VisiteBande } from "@/components/carnet/VisiteBande";
 import { ancreCousin, BANDE } from "@/lib/bande";
@@ -35,6 +36,8 @@ export default function Page() {
           "Kira, c'est ma chatte : un peu plus d'un an, fofolle, joueuse comme un petit chien, et fan de l'eau qui coule du robinet. C'est la seule de la bande qui a son mot à dire sur le site.",
         )}
       </p>
+      {/* Mini-jeu « Kira rapporte la balle » (pack 9) : vrai fait, elle rapporte ses jouets comme un petit chien. */}
+      <JeuBalleDiffere className="mt-10" />
 
       <h2 className="font-display mt-20 text-head">
         Ses <span className="mot-serif">cousins</span>

@@ -14,13 +14,31 @@ export function BulleKira({
   variante = "ligne",
   clinSignal,
   className = "",
+  sansDessin = false,
 }: {
   children: ReactNode;
   vivante?: boolean;
   variante?: "ligne" | "accueil";
   clinSignal?: number;
   className?: string;
+  // Bulle seule, pointe vers le bas (mini-jeu de la balle, pack 9) : la Kira qui parle est dessinée juste dessous,
+  // sur le terrain, pour ne jamais avoir deux Kira à l'écran.
+  sansDessin?: boolean;
 }) {
+  if (sansDessin) {
+    return (
+      <div
+        aria-live={vivante ? "polite" : undefined}
+        className={`relative min-w-[10rem] rounded-[14px] border-[1.5px] border-nuit bg-white px-4 py-3 text-nuit sm:px-5 sm:py-4 ${className}`}
+      >
+        <span
+          aria-hidden="true"
+          className="absolute -bottom-[7.5px] left-[2.25rem] size-3 rotate-45 border-b-[1.5px] border-r-[1.5px] border-nuit bg-white sm:left-[4.5rem]"
+        />
+        <div className="relative">{children}</div>
+      </div>
+    );
+  }
   const accueil = variante === "accueil";
   return (
     <div className={`flex flex-wrap items-start gap-3 sm:gap-4 ${accueil ? "lg:flex-col lg:gap-5" : ""} ${className}`}>

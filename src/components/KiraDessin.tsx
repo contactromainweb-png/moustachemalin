@@ -10,8 +10,19 @@ import { useEffect, useRef, useState } from "react";
 let pageDuClinAuto: string | null = null;
 
 // `clinSignal` : chaque nouvelle valeur (non nulle) fait cligner Kira, par exemple à l'affichage du résultat d'un quiz
-// (pas avec « animations réduites »).
-export function KiraDessin({ taille = 96, className = "", clinSignal = 0 }: { taille?: number; className?: string; clinSignal?: number }) {
+// (pas avec « animations réduites »). `clinMemeReduit` : le signal répond directement à un clic (mini-jeu de la balle) ;
+// comme le clin au clic, il reste alors avec « animations réduites ».
+export function KiraDessin({
+  taille = 96,
+  className = "",
+  clinSignal = 0,
+  clinMemeReduit = false,
+}: {
+  taille?: number;
+  className?: string;
+  clinSignal?: number;
+  clinMemeReduit?: boolean;
+}) {
   const [clin, setClin] = useState(false);
   const minuteur = useRef<number | undefined>(undefined);
   const ref = useRef<SVGSVGElement>(null);
@@ -23,13 +34,13 @@ export function KiraDessin({ taille = 96, className = "", clinSignal = 0 }: { ta
   };
 
   useEffect(() => {
-    if (!clinSignal || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!clinSignal || (!clinMemeReduit && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
     window.clearTimeout(minuteur.current);
     minuteur.current = window.setTimeout(() => {
       setClin(true);
       minuteur.current = window.setTimeout(() => setClin(false), 700);
     }, 150);
-  }, [clinSignal]);
+  }, [clinSignal, clinMemeReduit]);
 
   useEffect(() => {
     const el = ref.current;
